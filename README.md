@@ -19,7 +19,7 @@ Stage 04 — Embeddings & Vector DB
 
 Stage 05 — Web UI & Flask RAG Backend
 - Start Flask RAG backend: `python 05_webui/app.py`
-  - Requires Ollama running locally with gemma3-q3km:12b model
+  - Requires Ollama running locally with gemma3:4b model
   - Serves streaming endpoint at http://localhost:5000/api/stream
   - Set environment vars: `HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1` to avoid network timeouts
 - Run the Node server UI proxy: `cd 05_webui/nodejs && npm install && npm start`
