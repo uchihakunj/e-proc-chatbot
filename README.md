@@ -26,5 +26,3 @@ Stage 05 — Web UI & Flask RAG Backend
   - Auth Username: `admin`
   - Auth Password: `StrongPass123`
   - Accesses Flask backend at http://localhost:5000
-
-Note: Sarvam AI has been removed. All OCR uses Docling locally. All LLM inference uses Ollama locally. 
