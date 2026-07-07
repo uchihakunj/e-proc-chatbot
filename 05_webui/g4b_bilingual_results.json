@@ -1,0 +1,399 @@
+[
+  {
+    "id": "Q1",
+    "lang": "EN",
+    "question": "What is the step-by-step process for challan payment?",
+    "outcome": "ANSWERED",
+    "total_s": 66.0,
+    "ttc_s": 3.8,
+    "ttft_s": 37.7,
+    "chars": 1391,
+    "n_sources": 5,
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nHere’s the step-by-step process for EMD payment via Challan, as outlined in the provided documents:\n\n1.  Log into the Eproc System using your User ID and Password.\n2.  Click on \"Run\".\n3.  Select DSC.\n4.  Click “Continue to Dashboard”.\n5.  Click on “All Live Tenders”.\n6.  Click on “View Tender”.\n7.  Click on “INTERSTED”.\n8.  Check the terms and click “I AGREE/ACCEPT”.\n9.  Click \"Pay Tender/Processing Fee\".\n10. Select “Payment mode as RTGS/CHALLAN” and save.\n11. Generate Challan.\n12. Click “OK to confirm”.\n13. Select the Gateway.\n14. Click on “Pay Now”.\n15. Fill-up required information.\n16. Click on “RTGS/NEFT/IMPS”.\n17. Click \"Confirm and Print\" to download the challan PDF.\n18. Save the Challan for further Bank payment.\n\n📋 Process\n1.  Log in to Eproc System (User ID & Password).\n2.  Click \"Run\".\n3.  Select DSC.\n4.  Click “Continue to Dashboard”.\n5.  Click on “All Live Tenders”.\n6.  Click on “View Tender”.\n7.  Click on “INTERSTED”.\n8.  Check the terms and click “I AGREE/ACCEPT”.\n9.  Click \"Pay Tender/Processing Fee\".\n10. Select “Payment mode as RTGS/CHALLAN” and save.\n11. Generate Challan.\n12. Click “OK to confirm”.\n13. Select Gateway.\n14. Click on “Pay Now”.\n15. Fill-up required information.\n16. Click on “RTGS/NEFT/IMPS”.\n17. Click \"Confirm and Print\" to download challan PDF.\n18. Save the Challan for further Bank payment.\n\n📘 Source: EMD_CHALLAN_PAYMENT_V1.0.pdf"
+  },
+  {
+    "id": "Q1",
+    "lang": "HI",
+    "question": "चालान भुगतान की चरण-दर-चरण प्रक्रिया क्या है?",
+    "outcome": "ANSWERED",
+    "total_s": 61.8,
+    "ttc_s": 3.5,
+    "ttft_s": 24.1,
+    "chars": 1865,
+    "n_sources": 5,
+    "sources": [
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "mannual procurement.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "devanagari_ratio": 0.4,
+    "has_table": false,
+    "answer": "💡 उत्तर\nI'm not fully certain this matches your question - please verify with the cited document.\nचालान भुगतान की चरण-दर-चरण प्रक्रिया इस प्रकार है:\n\n1.  Bidder User Eproc System में User ID & Password से लॉग इन करता है।\n2.  Run पर क्लिक करता है।\n3.  DSC (Digital Signature Certificate) चुनता है।\n4.  Continue to Dashboard पर क्लिक करता है।\n5.  All Live Tenders पर क्लिक करता है।\n6.  View Tender पर क्लिक करता है।\n7.  INTERSTED पर क्लिक करता है।\n8.  Term की जांच करता है और I AGREE/ACCEPT पर क्लिक करता है।\n9.  Pay Tender/Processing Fee पर क्लिक करता है।\n10. RTGS/CHALLAN के रूप में Payment mode का चयन करता है और save करता है।\n11. Challan Generate करता है।\n12. OK पर क्लिक करके confirm करता है।\n13. Select Gateway पर क्लिक करता है।\n14. Pay Now बटन पर क्लिक करता है।\n15. Confirm करने के लिए क्लिक करता है।\n16. आवश्यक जानकारी भरता है।\n17. RTGS/NEFT/IMPS पर क्लिक करता है।\n18. Confirm और Print करके challan pdf डाउनलोड करता है।\n19. आगे की Bank Payment के लिए Challan को save करता है।\n\n📋 प्रक्रिया\n1.  Bidder User Eproc System में User ID & Password से लॉग इन करता है।\n2.  Run पर क्लिक करता है।\n3.  DSC (Digital Signature Certificate) चुनता है।\n4.  Continue to Dashboard पर क्लिक करता है।\n5.  All Live Tenders पर क्लिक करता है।\n6.  View Tender पर क्लिक करता है।\n7.  INTERSTED पर क्लिक करता है।\n8.  Term की जांच करता है और I AGREE/ACCEPT पर क्लिक करता है।\n9.  Pay Tender/Processing Fee पर क्लिक करता है।\n10. RTGS/CHALLAN के रूप में Payment mode का चयन करता है और save करता है।\n11. Generate Challan करता है।\n12. OK पर क्लिक करके confirm करता है।\n13. Select Gateway पर क्लिक करता है।\n14. Pay Now बटन पर क्लिक करता है।\n15. Confirm करने के लिए क्लिक करता है।\n16. आवश्यक जानकारी भरता है।\n17. RTGS/NEFT/IMPS पर क्लिक करता है।\n18. Confirm और Print करके challan pdf डाउनलोड करता है।\n19. आगे की Bank Payment के लिए Challan को save करता है।\n\n📘 स्रोत: EMD_CHALLAN_PAYMENT_V1.0.pdf"
+  },
+  {
+    "id": "Q2",
+    "lang": "EN",
+    "question": "What is the step-by-step process for CHiPS vendor registration?",
+    "outcome": "ANSWERED",
+    "total_s": 33.3,
+    "ttc_s": 3.2,
+    "ttft_s": 19.6,
+    "chars": 1025,
+    "n_sources": 5,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nThe process for CHiPS vendor registration involves several steps outlined in the Vendor Registration Manual. First, you visit the e-Procurement portal at https://eproc.cgstate.gov.in and click on ‘New User’ under Register. Next, you enter your PAN card details accurately and select “New User” followed by “Enter”. Then, you should enter a preferred login code to check availability, and if available, fill in the required details including Authorized Signatory, Contact, Additional contact Bank, CRN, Vendor business & Partner. Finally, the system will ask for validation, which you save and proceed with.\n\n📋 Process\n1.  Visit https://eproc.cgstate.gov.in and click ‘New User’ under Register.\n2.  Enter your PAN card details.\n3.  Select “New User” and “Enter”.\n4.  Enter a preferred login code to check availability.\n5.  If available, fill in the required details: Authorized Signatory, Contact, Additional contact Bank, CRN, Vendor business & Partner.\n6.  Save & Next.\n\n📘 Source: Vendor Registration Manual (CHiPS)"
+  },
+  {
+    "id": "Q2",
+    "lang": "HI",
+    "question": "CHiPS पर विक्रेता पंजीकरण की प्रक्रिया क्या है?",
+    "outcome": "ANSWERED",
+    "total_s": 29.8,
+    "ttc_s": 3.2,
+    "ttft_s": 20.3,
+    "chars": 605,
+    "n_sources": 5,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf"
+    ],
+    "devanagari_ratio": 0.35,
+    "has_table": false,
+    "answer": "💡 उत्तर\nCHiPS पर विक्रेता पंजीकरण की प्रक्रिया इस प्रकार है:\n\n1.  सबसे पहले, CHiPS पोर्टल पर \"New Supplier Registration\" विकल्प चुनें।\n2.  PAN दर्ज करें।\n3.  Vendor Class A–D होने पर CRN Certificate की scanned copy अपलोड करें।\n4.  Preferred Login code बनाएँ।\n5.  सभी business coordinates भरकर फॉर्म सबमिट करें।\n\n📋 प्रक्रिया\n1. पोर्टल पर \"New Supplier Registration\" विकल्प चुनें।\n2. PAN दर्ज करें।\n3. Vendor Class A–D होने पर CRN Certificate की scanned copy अपलोड करें।\n4. Preferred Login code बनाएँ।\n5. सभी business coordinates भरकर फॉर्म सबमिट करें।\n\n📘 स्रोत: CHiPS_Vendor_Registration_Manual_English.pdf"
+  },
+  {
+    "id": "Q3",
+    "lang": "EN",
+    "question": "What are the main guidelines mentioned in the DSC manual?",
+    "outcome": "ANSWERED",
+    "total_s": 35.6,
+    "ttc_s": 3.1,
+    "ttft_s": 19.5,
+    "chars": 1279,
+    "n_sources": 5,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nThe primary guidelines outlined in the DSC manual relate to obtaining a Digital Signature Certificate (DSC) necessary for participation in e-procurement processes. Specifically, vendors are instructed to immediately procure a Class II or Class III DSC from approved Certifying Authorities (CAs) like e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, and Safescrypt. The manual details a step-by-step procedure for foreign vendors, involving downloading an application form from the CCA website, submitting it to the Indian Embassy along with original documents for certification, making an online fund transfer as instructed by the CA, and subsequently couriering the certified documents to the relevant authority.\n\n📋 Process\n1.  Procure a Class II or Class III DSC from one of the listed Certifying Authorities (e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, Safescrypt).\n2.  Download the Registration/Application form from the CCA website: https://cca.gov.in.\n3.  Fill out the application form and submit it to the Indian Embassy with original documents for certification.\n4.  Make an online fund transfer as instructed by the CA (Swift code provided by the CA).\n5.  Couriered certified documents to the relevant authority.\n\n📘 Source: CHiPS_Vendor_Registration_Manual_English.pdf"
+  },
+  {
+    "id": "Q3",
+    "lang": "HI",
+    "question": "DSC मैनुअल में उल्लिखित मुख्य दिशानिर्देश क्या हैं?",
+    "outcome": "ANSWERED",
+    "total_s": 35.9,
+    "ttc_s": 2.9,
+    "ttft_s": 19.1,
+    "chars": 1247,
+    "n_sources": 5,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "devanagari_ratio": 0.7,
+    "has_table": true,
+    "answer": "💡 उत्तर\nI'm not fully certain this matches your question - please verify with the cited document.\nDSC मैनुअल में उल्लिखित मुख्य दिशानिर्देश निम्नलिखित हैं:\n\n| दिशानिर्देश | विवरण |\n|---|---|\n| DSC का उपयोग | e-procurement प्रक्रिया में भाग लेने के लिए डिजिटल हस्ताक्षर प्रमाणपत्र (DSC) का उपयोग आवश्यक है।  |\n| DSC प्राप्त करना |  DSC वर्ग II या III (हस्ताक्षर और एन्क्रिप्शन) होना चाहिए। विदेशी विक्रेताओं को भारतीय दूतावास जाकर दस्तावेज़ों को प्रमाणित कराना होगा। |\n| CA की सूची | e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, Safescrypt जैसे अधिकृत CA (डिजिटल हस्ताक्षर प्राधिकरण) से DSC प्राप्त किया जा सकता है। |\n| दस्तावेज़ आवश्यकताएँ | पंजीकरण/आवेदन पत्र डाउनलोड करने के लिए CAs द्वारा अनुमोदित वेबसाइट का उपयोग करें और आवश्यक दस्तावेजों को जमा करें। |\n\n📋 प्रक्रिया\n1.  आवश्यक DSC प्राप्त करें: विदेशी विक्रेताओं को भारतीय दूतावास जाकर दस्तावेज़ों को प्रमाणित कराना होगा।\n2.  पंजीकरण फॉर्म भरें: CAs द्वारा अनुमोदित वेबसाइट से पंजीकरण/आवेदन फॉर्म डाउनलोड करें और आवश्यक दस्तावेजों के साथ भरें।\n3.  दस्तावेजों का प्रमाणीकरण: दूतावास द्वारा जमा किए गए दस्तावेजों को प्रमाणित करवाएं।\n4.  ऑनलाइन फंड ट्रांसफर: Rupee समकक्ष राशि का ऑनलाइन फंड ट्रांसफर करें (CA के बैंक की स्विफ्ट कोड प्राप्त करें)।\n\n📘 स्रोत: CHiPS_Bid_Submission_Manual_English.pdf"
+  },
+  {
+    "id": "Q4",
+    "lang": "EN",
+    "question": "What is EMD and when is it exempted?",
+    "outcome": "ANSWERED",
+    "total_s": 27.6,
+    "ttc_s": 3.2,
+    "ttft_s": 18.7,
+    "chars": 727,
+    "n_sources": 5,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nBid Security (also known as Earnest Money Deposit or EMD) is a guarantee provided by a bidder to ensure their commitment to participate in a tender. It’s typically required to safeguard against a bidder withdrawing or altering their bid during the validity period, or failing to fulfill contract obligations. The amount of EMD generally ranges between two and five percent of the estimated value of goods to be procured, rounded off to the nearest thousands of Rupees as determined by the Procuring Entity.\n\n📋 Process\n1.  EMD is obtained along with bids for OTE and GTE tenders.\n2.  Bids not accompanied by EMD are rejected.\n3.  The standard EMD range is 2-5% of the estimated value.\n\n📘 Source: mannual procurement.pdf"
+  },
+  {
+    "id": "Q4",
+    "lang": "HI",
+    "question": "EMD क्या है और इसे कब छूट दी जाती है?",
+    "outcome": "ANSWERED",
+    "total_s": 29.8,
+    "ttc_s": 3.2,
+    "ttft_s": 18.8,
+    "chars": 686,
+    "n_sources": 5,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "devanagari_ratio": 0.72,
+    "has_table": false,
+    "answer": "💡 उत्तर\nEMD (Earnest Money Deposit), जिसे Bid Security भी कहा जाता है, एक सुरक्षा राशि है जो बोलीदाताओं द्वारा जमा की जाती है ताकि यह सुनिश्चित किया जा सके कि वे अपनी बोली वापस नहीं लेंगे या निविदा अवधि के दौरान उसमें कोई बदलाव नहीं करेंगे।\n\n📋 प्रक्रिया\n1. EMD की आवश्यकता होती है जब निविदा में जोखिम होता है।\n2. सामान्य तौर पर, EMD का प्रतिशत 2% से 5% तक होता है।\n3. कुछ मामलों में, जैसे कि MSME (Micro, Small & Medium Enterprises) के लिए, EMD छूट दी जा सकती है। इसके लिए वैध पंजीकरण प्रमाण पत्र जमा करना आवश्यक है।\n4. यदि बोलीदाता अनुबंध पर हस्ताक्षर नहीं करता है या प्रदर्शन सुरक्षा जमा नहीं करता है, तो EMD जब्त कर लिया जाता है।\n\n📘 स्रोत: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "id": "Q5",
+    "lang": "EN",
+    "question": "What are the main guidelines mentioned in the GeM manual?",
+    "outcome": "ANSWERED",
+    "total_s": 32.2,
+    "ttc_s": 2.8,
+    "ttft_s": 18.0,
+    "chars": 1149,
+    "n_sources": 5,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nThe GeM manual outlines several key guidelines for procurement through the Government e-Marketplace (GeM) portal. These include a prohibition against dividing demand into small quantities to avoid L1 bidding, mandatory use of the GeM portal where goods/services are available, and requirements for supplier registration and certificate compliance. The manual also details procedures for generating GeMAR&PTS reports, utilizing Business Analytics tools on GeM, and adhering to Model Clauses/Certificates.\n\n📋 Process\n1.  Prohibition against Piecemeal Purchases: Demand for goods cannot be divided into small quantities to avoid L1 bidding on GeM.\n2.  GeM Portal Usage: Goods/services must be procured through the GeM portal when available.\n3.  GeMAR&PTS Reporting: Buyers must generate a \"GeM Availability Report and Past Transaction Summary\" (GeMAR&PTS) for procurement outside GeM.\n4.  Business Analytics Tools: Utilize BA tools on GeM to assess price reasonableness.\n5.  Supplier Registration & Compliance: Vendors/bidders registered with GeM must provide a certificate of compliance.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "id": "Q5",
+    "lang": "HI",
+    "question": "GeM मैनुअल में उल्लिखित मुख्य दिशानिर्देश क्या हैं?",
+    "outcome": "ANSWERED",
+    "total_s": 49.3,
+    "ttc_s": 2.8,
+    "ttft_s": 19.0,
+    "chars": 1835,
+    "n_sources": 5,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "devanagari_ratio": 0.82,
+    "has_table": false,
+    "answer": "💡 उत्तर\nGeM मैनुअल में उल्लिखित मुख्य दिशानिर्देश निम्नलिखित हैं:\n\n*   **GeM पोर्टल का उपयोग:** सरकारी खरीद के लिए GeM पोर्टल का उपयोग अनिवार्य है, जो वस्तुओं और सेवाओं की आम खरीद के लिए स्थापित किया गया है। यह पोर्टल उपयोगकर्ता संगठन पंजीकरण, आपूर्तिकर्ता पंजीकरण, उत्पादों की सूची, ऑनलाइन बोली, रिवर्स नीलामी और मांग समेकन के लिए विस्तृत निर्देश प्रदान करता है।\n*   **GeMAR&PTS रिपोर्ट:** खरीदारों को GeM पर अपनी लॉगिन क्रेडेंशियल्स का उपयोग करके GeM Availability Report and Past Transaction Summary (GeMAR&PTS) उत्पन्न करना अनिवार्य है। यह रिपोर्ट GeM के बाहर खरीद के लिए एक पूर्व शर्त है और इसकी अद्वितीय आईडी को निविदा प्रस्ताव के साथ प्रकाशन पोर्टल पर प्रस्तुत करने की आवश्यकता होती है।\n*   **वित्तीय सीमाएँ:**\n    *   Rs. 50,000/- तक की वस्तुओं के लिए, किसी भी आपूर्तिकर्ता से सीधे खरीद की जा सकती है।\n    *   Rs. 50,000/- से Rs. 10,00,000/- तक की वस्तुओं के लिए, GeM पर सबसे कम कीमत वाले विक्रेता में से कम से कम तीन निर्माताओं के बीच चयन किया जाना चाहिए।\n    *   Rs. 10,00,000/- से अधिक की वस्तुओं के लिए, GeM पर सबसे कम कीमत वाले आपूर्तिकर्ता से बोली लगाकर खरीद की जानी चाहिए।\n*   **पiecemeal खरीद से बचाव:** मांग को छोटे भागों में विभाजित करके GeM के माध्यम से खरीद से बचने की अनुमति नहीं है।\n\n📋 प्रक्रिया\n1.  GeM पोर्टल पर पंजीकरण करें: उपयोगकर्ता संगठन और आपूर्तिकर्ता दोनों के लिए पंजीकरण आवश्यक है।\n2.  GeMAR&PTS रिपोर्ट उत्पन्न करें: GeM के बाहर खरीद के लिए, GeMAR&PTS रिपोर्ट उत्पन्न करना अनिवार्य है।\n3.  GeM पर सबसे कम कीमत वाले विक्रेता का चयन करें: Rs. 50,000/- से Rs. 10,00,000/- तक की वस्तुओं के लिए, GeM पर सबसे कम कीमत वाले विक्रेता का चयन किया जाना चाहिए।\n4.  Rs. 10,00,000/- से अधिक की वस्तुओं के लिए, GeM पर सबसे कम कीमत वाले आपूर्तिकर्ता से बोली लगाकर खरीद की जानी चाहिए।\n5.  GeM पोर्टल पर उपलब्ध उपकरणों (ऑनलाइन नीलामी और रिवर्स नीलामी) का उपयोग करें।\n\n📘 स्रोत: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "id": "Q6",
+    "lang": "EN",
+    "question": "What is the step-by-step process for EDGE browser setup?",
+    "outcome": "ANSWERED",
+    "total_s": 36.6,
+    "ttc_s": 2.8,
+    "ttft_s": 20.4,
+    "chars": 1266,
+    "n_sources": 5,
+    "sources": [
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "Preferred_System_Configuration_V_2.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nHere’s a breakdown of the steps to set up your EDGE browser as outlined in the provided documents:\n\n1.  **Open Internet Property:** Navigate to Start Menu > Windows + Run, enter “inetcpl.cpl” and click OK. This opens the Internet Properties window.\n2.  **Trusted Sites Configuration:** Go to the Security tab and select the Trusted Sites category. Add the application URL to the Trusted Site List. Set IE security levels as follows: Internet: Medium-high, Trusted sites: Medium. Enable or Prompt for ActiveX related options under ‘Internet’ and ‘Trusted sites’.\n3.  **Browser Launch & Settings:** Open the EDGE Browser and click on the “Settings” menu.\n4.  **Default Browser Setting:** Click \"Default Browser\" to set EDGE as the default browser.\n5.  **Recommended Portal Address:** Add the Recommended Portal Address/URL by clicking the appropriate setting (likely labeled ‘Allow’ or similar).\n6. **Reopen Browser**: After adding the address, reopen the browser.\n\n📋 Process\n1. Open Internet Property: Start Menu > Windows + Run > enter “inetcpl.cpl” and click OK.\n2. Add URL to Trusted Sites: Security tab > Trusted Sites category > Add application URL.\n3. Set IE Security Levels: Security tab > Internet > Custom level – set to Medium-high.\n4.  Set Trusted"
+  },
+  {
+    "id": "Q6",
+    "lang": "HI",
+    "question": "EDGE ब्राउज़र सेटअप की चरण-दर-चरण प्रक्रिया क्या है?",
+    "outcome": "ANSWERED",
+    "total_s": 33.0,
+    "ttc_s": 2.8,
+    "ttft_s": 22.6,
+    "chars": 660,
+    "n_sources": 5,
+    "sources": [
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "Guidelines_To_Bidders_EPS_v1.6.pdf"
+    ],
+    "devanagari_ratio": 0.9,
+    "has_table": false,
+    "answer": "💡 उत्तर\nEDGE ब्राउज़र को सुचारू रूप से चलाने के लिए निम्नलिखित चरण-दर-चरण प्रक्रिया का पालन करें:\n\n1.  **इंटरनेट प्रॉपर्टी खोलें:** स्टार्ट मेनू > विंडोज़ + रन > इनetcpl.cpl टाइप करें और ओके पर क्लिक करें। (चित्र में दिखाया गया है)\n2.  **विश्वसनीय साइट सूची में एप्लिकेशन URL जोड़ें:** सुरक्षा > विश्वसनीय साइटों में, इंटरनेट और विश्वसनीय साइटों के लिए सुरक्षा स्तर को मध्यम-उच्च (डिफ़ॉल्ट) पर सेट करें। ActiveX संबंधित विकल्पों के लिए सक्षम या संकेत चुनें।\n3.  **EDGE ब्राउज़र खोलें:** सेटिंग मेनू पर क्लिक करें।\n4.  **डिफ़ॉल्ट ब्राउज़र सेट करें:** सेटिंग्स > डिफ़ॉल्ट ब्राउज़र पर क्लिक करें।\n5.  **अनुशंसित पोर्टल पता/URL जोड़ें:**  ब्राउज़र को अनुशंसित करने"
+  },
+  {
+    "id": "Q7",
+    "lang": "EN",
+    "question": "Under GFR and government rules, what is the procedure for MSME procurement?",
+    "outcome": "ANSWERED",
+    "total_s": 38.3,
+    "ttc_s": 3.1,
+    "ttft_s": 20.0,
+    "chars": 1287,
+    "n_sources": 5,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nThe Government of India mandates preferential procurement of goods and services from Micro and Small Enterprises (MSEs) under Rule 153(ii) of GFR 2017, as well as incorporating broader objectives like supporting local industry and job creation through rules 153(iii) and 170(i), 173(i) of GFR 2017. This involves inviting offers from MSEs registered under Udyam Registration, with provisions for reclassification benefits if an enterprise’s investment or turnover changes. The procurement process must also conform to fair, transparent, and reasonable procedures as outlined in Rule 144 of GFR 2017, including consideration of locally manufactured goods or services.\n\n📋 Process\n1.  Invitations to offers should be conducted following a fair, transparent, and reasonable procedure as per Rule 144 of GFR 2017.\n2.  Procuring authorities must satisfy that the selected offer meets requirements and is reasonably priced (Rule 144).\n3.  Preferential procurement from MSEs, backward regions, weaker sections, and locally manufactured goods or services is encouraged (Rules 153(iii) & 170(i), 173(i)).\n4.  MSEs reclassified due to increased investment or turnover receive continued non-tax benefits for three years (Rule 153(ii)).\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "id": "Q7",
+    "lang": "HI",
+    "question": "GFR और सरकारी नियमों के तहत MSME खरीद की प्रक्रिया क्या है?",
+    "outcome": "ANSWERED",
+    "total_s": 44.7,
+    "ttc_s": 3.1,
+    "ttft_s": 19.5,
+    "chars": 1401,
+    "n_sources": 5,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "devanagari_ratio": 0.84,
+    "has_table": false,
+    "answer": "💡 उत्तर\nसरकारी नियमों और GFR के तहत MSME खरीद की प्रक्रिया निम्नलिखित है:\n\n1.  **नियमों का पालन:** सरकारी खरीद में MSME को शामिल करने के लिए Rule 153 (ii) of GFR 2017 लागू होता है, जो माइक्रो और स्मॉल एंटरप्राइजेज (MSEs) के लिए खरीद नीति प्रदान करता है।\n2.  **अयोग्यता:** ट्रेडर्स/डिस्ट्रिब्यूटर/सोले एजेंट/वर्क कॉन्ट्रैक्ट को इस नीति से बाहर रखा गया है।\n3.  **मूल्यांकन:** यदि L1 बिडर MSME नहीं है, तो 15% की मार्जिन के भीतर मूल्य रखने वाले MSME बिडरों को प्राथमिकता दी जाती है।\n4.  **बातचीत:** यदि कोई खरीददार L1 बिडर के साथ बातचीत करता है, तो वरीयता मार्जिन (L1+15%) L1 की मूल कीमत पर, रियायती कीमत पर नहीं, गणना की जानी चाहिए।\n5.  **MSME डेवलप करना:** मंत्रालयों/विभागों को GeM पोर्टल के माध्यम से MSME खरीद के लिए वेंडर डेवलपमेंट प्रोग्राम (VDP) या बायर-सेलर मीट आयोजित करके MSME को विकसित करने के लिए कदम उठाने चाहिए।\n6. **GeM पोर्टल का उपयोग:** सभी खरीद GeM पोर्टल पर की जानी चाहिए, यदि यह उपलब्ध नहीं है तो GFR नियमों का पालन किया जाना चाहिए।\n\n📋 प्रक्रिया\n1.  GFR 2017 के Rule 153 (ii) का पालन करें।\n2.  MSME बिडरों को 15% वरीयता मार्जिन के भीतर मूल्य रखने वाले बिडरों को प्राथमिकता दें।\n3.  खरीददारों द्वारा L1 बिडर के साथ बातचीत की जानी चाहिए, और वरीयता मार्जिन L1 की मूल कीमत पर गणना की जानी चाहिए।\n4.  मंत्रालयों/विभागों को GeM पोर्टल के माध्यम से MSME खरीद के लिए वेंडर डेवलपमेंट प्रोग्राम (VDP) या बायर-सेलर मीट आयोजित करने के लिए कदम उठाने चाहिए।\n\n📘 स्रोत: FInal_GFR_upto_31_07_2024.pdf"
+  },
+  {
+    "id": "Q8",
+    "lang": "EN",
+    "question": "What is the core objective of the e-Procurement project?",
+    "outcome": "ANSWERED",
+    "total_s": 25.3,
+    "ttc_s": 3.0,
+    "ttft_s": 17.9,
+    "chars": 670,
+    "n_sources": 5,
+    "sources": [
+      "Précis  e-Procurement Project.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "mannual procurement.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nThe core objective of the e-Procurement project was to increase efficiency and transparency in public procurement activity across all Government departments within Chhattisgarh. This involved implementing a comprehensive end-to-end solution encompassing vendor registration, indent management, e-tendering, e-auction, contract management, e-payment, and MIS & Accounting.\n\n📋 Process\n1. The project aimed to streamline procurement processes.\n2. It sought to enhance transparency in government spending.\n3.  It utilized a Public Private Partnership (PPP) model with Wipro Ltd. as the Application Service Provider (ASP).\n\n📘 Source: Précis e-Procurement Project.pdf"
+  },
+  {
+    "id": "Q8",
+    "lang": "HI",
+    "question": "e-Procurement परियोजना का मुख्य उद्देश्य क्या है?",
+    "outcome": "ANSWERED",
+    "total_s": 20.8,
+    "ttc_s": 3.7,
+    "ttft_s": 16.3,
+    "chars": 300,
+    "n_sources": 1,
+    "sources": [
+      "Chatbot_Capabilities.pdf"
+    ],
+    "devanagari_ratio": 0.57,
+    "has_table": false,
+    "answer": "💡 उत्तर\nमैं CHiPS e-Procurement Portal के लिए एक AI सहायक हूँ। मैं आपको सरकारी खरीद (Government Procurement) से संबंधित किसी भी सवाल का जवाब दे सकता हूँ — हिंदी, अंग्रेजी, या हिंग्लिश में।\n\n📋 प्रक्रिया\n1.  मुझे कोई भी प्रश्न पूछें।\n2.  मैं आपको विस्तृत उत्तर दूंगा।\n\n📘 स्रोत: Chatbot_Capabilities.pdf"
+  },
+  {
+    "id": "Q9",
+    "lang": "EN",
+    "question": "What system settings or configurations are needed for CHiPS online?",
+    "outcome": "ANSWERED",
+    "total_s": 40.3,
+    "ttc_s": 2.9,
+    "ttft_s": 13.0,
+    "chars": 2115,
+    "n_sources": 5,
+    "sources": [
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Preferred_System_Configuration_V_2.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": true,
+    "answer": "💡 Answer\nTo operate effectively on the Chhattisgarh Infotech Promotion Society (CHiPS) e-Procurement portal, bidders need to configure their computer systems with specific software and browser settings. Here’s a breakdown of the recommended system configurations:\n\n| Setting | Preferred Requirement | Not Recommended |\n|---|---|---|\n| Operating System | Windows 7 or Windows 8 (32 bit or 64 bit) | Trying different combinations of operating systems, browsers, and Java versions |\n| Browser | Internet Explorer 9 / Mozilla Firefox Version 44 (with IE Tab Add-on) / Google Chrome Version 48 (with IE Tab Extension) | Directly using Mozilla Firefox, Chrome, or Opera as the primary browser |\n| Java | Preferred Version: 1.8.0_77 (32 bit or 64 bit – as required) | Keeping multiple versions of Java or setting JAVA Security to High or Very High |\n| Digital Certificate | CLASS II/III- SHA 2- 2048 BIT SIGNING AND ENCRYPTION COMPONENT SEPARATELY, valid certificate, properly installed e-Token Drivers, Root Certificates installed | Using only a signing certificate or an encryption certificate, using expired certificates, improperly installed e-Token drivers, or missing root certificates |\n| Internet Bandwidth | Minimum 1 MBPS | Lower bandwidth |\n\n📋 Process\n1.  Install Java Version 1.8.0_77 (or later) – ensure it’s compatible with your operating system.\n2.  Download and install either Internet Explorer 9, Mozilla Firefox Version 44 (with the IE Tab Add-on), or Google Chrome Version 48 (with the IE Tab Extension).\n3.  Ensure that the ‘Include Local Directory Path’ option is enabled in Internet Explorer settings (Tools > Internet Options > Security > Custom Level > Miscellaneous).\n4.  Obtain and install a valid Class II/III Digital Signature Certificate (DSC) from a trusted Certifying Authority. Verify its validity.\n5.  Install the appropriate e-Token drivers for your DSC.\n6.  Ensure that the Root Certificates required by the e-Procurement system are installed on your computer.\n7.  Maintain a stable internet connection with at least 1 MBPS bandwidth.\n\n📘 Source: Preferred System Setup Guidelines (CHiPS)"
+  },
+  {
+    "id": "Q9",
+    "lang": "HI",
+    "question": "CHiPS ऑनलाइन के लिए कौन-सी सिस्टम सेटिंग्स आवश्यक हैं?",
+    "outcome": "ANSWERED",
+    "total_s": 25.2,
+    "ttc_s": 2.9,
+    "ttft_s": 15.1,
+    "chars": 661,
+    "n_sources": 5,
+    "sources": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "devanagari_ratio": 0.52,
+    "has_table": true,
+    "answer": "💡 उत्तर\nCHiPS ऑनलाइन सिस्टम के लिए निम्नलिखित सिस्टम सेटिंग्स आवश्यक हैं:\n\n| सेटिंग | विवरण |\n|---|---|\n| Java | Java का संस्करण 1.6 स्थापित होना चाहिए। |\n| Regional & Language Format Settings | नियंत्रण पैनल में जाकर Region and Language Options चुनें, और English (United States) का चयन करें। |\n| डिजिटल सर्टिफिकेट | Class II या Class III डिजिटल सर्टिफिकेट प्राप्त करना आवश्यक है। |\n\n📋 प्रक्रिया\n1.  नियंत्रण पैनल पर जाएं।\n2.  Region and Language Options आइकन पर क्लिक करें।\n3.  English (United States) चुनें।\n4.  OK पर क्लिक करें।\n5.  Java का संस्करण 1.6 डाउनलोड और इंस्टॉल करें।\n6.  डिजिटल सर्टिफिकेट प्राप्त करें।\n\n📘 स्रोत: Guidelines_To_Bidders_EPS_v1.6.pdf"
+  },
+  {
+    "id": "Q10",
+    "lang": "EN",
+    "question": "What is the step-by-step process for the auction manual?",
+    "outcome": "ANSWERED",
+    "total_s": 31.4,
+    "ttc_s": 3.2,
+    "ttft_s": 14.5,
+    "chars": 1249,
+    "n_sources": 6,
+    "sources": [
+      "AuctionManual_FA.pdf",
+      "AuctionManual_FA.pdf",
+      "mannual procurement.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "devanagari_ratio": null,
+    "has_table": false,
+    "answer": "💡 Answer\nHere’s the step-by-step process for participating in an e-Auction as outlined in the Auction Manual:\n\n1.  Login to the Chhattisgarh EProcurement portal using your user ID, password, and Digital Signature Certificate (DSC).\n2.  Navigate to the “Forward Auction” tab on the Dashboard and open the auction portal in a new window.\n3.  If prompted, enter the old password (“Password@123”) and then input the new password.\n4.  Select the specific auction from the dashboard and click \"View Respond to RFX.\"\n5.  Quote an opening price and multiples of the minimum bid change price. If no opening price is specified, use “0” as the opening price.\n6.  The auction page will automatically refresh every 1 minute with updated bidding status and ranking information.\n\n📋 Process\n1. Login to Chhattisgarh EProcurement portal using user ID, password & DSC.\n2. Navigate to \"Forward Auction\" tab in Dashboard & open new window.\n3. Enter old password (“Password@123”) and then enter new password.\n4. Select auction from dashboard & click “View Respond to RFX”.\n5. Quote opening price & multiples of min bid change price; use ‘0’ if no opening price.\n6. Page auto-refreshes every 1 minute with updated bidding status & ranking.\n\n📘 Source: AuctionManual_FA.pdf"
+  },
+  {
+    "id": "Q10",
+    "lang": "HI",
+    "question": "नीलामी मैनुअल की चरण-दर-चरण प्रक्रिया क्या है?",
+    "outcome": "ANSWERED",
+    "total_s": 39.1,
+    "ttc_s": 2.9,
+    "ttft_s": 14.2,
+    "chars": 1482,
+    "n_sources": 6,
+    "sources": [
+      "AuctionManual_FA.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "devanagari_ratio": 0.92,
+    "has_table": false,
+    "answer": "💡 उत्तर\nनीलामी मैनुअल की चरण-दर-चरण प्रक्रिया इस प्रकार है:\n\n1.  **आवश्यकता आकलन:** आवश्यकता आकलन, विनिर्देशों का प्रारूपण और खरीद योजना (आवश्यकतानुसार बाजार परामर्श सहित)।\n2.  **निविदा आमंत्रण प्रक्रिया:** निविदा दस्तावेज तैयार करना, प्रकाशन, प्राप्त करना और निविदाएं खोलना।\n3.  **निविदा मूल्यांकन और अनुबंध की निष्पादन:** निविदाओं का मूल्यांकन और अनुबंध का निष्पादन।\n4.  **अनुबंध प्रबंधन:** अनुबंध प्रबंधन और समापन।\n5.  **स्क्रैप निपटान:** विभिन्न निपटान मोड के माध्यम से स्क्रैप का निपटान।\n\n📋 प्रक्रिया\n1.  आवश्यकता आकलन, विनिर्देशों का प्रारूपण और खरीद योजना तैयार करना।\n2.  निविदा दस्तावेज तैयार करना, प्रकाशन करना और प्राप्त करना तथा निविदाएं खोलना।\n3.  तकनीकी-व्यावसायिक (techno-commercial) और मूल्य निविदाओं का मूल्यांकन करना और अनुबंध निष्पादित करना।\n4.  अनुबंध प्रबंधन और समापन करना।\n5.  विभिन्न निपटान मोड के माध्यम से स्क्रैप का निपटान करना।\n\nनियम/प्रावधान:\n1.14. नामकरण पहेली\n1. सार्वजनिक खरीद में कोई मानकीकृत नामकरण नहीं है, और अमेरिकी, यूरोपीय और ब्रिटिश/भारतीय नामकरण का मिश्रण आम है। ‘निविदा’ को (i) ‘निविदा दस्तावेज’ या ‘निविदा प्रक्रिया’ के रूप में और (ii) बोलीकर्ता द्वारा प्रस्तुत ‘बोली’ के रूप में लिया जाता है। निविदा दस्तावेज जिसेProcuring Entity द्वारा जारी किया गया है, उसे भी ‘बोली’ (या ‘बidding’) दस्तावेज़ के रूप में जाना जाता है। इसी तरह, ‘निविदा’ में भाग लेने वाले व्यक्तियों को बोलीदाताओं और निविदाकर्ताओं के रूप में भी जाना जाता है। इस द्वैत को “निविदा आमंत्रण” और “बोलीकर्ताओं के लिए निर्देश” आदि में दर्शाया गया है।\n\n📘 स्रोत: AuctionManual_FA.pdf"
+  }
+]

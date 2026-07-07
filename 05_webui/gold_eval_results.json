@@ -1,0 +1,161 @@
+[
+  {
+    "id": "G1",
+    "q": "What is EMD and when is it exempted?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 55.6,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Chatbot_Capabilities.pdf",
+      "mannual procurement.pdf"
+    ],
+    "answer": "💡 Answer\n**1. What is EMD**\n‌EMD (Earnest Money Deposit / Bid Security) is a safeguard against a bidder withdrawing or altering their bid during the bid validity period for OTE and GTE tenders. The amount typically ranges between two to five per cent of the estimated value of the goods to be procured, rounded off to the nearest thousands of Rupees as determined by the Procuring Entity.\n\n**2. when is EMD exempted**\nEMD is exempted for bidders who are notified under OM No F.20/2/2014-PPD(Pt.) issued by Department of Expenditure dated 25.07.2017, or those registered under MSEs."
+  },
+  {
+    "id": "G2",
+    "q": "What is the step-by-step process for CHiPS vendor registration?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 45.7,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "answer": "💡 Answer\nThe process for CHiPS vendor registration involves several steps to ensure a credible and compliant supplier is onboarded. Here’s a breakdown of the key stages based on the available documentation:\n\n1. **Visit the e-Procurement Portal:** Begin by visiting the website https://eproc.cgstate.gov.in and clicking on ‘New User’ under Register.\n2. **Enter PAN Card Details:** Correctly input your PAN card details, then select “New User” and “Enter”. Be prepared for a system setup guide download alert.\n3. **Complete Registration Details:** After the initial login, you'll need to enter preferred login code to check availability, followed by other details such as Authorized Signatory, Contact, Additional contact Bank, CRN, Vendor business & Partner.\n4. **Validation**: System will ask for a validation after all details are entered, press “Save &Next” to continue.\n\n📋 Process\n1. Navigate to https://eproc.cgstate.gov.in and click ‘New User’ under Register.\n2. Enter your PAN card details accurately.\n3. Select \"New User\" and \"Enter\" after entering the PAN.\n4. Complete all required fields, including Authorized Signatory, Contact information, Bank details, CRN, and Vendor business/partner information.\n5. Press “Save &Next” to complete the validation process.\n\n📘 Source: [Source 1: CHiPS_Vendor_Registration_Manual_English.pdf]"
+  },
+  {
+    "id": "G3",
+    "q": "What is the step-by-step process for challan payment?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 45.2,
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "answer": "💡 Answer\nThe process for challan payment involves several steps to ensure accurate and secure payment of the tender fee. Here’s a breakdown:\n\n📋 Process\n1. **Login:** Begin by logging into the Eproc system using your User ID and Password.\n2. **Select DSC:** Choose your Digital Signature Certificate (DSC).\n3. **Navigate to Tenders:** Click on \"All Live Tenders\" and then “View Tender” followed by “INTERSTED”.\n4. **Accept Terms:** Check the terms and conditions, then click \"I AGREE/ACCEPT\".\n5. **Pay Tender Fee:** Click “Pay Tender/Processing Fee”.\n6. **Select Payment Mode:** Choose “RTGS/CHALLAN” as the payment mode and save it.\n7. **Generate Challan:** Click “OK to confirm” to generate the challan.\n8. **Print & Pay:** Select the Gateway, click \"Pay Now\", fill in the required information, and click “RTGS/NEFT/IMPS”. Confirm and print the challan.\n9. **Save Challan:** Save a copy of the challan for bank payment.\n10. **Upload:** Click \"Redirect to go back to Eproc System\" and then \"Close\". Finally, upload the counterfoil copy of the challan.\n\n📘 Source: EMD_CHALLAN_PAYMENT_V1.0.pdf"
+  },
+  {
+    "id": "G4",
+    "q": "What system settings or configurations are needed for CHiPS online?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 40.8,
+    "sources": [
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "Guidelines_To_Bidders_EPS_v1.6.pdf"
+    ],
+    "answer": "💡 Answer\nTo operate effectively on the Chhattisgarh Infotech Promotion Society (CHiPS) e-Procurement portal, several system settings are required. These include Windows 7 or 8 (32-bit or 64-bit) operating systems, Internet Explorer 9 or Mozilla Firefox Version 44 with the IE Tab add-on, Java version 1.8.0_77, and a minimum internet bandwidth of one MBPS. It’s crucial to avoid using multiple Java versions or incompatible browsers. The preferred system setup is detailed in the “Preferred System Configuration” document.\n\n📋 Process\n1. Install Windows 7 or 8 (32-bit or 64-bit) operating system.\n2. Download and install Internet Explorer 9 or Mozilla Firefox Version 44 with the IE Tab add-on.\n3. Download and install Java version 1.8.0_77.\n4. Ensure a minimum internet bandwidth of one MBPS.\n5. Utilize the auto setup utility available at https://eproc.cgstate.gov.in --> Auto Setup for streamlined configuration.\n\n📘 Source: Preferred System Configuration V_2.pdf"
+  },
+  {
+    "id": "G5",
+    "q": "What is the step-by-step process for the auction manual?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 48.8,
+    "sources": [
+      "AuctionManual_FA.pdf",
+      "mannual procurement.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "answer": "💡 Answer\nHere’s the step-by-step process for participating in an e-Auction as outlined in the provided documents:\n\n1. **Login:** Access the Chhattisgarh EProcurement portal using your user ID, password, and Digital Signature Certificate (DSC).\n2. **Navigate to Auction Tab:** After logging in, navigate to the “Auction” tab on the Dashboard and open the auction portal in a new window.\n3. **Password Change (if required):** If prompted to change your password, enter the old password (“Password@123”) and then provide your new password.\n4. **Select Auction & View Response:** Select the specific auction you wish to participate in from the dashboard and click on “View Respond to RFX”.\n5. **Quote Bid Price:** Submit your bid by quoting an amount above the Opening Price, or a multiple of the minimum bid change price. If there is no opening price, use ‘0’ as the starting point.\n6. **Auto-Refresh & Updates:** The auction page will automatically refresh every 1 minute with updated bidding status and ranking information.\n\n📋 Process\n1. Login to Chhattisgarh EProcurement portal using user ID, password, and DSC.\n2. Navigate to “Auction” tab on Dashboard and open in new window.\n3. Change Password (if prompted): Enter \"Password@123\" as old password & provide new password.\n4. Select Auction: Click “View Respond to RFX”.\n5. Quote Bid Price: Submit bid above Opening Price or multiple of min change price, or ‘0’ if no opening price.\n6. Auto-Refresh: Page refreshes every 1 minute with updated status and ranking.\n\n📘 Source: AuctionManual_FA.pdf"
+  },
+  {
+    "id": "G6",
+    "q": "What are the main guidelines mentioned in the DSC manual?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 42.9,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf"
+    ],
+    "answer": "💡 Answer\nThe primary guidelines outlined in the DSC manual relate to obtaining a Digital Signature Certificate (DSC) necessary for participation in e-procurement processes. Specifically, vendors are instructed to immediately procure a Class II or Class III DSC from approved Certifying Authorities (CAs), with contact details listed as: e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, and Safescrypt. The manual also details the procedure for foreign vendors to obtain a DSC, involving downloading an application form from a licensed CA, submitting it along with original documents to the Indian Embassy for certification, and making an online fund transfer as instructed by the CA.\n\n📋 Process\n1. Procure a Class II or Class III DSC from one of the listed Certifying Authorities (e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, Safescrypt).\n2. Download the Registration/Application form for the DSC from a licensed CA approved by CCA (https://cca.gov.in).\n3. Fill out the application form and submit it to the Indian Embassy along with original documents for certification.\n4. Make an online fund transfer in the Rupee equivalent amount as instructed by the CA, providing the CA’s Swift code upon request.\n5. Courier the certified documents to the relevant authority.\n\n📘 Source: CHiPS_Vendor_Registration_Manual_English.pdf"
+  },
+  {
+    "id": "G7",
+    "q": "What is the core objective of the e-Procurement project?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 35.3,
+    "sources": [
+      "Précis  e-Procurement Project.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "mannual procurement.pdf"
+    ],
+    "answer": "💡 Answer\nThe core objective of the e-Procurement project was to increase efficiency and transparency in public procurement activity across all Government departments within Chhattisgarh. This involved implementing a comprehensive end-to-end solution encompassing vendor registration, indent management, e-tendering, e-auction, contract management, e-payment, and MIS & Accounting modules.\n\n📋 Process\n1. The project was initiated in 2007 to improve public procurement processes.\n2. It utilized a Public Private Partnership (PPP) model with Wipro Ltd. as the Application Service Provider (ASP).\n3. The system managed tenders through a web site and encompassed viewing of Tender/ N.I.T., responding to tender, submitting the QUOTATION online, viewing tender opening, viewing the PURCHASE ORDER, viewing the RECEIPT, and viewing the PAYMENT information.\n\n📘 Source: Précis e-Procurement Project.pdf"
+  },
+  {
+    "id": "G8",
+    "q": "Under GFR and government rules, what is the procedure for MSME procurement?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 49.0,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "answer": "💡 Answer\nThe Government of India mandates preferential procurement of goods and services from Micro and Small Enterprises (MSEs) under Rule 153(ii) of GFR 2017. This policy, amended in 2018 and 2021, aims to support inclusive economic growth. The procedure involves offering preferential procurement opportunities to MSEs registered on the Udyam Registration portal, particularly those owned by SC/ST or women entrepreneurs. Additionally, the government encourages the procurement of locally manufactured goods or services (Rule 153(iii) of GFR 2017) and supports startup enterprises (Rules 170(i), 173(i) of GFR 2017) to achieve broader social policy objectives like “Make in India” and job creation.\n\n📋 Process\n1. **Policy Compliance:** Procuring authorities must follow the procurement policy for MSEs, as outlined in the MSME Act, 2006 and its amendments.\n2. **Udyam Registration:** MSEs registered on the Udyam portal are eligible to participate in tenders.\n3. **Preferential Treatment:** MSEs receive preferential treatment during procurement processes, particularly for goods and services not available on GeM.\n4. **Local Procurement Support**: Preference is given to locally manufactured goods or services (Rule 153(iii) of GFR 2017), aligning with the \"Make in India\" initiative.\n5. **Startup Enterprise Support:** Support for startup enterprises is provided as per Rules 170(i), 173(i) of GFR 2017.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "id": "G9",
+    "q": "Under GFR and government rules, what is the procedure for Instructions for department users and bidders?",
+    "pass": false,
+    "failures": [
+      "forbidden present: /Rule 172/"
+    ],
+    "latency_s": 59.0,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "answer": "💡 Answer\nThe procedure for issuing tender instructions to departments and bidders involves several key steps as outlined across multiple sources. Primarily, Section I of the Tender Document (NIT) serves as the foundational notice inviting tenders, containing a Tender Information Summary (TIS). The NIT must provide sufficient information for prospective bidders to decide whether to participate and understand how to proceed. Furthermore, Sections II (Instructions to Bidders - ITB), III (Appendix to Instructions to Bidders - AITB), IV (General Conditions of Contract - GCC), V (Special Conditions of Contract - SCC), VI (Schedule of Requirements), VII (Technical Specifications and Quality Assurance) and VIII (Qualification and Evaluation Criteria) detail the requirements and evaluation process. Crucially, bidders must adhere to the Financial Bid (BOQ Excel Sheet) and submission formats. The procuring entity is obligated to publish modifications or clarifications regarding the bidding document in the same manner as the initial document was communicated, as detailed in GFR Rule 172(ii). Additionally, registration requirements apply for bidders from countries sharing a land border with India, as outlined in Order (Public Procurement No.1)58.\n\n📋 Process\n1. **NIT Publication:** The Department Admin initiates the process by publishing the Notice Inviting Tender (NIT) and its Appendix (TIS), adhering to Model NIT format as per MTD guidelines.\n2. **ITB & AITB Provision:** The Instructions to Bidders (ITB) and Appendix to ITB (AITB) sections clearly define eligibility criteria, submission requirements, and evaluation procedures.\n3. **GCC & SCC Details:** The General Conditions of Contract (GCC) and Special Conditions of Contract (SCC) outline the contractual terms and any specific conditions relevant to the tender.\n4. **Schedule of Requirements:** This section specifies the required goods or services, quantities, and delivery schedules.\n5. **Financial Bid Preparation:** Bidders prepare their Financial Bids (BOQ Excel Sheet) according to the specified format.\n6. **Modification Communication:** Any modifications or clarifications to the bidding document must be communicated to bidders in the same manner as the initial document was published, as per GFR Rule 172(ii).\n7. **Registration Compliance**: Bidders from countries sharing a land border with India must register with the Competent Authority (Para 12(c)) as detailed in Order (Public Procurement No.1)58.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "id": "G10",
+    "q": "What are the main guidelines mentioned in the GeM manual?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 51.5,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "answer": "💡 Answer\nThe GeM manual outlines several key guidelines for procurement through the Government e-Marketplace (GeM) portal. These include a prohibition against dividing demand into small quantities to avoid L1 bidding, mandatory use of the GeM portal where goods are available, and requirements for supplier registration and certificate compliance. The manual also details procedures for generating GeMAR&PTS reports, utilizing Business Analytics tools on GeM, and adhering to model clauses/certificates.\n\n📋 Process\n1. Prohibition against Piecemeal Purchases: Demand for goods cannot be divided into small quantities to avoid L1 bidding or obtaining higher authority sanctions (as stated in publicProManual-1755343081262-715558279.pdf, Rule 150).\n2. GeM Portal Usage: All purchases should be made through the GeM portal for goods available there, following its terms and conditions.\n3. GeMAR&PTS Reporting: Buyers must generate a GeMAR&PTS report on the GeM portal for procurement outside GeM.\n4. Business Analytics Tools: Utilize BA tools on GeM to assess price reasonableness.\n5. Supplier Registration and Compliance: Vendors/bidders registered with GeM must provide a certificate of compliance.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "id": "G11",
+    "q": "What is the performance security in a work contract?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 32.6,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "answer": "💡 Answer\nThe performance security, also known as a Performance Bank Guarantee (PBG), required for a work contract is typically an amount of five to ten percent of the value of the contract. This ensures due performance of the contract by the successful bidder.\n\n📋 Process\n1. Performance Security must be obtained from the successful bidder awarded the contract.\n2. The amount should be between 5% and 10% of the contract value.\n3. It can be furnished in various forms, including an account payee demand draft, fixed deposit receipt from a commercial bank, a bank guarantee, or an online payment.\n\n📘 Source: Manual_for_Procurement_of_works_2019.pdf"
+  },
+  {
+    "id": "G12",
+    "q": "What is today's weather in Raipur?",
+    "pass": true,
+    "failures": [],
+    "latency_s": 2.5,
+    "sources": [],
+    "answer": "The answer to this question was not found in the available documents."
+  }
+]

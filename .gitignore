@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+.env
+*.env.local
+
+# Secrets / credentials
+.env.*
+!.env.template
+
+# Vector database (large binary, not source)
+04_embeddings_and_kg/db/
+
+# Manifest (auto-generated, not source)
+04_embeddings_and_kg/.embeddings_manifest.json
+
+# Logs
+logs/
+*.log
+01_preprocessing/logs/
+
+# Node
+node_modules/
+npm-debug.log
+
+# OS / editor
+.DS_Store
+.vscode/
+Thumbs.db
+
+# Pipeline output
+01_preprocessing/stage1_output/
+01_preprocessing/stage2_output/
+01_preprocessing/input_pdfs/
+02_optimization/output/
+03_chunking/output/
+04_embeddings_and_kg/scripts/ov_models/

@@ -1,0 +1,268 @@
+[
+  {
+    "idx": 1,
+    "lang": "hi",
+    "question": "निविदा क्या होती है?",
+    "answer": "💡 उत्तर\nनिविदा का अर्थ है किसी कार्य या वस्तु की खरीद के लिए एक औपचारिक प्रस्ताव। यह एक ऐसी प्रक्रिया है जिसमें संभावित आपूर्तिकर्ता (suppliers) एक निर्धारित प्रारूप में अपनी कीमतें और शर्तें प्रस्तुत करते हैं, जिनका मूल्यांकन करके सबसे उपयुक्त आपूर्तिकर्ता को चुना जाता है।\n\n📋 प्रक्रिया\n1. निविदा विज्ञप्ति (NIT) जारी की जाती है जिसमें कार्य या वस्तु का विवरण होता है।\n2. आपूर्तिकर्ताओं को निविदा प्रपत्र भरने और जमा करने के लिए कहा जाता है।\n3. निविदाएँ निर्धारित समय सीमा के भीतर प्राप्त की जाती हैं।\n4. निविदाओं का मूल्यांकन किया जाता है और सबसे कम कीमत या सर्वोत्तम शर्तों वाला आपूर्तिकर्ता चुना जाता है।\n\n📘 स्रोत: निविदाएँ और प्रक्रिया (Tenders & Procurement Process) - Chatbot_Capabilities.pdf",
+    "detected_lang": "hi",
+    "sources": [
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Chatbot_Capabilities.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "latency_s": 45.5
+  },
+  {
+    "idx": 2,
+    "lang": "hi",
+    "question": "EMD क्या है और यह कितनी होती है?",
+    "answer": "💡 उत्तर\nEMD का मतलब है Earnest Money या Bid Security। यह एक प्रकार की जमानत होती है जो बोली लगाने वाले द्वारा जमा की जाती है ताकि यह सुनिश्चित किया जा सके कि वे अपनी बोली वापस नहीं लेंगे या बोली अवधि के दौरान उसमें कोई बदलाव नहीं करेंगे।\n\n📋 प्रक्रिया\n1. EMD",
+    "detected_lang": "hi",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Chatbot_Capabilities.pdf"
+    ],
+    "latency_s": 28.8
+  },
+  {
+    "idx": 3,
+    "lang": "hi",
+    "question": "वेंडर पंजीकरण कैसे करें?",
+    "answer": "💡 उत्तर\nनया विक्रेता/आपूर्तिकर्ता रजिस्टर करने की प्रक्रिया इस प्रकार है:\n\n1.  सबसे पहले, आधिकारिक वेबसाइट https://eproc.cgstate.gov.in पर जाएं।\n2.  \"New User\" के लिंक पर क्लिक करें।\n3.  PAN कार्ड की जानकारी सही ढंग से दर्ज करें।\n4.  \"New User\" और \"Enter\" पर क्लिक करके आगे बढ़ें।\n5.  सिस्टम द्वारा पूछे गए सभी विवरण (अधिकृत हस्ताक्षरकर्ता, संपर्क जानकारी, बैंक विवरण, CRN, विक्रेता व्यवसाय और भागीदार) भरें।\n6.  सभी जानकारी भरने के बाद, सिस्टम सत्यापन का अनुरोध करेगा। “Save &Next” पर क्लिक करें।\n\n📋 प्रक्रिया\n1.  वेबसाइट https://eproc.cgstate.gov.in पर जाएं।\n2.  \"New User\" लिंक पर क्लिक करें।\n3.  PAN कार्ड की जानकारी दर्ज करें।\n4.  \"New User\" और \"Enter\" पर क्लिक करें।\n5.",
+    "detected_lang": "hi",
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "Chatbot_Capabilities.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf"
+    ],
+    "latency_s": 34.6
+  },
+  {
+    "idx": 4,
+    "lang": "hi",
+    "question": "GeM क्या है?",
+    "answer": "💡 उत्तर\nGeM (Government e-Marketplace) भारत सरकार द्वारा स्थापित एक ऑनलाइन ई-कॉमर्स प्लेटफॉर्म है जिसका उद्देश्य सामान्य उपयोग के सामान और सेवाओं की खरीद में पारदर्शिता और दक्षता लाना है। GeM पर विक्रेता अपने उत्पादों या सेवाओं को पेश करते हैं, और योग्य खरीदार किसी भी विक्रेता से उत्पाद/सेवाओं का चयन कर सकते हैं। यह प्लेटफ़ॉर्म खरीद प्रक्रिया को ऑनलाइन और इलेक्ट्रॉनिक बनाता है, जिसमें ऑर्डर प्लेसमेंट से लेकर भुगतान तक सब कुछ शामिल है।\n\n📋 प्रक्रिया\n1. GeM पोर्टल पर पंजीकरण करें।\n2. आवश्यक पहचान प्रमाण प्रदान करके विक्रेता के रूप में पंजीकरण कराएं।\n3. GeM द्वारा दर की reasonableness का मूल्यांकन किया जाएगा।\n4. GeM पोर्टल का उपयोग करके सीधे ऑनलाइन खरीद करें।\n\nउपलब्ध खरीद सीमाएँ:\n(i) ₹50,000/- तक - किसी भी योग्य विक्रेता से उत्पाद खरीदें।\n(ii) ₹50,000/- से ₹10,00,000/- तक - कम से कम तीन निर्माताओं के बीच सबसे कम कीमत वाले विक्रेता से उत्पाद खरीदें।\n(iii) ₹10,00,000/- से अधिक - GeM पर उपलब्ध ऑनलाइन नीलामी या रिवर्स ऑक्शन टूल का उपयोग करके सबसे कम कीमत वाले विक्रेता से उत्पाद खरीदें।\n\n📘 स्रोत: FInal_GFR_upto_31_07_2024.pdf",
+    "detected_lang": "hi",
+    "sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "latency_s": 39.7
+  },
+  {
+    "idx": 5,
+    "lang": "hi",
+    "question": "परफॉर्मेंस सिक्योरिटी कितने प्रतिशत होती है?",
+    "answer": "💡 उत्तर\nपरफॉर्मेंस सिक्योरिटी का प्रतिशत अनुबंध मूल्य का पांच से दस प्रतिशत होता है। कार्यों के अनुबंधों के लिए यह आमतौर पर पाँच प्रतिशत का होता है।\n\n📋 प्रक्रिया\n1. सफल बोलीदाता को अनुबंध के लिए परफॉर्मेंस सिक्योरिटी प्राप्त करनी होती है।\n2. परफॉर्मेंस सिक्योरिटी की राशि अनुबंध मूल्य का पांच से दस प्रतिशत होनी चाहिए।\n3. इसे अकाउंट पे योजना डिमांड ड्राफ्ट, एक वाणिज्यिक बैंक से फिक्स्ड डिपॉजिट रिसीट, किसी भारतीय वाणिज्यिक बैंक द्वारा जारी किया गया बैंक गारंटी या ऑनलाइन भुगतान के रूप में दिया जा सकता है।\n4. यदि संयुक्त उद्यम (JV) है, तो सभी भागीदारों ने परियोजना में उनकी भागीदारी के अनुपात में परफॉर्मेंस सिक्योरिटी के लिए बैंक गारंटी प्रदान करनी होगी।\n5. जीटीई टेंडर के लिए, परफॉर्मेंस सिक्योरिटी अनुबंध की मुद्रा में होनी चाहिए और यह अंतर्राष्ट्रीय कन्वेंशन URDG 758 का पालन करना चाहिए।\n\n📘 स्रोत: Manual_for_Procurement_of_works_2019.pdf",
+    "detected_lang": "hi",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "latency_s": 34.4
+  },
+  {
+    "idx": 6,
+    "lang": "hi",
+    "question": "डिजिटल हस्ताक्षर (DSC) क्या है और क्यों जरूरी है?",
+    "answer": "💡 उत्तर\nडिजिटल हस्ताक्षर (DSC), जिसे Earnest Money Deposit (EMD) के रूप में भी जाना जाता है, एक उच्च आश्वासन प्रमाण पत्र है जो मुख्य रूप से ई-कॉमर्स लेनदेन पर ऑनलाइन अनुप्रयोगों में उपयोग किया जाता है। इसे Class – II/Class – III डिजिटल प्रमाणपत्र के रूप में जारी किया जाता है और यह केवल उन विक्रेताओं/idders के लिए आवश्यक",
+    "detected_lang": "hi",
+    "sources": [
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf"
+    ],
+    "latency_s": 25.9
+  },
+  {
+    "idx": 7,
+    "lang": "hi",
+    "question": "लिमिटेड टेंडर इंक्वायरी कब इस्तेमाल की जाती है?",
+    "answer": "💡 उत्तर\nलिमिटेड टेंडर इंक्वायरी (LTE) तब इस्तेमाल की जाती है जब अनुमानित मूल्य [Rupees Fifty Lakhs]³⁰ तक होता है। यह एक सीमित प्रतिस्पर्धा खरीद विधि है, जिसमें पूर्व-चयनित बोलीदाताओं (जिनको खरीद इकाई के साथ-साथ अन्य सार्वजनिक निर्माण संगठनों/निर्माण PSUs के साथ सूचीबद्ध किया गया है) को सीधे बोली लगाने के लिए बुलाया जाता",
+    "detected_lang": "hi",
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "latency_s": 26.0
+  },
+  {
+    "idx": 8,
+    "lang": "hi",
+    "question": "e-Procurement पोर्टल का वेब पता क्या है?",
+    "answer": "💡 उत्तर\ne-Procurement पोर्टल का वेब पता है: https://eprocdemo.cgstate.gov.in/CHEPS/.\n\n📋 प्रक्रिया\n1. ऊपर दिए गए URL को ब्राउज़र में खोलें।\n2. यह आपको CHEPS (Chhattisgarh e-Procurement System) पोर्टल पर ले जाएगा।\n\n📘 स्रोत: [Source 1: Corrigendum_Instructions_to_department_users_and_bidders.pdf]",
+    "detected_lang": "hi",
+    "sources": [
+      "Corrigendum_Instructions_to_department_users_and_bidders.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "mannual procurement.pdf"
+    ],
+    "latency_s": 25.8
+  },
+  {
+    "idx": 9,
+    "lang": "hi",
+    "question": "परचेज कमेटी कब बनाई जाती है और उसमें कितने सदस्य होते हैं?",
+    "answer": "इस प्रश्न का उत्तर उपलब्ध दस्तावेजों में नहीं मिला।",
+    "detected_lang": null,
+    "sources": [],
+    "latency_s": 0.6
+  },
+  {
+    "idx": 10,
+    "lang": "hi",
+    "question": "कोरिजेंडम (Corrigendum) क्या होता है?",
+    "answer": "💡 उत्तर\nकोरिजेंडम (Corrigendum) एक संशोधन नोटिस है जो निविदा प्रक्रिया के दौरान जारी किया जाता है। यह निविदा दस्तावेज़ों में किए गए बदलावों को सूचित करता है, जैसे कि आवश्यकताओं में परिवर्तन, समय सीमा का विस्तार, या अतिरिक्त जानकारी। कोरिजेंडम को सभी ज्ञात संभावित निविदाकर्ताओं को पंजीकृत पोस्ट/स्पीड पोस्ट/कूरियर/ईमेल द्वारा अधिसूचित किया जाता है और CPPP पर प्रकाशित किया जाता है।\n\n📋 प्रक्रिया\n1. विभाग के उपयोगकर्ता कोरिजेंडम जारी करने के लिए e-Procurement पोर्टल का उपयोग करते हैं।\n2. Tender Owner/Dept. User डैशबोर्ड पर लॉग इन करता है।\n3. निविदा के लिए कोरिजेंडम जारी करने की खोज करता है।\n4. RF",
+    "detected_lang": "hi",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Corrigendum_Instructions_to_department_users_and_bidders.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "latency_s": 31.3
+  },
+  {
+    "idx": 11,
+    "lang": "hin",
+    "question": "Tender kya hota hai?",
+    "answer": "💡 Answer\nA tender is a formal invitation to bid on a procurement opportunity, typically issued by a government entity like the Chhattisgarh Infotech Promotion Society (CHiPS). It outlines the requirements for a project or service and allows vendors to submit their proposals. The process involves several stages including creating the tender, viewing live tenders, and submitting an interested bid.\n\n📋 Process\n1.  A ‘live’ tender status is achieved after a bidder logs in and shows interest in participating, as seen on the dashboard.\n2.  To view RFQs (Request for Quotations), you navigate to “Tenders” then “View”.\n3.  An \"interested\" button appears on the screen after selecting an RFQ, but this is not available for limited tenders.\n4.  NITs (Notices Inviting Tender) are issued by Ministries/Departments with fixed days for issuance and opening of tenders to ensure a structured procurement process.\n\n📘 Source: Manual for Procurement of Works 2019",
+    "detected_lang": "hinglish",
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "latency_s": 34.0
+  },
+  {
+    "idx": 12,
+    "lang": "hin",
+    "question": "EMD refund kaise hota hai?",
+    "answer": "💡 Answer\nEMD/Bid Security (also known as EMD) refund ki process yeh hai: Agar bidder unsuccessful ho toh Department Admin EMD refund process initiate karta hai. Online payment karne wale bidders ke account mein amount online refund ho jaati hai, subject to tender terms & conditions aur department authority ke evaluation se. Bidders ko registration mein relevant account details provide karni hoti hain, jo EMD/Bid Security refund ke liye use hote hain. CHiPS/System Integrator account details verify nahi karte aur funds loss hone ya transfer hone ka bhi responsibility bidder ka hota hai. Agar bidder apni account details update karna chahta hai toh woh registration mein update kar sakta hai, aur last updated details future payment/refund ke liye use honge.\n\n📋 Process\n1. Department Admin EMD refund process initiate karta hai.\n2. Department authority EMD refund approve karta hai.",
+    "detected_lang": "hinglish",
+    "sources": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "mannual procurement.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "latency_s": 32.1
+  },
+  {
+    "idx": 13,
+    "lang": "hin",
+    "question": "Vendor registration ke liye kaunse documents chahiye?",
+    "answer": "💡 Answer\nVendor registration ke liye aapke paas following documents honi chahiye: PAN card, CRN certificate, authorized signatory details, bank details aur contact information. Vender categories A, B, C, D bhi hain aur har category mein value limits bhi hai. Registration fee ₹500 hai aur renewal fee ₹100 hai.\n\n📋 Process\n1.  Portal par \"New Supplier Registration\" option select karein.\n2. PAN enter karein.\n3. CRN certificate upload karein.\n4. Preferred Login Code generate karein.\n5. Sabhi details form mein fill karein aur “Save & Next” pe click karein.\n\n📘 Source: CHiPS_Vendor_Registration_Manual_English.pdf",
+    "detected_lang": "hinglish",
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Chatbot_Capabilities.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "latency_s": 30.3
+  },
+  {
+    "idx": 14,
+    "lang": "hin",
+    "question": "Bid submit kaise karte hain?",
+    "answer": "💡 Answer\nBid submit karne ke liye, bidder ko procuring entity ne fix kiya hua deadline pe tender form complete bhar kar submit karna hota hai. Technical bid hardbound hona chahiye aur online submission ka option e-Procurement portal par available hoga. Financial bid (BOQ Excel Sheet) bhi system mein upload karna hota hai jismein complete schedule of requirements aur price components ke details hote hain, jo system ke dvara automatically all-inclusive price calculate karta hai.\n\n📋 Process\n1.  Procuring entity ne tender submission ke liye relevant forms provide kiye hote hain, jaise declarations, bank guarantee formats, BOQ Excel Sheet, deviation forms, contract forms aur manufacturer’s authorisation form.\n2.  Bidders ko e-Procurement portal par available BOQ Excel Sheet download karna hota hai.\n3.  Bidders ko BOQ Excel Sheet mein complete schedule of requirements aur price components ke details fill up kar ke system mein upload karna hota hai.\n4.  System automatically all-inclusive price calculate karta hai.\n5.  Bidders ko apni quoted price submit karne ki hoti hai, jismein inter-alia scope of goods, location of bidder",
+    "detected_lang": "hinglish",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "GFR2017_HINDI.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "latency_s": 36.1
+  },
+  {
+    "idx": 15,
+    "lang": "hin",
+    "question": "Performance security kitni honi chahiye?",
+    "answer": "💡 Answer\nPerformance Security ki amount contract ke value ka 3% to 5% tak honi chahiye.  [Source 1], [Source 2] aur [Source 3] ne yeh nirnay diya hai ki Performance Security ki amount market conditions aur commercial practice par nirbhar hoti hai, jise goods ke kinam se decide kiya jata hai. [Source 4] aur [Source 5] ne bhi yeh kaha hai ki BG (Performance Bank Guarantee) 5% to 10% tak ho sakti hai.  Performance Security ko account payee demand draft, fixed deposit receipt, bank guarantee ya online payment ke roop mein furnished kiya ja sakta hai. [Source 1], [Source 2], [Source 3] aur [Source 4].\n\n📋 Process\n1. Contract value ka 3% to 5% tak Performance Security ko nirnayen.\n2.  Performance Security ko account payee demand draft, fixed deposit receipt, bank guarantee ya online payment ke roop mein furnish karen.\n3.  Performance Security ki validity period contract completion ke baad 60 days ki honi chahiye, warranty obligations inclusive.\n\n📘 Source: [Source 1], [Source 2], [Source 3], [Source 4], [Source 5]\n\n📎 As written in the rulebook — Rule 171: three to five per cent (3-5%)³⁷.",
+    "detected_lang": "hinglish",
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "latency_s": 35.3
+  },
+  {
+    "idx": 16,
+    "lang": "hin",
+    "question": "Bid security yaani EMD kitne percent hoti hai?",
+    "answer": "💡 Answer\nBid Security (yaani EMD) ordinarily 2 to 5 percent of the estimated value of the goods to be procured hoti hai.\n\n📋 Process\n1.  Bid Security ki percentage normally 2% to 5% hoti hai.\n2.  Procuring Entity by the amount of bid security, rounded off to the nearest thousands of Rupees, as determined decides.\n3.  EMD can be obtained in form of Insurance Surety Bonds, Account Payee Demand Draft, Fixed Deposit Receipt, Banker’s Cheque or Bank Guarantee (including e-Bank Guarantee) from any Commercial Banks or online payment.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf",
+    "detected_lang": "hinglish",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "latency_s": 34.3
+  },
+  {
+    "idx": 17,
+    "lang": "hin",
+    "question": "GFR rule 155 kya kehta hai?",
+    "answer": "💡 Answer\nGFR rule 155 purchase of goods by Purchase Committee ke samband mein hai. Iske hisab se, Rs. 50,000 se upto Rs. 5,00,000 ke value ki goods ko Local Purchase Committee (LPC) ke recommendations par kharidne chahay. LPC mein 3 members hote hain. Agar GeM portal par item nahi milti hai toh bhi LPC ne recommendation dakhle to ye goods kharid sakte hain.\n\n📋 Process\n1.  Rs. 50,000 se upto Rs. 5,00,000 ke value ki goods ko kharidne ke liye LPC ne recommendations dena zaroori hai.\n2.  LPC mein 3 members hote hain.\n3.  Agar GeM portal par item nahi milti hai toh bhi LPC ne recommendations dakhle to ye goods kharid sakte hain.\n\n📘 Source: Final_GFR_upto_31_07_2024.pdf\n\n📎 As written in the rulebook — Rule 155: [Rs.50,000 (Rupees Fifty thousand only) and upto Rs.5,00,000/- (Rupees",
+    "detected_lang": "hinglish",
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "latency_s": 32.2
+  },
+  {
+    "idx": 18,
+    "lang": "hin",
+    "question": "Two-bid system kya hota hai?",
+    "answer": "💡 Answer\nDo-bid system ek tendering system hai jismein bidders do parts mein bid submit karte hain – ek technical bid aur ek financial bid. Technical bid mein product ki technical details aur commercial terms hote hain, jabki financial bid mein item-wise price dikhaate hain. Yeh system use hota hai jab technical requirements complex",
+    "detected_lang": "hinglish",
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "latency_s": 28.2
+  },
+  {
+    "idx": 19,
+    "lang": "hin",
+    "question": "DSC kaise register karte hain portal par?",
+    "answer": "💡 Answer\nPortal par DSC ko register karne ki process yeh hai: (1) pehle ek Class II ya Class III DSC procure karein jo Signing aur Encryption dono certificates ke saath licensed CA se procure kiya jaye; (2) registration details bhrit karein aur Save & Next click karein; (3) ‘Selecting DSC’ step par, aapko appropriate Digital Signature Certificate select karne hogi – certificate ko register karna zaroori hai jab tak aap e-procurement account mein login nahi kar sakte; (4) DSC selection ke baad, Terms & Conditions ko accept karne ke liye Confirmation click karein.\n\n📋 Process\n1.",
+    "detected_lang": "hinglish",
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "AuctionManual_FA.pdf"
+    ],
+    "latency_s": 28.7
+  },
+  {
+    "idx": 20,
+    "lang": "hin",
+    "question": "Advertised tender enquiry kab use hoti hai?",
+    "answer": "💡 Answer\nAdvertised tender enquiry (OTE) ka istemal ussa goods ke procurement ke liye hota hai jahaan ka estimated value Rs. 50 lakh se zyada hota hai. Yeh geM aur geM-CPPP par advertisement dene ki salah hoti hai.\n\n📋 Process\n1. Estimated value Rs. 50 lakh se zyada hona chahiye.\n2. GeM aur geM-CPPP par advertisement dena chahiye.\n3. Open Tender Enquiry (OTE) ka istemal karna chahiye.\n\n📘 Source: publicProManual-1\n\n📎 As written in the rulebook — Rule 161: [Rs. 50 lakhs (Rupees Fifty 200 crore or such limit as",
+    "detected_lang": "hinglish",
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "latency_s": 27.8
+  }
+]

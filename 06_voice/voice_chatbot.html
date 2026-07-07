@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>eProcurement Assistant — Voice (Offline)</title>
+<!--
+  ===========================================================================
+  voice_chatbot.html  —  Offline voice chatbot for the CHiPS eProcurement portal
+  ===========================================================================
+  Talks to the LOCAL voice_server.py (faster-whisper + pyttsx3) on port 5050.
+  Nothing leaves the machine.
+
+  IMPORTANT — microphone access:
+    Browsers block getUserMedia() on file:// pages. You MUST serve this file
+    over http://localhost (or https). On Windows:
+
+        cd into this folder, then run:
+            python -m http.server 8000
+        and open:
+            http://localhost:8000/voice_chatbot.html
+
+    (Also start the backend first:  python voice_server.py)
+  ===========================================================================
+-->
+<style>
+  :root { --gov-blue: #1565C0; --gov-blue-d: #0d47a1; --bg: #eef2f7; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg); display: flex; justify-content: center;
+    align-items: center; min-height: 100vh; padding: 16px;
+  }
+  #app {
+    width: 420px; max-width: 100%; height: 640px; max-height: 95vh;
+    background: #fff; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 14px 40px rgba(0,0,0,.18); display: flex; flex-direction: column;
+  }
+
+  /* Header */
+  #header {
+    background: var(--gov-blue); color: #fff; padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  #header .emblem {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: rgba(255,255,255,.18); display: flex; align-items: center;
+    justify-content: center; font-size: 18px; flex-shrink: 0;
+  }
+  #header h1 { font-size: 15px; margin: 0; font-weight: 700; line-height: 1.2; }
+  #header .sub { font-size: 11px; opacity: .9; font-weight: 400; }
+
+  /* Chat area */
+  #chat {
+    flex: 1; overflow-y: auto; padding: 14px; background: #f6f8fb;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .msg { max-width: 82%; padding: 9px 12px; border-radius: 12px; font-size: 13.5px;
+         line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+  .msg.user { align-self: flex-end; background: var(--gov-blue); color: #fff;
+              border-bottom-right-radius: 4px; }
+  .msg.bot  { align-self: flex-start; background: #fff; color: #1f2937;
+              border: 1px solid #e2e8f0; border-bottom-left-radius: 4px; }
+  .listen-btn {
+    display: inline-block; margin-top: 6px; font-size: 11px; cursor: pointer;
+    color: var(--gov-blue); background: #eaf1fb; border: 1px solid #cfe0f7;
+    border-radius: 12px; padding: 2px 9px; user-select: none;
+  }
+  .listen-btn:hover { background: #dceafb; }
+
+  /* Quick chips */
+  #chips { display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 12px 0; }
+  .chip {
+    font-size: 12px; padding: 6px 11px; border-radius: 16px; cursor: pointer;
+    background: #eaf1fb; color: var(--gov-blue); border: 1px solid #cfe0f7;
+    white-space: nowrap;
+  }
+  .chip:hover { background: #dceafb; }
+
+  /* Input row */
+  #inputbar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; }
+  #q {
+    flex: 1; border: 1px solid #cbd5e1; border-radius: 22px; padding: 10px 14px;
+    font-size: 13.5px; outline: none;
+  }
+  #q:focus { border-color: var(--gov-blue); box-shadow: 0 0 0 3px rgba(21,101,192,.12); }
+  .icon-btn {
+    width: 42px; height: 42px; flex-shrink: 0; border: none; border-radius: 50%;
+    cursor: pointer; font-size: 18px; display: flex; align-items: center;
+    justify-content: center; color: #fff; background: var(--gov-blue);
+    transition: background .15s, transform .1s;
+  }
+  .icon-btn:hover { background: var(--gov-blue-d); }
+  .icon-btn:active { transform: scale(.94); }
+  #mic.recording { background: #d32f2f; animation: pulse 1s infinite; }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(211,47,47,.6); }
+    70%  { box-shadow: 0 0 0 12px rgba(211,47,47,0); }
+    100% { box-shadow: 0 0 0 0 rgba(211,47,47,0); }
+  }
+
+  /* Status bar */
+  #status {
+    font-size: 11.5px; color: #475569; padding: 7px 14px; border-top: 1px solid #e2e8f0;
+    background: #fff; display: flex; align-items: center; gap: 7px;
+  }
+  #dot { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; }
+  #dot.busy { background: #f59e0b; }
+  #dot.rec  { background: #d32f2f; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="header">
+    <div class="emblem">🏛️</div>
+    <div>
+      <h1>eProcurement Assistant — powered by AI</h1>
+      <div class="sub">(Hindi &amp; English) · Offline Voice</div>
+    </div>
+  </div>
+
+  <div id="chat"></div>
+
+  <div id="chips">
+    <div class="chip" onclick="ask('Vendor registration')">Vendor registration</div>
+    <div class="chip" onclick="ask('Submit bid')">Submit bid</div>
+    <div class="chip" onclick="ask('EMD payment')">EMD payment</div>
+    <div class="chip" onclick="ask('Browser support')">Browser support</div>
+  </div>
+
+  <div id="inputbar">
+    <input id="q" type="text" placeholder="Ask about tenders, vendors, EMD..."
+           onkeydown="if(event.key==='Enter') sendMessage()" />
+    <button id="mic" class="icon-btn" title="Speak" onclick="toggleMic()">🎤</button>
+    <button id="send" class="icon-btn" title="Send" onclick="sendMessage()">➤</button>
+  </div>
+
+  <div id="status"><span id="dot"></span><span id="statusText">Ready</span></div>
+</div>
+
+<script>
+/* ===========================================================================
+   CONFIG — change SERVER_URL here if the voice server runs elsewhere.
+   =========================================================================== */
+const SERVER_URL = "http://localhost:5050";
+
+const chatEl   = document.getElementById("chat");
+const inputEl  = document.getElementById("q");
+const micBtn   = document.getElementById("mic");
+const dotEl    = document.getElementById("dot");
+const statusEl = document.getElementById("statusText");
+
+/* ---------------------------------------------------------------------------
+   Status bar:  Ready / Listening / Processing / Speaking
+   --------------------------------------------------------------------------- */
+function setStatus(state) {
+  statusEl.textContent = state;
+  dotEl.className = "";
+  if (state === "Listening")  dotEl.classList.add("rec");
+  else if (state === "Processing" || state === "Speaking") dotEl.classList.add("busy");
+}
+
+/* ---------------------------------------------------------------------------
+   Render messages
+   --------------------------------------------------------------------------- */
+function addMessage(role, text) {
+  const el = document.createElement("div");
+  el.className = "msg " + role;
+  el.textContent = text;
+
+  if (role === "bot") {
+    const btn = document.createElement("span");
+    btn.className = "listen-btn";
+    btn.textContent = "🔊 Listen";
+    btn.onclick = () => speak(text);
+    el.appendChild(document.createElement("br"));
+    el.appendChild(btn);
+  }
+  chatEl.appendChild(el);
+  chatEl.scrollTop = chatEl.scrollHeight;
+  return el;
+}
+
+/* ---------------------------------------------------------------------------
+   Send the typed / transcribed question
+   --------------------------------------------------------------------------- */
+function sendMessage() {
+  const q = inputEl.value.trim();
+  if (!q) return;
+  addMessage("user", q);
+  inputEl.value = "";
+
+  const reply = getAnswer(q);
+  addMessage("bot", reply);
+  speak(reply);              // auto text-to-speech after every reply
+}
+
+function ask(text) { inputEl.value = text; sendMessage(); }
+
+/* ===========================================================================
+   LOCAL ANSWERS — keyword matching for CHiPS eProcurement topics.
+   =========================================================================== */
+function getAnswer(question) {
+  const q = question.toLowerCase();
+
+  const has = (...words) => words.some(w => q.includes(w));
+
+  // Vendor / supplier registration
+  if (has("register", "registration", "vendor", "supplier", "new user", "signup", "sign up")) {
+    return "Vendor Registration:\n" +
+      "1. Visit the portal at eproc.cgstate.gov.in and click 'Register / New User'.\n" +
+      "2. Keep your PAN card number ready (mandatory).\n" +
+      "3. Upload a scanned copy of your CRN certificate if your vendor class is A, B, C or D.\n" +
+      "4. Choose a preferred login code and fill in your business & bank details.\n" +
+      "5. Submit the form to complete the one-time registration.";
+  }
+
+  // Bid submission
+  if (has("bid", "submit", "submission", "tender apply", "apply tender", "upload bid")) {
+    return "Bid Submission:\n" +
+      "• A valid Digital Signature Certificate (DSC) — Class II or Class III — is required.\n" +
+      "• Each uploaded document must be under 5 MB, and the total size under 50 MB.\n" +
+      "• Fill the technical and price bid online, attach the required documents,\n" +
+      "  and digitally sign and submit before the bid due date & time.";
+  }
+
+  // EMD payment
+  if (has("emd payment", "pay emd", "earnest money", "pay bid security") ||
+      (has("emd") && has("pay", "payment", "deposit", "how"))) {
+    return "EMD Payment:\n" +
+      "• Pay the EMD (Earnest Money Deposit) online via NEFT / RTGS or the ATOM payment gateway.\n" +
+      "• Generate the challan from the portal and complete the payment from your bank.\n" +
+      "• Payment verification usually takes 1–2 working days; only then can the bid be opened.";
+  }
+
+  // EMD refund
+  if (has("refund") || (has("emd") && has("return", "back", "release"))) {
+    return "EMD Refund:\n" +
+      "• The EMD refund is initiated by the concerned department after bid evaluation.\n" +
+      "• The amount is credited back 1–2 days after departmental approval.\n" +
+      "• You can track the refund status under the MIS section inside your bidder login.";
+  }
+
+  // Browser support
+  if (has("browser", "chrome", "firefox", "edge", "internet explorer", "ie ", "java", "supported")) {
+    return "Supported Browsers:\n" +
+      "• Google Chrome (with the 'IE Tab' extension), Mozilla Firefox,\n" +
+      "  Internet Explorer 9 / 11, and Microsoft Edge are supported.\n" +
+      "• Java version 1.8.0_77 is required for digital signing.\n" +
+      "• Allow pop-ups and add the portal to trusted sites for best results.";
+  }
+
+  // DSC / digital signature
+  if (has("dsc", "digital signature", "signature certificate", "sign")) {
+    return "Digital Signature Certificate (DSC):\n" +
+      "• A Class II or Class III DSC issued by a licensed Certifying Authority is required\n" +
+      "  to register, sign and submit bids on the portal.\n" +
+      "• Install the DSC on your machine and ensure Java 1.8.0_77 is set up before signing.";
+  }
+
+  // Helpdesk
+  if (has("help", "helpdesk", "support", "contact", "phone", "call", "email", "problem", "issue")) {
+    return helpdesk();
+  }
+
+  // Default fallback
+  return "I can help with vendor registration, bid submission, EMD payment/refund,\n" +
+         "DSC and supported browsers.\n\n" + helpdesk();
+}
+
+function helpdesk() {
+  return "Helpdesk:\n" +
+    "• Toll-free: 1800 419 9140 (9:00 AM – 11:00 PM, weekdays)\n" +
+    "• Email: helpdesk.cgeproc@mjunction.in";
+}
+
+/* ===========================================================================
+   VOICE INPUT (Speech-to-Text)  ->  local /stt
+   =========================================================================== */
+let mediaRecorder = null, audioChunks = [], isRecording = false, recordTimer = null;
+
+async function toggleMic() {
+  if (isRecording) { stopRecording(); return; }           // second click = stop early
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
+
+    mediaRecorder.ondataavailable = e => { if (e.data.size) audioChunks.push(e.data); };
+    mediaRecorder.onstop = async () => {
+      stream.getTracks().forEach(t => t.stop());            // release the mic
+      const blob = new Blob(audioChunks, { type: "audio/webm" });
+      await sendToSTT(blob);
+    };
+
+    mediaRecorder.start();
+    isRecording = true;
+    micBtn.classList.add("recording");
+    micBtn.textContent = "⏹";
+    setStatus("Listening");
+
+    // auto-stop after 5 seconds
+    recordTimer = setTimeout(() => { if (isRecording) stopRecording(); }, 5000);
+  } catch (err) {
+    alert("Microphone access failed.\n" +
+          "Make sure you opened this page via http://localhost:8000 (not file://) " +
+          "and allowed mic permission.\n\n" + err);
+  }
+}
+
+function stopRecording() {
+  if (recordTimer) { clearTimeout(recordTimer); recordTimer = null; }
+  if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
+  isRecording = false;
+  micBtn.classList.remove("recording");
+  micBtn.textContent = "🎤";
+}
+
+async function sendToSTT(blob) {
+  setStatus("Processing");
+  const form = new FormData();
+  form.append("audio", blob, "recording.webm");
+  try {
+    const res = await fetch(SERVER_URL + "/stt", { method: "POST", body: form });
+    const data = await res.json();
+    if (data.text && data.text.trim()) {
+      inputEl.value = data.text.trim();
+      sendMessage();                                        // auto-submit transcript
+    } else {
+      setStatus("Ready");
+      if (data.error) console.warn("STT error:", data.error);
+    }
+  } catch (err) {
+    setStatus("Ready");
+    alert("Could not reach the voice server at " + SERVER_URL +
+          ".\nIs voice_server.py running?\n\n" + err);
+  }
+}
+
+/* ===========================================================================
+   VOICE OUTPUT (Text-to-Speech)  ->  local /tts
+   =========================================================================== */
+async function speak(text) {
+  setStatus("Speaking");
+  try {
+    const res = await fetch(SERVER_URL + "/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text })
+    });
+    if (!res.ok) { setStatus("Ready"); return; }
+    const blob = await res.blob();
+    const audio = new Audio(URL.createObjectURL(blob));
+    audio.onended = () => setStatus("Ready");
+    audio.onerror = () => setStatus("Ready");
+    audio.play();
+  } catch (err) {
+    setStatus("Ready");
+    console.warn("TTS error:", err);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Greeting
+   --------------------------------------------------------------------------- */
+window.addEventListener("load", () => {
+  addMessage("bot",
+    "Namaste! 🙏 I'm your eProcurement Assistant.\n" +
+    "Ask me about vendor registration, bid submission, EMD payment, or browser support — " +
+    "type your question or tap the 🎤 mic to speak.");
+  setStatus("Ready");
+});
+</script>
+</body>
+</html>

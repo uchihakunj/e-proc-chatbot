@@ -1,0 +1,75 @@
+[
+  {
+    "id": "G1",
+    "q": "What is EMD and when is it exempted?",
+    "must_include": ["earnest money|bid security|EMD", "exempt|MSE|MSME|DPIIT|startup|start-up"],
+    "expect_source": ["Manual for Procurement of Goods 2024", "Public Procurement Manual"]
+  },
+  {
+    "id": "G2",
+    "q": "What is the step-by-step process for CHiPS vendor registration?",
+    "must_include": ["eproc\\.cgstate\\.gov\\.in", "New User|New Supplier", "PAN"],
+    "expect_source": ["Vendor Registration Manual (CHiPS)"]
+  },
+  {
+    "id": "G3",
+    "q": "What is the step-by-step process for challan payment?",
+    "must_include": ["RTGS|CHALLAN", "Generate Challan|Pay Tender|Processing Fee"],
+    "expect_source": ["EMD Challan Payment Guide (CHiPS)"]
+  },
+  {
+    "id": "G4",
+    "q": "What system settings or configurations are needed for CHiPS online?",
+    "must_include": ["Windows 7|Windows 8", "Java|1\\.8\\.0_77", "Internet Explorer|Firefox|Mozilla"],
+    "expect_source": ["Preferred System Configuration"]
+  },
+  {
+    "id": "G5",
+    "q": "What is the step-by-step process for the auction manual?",
+    "must_include": ["Password@123", "1 ?min|one minute|every 1 minute", "opening price"],
+    "expect_source": ["e-Auction Manual"]
+  },
+  {
+    "id": "G6",
+    "q": "What are the main guidelines mentioned in the DSC manual?",
+    "must_include": ["Class II|Class III|Class 2|Class 3", "e-?Mudhra|Safescrypt|GNFC|IDRBT", "cca\\.gov\\.in|Certifying Authorit"],
+    "expect_source": ["Vendor Registration Manual (CHiPS)"]
+  },
+  {
+    "id": "G7",
+    "q": "What is the core objective of the e-Procurement project?",
+    "must_include": ["transparency|efficiency", "Chhattisgarh|CHIPS|CHiPS"],
+    "expect_source": ["Pr"]
+  },
+  {
+    "id": "G8",
+    "q": "Under GFR and government rules, what is the procedure for MSME procurement?",
+    "must_include": ["Micro and Small|MSE|MSME", "Udyam|preference|preferential"],
+    "must_not_include": ["Rule 170", "Rule 172", "Rule 173"],
+    "expect_source": ["Manual for Procurement of Goods 2024", "Public Procurement Manual"]
+  },
+  {
+    "id": "G9",
+    "q": "Under GFR and government rules, what is the procedure for Instructions for department users and bidders?",
+    "must_include": ["NIT|tender document|bidding document|Notice Inviting Tender"],
+    "must_not_include": ["Rule 172"],
+    "expect_source": ["Manual for Procurement of Goods 2024", "Public Procurement Manual"]
+  },
+  {
+    "id": "G10",
+    "q": "What are the main guidelines mentioned in the GeM manual?",
+    "must_include": ["GeM|Government e-Marketplace", "mandatory|Rule 149|reverse auction"],
+    "expect_source": ["Manual for Procurement of Goods 2024", "Public Procurement Manual"]
+  },
+  {
+    "id": "G11",
+    "q": "What is the performance security in a work contract?",
+    "must_include": ["performance security|performance guarantee", "5%|10%|five percent|ten percent|per ?cent"],
+    "expect_source": ["Manual for Procurement of Works 2019", "Public Procurement Manual"]
+  },
+  {
+    "id": "G12",
+    "q": "What is today's weather in Raipur?",
+    "expect_refusal": true
+  }
+]

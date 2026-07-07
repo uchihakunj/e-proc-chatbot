@@ -1,0 +1,955 @@
+[
+  {
+    "idx": 1,
+    "question": "What are the main guidelines mentioned in short term tender?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 32.91,
+    "server_elapsed": "30.84s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe key guidelines for a short-term tender, as outlined across the provided documents, center around efficient communication and streamlined processes to ensure rapid bid submissions. Specifically, the NIT must be easily searchable and visible on the website, notifications should be sent to registered vendors via SMS/mail/email, and sufficient time (minimum 21 days) should be allowed for bid preparation, potentially adjustable based on the nature of the requirements.  Furthermore, ensuring easy access to tender documents and avoiding any impediments is crucial.\n\n📋 Process\n1. Ensure NIT visibility: The NIT must be easily searchable and visible on the e-Procurement portal.\n2. Notify Registered Vendors: Send notifications (SMS/mail/email) to registered vendors about upcoming tenders.\n3. Adequate Timeframe: Allow a minimum of 21 days for bid preparation, with potential adjustments based on requirements.\n4. Easy Access to Documents: Ensure unobstructed access to tender documents for all bidders.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 2,
+    "question": "What are the main guidelines mentioned in short tender?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 23.67,
+    "server_elapsed": "21.64s",
+    "n_sources": 4,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe short tender document should include key elements to ensure clarity and responsiveness from bidders. These guidelines are: a) A clear description of the subject matter of procurement, including specifications, quantity, time, and location; b) Eligibility criteria for goods, outlining any restrictions or conditions regarding origin; c) The procedure and timeline for submitting bids, including dates, times, and locations; d) Criteria for evaluating bids; e) Special terms affecting performance; f) Essential terms of the procurement contract, including interpretation under Indian laws; g) A clause stating that NIL charges will be treated as unresponsive; and h) Contact information for authorized communication with contractors.\n\n📋 Process\n1.  Include a clear description of the subject matter of procurement.\n2.  Define eligibility criteria for goods.\n3.  Specify the bid submission procedure and timeline.\n4.  Outline the evaluation criteria.\n5.  Address special terms affecting performance.\n6.  State essential contract terms, including interpretation under Indian law.\n7.  Include a clause regarding NIL charges.\n8.  Provide contact information for communication.\n\n📘 Source: mannual procurement.pdf"
+  },
+  {
+    "idx": 3,
+    "question": "What is the core objective of Notification EMDExemption?",
+    "intent": "EMD_GENERAL",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 33.84,
+    "server_elapsed": "31.81s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe core objective of Notification EMD Exemption, as outlined in publicProManual-1755343081262-715558279.pdf, is to reduce the financial burden on unsuccessful bidders by exempting certain categories of bidders – specifically MSEs and those meeting DPIIT registration criteria – from paying the Earnest Money Deposit (EMD). This aims to encourage wider participation in government tenders.\n\n📋 Process\n1.  Identification of Exempt Categories: The notification identifies specific categories of bidders that qualify for EMD exemption, primarily MSMEs registered with DPIIT and startups recognized by DPIIT.\n2.  Verification of Registration Details: Bidders falling into these categories must furnish certified copies of their valid registration details to demonstrate compliance.\n3.  Reduced Financial Burden: By waiving the EMD requirement, the notification seeks to lower the financial risk associated with bidding, thereby promoting greater competition and transparency in government procurement.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 4,
+    "question": "What are the main guidelines mentioned in CVC Guidelines on Tenders and Contracts?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 33.02,
+    "server_elapsed": "30.97s",
+    "n_sources": 3,
+    "sources": [
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Central Vigilance Commission’s (CVC) guidelines prioritize transparency in procurement processes. Key recommendations include wider publicity of tenders through various channels like newspapers and websites, avoiding restrictive practices such as requiring tender samples for subjective assessments like shade or finish, and utilizing detailed specifications for procurement instead of relying on subjective sample evaluations. Furthermore, the CVC emphasizes the importance of clear and comprehensive Tender Documents with specific sections covering Notices Inviting Tender (NIT), Instructions to Bidders (ITB), General Conditions of Contract (GCC), Special Conditions of Contract (SCC), and a Bill of Quantities (BOQ).\n\n📋 Process\n1.  Ensure wide publicity of tenders through newspapers, trade journals, and website publication as directed by the CVC.\n2.  Avoid requiring tender samples for subjective assessments; instead, use detailed specifications.\n3.  Utilize Standard Bidding Documents (SBDs) to standardize bidding processes.\n4.  Maintain comprehensive Tender Documents with clearly defined sections (NIT, ITB, GCC, SCC, BOQ).\n\n📘 Source: Compilation of CVC Circulars and Guidelines.pdf"
+  },
+  {
+    "idx": 5,
+    "question": "What does the document regulate regarding Compilation Tenders Contracts?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 31.31,
+    "server_elapsed": "29.26s",
+    "n_sources": 3,
+    "sources": [
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe tender document plays a fundamental role in public procurement, serving as the basis for contract agreements and aiming to prevent delays and disputes. It must be comprehensive, clear, and unambiguous, covering aspects like specifications, payment terms, timelines, and quality assurance measures. The document should also address eligibility criteria, purchase preference policies, and conflict of interest situations to ensure a fair and transparent bidding process.\n\n📋 Process\n1.  The tender document outlines the subject matter of procurement, including specifications, quantities, delivery locations, and quality standards.\n2.  It specifies limitations or preferences for bidder participation based on government policies (e.g., Make in India).\n3.  It details the procedure for obtaining, submitting, and opening bids, along with relevant dates and times.\n4.  It includes provisions for bidders to question bidding conditions or rejection of their bids within a defined timeframe.\n\n📘 Source: mannual procurement.pdf"
+  },
+  {
+    "idx": 6,
+    "question": "Under GFR and government rules, what is the procedure for Compilation Tenders Contracts?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 42.54,
+    "server_elapsed": "40.51s",
+    "n_sources": 4,
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe procedure for compilation of tenders and contracts under GFR and government rules involves several key steps to ensure transparency and compliance. Primarily, the procuring entity must adhere to the guidelines outlined in documents like the Final GFR (upto 31/07/2024) and the Manual for Procurement of Goods 2024, particularly regarding bidding document content and evaluation criteria. This includes clearly defining specifications, eligibility criteria, and a transparent process for evaluating bids, as detailed in Section 5 of the Manual for Procurement of Goods. Furthermore, any restrictions on bidders from countries sharing land borders with India, as stipulated in Order (Public Procurement No.1)58, must be meticulously followed. The bidding document should explicitly state that bids quoting NIL charges will be considered non-responsive.\n\n📋 Process\n1.  Define Clear Specifications: The procuring entity must establish detailed specifications for the goods or services being procured, ensuring clarity and avoiding ambiguities as per GFR guidelines (Source 2).\n2.  Establish Eligibility Criteria: Define clear eligibility criteria for bidders, including experience, technical capabilities, and financial position, aligning with departmental requirements (Source 2).\n3.  Implement Registration Requirements: If applicable, enforce registration requirements for bidders from specific countries, following the procedures outlined in Order (Public Procurement No.1)58 (Source 3).\n4.  Evaluate Bids Transparently: Evaluate bids based on pre-defined criteria, ensuring a fair and competitive process as detailed in the Manual for Procurement of Goods 2024 (Source 4).\n5.  Address NIL Bid Clause: Include a clause stating that bids with NIL charges will be treated as non-responsive (Source 2 & 4).\n\n📘 Source: Final GFR upto 31/07/2024.pdf"
+  },
+  {
+    "idx": 7,
+    "question": "What are the main guidelines mentioned in Instructions to department users and bidders?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 35.65,
+    "server_elapsed": "33.58s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe public procurement manual outlines several key guidelines for both department users and bidders. For department users, it emphasizes utilizing the model NIT format, ensuring the NIT contains sufficient information to attract competition, and inviting all likely bidders through various channels like email and SMS.  For bidders, the manual stresses meeting eligibility criteria outlined in the ITB, maintaining proper records of tender document sales, and adhering to specific requirements regarding JV partnerships and past performance. The core focus is on clear communication within the tender documents themselves, covering technical specifications, commercial terms, and dispute resolution mechanisms.\n\n📋 Process\n1.  **NIT Format:** Department users must utilize the model NIT format in MTD for publishing tender notices.\n2.  **Information Content:** The NIT (and its TIS) needs to provide sufficient information for prospective bidders to assess their participation.\n3.  **Bidder Invitation:** All likely bidders should be invited through email, SMS, or letters to maximize competition.\n4.  **Eligibility Criteria:** Bidders must meet the eligibility criteria defined in the ITB (e.g., registration with EPF, JV restrictions).\n5.  **Record Keeping:** The procuring entity needs to maintain records of tender document sales and unsold documents.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 8,
+    "question": "What does the document regulate regarding Instructions for department users and bidders?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 31.99,
+    "server_elapsed": "29.94s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe publicProManual-1755343081262-715558279.pdf document regulates the tender process by outlining the key sections within the Tender Document, including the Notice Inviting Tender (NIT), Instructions to Bidders (ITB), General Conditions of Contract (GCC), Special Conditions of Contract (SCC), and Financial Bid (BOQ Excel Sheet). It emphasizes the importance of a clear and comprehensive NIT for attracting competition and ensuring bidders have sufficient information to participate effectively.\n\n📋 Process\n1.  The document details the structure of the Tender Document, specifying sections I through VIII as essential components.\n2.  It highlights the need for a well-defined NIT with an Appendix (TIS) providing summary information.\n3.  The manual stresses the importance of clear and unambiguous language in the bid documents to avoid delays and complaints.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 9,
+    "question": "Under GFR and government rules, what is the procedure for Instructions for department users and bidders?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 41.17,
+    "server_elapsed": "39.11s",
+    "n_sources": 4,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe procedure for instructions to department users and bidders, as outlined across several documents, centers around clear communication and documentation within the tender process. Specifically, Section I of the Tender Document (NIT) serves as the primary source of information, detailing the purpose and instructions for all participants. The NIT must contain sufficient detail for prospective bidders to assess their participation and include key elements such as bid submission deadlines, evaluation criteria, and special terms. Furthermore, amendments or clarifications regarding the bidding document are to be communicated in the same manner as the initial document was published (as detailed in GFR 2017 Rule 172).  The inclusion of a clause stating that NIL charges will be treated as unresponsive bids is also crucial (GFR 2017, Rule 172(ii)).\n\n📋 Process\n1.  **NIT Publication:** The Department Admin initiates the process by publishing the Notice Inviting Tender (NIT) – this is legally significant and should follow the MTD model format.\n2.  **Information Dissemination:** Sufficient information must be included in the NIT to allow potential bidders to determine their suitability and approach the tender. This includes inviting attention of likely bidders via email/SMSs/letters.\n3.  **Document Updates:** Any modifications or clarifications to the bidding document (as per Rule 172) must be communicated using the same method as the initial publication.\n4. **Bidding Document Content**: The bidding document should include a clause that \"if a firm quotes NIL charges/ consideration, the bid shall be treated as unresponsive and will not be considered\".\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 10,
+    "question": "Where can I find the specific sections about Instructions for department users and bidders?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 31.63,
+    "server_elapsed": "29.56s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe tender documents contain several key sections relevant to instructions for both department users and bidders. Specifically, you can find detailed guidance within Section II: Instructions to Bidders (ITB) and Appendix to Instructions to Bidders (AITB). These sections outline the procedures, requirements, and formats expected throughout the bidding process. Furthermore, Chapter-1: Instructions to Bidders in the NIT provides overarching instructions for all bidders.\n\n📋 Process\n1.  Locate Section II: Instructions to Bidders (ITB) within the tender document. This section details the steps involved in preparing and submitting a bid.\n2.  Review Appendix to Instructions to Bidders (AITB). This appendix likely contains supplementary information and clarifications related to ITB.\n3. Examine Chapter-1: Instructions to Bidders in the NIT for overarching instructions.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 11,
+    "question": "What are the main guidelines mentioned in CVC guidelines?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 31.8,
+    "server_elapsed": "29.75s",
+    "n_sources": 3,
+    "sources": [
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe CVC guidelines encompass a wide range of areas aimed at ensuring integrity and preventing corruption within government administration. Key guidelines include prompt action on disciplinary matters for major penalty proceedings, regular backup of application and data with commensurate regularity, control of source code and configuration management, and system audits and forensic investigations. Furthermore, the CVC has an advisory role in discipline and appeal cases, investigates and recommends actions to entities, and plays a role in appointments and monitoring. Finally, vigilance clearance for public servants is also a key component, obtained through a process involving DoPT guidelines and CVC input.\n\n📋 Process\n1.  Ensure prompt/timely action on disciplinary matters with major penalty proceedings.\n2.  Implement regular backup procedures for application and data.\n3.  Establish controls over source code and configuration management.\n4.  Conduct system audits and forensic investigations, reporting to the CVC.\n5.  Follow DoPT guidelines for vigilance clearance of public servants.\n\n📘 Source: Compilation of CVC Circulars and Guidelines.pdf"
+  },
+  {
+    "idx": 12,
+    "question": "What is the core objective of CVC guidelines?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 27.72,
+    "server_elapsed": "25.64s",
+    "n_sources": 3,
+    "sources": [
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe core objective of CVC guidelines, as outlined in Compilation of CVC Circulars and Guidelines (Source 1), is to improve vigilance administration by increasing transparency through greater scrutiny of tendering processes. Specifically, the directive aims to ensure that all tenders are placed on the web-site, with regular tracking by CVOs to monitor compliance.\n\n📋 Process\n1.  CVOs must regularly track tender notices and website activity.\n2.  CVO’s should pursue newspaper advertisements to ensure compliance.\n3.  The Commission requires monthly reports detailing whether all tenders were placed on the web-site, with explanations for non-compliance.\n\n📘 Source: Compilation of CVC Circulars and Guidelines.pdf"
+  },
+  {
+    "idx": 13,
+    "question": "What are the main guidelines regarding CVC guidelines?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 33.35,
+    "server_elapsed": "31.30s",
+    "n_sources": 3,
+    "sources": [
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Central Vigilance Commission (CVC) provides several key guidelines related to vigilance administration. Primarily, it advises Ministries/Departments on maintaining integrity in administration, including vigilance inputs regarding public servants’ antecedents – often referred to as ‘Vigilance Clearance’.  Specifically, CVC relies on DoPT guidelines for obtaining this clearance, particularly concerning AIS officers, ensuring continued verification from State Governments and Ministry when dealing with Central Government officers. The CVC also oversees the functioning of the CBI and has jurisdiction over corruption cases under various acts like the Lokpal Act and Money Laundering Act, though it lacks arrest powers.\n\n📋 Process\n1.  The CVC advises Ministries/Departments on maintaining integrity in administration, including vigilance inputs regarding public servants’ antecedents (Vigilance Clearance).\n2.  It relies on DoPT guidelines for obtaining Vigilance Clearance, particularly concerning AIS officers.\n3.  This involves continued verification from State Governments and the relevant Ministry when dealing with Central Government officers.\n4. The CVC oversees the CBI's investigations into corruption cases.\n5. It has jurisdiction over cases under the Lokpal and Lokayukta Acts, and the Money Laundering Act.\n\n📘 Source: Compilation of CVC Circulars and Guidelines.pdf"
+  },
+  {
+    "idx": 14,
+    "question": "Is it mandatory to follow the rules of CVC guidelines?",
+    "intent": "RULES_GFR",
+    "intent_conf": 0.8,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 32.42,
+    "server_elapsed": "30.38s",
+    "n_sources": 3,
+    "sources": [
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Central Vigilance Commission (CVC) expects organizations to implement its instructions regarding transparency and disciplinary procedures, although its recommendations are not legally binding. The CVC’s role is primarily advisory and investigative, focusing on recommending actions and reporting deviations to the Parliament.\n\n📋 Process\n1.  The CVC provides guidelines through circulars like No. 000/VGL/18 dated 23.05.2000 regarding timely action in disciplinary matters.\n2.  It expects organizations to ensure transparency in tender processes, as evidenced by its consideration of websites used for publicizing tenders.\n3. The CVC’s role extends to overseeing the CBI's investigations into corruption and providing guidance on appointments and integrity pacts.\n\n📘 Source: Compilation of CVC Circulars and Guidelines.pdf"
+  },
+  {
+    "idx": 15,
+    "question": "What are the main guidelines mentioned in the DSC manual?",
+    "intent": "DSC",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 37.73,
+    "server_elapsed": "35.70s",
+    "n_sources": 4,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe primary guidelines outlined in the DSC manual relate to obtaining a Digital Signature Certificate (DSC) necessary for participation in e-procurement processes. Specifically, vendors are instructed to immediately procure a Class II or Class III DSC from approved Certifying Authorities (CAs) like e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, and Safescrypt. The manual details a step-by-step procedure for foreign vendors, involving downloading an application form from the CCA website, submitting it to the Indian Embassy along with original documents for certification, making an online fund transfer as instructed by the CA, and subsequently couriering the certified documents to the relevant authority.\n\n📋 Process\n1.  Procure a Class II or Class III DSC from one of the listed Certifying Authorities (e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, Safescrypt).\n2.  Download the Registration/Application form from the CCA website: https://cca.gov.in.\n3.  Fill out the application form and submit it to the Indian Embassy with original documents for certification.\n4.  Make an online fund transfer as instructed by the CA (Swift code provided by the CA).\n5.  Couriered certified documents to the relevant authority.\n\n📘 Source: CHiPS_Vendor_Registration_Manual_English.pdf"
+  },
+  {
+    "idx": 16,
+    "question": "What is the core objective of the DSC manual?",
+    "intent": "DSC",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 30.86,
+    "server_elapsed": "28.79s",
+    "n_sources": 3,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "mannual procurement.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe core objective of the DSC manual is to guide vendors, particularly foreign ones, through the process of obtaining a Digital Signature Certificate (DSC) which is essential for participating in e-procurement activities within the Chhattisgarh Infotech Promotion Society (CHiPS). It outlines the necessary steps, including contacting approved Certifying Authorities and completing required documentation.\n\n📋 Process\n1.  The manual details the necessity of acquiring a DSC for accessing the e-Procurement portal.\n2.  It provides a step-by-step procedure for foreign vendors to obtain a DSC, involving downloading application forms from licensed CAs (approved by CCA), submitting documents to the Indian Embassy for certification, and making an online fund transfer.\n3. It lists contact details of approved DSC Certifying Authorities: e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, Safescrypt.\n\n📘 Source: CHiPS_Vendor_Registration_Manual_English.pdf"
+  },
+  {
+    "idx": 17,
+    "question": "What procedure is prescribed under the DSC manual?",
+    "intent": "DSC",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 25.02,
+    "server_elapsed": "22.94s",
+    "n_sources": 4,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe process for obtaining a Digital Signature Certificate (DSC) as outlined in the CHiPS Vendor Registration Manual involves several steps for foreign vendors. Initially, the vendor must download the Registration/Application form from an approved CA website (e.g., e-Mudhra, GNFC). Subsequently, they fill out the application with required documents and submit them to the Indian Embassy along with original copies for certification. An online fund transfer equivalent to the Rupee amount in their respective currency is then made using the CA’s bank Swift code. Finally, the certified documents are couriered to the Indian Embassy.\n\n📋 Process\n1. Download Registration/Application form from an approved CA website (e.g., e-Mudhra, GNFC).\n2. Fill out the application form with required documents.\n3. Submit the completed application and original documents to the Indian Embassy.\n4. Obtain certification of documents by the Indian Embassy.\n5. Make online fund transfer in Rupee equivalent amount using CA’s bank Swift code.\n6. Courier certified documents to the Indian Embassy.\n\n📘 Source: CHiPS_Vendor_Registration_Manual_English.pdf"
+  },
+  {
+    "idx": 18,
+    "question": "What are the main guidelines mentioned in the DSC tutorial?",
+    "intent": "DSC",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 32.14,
+    "server_elapsed": "30.05s",
+    "n_sources": 4,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe primary guidelines outlined in the DSC tutorial relate to obtaining a Digital Signature Certificate (DSC) for e-procurement participation. Specifically, foreign vendors must download a registration/application form from an approved CA (e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, Safescrypt), fill it out with required documents, and have those documents certified by the Indian Embassy. An online fund transfer equivalent to the rupee amount is then required, followed by courier of the embassy’s documents.\n\n📋 Process\n1.  Download registration/application form from an approved CA (e-Mudhra, GNFC, IDRBT, MTNLTrustline, NIC, Safescrypt).\n2.  Fill out the application form with requisite documents.\n3.  Have documents certified by the Indian Embassy.\n4.  Make online fund transfer equivalent to the rupee amount (Swift code provided by CA).\n5.  Courier the embassy’s certified documents.\n\n📘 Source: CHiPS_Vendor_Registration_Manual_English.pdf"
+  },
+  {
+    "idx": 19,
+    "question": "Under GFR and government rules, what is the procedure for the tutorial?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 33.37,
+    "server_elapsed": "31.28s",
+    "n_sources": 3,
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe procedure for the tutorial, as outlined in the GFR documents, involves scrutiny of procedures by which the sanctioning authority satisfies itself regarding the fulfillment of conditions subject to which grants and/or loans were given. Specifically, Rule 236(3) states that the Institution or Organisation shall get its accounts audited from Chartered Accountants of its own choice, unless the Comptroller and Auditor General of India is the sole auditor.  Rule 238 (1) details utilization certificates for non-recurring grants.\n\n📋 Process\n1. Audit scrutiny by designated authority: The sanctioning authority scrutinizes procedures to ensure conditions are met.\n2. Account Auditing: The Institution or Organisation gets its accounts audited from Chartered Accountants of its own choice, unless the Comptroller and Auditor General of India is the sole auditor.\n3. Utilization Certificate preparation:  A certificate of actual utilization is prepared for non-recurring grants (Rule 238(1)).\n\n📘 Source: FInal_GFR_upto_31_07_2024.pdf"
+  },
+  {
+    "idx": 20,
+    "question": "Where can I find the specific sections about the tutorial?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "REFUSED",
+    "latency_s": 3.66,
+    "server_elapsed": "1.60s",
+    "n_sources": 0,
+    "sources": [],
+    "error": null,
+    "answer": "The answer to this question was not found in the available documents."
+  },
+  {
+    "idx": 21,
+    "question": "What are the main guidelines mentioned in the final GFR?",
+    "intent": "RULES_GFR",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 31.11,
+    "server_elapsed": "29.05s",
+    "n_sources": 3,
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe final General Financial Rules (GFR) 2017, as outlined across multiple documents, establishes a framework for managing government finances. Key guidelines include rules regarding short titles and commencement (Rule 1), definitions of key terms such as Accounts Officer, Appropriation, Audit Officer, Consolidated Fund, and Contingency Fun (Rule 2), procedures for preparing detailed estimates for revenue receipts and expenditure (Rules 128, 130, 132, 139, 142), processes for collecting supplementary demands, and provisions related to the Contingency Fund of India and land/building transfers (Rules 6, 7, and 8).\n\n📋 Process\n(This section is omitted as there isn't a numbered process outlined in the provided documents.)\n\n📘 Source: FInal_GFR_upto_31_07_2024.pdf"
+  },
+  {
+    "idx": 22,
+    "question": "What does the final GFR regulate regarding 2024?",
+    "intent": "RULES_GFR",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 26.7,
+    "server_elapsed": "24.64s",
+    "n_sources": 3,
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Final GFR upto 31.07.2024 regulates General Financial Rules, 2017 which are applicable to all Central Government Ministries/Departments and attached/subordinate bodies. It includes definitions of key terms such as “Accounts Officer,” “Administrator,” and “Appropriation.”\n\n📋 Process\n(None - This is a factual answer based on the document)\n\n📘 Source: Final_GFR_upto_31_07_2024.pdf"
+  },
+  {
+    "idx": 23,
+    "question": "What are the main guidelines mentioned in the GeM manual?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 35.15,
+    "server_elapsed": "33.07s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe GeM manual outlines several key guidelines for procurement through the Government e-Marketplace (GeM) portal. These include a prohibition against dividing demand into small quantities to avoid L1 bidding, mandatory use of the GeM portal where goods/services are available, and requirements for supplier registration and certificate compliance. The manual also details procedures for generating GeMAR&PTS reports, utilizing Business Analytics tools on GeM, and adhering to Model Clauses/Certificates.\n\n📋 Process\n1.  Prohibition against Piecemeal Purchases: Demand for goods cannot be divided into small quantities to avoid L1 bidding on GeM.\n2.  GeM Portal Usage: Goods/services must be procured through the GeM portal when available.\n3.  GeMAR&PTS Reporting: Buyers must generate a \"GeM Availability Report and Past Transaction Summary\" (GeMAR&PTS) for procurement outside GeM.\n4.  Business Analytics Tools: Utilize BA tools on GeM to assess price reasonableness.\n5.  Supplier Registration & Compliance: Vendors/bidders registered with GeM must provide a certificate of compliance.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 24,
+    "question": "Under GFR and government rules, what is the procedure for the GeM manual?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 34.63,
+    "server_elapsed": "32.59s",
+    "n_sources": 4,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe GeM portal’s procedures are governed by several key regulations. Ministries and Departments are expected to utilize the GeM platform for procuring goods and services, particularly bulk quantities, as outlined in GFR rules and the publicProManual. Specifically, they must project their annual procurement plan on the GeM portal within 30 days of budget approval, utilizing either OPEX or CAPEX models.  The Business Analytics (BA) tools available on GeM can be used to assess price reasonableness before placing orders.\n\n📋 Process\n1. Project Annual Procurement Plan: Ministries/Departments must project their annual procurement plan for goods and services on the GeM portal within 30 days of budget approval, utilizing either OPEX or CAPEX models.\n2. Utilize BA Tools: Employ Business Analytics (BA) tools available on GeM to assess price reasonableness before placing orders. These tools include last purchase prices on GeM and the department’s own last purchase price.\n3. Compliance with GeM Terms: Ensure all vendors/bidders registered with GeM provide a certificate regarding compliance with Order terms, as mandated by the GeM portal.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 25,
+    "question": "What is the core objective of the GeM manual?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 32.98,
+    "server_elapsed": "30.92s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe core objective of the GeM manual is to facilitate efficient and transparent procurement of goods and services by government departments through the Government e-Marketplace (GeM) platform. This includes promoting competition among suppliers, leveraging aggregate demand for better pricing, and streamlining the entire procurement process electronically.\n\n📋 Process\n1.  Establishment of GeM: The manual highlights the creation of GeM as an e-commerce marketplace for common goods and services.\n2.  Supplier Registration & Certification: It outlines the registration process for suppliers on GeM, emphasizing certification by the GeM SPV.\n3.  Procurement Rules & Guidelines: The manual references Rule 149 of GFR, 2017, detailing the mandatory use of GeM for goods and services available on the platform.\n4.  Bidding Methods: It describes various bidding methods available on GeM, including online bidding, reverse auction, and e-auction, suitable for different procurement volumes.\n5.  Rate Reasonability Assessment: The manual stresses the responsibility of procuring authorities to assess the reasonability of rates offered through GeM.\n\n📘 Source: mannual procurement.pdf"
+  },
+  {
+    "idx": 26,
+    "question": "What are the main guidelines mentioned in the GeM handbook?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 38.49,
+    "server_elapsed": "36.43s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe primary guidelines outlined within the provided documents regarding the Government e-Marketplace (GeM) center around mandatory procurement on GeM whenever possible, utilizing available tools for price reasonableness and bid evaluation, and establishing a streamlined registration process for vendors. Specifically, GeM should be utilized for purchases up to Rs. 50,000/- through any available supplier, above this amount using the lowest priced seller amongst at least three manufacturers, and above Rs. 10,00,000/- utilizing online bidding or reverse auction tools. The portal also mandates a \"GeM Availability Report and Past Transaction Summary\" (GeMAR&PTS) for procurement outside GeM.\n\n📋 Process\n1.  Mandatory Use of GeM: Goods and services available on GeM must be procured through it whenever possible, adhering to the monetary ceilings outlined in Rule 149.\n2.  Price Reasonableness Tools: Buyers can utilize Business Analytics (BA) tools on GeM to assess price reasonableness before placing orders.\n3.  Bid Evaluation Methods: Online bidding and reverse auction tools are mandatory for procurements above specified thresholds.\n4.  GeMAR&PTS Requirement: A \"GeM Availability Report and Past Transaction Summary\" (GeMAR&PTS) is required for procurement outside GeM, serving as a pre-requisite for bid evaluation.\n5.  Supplier Registration: Vendors must register on GeM and provide compliance certificates.\n\n📘 Source: [Source 1: publicProManual-1755343081262-715558279.pdf]"
+  },
+  {
+    "idx": 27,
+    "question": "What does the GeM handbook regulate regarding the handbook?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 28.0,
+    "server_elapsed": "25.93s",
+    "n_sources": 2,
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe GeM handbook regulates that Ministries or Departments are mandatory for Goods or Services available on GeM. This means that all procurement of goods and services by government departments must utilize the Government e-Marketplace (GeM) platform, as outlined in Rule 149 of the Final GFR upto 31.07.2024.\n\n📋 Process\n1.  Government Departments are required to use GeM for all procurement activities.\n2.  The GeM SPV ensures adequate publicity and advertising of items available on the platform.\n3.  Procuring authorities must certify the reasonability of rates offered through GeM.\n\n📘 Source: FInal_GFR_upto_31_07_2024.pdf"
+  },
+  {
+    "idx": 28,
+    "question": "What are the main guidelines mentioned in the general financial rules?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 36.17,
+    "server_elapsed": "34.12s",
+    "n_sources": 3,
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe General Financial Rules, 2017 outline key provisions for Central Government Ministries/Departments regarding expenditure and financial control. Specifically, Rule 1 states that these rules apply to all Central Government bodies, except Autonomous Bodies where separate approved financial rules exist. Rule 25 focuses on sanctioning funds, requiring details of the grant or appropriation from which expenditure will be met, and ensuring expenditure aligns with budget allocations. Rule 26 assigns responsibilities to controlling officers – they must ensure expenditures don’t exceed budgets, are used for intended purposes, serve public interest, and implement controls against waste and loss. Finally, Rule 27 addresses the effective date of sanctions, subject to Delegation of Financial Powers Rules.\n\n📋 Process\n1.  Rule 1: Applies to all Central Government bodies except Autonomous Bodies with separate rules.\n2.  Rule 25: Requires details of funds from grants/appropriations when sanctioning expenditure.\n3.  Rule 26: Assigns responsibilities to controlling officers for budget adherence and financial oversight.\n4.  Rule 27: Specifies the effective date of sanctions, contingent on Delegation of Financial Powers Rules.\n\n📘 Source: General Financial Rules, 2017 (GFR2017_HINDI.pdf) / FInal_GFR_upto_31_07_2024.pdf"
+  },
+  {
+    "idx": 29,
+    "question": "Under GFR and government rules, what is the procedure for general financial rules?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 20.49,
+    "server_elapsed": "18.41s",
+    "n_sources": 3,
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe General Financial Rules, 2017 are applicable to all Central Government Ministries/Departments and attached/subordinate bodies. These rules come into force at once and are deemed to be applicable to Autonomous Bodies except where specific financial rules have been approved by the Government.\n\n📋 Process\n1.  These rules (GFR) may be called General Financial Rules, 2017.\n2.  They shall come into force at once and shall be applicable to all Central Government Ministries/Departments, attached and subordinate bodies.\n3. The provisions contained in GFRs are deemed to be applicable to Autonomous Bodies except to the extent the bye-laws of an Autonomous Body provides for separate Financial Rules which have been approved by the Government.\n\n📘 Source: General Financial Rules, 2017 (GFRupdatedupto31072024.pdf)"
+  },
+  {
+    "idx": 30,
+    "question": "What is the core objective of the IT Act Rules?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 31.35,
+    "server_elapsed": "29.31s",
+    "n_sources": 4,
+    "sources": [
+      "GFRupdatedupto31012026.pdf",
+      "it_act_2000_updated english.pdf",
+      "it_act_2000_updated hindi.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe core objective of the IT Act Rules, as outlined across multiple sources, is to establish a framework for cybersecurity and data protection within India. Specifically, it aims to protect information and systems from unauthorized access, use, disclosure, disruption, modification, or destruction, along with defining key terms related to electronic records and digital signatures.\n\n📋 Process\n1.  The IT Act, through its regulations (as detailed in sources 2 & 3), establishes standards for Certifying Authorities regarding data maintenance and disclosures.\n2.  It defines critical terms like “cyber security,” “data,” “digital signature,” and “electronic record” to provide a clear legal basis for enforcement.\n3. The Controller has the power to make regulations consistent with the Act, as outlined in section 89 of IT Act (source 2).\n\n📘 Source: it_act_2000_updated english.pdf & it_act_2000_updated hindi.pdf"
+  },
+  {
+    "idx": 31,
+    "question": "What are the main guidelines mentioned in the procurement manual?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 33.79,
+    "server_elapsed": "31.70s",
+    "n_sources": 2,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe primary guidelines outlined in the Procurement Manual focus on establishing a robust and transparent public procurement process. Key aspects include adherence to the Five R’s of Procurement – Refinement, Rationalization, Risk Management, Reduction of Costs, and Resilience – emphasizing value for money. The manual also stresses fundamental principles of financial propriety, incorporates provisions for reserved items and preference policies, and mandates the use of the Central Public Procurement Portal (CPPP). Furthermore, it highlights the importance of Right to Information and proactive information disclosures, along with a defined procurement cycle.\n\n📋 Process\n1.  Adherence to the Five R’s of Procurement: This involves refining requirements, rationalizing costs, managing risks, reducing expenses, and building resilience into procurement strategies.\n2.  Compliance with Financial Propriety Standards: Following established canons of financial propriety ensures ethical and accountable procurement practices.\n3.  Utilization of the CPPP Portal: Leveraging the CPPP for streamlined procurement processes and transparency.\n4.  Implementation of Right to Information (RTI) provisions: Ensuring public access to information related to procurement activities.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 32,
+    "question": "What does the procurement manual regulate regarding procurement?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 26.14,
+    "server_elapsed": "24.07s",
+    "n_sources": 3,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe procurement manual regulates the acquisition of goods, works, and services by procuring entities, encompassing various sources of funds like grants and loans. It outlines principles such as value for money, transparency, fairness, competition, economy, efficiency, and accountability within the public procurement process. The manual covers aspects including categorization of procurements, authorities competent to purchase, and fundamental principles of public procurement.\n\n📋 Process\n(No specific process steps are outlined in these documents regarding what the procurement manual regulates – it’s a broad definition.)\n\n📘 Source: Manual_for_Procurement_of_works_2019.pdf"
+  },
+  {
+    "idx": 33,
+    "question": "What are the main guidelines mentioned in the procurement of works manual?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 30.63,
+    "server_elapsed": "28.57s",
+    "n_sources": 2,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Procurement of Works Manual outlines several key guidelines for ensuring transparency and fairness in public procurement. These include inviting offers in accordance with the manual’s procedures, verifying that selected offers adequately meet requirements, assessing whether prices are reasonable considering quality, and selecting the most appropriate offer based on all relevant factors while maintaining financial propriety. Furthermore, the manual emphasizes clear communication of acceptance via registered letter or a foolproof method, and requires successful bidders to furnish performance security within a specified timeframe.\n\n📋 Process\n1.  Invite offers in accordance with the manual’s procedures.\n2.  Verify that selected offer adequately meets requirements.\n3.  Assess whether prices are reasonable considering quality.\n4.  Select the most appropriate offer based on all relevant factors and financial propriety.\n5. Communicate acceptance of offer via registered letter or a foolproof method.\n6.  Instruct successful tenderer to furnish performance security within a specified timeframe.\n\n📘 Source: Manual for Procurement of Works (Updated June, 2022)"
+  },
+  {
+    "idx": 34,
+    "question": "What does the procurement of works manual regulate regarding procurement of works?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 27.15,
+    "server_elapsed": "25.11s",
+    "n_sources": 2,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Manual for Procurement of Works (2022) regulates the acquisition of goods and services, as well as the execution of works, by government organizations. It aims to improve transparency in decision-making and reduce subjectivity within public procurement processes, aligning with General Financial Rules (GFR), 2005. The manual has been extensively revised to incorporate recent changes like the introduction of the Central Public Procurement Portal (CPPP) and preference for domestic contractors.\n\n📋 Process\n(This section is omitted as a direct process isn't outlined in the provided documents.)\n\n📘 Source: Manual for Procurement of Works (Updated June, 2022) Government of India Ministry of Finance Department of Expenditure"
+  },
+  {
+    "idx": 35,
+    "question": "What are the main guidelines mentioned in the MSME procurement policy?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 39.1,
+    "server_elapsed": "37.06s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe MSME procurement policy, as outlined in the provided documents, focuses on preferential procurement of goods and services from Micro and Small Enterprises (MSEs) registered under Udyam Registration. Key aspects include:\n\n*   **Eligibility:** MSEs registered under Udyam Registration are eligible to benefit from this policy.\n*   **Preferential Procurement:** The policy mandates that procuring entities give preference to MSEs producing goods or rendering services.\n*   **Reclassification Benefits:** If an MSE’s investment or turnover increases, it continues to receive non-tax benefits for three years from its previous category classification.\n*   **SC/ST/Women Ownership:** In the case of proprietary MSEs, the proprietor(s) are considered SC/ST or a Woman; and in partnership MSEs, the partners are treated as such.\n\n📋 Process\nThere isn’t a defined process outlined in these documents for the MSME procurement policy itself – it's more of a general directive. However, the following steps would be involved:\n\n1.  Ensure the vendor is registered under Udyam Registration.\n2.  Evaluate bids from MSEs alongside other vendors, giving preference to MSEs.\n3.  If an MSE’s investment or turnover increases, assess if it continues to qualify for previous category benefits.\n4.  Verify that the vendor meets SC/ST/Woman ownership criteria where applicable.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 36,
+    "question": "Under GFR and government rules, what is the procedure for MSME procurement?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 39.28,
+    "server_elapsed": "37.22s",
+    "n_sources": 3,
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Government of India mandates preferential procurement of goods and services from Micro and Small Enterprises (MSEs) under Rule 153(ii) of GFR 2017, as well as incorporating broader objectives like supporting local industry and job creation through rules 153(iii) and 170(i), 173(i) of GFR 2017. This involves inviting offers from MSEs registered under Udyam Registration, with provisions for reclassification benefits if an enterprise’s investment or turnover changes. The procurement process must also conform to fair, transparent, and reasonable procedures as outlined in Rule 144 of GFR 2017, including consideration of locally manufactured goods or services.\n\n📋 Process\n1.  Invitations to offers should be conducted following a fair, transparent, and reasonable procedure as per Rule 144 of GFR 2017.\n2.  Procuring authorities must satisfy that the selected offer meets requirements and is reasonably priced (Rule 144).\n3.  Preferential procurement from MSEs, backward regions, weaker sections, and locally manufactured goods or services is encouraged (Rules 153(iii) & 170(i), 173(i)).\n4.  MSEs reclassified due to increased investment or turnover receive continued non-tax benefits for three years (Rule 153(ii)).\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 37,
+    "question": "What are the main guidelines mentioned in PPM?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 32.61,
+    "server_elapsed": "30.54s",
+    "n_sources": 4,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe Public Procurement Manual (PPM) outlines several key guidelines for achieving Value for Money (VfM). Primarily, it emphasizes optimal description of needs, development of value-engineered specifications/Terms of Reference, appropriate packaging/slicing of requirements, and selecting the right procurement mode and tendering system. It also highlights considerations like fitness for purpose, vendor experience, flexibility, environmental sustainability, and total cost of ownership when conducting a VfM assessment.  Due to uncertainties in estimates, subjectivity is generally avoided in routine cases.\n\n📋 Process\n1. Optimal Description of Needs: Clearly define the requirements to attract competitive bids.\n2. Value-Engineered Specifications/ToR: Develop specifications that balance quality with cost efficiency.\n3. Packaging/Slicing of Requirements: Break down complex requirements into smaller, manageable packages.\n4. Appropriate Procurement Mode & Tendering System Selection: Choose a system suited to the specific procurement needs.\n5. VfM Assessment Considerations: Evaluate factors like fitness for purpose, vendor experience, flexibility, and environmental sustainability.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf"
+  },
+  {
+    "idx": 38,
+    "question": "Under GFR and government rules, what is the procedure for PPM?",
+    "intent": "RULES_GFR",
+    "intent_conf": 1.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 31.45,
+    "server_elapsed": "29.38s",
+    "n_sources": 3,
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Public Procurement Manual (PPM) outlines a process for procurement of goods and services, emphasizing transparency and adherence to government rules. Key aspects include publishing a complete schedule of the procurement cycle from tender issuance to contract issuance, preparing an Annual Procurement Plan and placing it on the GeM portal within 30 days of budget approval, and utilizing Business Analytics (BA) tools on GeM for price reasonableness assessments.  Furthermore, Ministries/Departments must work out their procurement requirements using either OPEX or CAPEX models and project them on the GeM portal.\n\n📋 Process\n1. Publish a complete schedule of the procurement cycle from date of issuing the tender to date of issuing the contract.\n2. Prepare and place an Annual Procurement Plan on the GeM portal within 30 days of Budget approval.\n3. Utilize Business Analytics (BA) tools available on GeM for price reasonableness assessments.\n4. Work out procurement requirements using either OPEX or CAPEX models.\n\n📘 Source: mannual procurement.pdf"
+  },
+  {
+    "idx": 39,
+    "question": "What is the core objective of the e-Procurement project?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 26.38,
+    "server_elapsed": "24.33s",
+    "n_sources": 3,
+    "sources": [
+      "Précis  e-Procurement Project.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe core objective of the e-Procurement project was to increase efficiency and transparency in public procurement activity across all Government departments within Chhattisgarh. This involved implementing a comprehensive end-to-end solution encompassing vendor registration, indent management, e-tendering, e-auction, contract management, e-payment, and MIS & Accounting.\n\n📋 Process\n1. The project aimed to streamline procurement processes.\n2. It sought to enhance transparency in government spending.\n3.  It utilized a Public Private Partnership (PPP) model with Wipro Ltd. as the Application Service Provider (ASP).\n\n📘 Source: Précis e-Procurement Project.pdf"
+  },
+  {
+    "idx": 40,
+    "question": "What are the main guidelines mentioned in the public procurement manual?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 29.54,
+    "server_elapsed": "27.50s",
+    "n_sources": 3,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe primary guidelines outlined within the provided manuals for public procurement focus on ensuring transparency, fairness, and efficiency in government purchasing processes. Key aspects include objective specifications for goods and services, adherence to national or international standards where available, avoiding excessive purchase quantities, and promoting competition among vendors.  Specifically, the manuals emphasize measurable and functional requirements, minimizing brand preferences, utilizing recognized standards, and managing inventory costs.\n\n📋 Process\n1. Objective Specifications: The procurement process should utilize objective, functional, generic, and measurable specifications for goods and services to reduce subjectivity.\n2. Standard Adherence: Technical specifications should ideally align with national or international standards where they exist.\n3. Quantity Management:  Procurement quantities should be aligned with actual requirements to minimize inventory carrying costs.\n4. Competition & Fairness: The process must foster fair, transparent, and competitive offers from vendors.\n\n📘 Source: mannual procurement.pdf"
+  },
+  {
+    "idx": 41,
+    "question": "What does the public procurement manual regulate regarding the public procurement manual?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 26.19,
+    "server_elapsed": "24.14s",
+    "n_sources": 3,
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe public procurement manual regulates public procurement by providing guidelines and procedures for government organizations to acquire goods, works, or services. It outlines key aspects such as contract formation, transparency, fairness, competition, and accountability within the procurement process. The manual serves as a guide for procuring entities to ensure compliance with relevant laws and regulations.\n\n📋 Process\n1.  The Manual provides guidelines for public procurement.\n2.  It covers aspects like contract formation, transparency, and accountability.\n3.  Procuring entities can customize the manual to suit their specific needs with approval.\n\n📘 Source: mannual procurement.pdf"
+  },
+  {
+    "idx": 42,
+    "question": "What is the step-by-step process for the auction manual?",
+    "intent": "AUCTION",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 37.93,
+    "server_elapsed": "35.88s",
+    "n_sources": 4,
+    "sources": [
+      "AuctionManual_FA.pdf",
+      "mannual procurement.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nHere’s the step-by-step process for participating in an e-Auction as outlined in the Auction Manual:\n\n1.  Login to the Chhattisgarh EProcurement portal using your user ID, password, and Digital Signature Certificate (DSC).\n2.  Navigate to the “Forward Auction” tab on the Dashboard and open the auction portal in a new window.\n3.  If prompted, enter the old password (“Password@123”) and then input the new password.\n4.  Select the specific auction from the dashboard and click \"View Respond to RFX.\"\n5.  Quote an opening price and multiples of the minimum bid change price. If no opening price is specified, use “0” as the opening price.\n6.  The auction page will automatically refresh every 1 minute with updated bidding status and ranking information.\n\n📋 Process\n1. Login to Chhattisgarh EProcurement portal using user ID, password & DSC.\n2. Navigate to \"Forward Auction\" tab in Dashboard & open new window.\n3. Enter old password (“Password@123”) and then enter new password.\n4. Select auction from dashboard & click “View Respond to RFX”.\n5. Quote opening price & multiples of min bid change price; use ‘0’ if no opening price.\n6. Page auto-refreshes every 1 minute with updated bidding status & ranking.\n\n📘 Source: AuctionManual_FA.pdf"
+  },
+  {
+    "idx": 43,
+    "question": "What are the troubleshooting steps mentioned in the auction manual?",
+    "intent": "AUCTION",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 31.3,
+    "server_elapsed": "29.24s",
+    "n_sources": 4,
+    "sources": [
+      "AuctionManual_FA.pdf",
+      "160616_AMC_AC short tender.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe Auction Manual (AuctionManual_FA.pdf) outlines specific actions to take during an auction event. If the auction engine asks for a password change, use “Password@123” as the old password. Bidders must quote above the Opening Price and multiples of the minimum bid price; if no opening price is provided, it should be considered ‘0’. During the auction, bidders can only view H1 prices and the ranking. The auction page automatically refreshes every 1 minute with updated bidding status.\n\n📋 Process\n1.  Use “Password@123” as the old password if prompted by the auction engine.\n2.  Quote above the Opening Price and multiples of the minimum bid price.\n3.  If no opening price is provided, consider it ‘0’.\n4.  Monitor H1 prices and ranking updates automatically every 1 minute.\n\n📘 Source: AuctionManual_FA.pdf"
+  },
+  {
+    "idx": 44,
+    "question": "What is the step-by-step process for CHiPS bid submission?",
+    "intent": "BID_SUBMISSION",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 30.72,
+    "server_elapsed": "28.66s",
+    "n_sources": 3,
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Guidelines_To_Bidders_EPS_v1.6.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe process for submitting a bid through the CHiPS e-Procurement system involves several key steps. First, bidders must procure a digital certificate and install Java on their machine, setting the appropriate language. Then, they need to register on the e-Procurement portal, providing necessary details. Finally, they can participate in tenders by submitting both technical and price bids through the online platform.\n\n📋 Process\n1.  Procure a Digital Certificate (Class II or Class III) and install Java.\n2.  Register on the e-Procurement Portal: Create an account and complete the registration form.\n3.  Submit Technical Bid: Upload required documents as specified in the Tender Document.\n4.  Submit Price Bid (Financial Bid): Enter bid prices within the stipulated format.\n5.  Review and Submit: Carefully review all submitted bids before final submission.\n\n📘 Source: Bid Submission Manual (CHiPS)"
+  },
+  {
+    "idx": 45,
+    "question": "What is the step-by-step process for CHiPS vendor registration?",
+    "intent": "VENDOR_REGISTRATION",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 34.45,
+    "server_elapsed": "32.40s",
+    "n_sources": 3,
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nThe process for CHiPS vendor registration involves several steps outlined in the Vendor Registration Manual. First, you visit the e-Procurement portal at https://eproc.cgstate.gov.in and click on ‘New User’ under Register. Next, you enter your PAN card details accurately and select “New User” followed by “Enter”. Then, you should enter a preferred login code to check availability, and if available, fill in the required details including Authorized Signatory, Contact, Additional contact Bank, CRN, Vendor business & Partner. Finally, the system will ask for validation, which you save and proceed with.\n\n📋 Process\n1.  Visit https://eproc.cgstate.gov.in and click ‘New User’ under Register.\n2.  Enter your PAN card details.\n3.  Select “New User” and “Enter”.\n4.  Enter a preferred login code to check availability.\n5.  If available, fill in the required details: Authorized Signatory, Contact, Additional contact Bank, CRN, Vendor business & Partner.\n6.  Save & Next.\n\n📘 Source: Vendor Registration Manual (CHiPS)"
+  },
+  {
+    "idx": 46,
+    "question": "What is the step-by-step process for EDGE browser setup?",
+    "intent": "PORTAL_USAGE",
+    "intent_conf": 0.8,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 38.25,
+    "server_elapsed": "36.18s",
+    "n_sources": 3,
+    "sources": [
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "Preferred_System_Configuration_V_2.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nHere’s a breakdown of the steps to set up your EDGE browser as outlined in the provided documents:\n\n1.  **Open Internet Property:** Navigate to Start Menu > Windows + Run, enter “inetcpl.cpl” and click OK. This opens the Internet Properties window.\n2.  **Trusted Sites Configuration:** Go to the Security tab and select the Trusted Sites category. Add the application URL to the Trusted Site List. Set IE security levels as follows: Internet: Medium-high, Trusted sites: Medium. Enable or Prompt for ActiveX related options under ‘Internet’ and ‘Trusted sites’.\n3.  **Browser Launch & Settings:** Open the EDGE Browser and click on the “Settings” menu.\n4.  **Default Browser Setting:** Click \"Default Browser\" to set EDGE as the default browser.\n5.  **Recommended Portal Address:** Add the Recommended Portal Address/URL by clicking the appropriate setting (likely labeled ‘Allow’ or similar).\n6. **Reopen Browser**: After adding the address, reopen the browser.\n\n📋 Process\n1. Open Internet Property: Start Menu > Windows + Run > enter “inetcpl.cpl” and click OK.\n2. Add URL to Trusted Sites: Security tab > Trusted Sites category > Add application URL.\n3. Set IE Security Levels: Security tab > Internet > Custom level – set to Medium-high.\n4.  Set Trusted"
+  },
+  {
+    "idx": 47,
+    "question": "What system settings or configurations are needed for EDGE browser setup?",
+    "intent": "PORTAL_USAGE",
+    "intent_conf": 0.8,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 27.96,
+    "server_elapsed": "25.91s",
+    "n_sources": 2,
+    "sources": [
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "Preferred_System_Configuration_V_2.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nTo configure the EDGE browser as recommended by CHiPS, follow these steps based on the provided documentation:\n\n1.  **Open Internet Properties:** Navigate to Start Menu > Windows + Run > Enter `inetcpl.cpl` and click OK. This opens the Internet Properties window.\n2.  **Trusted Sites Settings:** In the Security tab, navigate to Trusted Sites. Set the Internet security level to Medium-High (default) and the Trusted sites security level to Medium (default). Enable or Prompt for ActiveX related options under ‘Internet’ and ‘Trusted sites’.\n3.  **Add Application URL:** Navigate to the Default Browser setting within the Internet Options.\n4.  **Set as Recommended/Allow:** In the Default Browser settings, set the recommended portal address/URL as “Allow”.\n5.  **Reopen Browser:** After adding the address, reopen the EDGE browser.\n\n📋 Process\n1. Open Internet Properties by following: Go to start menu>click Windows+Run>enter the command inetcpl.cpl and click Ok.\n2. Navigate to Security > Trusted Sites.\n3. Set Internet security level to Medium-High and Trusted sites security level to Medium.\n4. Enable or Prompt for ActiveX related options under ‘Internet’ and ‘Trusted sites’.\n5. Go to Default Browser setting within the Internet Options.\n6. Set as Recommended/Allow."
+  },
+  {
+    "idx": 48,
+    "question": "What is the step-by-step process for challan payment?",
+    "intent": "EMD_PAYMENT",
+    "intent_conf": 0.6,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 49.02,
+    "server_elapsed": "46.95s",
+    "n_sources": 3,
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nHere’s the step-by-step process for EMD payment via Challan, as outlined in the provided documents:\n\n1.  Log into the Eproc System using your User ID and Password.\n2.  Click on \"Run\".\n3.  Select DSC.\n4.  Click “Continue to Dashboard”.\n5.  Click on “All Live Tenders”.\n6.  Click on “View Tender”.\n7.  Click on “INTERSTED”.\n8.  Check the terms and click “I AGREE/ACCEPT”.\n9.  Click \"Pay Tender/Processing Fee\".\n10. Select “Payment mode as RTGS/CHALLAN” and save.\n11. Generate Challan.\n12. Click “OK to confirm”.\n13. Select the Gateway.\n14. Click on “Pay Now”.\n15. Fill-up required information.\n16. Click on “RTGS/NEFT/IMPS”.\n17. Click \"Confirm and Print\" to download the challan PDF.\n18. Save the Challan for further Bank payment.\n\n📋 Process\n1.  Log in to Eproc System (User ID & Password).\n2.  Click \"Run\".\n3.  Select DSC.\n4.  Click “Continue to Dashboard”.\n5.  Click on “All Live Tenders”.\n6.  Click on “View Tender”.\n7.  Click on “INTERSTED”.\n8.  Check the terms and click “I AGREE/ACCEPT”.\n9.  Click \"Pay Tender/Processing Fee\".\n10. Select “Payment mode as RTGS/CHALLAN” and save.\n11. Generate Challan.\n12. Click “OK to confirm”.\n13. Select Gateway.\n14. Click on “Pay Now”.\n15. Fill-up required information.\n16. Click on “RTGS/NEFT/IMPS”.\n17. Click \"Confirm and Print\" to download challan PDF.\n18. Save the Challan for further Bank payment.\n\n📘 Source: EMD_CHALLAN_PAYMENT_V1.0.pdf"
+  },
+  {
+    "idx": 49,
+    "question": "What is the step-by-step process for FAQs?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "ANSWERED",
+    "latency_s": 28.15,
+    "server_elapsed": "26.11s",
+    "n_sources": 3,
+    "sources": [
+      "AuctionManual_FA.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nI'm not fully certain this matches your question - please verify with the cited document.\nThe e-Procurement portal utilizes a series of steps to facilitate FAQ access. First, users must log into the Chhattisgarh EProcurement portal with their designated user ID and password, along with their Digital Signature Certificate (DSC). Following login, navigating to the “FAQs” section within the portal’s interface allows users to view frequently asked questions and their corresponding answers.\n\n📋 Process\n1.  Log in to the Chhattisgarh EProcurement portal using your User ID, Password, and DSC.\n2.  Navigate to the \"FAQs\" section within the portal's interface.\n3.  Review the listed FAQs and their associated responses.\n\n📘 Source: CHiPS_Bid_Submission Manual_English.pdf"
+  },
+  {
+    "idx": 50,
+    "question": "What system settings or configurations are needed for CHiPS online?",
+    "intent": "UNKNOWN",
+    "intent_conf": 0.0,
+    "entities": {},
+    "entities_summary": "",
+    "outcome": "CACHE",
+    "latency_s": 2.05,
+    "server_elapsed": "0.00s",
+    "n_sources": 4,
+    "sources": [
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "Guidelines_To_Bidders_EPS_v1.6.pdf"
+    ],
+    "error": null,
+    "answer": "💡 Answer\nTo ensure optimal functionality within the Chhattisgarh Infotech Promotion Society (CHiPS) e-Procurement system, several key system settings and configurations are required. These include a Windows 7 or 8 operating system (32-bit or 64-bit), Internet Explorer 9 or Mozilla Firefox Version 44 with IE Tab, Java version 1.8.0_77, and a valid Class II/III Digital Signature Certificate.  Specifically, the system recommends using only one version of Java, ensuring proper DSC installation and validity, and maintaining adequate internet bandwidth (minimum 1 MBPS). Refer to the Preferred System Configuration document for detailed instructions and links to relevant resources.\n\n📋 Process\n1. Install Windows 7 or 8 (32-bit or 64-bit) operating system.\n2. Download and install Internet Explorer 9 or Mozilla Firefox Version 44 with IE Tab, ensuring compatibility mode is not used.\n3. Download and install Java version 1.8.0_77 (32-bit or 64-bit).\n4. Obtain and properly configure a valid Class II/III Digital Signature Certificate.\n5. Ensure adequate internet bandwidth (minimum 1 MBPS) for seamless operation.\n6. Utilize the auto setup utility available on the eProcurement portal home page: https://eproc.cgstate.gov.in --> Auto Setup.\n\n📘 Source: Preferred System Configuration V_2.pdf"
+  }
+]

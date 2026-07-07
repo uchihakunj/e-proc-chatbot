@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>e-Procurement Portal | Government of Chhattisgarh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- ══ Background portal page ═══════════════════════════════════════ -->
+  <div id="page-bg">
+    <header class="portal-header">
+      <div class="portal-logo-wrap">
+        <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+          <rect x="6" y="4" width="22" height="28" rx="3" fill="#1e40af" opacity="0.8" stroke="#3b82f6" stroke-width="1.6"/>
+          <path d="M11 13h12M11 18h12M11 23h7" stroke="#93c5fd" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="30" cy="30" r="8" fill="#1e40af" stroke="#3b82f6" stroke-width="1.6"/>
+          <path d="M26.5 30l2.5 2.5 4.5-4.5" stroke="#93c5fd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="portal-title-group">
+        <div class="portal-title">Government of Chhattisgarh</div>
+        <div class="portal-subtitle">e-Procurement Portal — CHiPS</div>
+      </div>
+    </header>
+    <div class="portal-hero">
+      <h1>e-Procurement System</h1>
+      <p>Transparent, efficient, and accountable procurement for all government departments of Chhattisgarh.</p>
+      <div class="portal-chips">
+        <span class="portal-chip">Vendor Registration</span>
+        <span class="portal-chip">Bid Submission</span>
+        <span class="portal-chip">EMD Payment</span>
+        <span class="portal-chip">Tenders</span>
+        <span class="portal-chip">GFR Rules</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Chat Widget ════════════════════════════════════════════════════ -->
+  <div id="chat-widget">
+
+    <!-- ── Chat popup (must come BEFORE toggle so flex order puts it above) ── -->
+    <div id="chat-popup" class="hidden" role="dialog" aria-label="AI Document Assistant">
+
+      <!-- Header -->
+      <div id="popup-header">
+        <div class="popup-brand">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 21 7 3 7"/>
+            <line x1="3" y1="22" x2="21" y2="22"/>
+            <line x1="6" y1="10" x2="6" y2="18"/>
+            <line x1="10" y1="10" x2="10" y2="18"/>
+            <line x1="14" y1="10" x2="14" y2="18"/>
+            <line x1="18" y1="10" x2="18" y2="18"/>
+          </svg>
+          <div class="popup-brand-text">
+            <span class="popup-brand-title">eProcurement Assistant<span class="ai-badge">AI</span></span>
+            <span class="popup-brand-sub">Powered by AI</span>
+          </div>
+        </div>
+        <div class="popup-header-actions">
+          <!-- Maximize / Restore -->
+          <button id="popup-maximize-btn" class="header-icon-btn" title="Maximize">
+            <svg class="icon-maximize" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
+              <path d="M21 8V5a2 2 0 0 0-2-2h-3"/>
+              <path d="M3 16v3a2 2 0 0 0 2 2h3"/>
+              <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+            </svg>
+            <svg class="icon-restore" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3v3a2 2 0 0 1-2 2H3"/>
+              <path d="M21 8h-3a2 2 0 0 1-2-2V3"/>
+              <path d="M3 16h3a2 2 0 0 1 2 2v3"/>
+              <path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
+            </svg>
+          </button>
+          <!-- Reset position & size (shown only after moving / maximizing) -->
+          <button id="popup-reset-btn" class="header-icon-btn hidden" title="Reset position &amp; size">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"/>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+            </svg>
+          </button>
+          <!-- Info / About -->
+          <button id="popup-info-btn" class="header-icon-btn" title="About this assistant">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+          </button>
+          <!-- Options menu (⋮) -->
+          <button id="popup-menu-btn" class="header-icon-btn" title="Menu" aria-haspopup="true" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/>
+            </svg>
+          </button>
+          <!-- Dropdown options menu -->
+          <div id="popup-menu" class="popup-menu hidden" role="menu">
+            <button class="popup-menu-item" data-action="clear" role="menuitem" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                <line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>
+              </svg>
+              <span>Clear Chat</span>
+            </button>
+            <button class="popup-menu-item" data-action="minimize" role="menuitem" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/>
+              </svg>
+              <span>Minimize</span>
+            </button>
+            <button class="popup-menu-item" data-action="save" role="menuitem" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Save Chat</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info / About card (toggled by the ⓘ button) -->
+      <div id="popup-info" class="hidden">
+        <div class="info-title">About this assistant</div>
+        <p class="info-intro">I answer questions on Chhattisgarh Government e-Procurement — tenders, bids, EMD / Bid Security, vendor registration, auctions, and GFR / Store Purchase rules — in <strong>Hindi, English or Hinglish</strong>, and cite the source manual for every answer.</p>
+        <div class="info-sub">Tips for best results</div>
+        <ul class="info-list">
+          <li>Be specific — name the rule, document, or step you mean.</li>
+          <li>Ask in any language; technical terms (EMD, GFR, NIT) stay in English.</li>
+          <li>Open “View sources” under an answer to read the original manual.</li>
+        </ul>
+        <div class="info-sub">For Hinglish queries</div>
+        <ul class="info-list" style="margin-top: 0;">
+          <li>Hinglish mein poochte samay ek baar mein ek hi sawaal poochein — jaise "EMD refund kaise milega?"</li>
+          <li>Agar jawab clear na lage, to sawaal ko sirf Hindi ya sirf English mein dobara try karein.</li>
+        </ul>
+        <p class="info-foot">Type your question below to begin.</p>
+        <div class="info-sub" style="margin-top: 16px; color: #b91c1c;">Disclaimer / अस्वीकरण</div>
+        <div class="info-disclaimer" style="margin-top: 6px; font-size: 0.85em; color: #b91c1c; background: #fef2f2; padding: 10px; border-radius: 6px; border: 1px solid #fecaca; line-height: 1.4;">
+          <p style="margin: 0 0 8px 0;"><strong>English:</strong> ⚠️ This response is for general guidance only and does not constitute an official ruling. In case of any conflict, the original GFR/procurement manual/circular shall prevail. Not valid for legal or contractual purposes.</p>
+          <p style="margin: 0;"><strong>Hindi:</strong> ⚠️ यह उत्तर केवल सामान्य मार्गदर्शन हेतु है और इसे आधिकारिक निर्णय नहीं माना जाएगा। किसी भी विरोधाभास की स्थिति में मूल GFR/क्रय नियमावली/परिपत्र ही मान्य होगा। यह विधिक या संविदात्मक प्रयोजनों हेतु मान्य नहीं है।</p>
+        </div>
+      </div>
+
+      <!-- Settings panel (collapsible) -->
+      <div id="popup-settings" class="hidden">
+        <div class="settings-status-row">
+          <span id="st-pipeline" class="status-dot-wrap">
+            <span class="status-dot" data-state="idle"></span>
+            <span id="st-pipeline-val" class="status-val-text">Pipeline: —</span>
+          </span>
+          <span id="st-db" class="status-dot-wrap">
+            <span class="status-dot" data-state="idle"></span>
+            <span id="st-db-val" class="status-val-text">DB: —</span>
+          </span>
+          <span id="st-docs" class="status-dot-wrap">
+            <span class="status-dot" data-state="idle"></span>
+            <span id="st-docs-val" class="status-val-text">—</span>
+          </span>
+        </div>
+        <button class="btn-init" id="btn-init">Initialise Pipeline</button>
+        <div class="settings-field-row">
+          <label class="settings-label" for="num-results">
+            Context chunks&nbsp;<span id="num-results-display">5</span>
+          </label>
+          <input type="range" id="num-results" min="1" max="10" value="5" />
+        </div>
+        <div class="settings-user-row">
+          <span id="user-display" class="settings-username">—</span>
+          <span id="footer-time" class="settings-time">—</span>
+        </div>
+      </div>
+
+      <!-- ── Chat area (open access — login removed) ─────────────── -->
+      <div id="popup-chat">
+        <div id="chat-pane">
+          <div id="chat-empty" class="chat-empty">
+            <div class="welcome-icon">&#128075;</div>
+            <h3 class="welcome-title">Welcome to the eProcurement Assistant</h3>
+            <p class="welcome-intro">Your AI guide to Chhattisgarh Government procurement — tenders, bids, EMD, vendor registration and the GFR rules. Ask in <strong>Hindi, English or Hinglish</strong>; every answer cites its source manual.</p>
+            <div class="welcome-caps">
+              <span class="cap-chip">Tenders &amp; Bids</span>
+              <span class="cap-chip">Vendor Registration</span>
+              <span class="cap-chip">EMD &amp; Refunds</span>
+              <span class="cap-chip">GFR &amp; Rules</span>
+              <span class="cap-chip">Auctions</span>
+            </div>
+            <div class="suggest-label">Try asking</div>
+            <div class="example-quick-list" id="example-list"></div>
+          </div>
+          <div id="chat-messages"></div>
+        </div>
+
+        <!-- Query bar -->
+        <div id="query-bar">
+          <div id="suggestion-chips">
+            <button class="suggestion-chip" type="button">What is e-Procurement?</button>
+            <button class="suggestion-chip" type="button">Vendor registration</button>
+            <button class="suggestion-chip" type="button">Forgot password?</button>
+            <button class="suggestion-chip" type="button">How to get a DSC?</button>
+          </div>
+          <div id="query-wrap">
+            <textarea id="query-input" rows="1"
+              placeholder="Ask about tenders, vendors, EMD…"
+              spellcheck="false"></textarea>
+            <button id="btn-mic" title="Speak your question (voice)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </button>
+            <button id="btn-send" disabled title="Send">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2.2"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+            <button id="btn-stop" class="hidden" title="Stop generating">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"
+                   stroke="none">
+                <rect x="6" y="6" width="12" height="12" rx="2.5"/>
+              </svg>
+            </button>
+          </div>
+          <div id="query-meta">
+            <span id="query-status">Not initialised</span>
+            <span id="query-timing"></span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /#chat-popup -->
+    <!-- ── Proactive greeting teaser (attention grabber, before first open) ── -->
+    <div id="widget-teaser" class="hidden">
+      <span class="teaser-text">👋 Namaste! Need help with tenders, EMD or bids? Ask me!</span>
+      <button id="teaser-close" type="button" aria-label="Dismiss">&times;</button>
+    </div>
+    <!-- ── Floating toggle button (last in flex = bottom of widget) ── -->
+    <button id="widget-toggle" aria-label="Ask E-proc AI">
+      <span id="widget-icon-open">
+        <span class="widget-avatar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 13a8 8 0 0 1 16 0"/>
+            <path d="M20 13v4a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h3z"/>
+            <path d="M4 13v4a2 2 0 0 0 2 2h0a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H4z"/>
+            <path d="M18 19a3 3 0 0 1-3 3h-3"/>
+          </svg>
+        </span>
+        <span class="widget-label">
+          <span class="widget-label-main">Ask E-proc AI</span>
+          <span class="widget-label-sub">Powered by AI</span>
+        </span>
+      </span>
+      <svg id="widget-icon-close" class="hidden" width="22" height="22" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+  </div><!-- /#chat-widget -->
+
+  <!-- ── Source drawer (slides in from right) ───────────────────────── -->
+  <div id="drawer-overlay" class="hidden"></div>
+  <aside id="source-drawer" class="hidden">
+    <div class="drawer-header">
+      <span class="section-label">Source Chunks</span>
+      <button id="drawer-close" aria-label="Close">&#10005;</button>
+    </div>
+    <div id="drawer-body"></div>
+  </aside>
+
+  <!-- ── PDF panel (half-screen, slides in from left) ───────────────── -->
+  <div id="pdf-overlay" class="hidden"></div>
+  <aside id="pdf-panel" class="hidden">
+    <div class="pdf-panel-header">
+      <div class="pdf-panel-title-row">
+        <span class="section-label">Document <span id="pdf-page" class="pdf-page hidden"></span></span>
+        <button id="pdf-close" aria-label="Close PDF">&#10005;</button>
+      </div>
+      <div id="pdf-title" class="pdf-filename"></div>
+      <div id="pdf-related" class="pdf-related hidden"></div>
+    </div>
+    <div class="pdf-panel-body">
+      <div id="pdf-loading" class="pdf-loading">
+        <div class="thinking-dot"></div>
+        <div class="thinking-dot"></div>
+        <div class="thinking-dot"></div>
+        <span>Loading PDF</span>
+      </div>
+      <iframe id="pdf-iframe" class="hidden" title="PDF viewer"></iframe>
+    </div>
+  </aside>
+
+  <!-- ── Toast ─────────────────────────────────────────────────────── -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Hidden stat elements kept for JS compatibility -->
+  <div style="display:none">
+    <span id="stat-docs">—</span>
+    <span id="stat-session">—</span>
+    <span id="stat-model">sarvam-105b</span>
+    <!-- app-shell kept hidden so existing showApp/showLogin still reference it -->
+    <div id="app-shell"></div>
+    <div id="login-screen"></div>
+  </div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

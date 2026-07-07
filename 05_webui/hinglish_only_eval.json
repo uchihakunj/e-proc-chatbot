@@ -1,0 +1,14 @@
+[
+  {
+    "idx": 1,
+    "question": "Tender kya hota hai?",
+    "answer": "💡 Answer\nA tender is when a department announces it needs to buy something – goods or services – and invites companies to submit bids to provide them. The ‘live’ status appears after a bidder logs in and shows interest, as seen on the dashboard. This happens for open, restricted, or short tenders.\n\n📋 Process\n1.  A department announces a need through a Tender (NIT).\n2.  Bidders log in to view the tender details.\n3.  The tender status changes to ‘live’ when a bidder expresses interest.\n4.  Interested bidders can use the “view RFQ” button to filter tenders and keep them as ‘live tenders’.\n\n📘 Source: CHiPS_Bid_Submission_Manual_English.pdf",
+    "detected_lang": "hinglish",
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "latency_s": 120.2
+  }
+]

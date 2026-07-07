@@ -1,0 +1,8 @@
+# Voice server (06_voice/voice_server.py) — run with the Python 3.11 interpreter.
+# STT stays fully offline; TTS uses edge-tts (online neural voices) with a
+# pyttsx3/SAPI offline fallback.
+flask
+flask-cors
+faster-whisper        # /stt  — offline speech-to-text (needs ffmpeg on PATH)
+pyttsx3               # /tts  — offline fallback (English SAPI voices only)
+edge-tts>=7.0         # /tts  — neural Hindi + Indian-English voices (needs internet)
