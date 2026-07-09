@@ -50,6 +50,15 @@
   #header h1 { font-size: 15px; margin: 0; font-weight: 700; line-height: 1.2; }
   #header .sub { font-size: 11px; opacity: .9; font-weight: 400; }
 
+  /* Toggle Switch */
+  .switch { position: relative; display: inline-block; width: 32px; height: 18px; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.4); transition: .2s; border-radius: 18px; }
+  .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 2px; bottom: 2px; background-color: white; transition: .2s; border-radius: 50%; }
+  input:checked + .slider { background-color: #10b981; }
+  input:checked + .slider:before { transform: translateX(14px); }
+  .auto-voice-toggle { display: flex; flex-direction: column; align-items: center; margin-left: auto; cursor: pointer; }
+
   /* Chat area */
   #chat {
     flex: 1; overflow-y: auto; padding: 14px; background: #f6f8fb;
@@ -117,6 +126,13 @@
     <div>
       <h1>eProcurement Assistant — powered by AI</h1>
       <div class="sub">(Hindi &amp; English) · Offline Voice</div>
+    </div>
+    <div class="auto-voice-toggle" title="Toggle the Auto-Voice switch in the top header to automatically hear answers spoken aloud while you type">
+      <label class="switch" title="Toggle the Auto-Voice switch in the top header to automatically hear answers spoken aloud while you type">
+        <input type="checkbox" id="autoVoiceToggle">
+        <span class="slider round"></span>
+      </label>
+      <div style="font-size: 10px; margin-top: 2px; opacity: 0.9;">Auto-Voice</div>
     </div>
   </div>
 
@@ -193,7 +209,10 @@ function sendMessage() {
 
   const reply = getAnswer(q);
   addMessage("bot", reply);
-  speak(reply);              // auto text-to-speech after every reply
+  
+  if (document.getElementById("autoVoiceToggle").checked) {
+    speak(reply);
+  }
 }
 
 function ask(text) { inputEl.value = text; sendMessage(); }

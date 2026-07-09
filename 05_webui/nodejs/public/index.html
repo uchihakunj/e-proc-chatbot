@@ -64,6 +64,14 @@
           </div>
         </div>
         <div class="popup-header-actions">
+          <!-- Auto-Voice Toggle -->
+          <button id="header-tts-btn" class="header-icon-btn" title="Toggle Auto-Voice" style="width: auto; padding: 0 8px; gap: 6px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <div id="tts-toggle" class="toggle-switch on" style="margin-left:2px;"></div>
+          </button>
           <!-- Maximize / Restore -->
           <button id="popup-maximize-btn" class="header-icon-btn" title="Maximize">
             <svg class="icon-maximize" width="15" height="15" viewBox="0 0 24 24" fill="none"
@@ -142,6 +150,7 @@
         <ul class="info-list">
           <li>Be specific — name the rule, document, or step you mean.</li>
           <li>Ask in any language; technical terms (EMD, GFR, NIT) stay in English.</li>
+          <li>Toggle the <strong>Auto-Voice</strong> switch in the top header to automatically hear answers spoken aloud while they type.</li>
           <li>Open “View sources” under an answer to read the original manual.</li>
         </ul>
         <div class="info-sub">For Hinglish queries</div>

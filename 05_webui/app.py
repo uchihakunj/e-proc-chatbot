@@ -549,16 +549,15 @@ def language_directive(lang):
                 "DSC, NIT, GFR, GeM, PAN, CRN, e-Procurement) unchanged.")
     if lang == 'hinglish':
         return ("\n\n=== LANGUAGE LOCK ===\n"
-                "The user's question is in HINGLISH (a mix of English and transliterated local languages written using the standard English A-Z alphabet). "
-                "You MUST write the ENTIRE response in HINGLISH too — even though the source Context "
-                "is in English, translate it to Hinglish. That means sentences written in Roman "
-                "script, NOT plain English and ABSOLUTELY NO Devanagari script. "
-                "CRITICAL: You MUST use ONLY the English alphabet (A-Z, a-z). Do not use any native scripts (no Devanagari, no Bengali). "
-                "Example style: 'E-procurement ka matlab hai internet ke zariye goods, works "
-                "aur services kharidna.' "
-                "Keep technical terms (EMD, CPPP, Tender, Bid, Vendor, DSC, NIT, GFR, GeM, PAN, "
-                "CRN, e-Procurement) in English. Use ONLY the English emoji headings: "
-                "💡 Answer, 📋 Process, 📘 Source:. DO NOT write the answer in plain English.")
+                "You MUST reply in conversational, casual 'Hinglish' written entirely in the English alphabet (Roman script).\n"
+                "CRITICAL RULES FOR HINGLISH:\n"
+                "1. NO Devanagari or Bengali scripts allowed.\n"
+                "2. Do NOT use overly formal literal Hindi words (e.g. do NOT use 'nividaa', use 'tender').\n"
+                "3. Mix English and Hindi naturally. Use English nouns/technical terms and Hindi grammar.\n"
+                "4. Example Good: 'Tender open hone ke baad koi bhi bidder bid price dekh sakta hai.'\n"
+                "5. Example Bad: 'nividaa khulane ke baada koee bhee bidara...'\n"
+                "6. Keep ALL technical terms exactly in English (Tender, Bid, Vendor, DSC, NIT, EMD, e-Procurement).\n"
+                "7. Use ONLY the English emoji headings: 💡 Answer, 📋 Process, 📘 Source.")
     return ("\n\n=== LANGUAGE LOCK ===\n"
             "The user's question is in ENGLISH. You MUST write the ENTIRE response in English. "
             "Use ONLY the English headings: 💡 Answer, 📋 Process, Rule/Provision:, "
@@ -2340,13 +2339,13 @@ def stream_query():
                 _final = ("\n\n>>> महत्वपूर्ण: ऊपर दी गई सामग्री अंग्रेज़ी में है, फिर भी पूरा उत्तर "
                           "केवल हिंदी (Devanagari लिपि) में, निर्धारित प्रारूप (💡 उत्तर / 📋 प्रक्रिया / "
                           "📘 स्रोत) में लिखें। कोई वाक्य अंग्रेज़ी में न लिखें; तकनीकी शब्द (EMD, Tender, "
-                          "Bid, GFR, DSC आदि) ज्यों के त्यों रखें।")
+                          "Bid, GFR, DSC आदि) ज्यों के त्यों रखें (उदा. Bid को 'बोली' या 'Bid' लिखें, 'बिंद' नहीं)।")
             elif _lang == 'hinglish':
                 _final = ("\n\n>>> IMPORTANT: Even though the Context is in English, you MUST "
                           "translate it and reply ENTIRELY in HINGLISH (sentences in Roman script, "
                           "e.g. 'E-procurement ka matlab hai...'). DO NOT write your answer in plain English. "
                           "CRITICAL: You MUST use ONLY the English alphabet (A-Z, a-z). ABSOLUTELY NO Devanagari or Bengali scripts allowed. "
-                          "Keep technical terms (EMD, Tender, Bid, DSC, NIT, GFR, e-Procurement) in English. "
+                          "Keep technical terms (EMD, Tender, Bid, DSC, NIT, GFR, e-Procurement) in English. For 'Bid', use 'Boli' or 'Bid', never 'Bind'. "
                           "Use the English emoji headings (💡 Answer / 📋 Process / 📘 Source).")
             else:
                 _final = ("\n\n>>> IMPORTANT: Reply ENTIRELY in English, using the English "
@@ -2366,13 +2365,15 @@ def stream_query():
             # (self-contained) question so it answers the right subject.
             _llm_question = effective_query if coref_applied else query_text
             
-            _ans_prefix = "\n\nAnswer:"
             if _lang == 'hinglish':
                 _ans_prefix = "\n\nAnswer (in Roman script Hinglish):"
+                ollama_user = f">>> CRITICAL: READ THE ENGLISH CONTEXT, BUT REPLY ENTIRELY IN HINGLISH (ROMAN SCRIPT). DO NOT REPLY IN ENGLISH. <<<\n\nContext:\n{context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
             elif _lang == 'hi':
                 _ans_prefix = "\n\nAnswer (in Devanagari Hindi):"
-
-            ollama_user = f"Context:\n{context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
+                ollama_user = f">>> CRITICAL: READ THE ENGLISH CONTEXT, BUT REPLY ENTIRELY IN HINDI (DEVANAGARI). <<<\n\nContext:\n{context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
+            else:
+                _ans_prefix = "\n\nAnswer:"
+                ollama_user = f"Context:\n{context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
 
             # ── Multi-part questions: TRUE decomposition ─────────────────────
             # gemma3:4b answers only the FIRST clause of a compound question and

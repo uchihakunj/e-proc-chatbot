@@ -991,8 +991,9 @@ function appendMessage(role, text, meta = {}) {
 const VOICE_SERVER = 'http://localhost:5050';
 let voiceRec = null, voiceChunks = [], voiceOn = false, voiceTimer = null;
 let pendingVoiceReply = false;     // true when the current query came from the mic
-let currentAudio = null;
+const currentAudio = new Audio();
 let currentSpeakBtn = null;        // the Listen button whose audio is loading/playing
+let autoSpeakEnabled = localStorage.getItem('autoSpeakEnabled') !== 'false'; // true by default
 
 async function toggleMic() {
   if (state.loading) return;
@@ -1075,10 +1076,58 @@ function setListenBtnState(btn, playing) {
   btn.title = playing ? 'Stop speaking' : 'Listen to this answer';
 }
 
+// A simple queue for streaming playback of sentences as they arrive.
+const ttsQueue = {
+  items: [],
+  playing: false,
+  btn: null,
+  active: false,
+
+  push(text) {
+    if (!text) return;
+    this.items.push(text);
+    this.playNext();
+  },
+
+  async playNext() {
+    if (this.playing || this.items.length === 0 || !this.active) return;
+    this.playing = true;
+    const text = this.items.shift();
+    
+    try {
+      const url = VOICE_SERVER + '/tts?text=' + encodeURIComponent(text.slice(0, 1200));
+      currentAudio.src = url;
+      currentAudio.onended = () => {
+        this.playing = false;
+        if (this.active) {
+          if (this.items.length > 0) {
+            this.playNext();
+          } else if (!state.loading) {
+            // Queue drained and stream is finished
+            if (this.btn) setListenBtnState(this.btn, false);
+            this.active = false;
+            currentSpeakBtn = null;
+          }
+        }
+      };
+      currentAudio.onerror = () => {
+        this.playing = false;
+        stopSpeak();
+      };
+      await currentAudio.play();
+    } catch (err) {
+      this.playing = false;
+      stopSpeak();
+    }
+  }
+};
+
 // Stop any current TTS playback (or in-flight load) and reset its button.
 function stopSpeak() {
-  if (currentAudio) { try { currentAudio.pause(); currentAudio.currentTime = 0; } catch (_) {} }
-  currentAudio = null;
+  ttsQueue.active = false;
+  ttsQueue.items = [];
+  ttsQueue.playing = false;
+  try { currentAudio.pause(); currentAudio.currentTime = 0; } catch (_) {}
   if (currentSpeakBtn) { setListenBtnState(currentSpeakBtn, false); currentSpeakBtn = null; }
 }
 
@@ -1090,20 +1139,19 @@ async function speak(text, btn) {
   stopSpeak();                       // stop any other answer that's currently playing
   currentSpeakBtn = btn || null;
   setListenBtnState(btn, true);
+  
+  ttsQueue.active = false; // disable streaming queue if active
+  
   const myBtn = btn;
   try {
     // Stream from the voice server (GET) so the <audio> element downloads and
     // plays PROGRESSIVELY — sound starts on the first chunk instead of after the
     // whole clip is synthesised.
     const url = VOICE_SERVER + '/tts?text=' + encodeURIComponent(t.slice(0, 1200));
-    currentAudio = new Audio(url);
+    currentAudio.src = url;
     currentAudio.onended = () => {
-      if (myBtn) setListenBtnState(myBtn, false);
-      if (currentSpeakBtn === myBtn) currentSpeakBtn = null;
-      currentAudio = null;
-    };
-    currentAudio.onerror = () => {
-      if (currentSpeakBtn === myBtn) { stopSpeak(); toast('Voice server not reachable for speech', 'error'); }
+      if (currentSpeakBtn) setListenBtnState(currentSpeakBtn, false);
+      currentSpeakBtn = null;
     };
     await currentAudio.play();
   } catch (err) {
@@ -1282,7 +1330,12 @@ function stripSourceTags(text) {
 async function sendQuery() {
   const text = ui.queryInput.value.trim();
   if (!text || state.loading) return;
-  const speakReply = pendingVoiceReply;   // capture & consume the voice flag
+  stopSpeak();
+  
+  // Unlock persistent audio object for Safari/Chrome Autoplay policies during user click
+  currentAudio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+  currentAudio.play().catch(()=>{});
+  const speakReply = autoSpeakEnabled || pendingVoiceReply;   // auto-speak if enabled or if mic used
   pendingVoiceReply = false;
 
   // ── Instant FAQ fast-path ─────────────────────────────────────────────────
@@ -1320,6 +1373,14 @@ async function sendQuery() {
   let contextResults = [];
   let followupItems  = [];
   const t0          = Date.now();
+  
+  // Streaming TTS state
+  let ttsBuffer = '';
+  if (speakReply) {
+    ttsQueue.active = true;
+    ttsQueue.items = [];
+    ttsQueue.playing = false;
+  }
 
   // Perceived-speed: rotate reassuring hints during the long LLM wait so the
   // UI never looks frozen. Cleared as soon as the first answer token arrives.
@@ -1412,6 +1473,18 @@ async function sendQuery() {
             ui.chatMessages.appendChild(answerMsg);
           }
           streamText += evt.content;
+          
+          if (speakReply && ttsQueue.active) {
+            ttsBuffer += evt.content;
+            let match;
+            while ((match = ttsBuffer.match(/^(.*?[.?!।\n])(.*)$/s))) {
+              const sentence = match[1];
+              ttsBuffer = match[2]; // remainder
+              const clean = speechText(sentence);
+              if (clean) ttsQueue.push(clean);
+            }
+          }
+          
           let _shown = stripSourceTags(streamText);
           if (answerLang === 'hinglish') _shown = toRomanHinglish(_shown);
           answerBody.innerHTML = renderMarkdown(_shown);
@@ -1445,7 +1518,28 @@ async function sendQuery() {
               answerBody.appendChild(btn);
             }
             const listenBtn = addListenBtn(answerBody, streamText);     // 🔊 Listen
-            if (speakReply && listenBtn) speak(streamText, listenBtn);  // voice question -> speak answer (stoppable)
+            
+            if (speakReply && listenBtn) {
+              if (ttsQueue.active) {
+                // flush remaining buffer
+                const clean = speechText(ttsBuffer);
+                if (clean) ttsQueue.push(clean);
+                
+                ttsQueue.btn = listenBtn;
+                setListenBtnState(listenBtn, true);
+                currentSpeakBtn = listenBtn;
+                
+                // If audio finished early
+                if (!ttsQueue.playing && ttsQueue.items.length === 0) {
+                  setListenBtnState(listenBtn, false);
+                  currentSpeakBtn = null;
+                  ttsQueue.active = false;
+                }
+              } else {
+                // Was stopped midway by user, or disabled
+              }
+            }
+
             // Feedback (👍/👎) + Export PDF action row
             if (!isRefusal(streamText)) {
               addAnswerActions(answerBody, text, streamText,
@@ -1746,6 +1840,17 @@ function boot() {
   ui.widgetToggle.addEventListener('click', () => {
     if (state.widgetOpen) closeWidget(); else openWidget();
   });
+
+  const ttsToggleBtn = document.getElementById('header-tts-btn');
+  const ttsToggle = document.getElementById('tts-toggle');
+  if (ttsToggle) ttsToggle.classList.toggle('on', autoSpeakEnabled);
+  if (ttsToggleBtn) {
+    ttsToggleBtn.addEventListener('click', () => {
+      autoSpeakEnabled = !autoSpeakEnabled;
+      localStorage.setItem('autoSpeakEnabled', autoSpeakEnabled);
+      if (ttsToggle) ttsToggle.classList.toggle('on', autoSpeakEnabled);
+    });
+  }
 
   // Settings gear toggle (gear removed from UI; guard in case it is absent)
   if (ui.settingsBtn) {
