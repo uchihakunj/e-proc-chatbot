@@ -46,7 +46,18 @@ from nlp_features import (
     ConversationMemory, resolve_coreference, inject_deadline_urgency,
     correct_typos, needs_clarification, confidence_from_score, compute_numeric,
     suggest_followups, AnswerCache, detect_flow_trigger,
-    is_language_switch_only,
+    is_language_switch_only, classify_actor, detect_commodity,
+)
+from actor_policy import actor_generation_directive
+from actor_boundary import devanagari_to_roman
+from context_selection import pack_context
+from sarvam_streaming import configured_reasoning_effort, parse_sarvam_sse_line
+from streaming_utils import is_explicitly_out_of_scope
+from fine_intent_policy import (
+    build_fine_intent_fallback, classify_fine_intent,
+    render_fine_intent_fallback, generation_directive, requires_deterministic_policy_answer,
+    route_for_intent, route_for_query, canonical_source_contract_query,
+    canonical_source_contract_sources,
 )
 
 # Dynamically find RAG pipeline module - works for both local and Docker
@@ -252,6 +263,14 @@ TERMINOLOGY — treat these as the SAME concept (never split synonyms apart):
 - Vendor = Supplier = Contractor (only when used interchangeably in the source)
 - Department Admin = Tender Owner
 - e-Procurement Portal = CPPP Portal
+VENDOR REGISTRATION PORTAL NAMING:
+- When explaining Vendor/Supplier Registration, call the site only the
+  "e-Procurement portal" (or the language-equivalent generic portal name).
+- Never call it "CHiPS portal" or "CHiPS e-Procurement portal" in registration
+  instructions, even if the supporting manual or source citation includes CHiPS.
+- This naming rule applies to the answer prose and every registration step. It
+  does not change friendly document titles or factual references to CHiPS as an
+  organisation or helpdesk.
 DISTINCT — these are DIFFERENT things; NEVER say one is "also known as" the other:
 - DSC (Digital Signature Certificate) is a digital signature / identity certificate.
   It is NOT EMD, NOT Bid Security, NOT a payment. Never equate DSC with EMD.
@@ -287,63 +306,18 @@ DOCUMENT NAMES — NEVER show raw filenames. Always use these friendly names:
 - Vigilance Manual 2021 (Hindi).pdf → Vigilance Manual 2021 (Hindi)
 For any other file, create a clean readable title (no extension, no hash digits).
 
-RESPONSE STRUCTURE — output these sections IN THIS ORDER. Use the heading set
-that matches the response language. Omit any section whose condition is not met.
+RESPONSE STRUCTURE:
+Write a direct, conversational, and natural response as a helpful AI assistant. Do NOT use rigid headers like "💡 Answer", "📋 Process", "Rule/Provision:", or "Explanation:".
+Instead, structure the answer fluidly:
+1. Start with a direct, friendly answer to the user's question.
+2. If there are steps or a process, list them naturally using bullet points or numbers.
+3. If quoting a rule or provision, integrate it naturally into your explanation.
+4. If a comparison or list is requested, use a Markdown table seamlessly within your text.
+5. AT THE VERY END, you must always provide the source citation on a new line formatted exactly as:
+   "📘 Source: [Friendly Document Name]"
+   (or "📘 स्रोत: [Friendly Document Name]" if responding in Hindi).
 
-ENGLISH headings:        HINDI headings:
-💡 Answer                💡 उत्तर
-📋 Process               📋 प्रक्रिया
-Rule/Provision:          नियम/प्रावधान:
-Explanation:             व्याख्या:
-📘 Source:               📘 स्रोत:
-(For Hinglish, use the English emoji headings but write content in Hinglish.)
-
-Section meaning:
-- Answer (💡): a SHORT, direct answer (1–3 sentences). Do NOT put the numbered
-  steps here.
-- Process (📋): the numbered step-by-step process — ONLY when the answer is a
-  procedure. Put the steps here, NOT in the Answer. Omit this section otherwise.
-- Rule/Provision: ONLY if the Context contains a real rule/clause/chapter/section
-  — quote its exact text. If none exists, OMIT this section entirely. Never invent.
-- Explanation: ONLY if it adds NEW clarification. Never repeat the Answer. Omit
-  if nothing to add.
-- Source (📘): a single line with friendly document name(s).
-
-MANDATORY TABLES — ALWAYS use a table for comparisons or structured lists.
-
-WHERE THE TABLE GOES (CRITICAL — follow exactly):
-- The table ALWAYS goes INSIDE the "💡 Answer" section: write the "💡 Answer"
-  heading, then ONE short intro sentence, then the table immediately below it.
-- NEVER drop the "💡 Answer" heading. NEVER put the table at the bottom, and
-  NEVER put it under Process or Explanation.
-- For a pure list/comparison, output ONLY: "💡 Answer" + intro + table +
-  "📘 Source". Omit Process, Rule/Provision and Explanation entirely.
-
-CELL RULE: Every cell must be FILLED. No empty cells — use "—" if unknown.
-
-TRIGGERS (respond with a table, no exceptions):
-- "List the..." → table with one row per item
-- "What is the difference between X and Y?" → 2-column table, X vs Y
-- "Compare..." / "X vs Y" → table format
-- Any question asking for multiple items with shared attributes → table
-
-EXAMPLE — FOLLOW THIS LAYOUT EXACTLY (heading first, then intro, then table):
-💡 Answer
-Here are the vendor registration documents and their fees:
-
-| Document Type | Registration Fee | Required? |
-|---|---|---|
-| PAN Card | Included in ₹500 | Yes |
-| VAT Registration | Included in ₹500 | Yes |
-| Bank Details | Included in ₹500 | Yes |
-| Tender fee (per tender) | ₹500–₹5,000 | Yes |
-
-📘 Source: Vendor Registration Manual (CHiPS)
-
-RULES (NON-NEGOTIABLE):
-- ALWAYS keep the "💡 Answer" heading above the intro sentence and table.
-- EVERY cell filled. No blanks. Use "—" if unknown.
-- 2–4 columns max (readable). Only ONE table per answer.
+CELL RULE: If using a table, every cell must be FILLED. No empty cells — use "—" if unknown.
 
 HARD OUTPUT RULES:
 - Do NOT repeat the same content across Answer, Process and Explanation.
@@ -355,30 +329,10 @@ HARD OUTPUT RULES:
   path, or "[Source N: ...]" marker.
 
 EXAMPLE — English question ("What is the EMD refund process?"):
-💡 Answer
-For unsuccessful bidders, the Department Admin initiates the EMD refund process. After approval, the e-Procurement system instructs the bank and the amount is credited within 1–2 days.
-
-📋 Process
-1. Department Admin initiates the refund.
-2. Department Approver verifies and approves.
-3. The system sends instructions to the bank.
-4. The amount is credited to the bidder's account.
-5. Refund status can be checked on the portal.
-
-📘 Source: EMD Refund Guidelines (CHiPS)
+For unsuccessful bidders, the Department Admin initiates the EMD refund process. After approval, the e-Procurement system instructs the bank and the amount is credited within 1–2 days. The process typically goes through the Department Admin, then the Approver, and finally the bank.
 
 EXAMPLE — Hindi question ("वेंडर पंजीकरण कैसे करें?"):
-💡 उत्तर
-CHiPS पोर्टल पर Vendor Registration एक बार की जाने वाली ऑनलाइन प्रक्रिया है, जिसके लिए वैध DSC आवश्यक होता है।
-
-📋 प्रक्रिया
-1. पोर्टल पर "New Supplier Registration" विकल्प चुनें।
-2. PAN दर्ज करें।
-3. Vendor Class A–D होने पर CRN Certificate की scanned copy अपलोड करें।
-4. Preferred Login code बनाएँ।
-5. सभी business coordinates भरकर फॉर्म सबमिट करें।
-
-📘 स्रोत: Vendor Registration Manual (CHiPS)
+e-Procurement पोर्टल पर Vendor Registration एक बार की जाने वाली ऑनलाइन प्रक्रिया है, जिसके लिए वैध DSC आवश्यक होता है। इसमें आपको "New Supplier Registration" चुनना होगा, PAN दर्ज करना होगा और आवश्यक दस्तावेज़ अपलोड करके सबमिट करना होगा।
 
 PERSONALIZATION — if the user mentions a specific person by name (e.g. "name ramesh",
 "my name is priya", "for suresh", "main ramesh hoon"), use that name naturally
@@ -396,6 +350,148 @@ A: The answer to this question was not found in the available documents.
 
 # Backwards-compatible alias used by the non-streaming /api/query path
 SYSTEM_PROMPT = PROCUREMENT_SYSTEM_PROMPT
+
+
+def normalize_vendor_registration_portal_name(text, query):
+    """Keep vendor-registration instructions neutral about the portal brand."""
+    import re
+
+    question = (query or "").casefold()
+    is_registration = any(term in question for term in (
+        "registration", "register", "पंजीकरण", "पंजीयन", "रजिस्ट्रेशन",
+    ))
+    is_vendor = any(term in question for term in (
+        "vendor", "supplier", "विक्रेता", "आपूर्तिकर्ता", "वेंडर", "सप्लायर",
+    ))
+    if not text or not (is_registration and is_vendor):
+        return text
+
+    patterns = (
+        r"\b(?:chhattisgarh\s+)?chips\s+e[-\s]?procurement\s+portal\b",
+        r"\bchips\s+portal\b",
+        r"\bchhattisgarh\s+e[-\s]?procurement\s+portal\b",
+    )
+    for pattern in patterns:
+        text = re.sub(pattern, "e-Procurement portal", text, flags=re.IGNORECASE)
+    return text
+
+
+def direct_department_laptop_planning_answer(query):
+    """Return the source-grounded first-step workflow for department laptop buys."""
+    q = (query or '').casefold()
+    has_department = any(term in q for term in (
+        'department', 'office', 'government buyer', 'government department',
+        'विभाग', 'कार्यालय',
+    ))
+    has_laptop = any(term in q for term in ('laptop', 'laptops', 'computer', 'computers'))
+    asks_first = any(term in q for term in (
+        'what should we do first', 'what should we do', 'what first',
+        'first step', 'where do we start', 'how should we start',
+    ))
+    if not (has_department and has_laptop and asks_first):
+        return None
+    return (
+        "💡 Answer\n"
+        "First, the department should consolidate and record the requirement for the laptops, "
+        "including quantity, purpose, users, delivery timeline, estimated value, and budget head. "
+        "After that, it should prepare generic and competition-friendly technical specifications, "
+        "confirm budget availability, obtain the required administrative and financial approvals, "
+        "and then check whether suitable laptops are available on GeM or another approved procurement channel. "
+        "Only after these steps should the department choose the permitted procurement method and create the GeM Bid or Tender.\n\n"
+        "📋 Process\n"
+        "1. Record the full requirement, including users, purpose, and delivery timeline.\n"
+        "2. Prepare generic, measurable technical specifications.\n"
+        "3. Estimate the total cost and confirm budget availability.\n"
+        "4. Obtain the applicable administrative approval and financial sanction.\n"
+        "5. Create the purchase indent or procurement request.\n"
+        "6. Check GeM and other approved channels for availability.\n"
+        "7. Apply the Store Purchase Rules and delegated powers to choose the lawful procurement method.\n"
+        "8. Then proceed with the GeM Bid or Tender process.\n\n"
+        "📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024."
+    )
+
+
+def direct_procurement_methods_overview_answer(query):
+    """Return the approved overview of Chhattisgarh procurement routes."""
+    q = (query or '').casefold()
+    mentions_chhattisgarh = any(term in q for term in (
+        'chhattisgarh', 'chhatisgarh', 'chattisgarh', 'chhatis', 'cg',
+    ))
+    asks_overview = any(phrase in q for phrase in (
+        'different ways', 'different methods', 'types of procurement',
+        'procurement methods', 'procurement routes', 'ways of government procurement',
+        'ways of govt procurement', 'how can government procurement',
+    ))
+    if not (mentions_chhattisgarh and asks_overview):
+        return None
+    return (
+        "In Chhattisgarh, government procurement can broadly happen through:\n\n"
+        "- **GeM procurement** for goods or services available on GeM, using methods such as "
+        "Direct Purchase, L1 purchase, bidding, or reverse auction as applicable.\n"
+        "- **Tender procurement**, including **Open Tender, Limited Tender, and Single Tender** "
+        "where the applicable rules permit.\n"
+        "- **Permitted direct purchase** in cases allowed by the applicable rules.\n"
+        "- **Inter-departmental procurement**, where one government department or undertaking "
+        "purchases from another, if permitted.\n"
+        "- **Emergency or special procurement** for exceptional situations such as urgent "
+        "disaster or law-and-order needs.\n"
+        "- **Foreign or global purchase** where the applicable rules and approvals allow it.\n\n"
+        "GeM and the state e-Procurement portal are procurement channels, while Open, "
+        "Limited, and Single Tender are procurement methods.\n\n"
+        "📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules; "
+        "Manual for Procurement of Goods 2024."
+    )
+
+
+def direct_two_bid_cancellation_answer(query):
+    """Answer the common two-bid tender-cancellation decision without RAG drift."""
+    q = (query or '').casefold()
+    mentions_bid = any(term in q for term in ('bid', 'bids', 'boli', 'boliyan', 'बोली'))
+    mentions_two = any(term in q for term in ('2 ', '2?', 'two', 'do bid', 'do bids', 'दो'))
+    mentions_cancel = any(term in q for term in ('cancel', 'cancellation', 'radd', 'रद्द'))
+    if not (mentions_bid and mentions_two and mentions_cancel):
+        return None
+    return (
+        "Nahi. Sirf 2 bids aane se Tender automatically cancel nahi hota. Pehle dono bids ki "
+        "eligibility aur responsiveness, published Tender conditions, price reasonableness, aur "
+        "competition par asar dalne wale factors check karein.\n\n"
+        "Tender tabhi cancel ya re-tender karein jab documented procurement reason ho, jaise dono "
+        "bids non-responsive hon, rates unreasonable hon, specifications/conditions ne competition "
+        "ko materially restrict kiya ho, ya requirement mein material change ho. Is decision ke liye "
+        "reasoned note aur competent authority ki applicable approval record mein rakhein.\n\n"
+        "Sirf zyada bids paane ke liye Tender cancel na karein. Agar re-tender zaroori ho, to pehle "
+        "underlying issue ko correct karke revised Tender issue karein.\n\n"
+        "📘 Source: General Financial Rules; CVC procurement guidelines; Manual for Procurement of Goods 2024."
+    )
+
+
+def direct_previous_tender_vendor_answer(query):
+    """Keep repeat-purchase questions from treating a past tender as fresh authority."""
+    q = (query or '').casefold()
+    mentions_tender = 'tender' in q or 'निविदा' in q
+    mentions_previous = any(term in q for term in (
+        'pehle', 'pichle', 'previous', 'earlier', 'last tender', 'same item', 'usi item',
+    ))
+    mentions_vendor = any(term in q for term in (
+        'vendor', 'supplier', 'same vendor', 'usi vendor', 'us vendor', 'उस vendor',
+    ))
+    mentions_direct = any(term in q for term in (
+        'direct', 'directly', 'seedhe', 'सीधे', 'सीधा', 'direct purchase',
+    ))
+    if not (mentions_tender and mentions_previous and mentions_vendor and mentions_direct):
+        return None
+    return (
+        "Nahi, sirf isliye ki same item ke liye pehle Tender hua tha, usi vendor se nayi "
+        "requirement ke liye directly purchase nahi ki ja sakti. Purana Tender fresh procurement "
+        "ke liye standing approval nahi hota.\n\n"
+        "Direct/repeat purchase tabhi consider karein jab purana contract ya rate arrangement abhi valid ho, "
+        "usmein lawful repeat-order/extension provision ho, aur applicable rules, delegated powers aur "
+        "competent authority ki approval support kare. Price reasonableness aur available GeM/approved "
+        "procurement route bhi record par check karein.\n\n"
+        "Agar aisi valid provision nahi hai, to nayi requirement ke liye applicable GeM method ya fresh "
+        "Tender route follow karein; sirf previous vendor ko preference na dein.\n\n"
+        "📘 Source: General Financial Rules; Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024."
+    )
 
 
 def _sanitize_rule_numbers(text, context_text):
@@ -462,6 +558,71 @@ def _decompose_question(q):
             if s:
                 parts.append(s if s.endswith('?') else s + '?')
     return parts if parts else [q]
+
+
+def estimate_prompt_hardness(query, intent=None, part_count=1, source_count=0, top_score=0):
+    """Classify a user prompt as easy/medium/hard for model routing.
+
+    The heuristic is intentionally deterministic and cheap: routing happens in
+    the hot chat path, so avoid a separate model call just to choose a model.
+    """
+    import re
+    q = (query or '').strip()
+    t = q.lower()
+    reasons = []
+    score = 0
+
+    def add(points, reason):
+        nonlocal score
+        score += points
+        reasons.append(reason)
+
+    words = re.findall(r'\w+', t)
+    if part_count >= 2:
+        add(2, 'multi-part question')
+    if len(words) >= 35:
+        add(1, 'long prompt')
+    if source_count >= 4:
+        add(1, 'many retrieved sources')
+    if top_score and top_score < 0.55:
+        add(1, 'low retrieval confidence')
+
+    if re.search(r'\b(rule|section|clause|order|gfr|act|penalty|punishment|legal|compliance|allowed|permitted)\b', t):
+        add(2, 'rule/legal lookup')
+    if re.search(r'\b(compare|difference|versus|vs\.?|better|choose|which method|gem or tender|direct purchase|single tender|limited tender)\b', t):
+        add(2, 'comparison or method selection')
+    if re.search(r'\b(calculate|compute|percentage|percent|%|amount|cost|fee|refund|emd|performance security|security deposit)\b', t):
+        add(1, 'numeric or money detail')
+    if re.search(r'\b(step[- ]?by[- ]?step|process|procedure|workflow|documents required|checklist|prepare before|how (?:do|to|can|should))\b', t):
+        add(1, 'workflow/process answer')
+    if re.search(r'\b(exempt|exemption|eligible|eligibility|condition|criteria|validity|deadline|timeline|last date)\b', t):
+        add(1, 'conditions or timelines')
+
+    if intent and any(key in intent for key in (
+        'comparison', 'eligibility', 'exemption', 'payment_failure',
+        'refund', 'method', 'creation', 'submission', 'workflow'
+    )):
+        add(1, f'intent:{intent}')
+
+    if score >= 3:
+        return 'hard', reasons
+    if score >= 1:
+        return 'medium', reasons
+    return 'easy', ['short factual prompt']
+
+
+def choose_ollama_model_for_prompt(default_model, lang, hardness):
+    """Choose the configured Ollama model for language + prompt hardness."""
+    lang_model = default_model
+    if lang == 'en' and os.getenv('OLLAMA_MODEL_EN'):
+        lang_model = os.getenv('OLLAMA_MODEL_EN')
+
+    if hardness == 'hard':
+        return os.getenv('OLLAMA_MODEL_HARD') or default_model
+    if hardness == 'medium':
+        return os.getenv('OLLAMA_MODEL_MEDIUM') or lang_model
+    return os.getenv('OLLAMA_MODEL_EASY') or lang_model
+
 
 # Per-session conversation memory (multi-turn slots + coreference topic).
 # In-memory; sessions expire after 1h of inactivity. Keyed by session_id sent
@@ -544,8 +705,7 @@ def language_directive(lang):
         return ("\n\n=== LANGUAGE LOCK ===\n"
                 "The user's question is in HINDI. You MUST write the ENTIRE response in "
                 "Hindi (Devanagari) — even though the source Context is in English, translate "
-                "it. Use ONLY the Hindi headings: 💡 उत्तर, 📋 प्रक्रिया, नियम/प्रावधान:, "
-                "व्याख्या:, 📘 स्रोत:. Keep technical terms (EMD, CPPP, Tender, Bid, Vendor, "
+                "it. Keep technical terms (EMD, CPPP, Tender, Bid, Vendor, "
                 "DSC, NIT, GFR, GeM, PAN, CRN, e-Procurement) unchanged.")
     if lang == 'hinglish':
         return ("\n\n=== LANGUAGE LOCK ===\n"
@@ -556,12 +716,16 @@ def language_directive(lang):
                 "3. Mix English and Hindi naturally. Use English nouns/technical terms and Hindi grammar.\n"
                 "4. Example Good: 'Tender open hone ke baad koi bhi bidder bid price dekh sakta hai.'\n"
                 "5. Example Bad: 'nividaa khulane ke baada koee bhee bidara...'\n"
-                "6. Keep ALL technical terms exactly in English (Tender, Bid, Vendor, DSC, NIT, EMD, e-Procurement).\n"
-                "7. Use ONLY the English emoji headings: 💡 Answer, 📋 Process, 📘 Source.")
+                "6. Keep ALL technical terms exactly in English (Tender, Bid, Vendor, DSC, NIT, EMD, e-Procurement).")
     return ("\n\n=== LANGUAGE LOCK ===\n"
-            "The user's question is in ENGLISH. You MUST write the ENTIRE response in English. "
-            "Use ONLY the English headings: 💡 Answer, 📋 Process, Rule/Provision:, "
-            "Explanation:, 📘 Source:.")
+            "The user's question is in ENGLISH. You MUST write the ENTIRE response in English.")
+
+
+def enforce_response_language(text, language):
+    """Keep Roman-script Hinglish responses free of model-generated Devanagari."""
+    if language == 'hinglish':
+        return devanagari_to_roman(text or '')
+    return text or ''
 
 
 # ── Procurement terminology dictionary (synonyms / abbreviations) ──────────
@@ -678,6 +842,19 @@ def detect_greeting(query):
         return None
     q = query.lower().strip()
     import re
+    # Acknowledge only complete social messages.  Do not treat the opening word
+    # of a real question (for example, "ok, what is EMD?") as a greeting.
+    if q.rstrip('?!.,') in {
+            'ok', 'okay', 'ok done', 'okay done', 'done', 'got it',
+            'understood', 'haan', 'haan ji', 'theek', 'theek hai', 'thik hai',
+            'samajh gaya', 'samajh gayi'}:
+        return 'hinglish'
+    if q.rstrip('?!.,') in {'\u0920\u0940\u0915 \u0939\u0948', '\u0939\u094b \u0917\u092f\u093e', '\u0938\u092e\u091d \u0917\u092f\u093e', '\u0938\u092e\u091d \u0917\u0908'}:
+        return 'hi'
+    if q.rstrip('?!.,') in {'good morning', 'good afternoon', 'good evening', 'thank you'}:
+        return 'en'
+    if len(q.split()) > 1:
+        return None
     # Only greetings: single word or 2-3 word phrases, must start/end with greeting words
     q_words = q.split()
     if not q_words:
@@ -818,7 +995,7 @@ _PROFANITY_PATTERNS = [
     r'\bwhore\b', r'\bdick(?:head)?\b', r'\bpussy\b', r'\bretard', r'\bnazi\b',
     # common Hindi/Hinglish abuses
     r'bhosdi', r'b?madarchod', r'be?hen?chod', r'chut(?:iya|iye)', r'gaand?u',
-    r'\blund\b', r'\brandi\b', r'\bchod\b', r'\bgandu\b', r'\bharami',
+    r'\blund\b', r'\brandi\b', r'\bchod\b', r'\bgandu\b', r'\bharami', r'\bsaale\b',
 ]
 _PROFANITY_REPLIES = {
     'hi':       'कृपया e-Procurement से संबंधित उचित प्रश्न पूछें।',
@@ -1454,7 +1631,7 @@ def lexical_portal_fact_lookup(query, cap=900):
         hits.insert(0, {'rank': 0, 'score': 0.96, 'parent_id': '',
                         'point': _LexPoint(_VENDOR_DOC, msg), 'source': _VENDOR_DOC, 'text': msg})
     if want_dscreg:
-        msg = ("Registering your DSC during vendor registration on the CHiPS portal: "
+        msg = ("Registering your DSC during vendor registration on the e-Procurement portal: "
                "(1) first procure a DSC — Class II or Class III, with BOTH Signing & "
                "Encryption certificates — from a licensed CA; (2) fill the registration "
                "details and click Save & Next; (3) at the 'Selecting DSC' step, select "
@@ -1774,6 +1951,20 @@ def query():
         reply = _PROFANITY_REPLIES.get(detect_query_language(query_text), _PROFANITY_REPLIES['en'])
         return jsonify({
             'success': True, 'query': query_text, 'answer': reply,
+            'results': [], 'result_count': 0,
+        }), 200
+
+    greeting_lang = detect_greeting(query_text)
+    if greeting_lang:
+        return jsonify({
+            'success': True, 'query': query_text, 'answer': greeting_response(greeting_lang),
+            'results': [], 'result_count': 0,
+        }), 200
+
+    if is_explicitly_out_of_scope(query_text):
+        refusal = REFUSAL_LINES.get(detect_query_language(query_text), REFUSAL_LINES['en'])
+        return jsonify({
+            'success': True, 'query': query_text, 'answer': refusal,
             'results': [], 'result_count': 0,
         }), 200
 
@@ -2103,6 +2294,15 @@ def stream_query():
     data = request.get_json()
     query_text = data.get('query', '').strip()
     num_context = data.get('num_results', num_results)
+    # Evaluation clients can opt out of shortcuts to measure retrieval quality.
+    # Normal chat keeps the shortcuts for the best interactive latency.
+    force_retrieval = str(data.get('force_retrieval', '')).strip().casefold() in (
+        '1', 'true', 'yes', 'on'
+    )
+    # Diagnostic/evaluation requests must observe the current actor, intent,
+    # retrieval and source contracts. Serving an answer-cache entry here can
+    # report stale sources after a routing repair or backend restart.
+    evaluation_diagnostics = bool(data.get('diagnostics'))
     # Conversation id for multi-turn memory (NER slots + coreference topic).
     # Falls back to a single shared bucket if the frontend doesn't send one.
     session_id = (data.get('session_id') or 'anon').strip() or 'anon'
@@ -2115,20 +2315,44 @@ def stream_query():
     def generate():
         import time
         t0 = time.time()
+
+        def bypass_context_event(reason, sources=None):
+            """Describe a non-retrieval answer path without fabricating search hits."""
+            return f"data: {json.dumps({'type': 'context', 'results': [], 'retrieval_skipped': True, 'bypass_reason': reason, 'declared_sources': sources or []})}\n\n"
+
+        def bypass_diagnostics(reason, provider='direct_policy'):
+            return {
+                'provider': provider,
+                'retrieval_skipped': True,
+                'bypass_reason': reason,
+                'force_retrieval': force_retrieval,
+            }
+
         try:
             # Profanity / abuse filter — refuse outright, do not engage or cite sources.
             if contains_profanity(query_text):
                 reply = _PROFANITY_REPLIES.get(detect_query_language(query_text), _PROFANITY_REPLIES['en'])
+                yield bypass_context_event('profanity_refusal')
                 yield f"data: {json.dumps({'type':'token','content':reply})}\n\n"
-                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[]})}\n\n"
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[],'diagnostics':bypass_diagnostics('profanity_refusal', 'safety')})}\n\n"
+                return
+
+            # Refuse obvious general-topic questions locally. This prevents the
+            # retriever from returning generic manual chunks for unrelated text.
+            if is_explicitly_out_of_scope(query_text):
+                refusal = REFUSAL_LINES.get(detect_query_language(query_text), REFUSAL_LINES['en'])
+                yield bypass_context_event('local_out_of_scope_refusal')
+                yield f"data: {json.dumps({'type':'token','content':refusal})}\n\n"
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[],'diagnostics':bypass_diagnostics('local_out_of_scope_refusal', 'scope_gate')})}\n\n"
                 return
 
             # Greeting handler — friendly responses for social openers (hi, hello, thanks, etc.)
             greeting_lang = detect_greeting(query_text)
             if greeting_lang:
                 reply = greeting_response(greeting_lang)
+                yield bypass_context_event('greeting')
                 yield f"data: {json.dumps({'type':'token','content':reply})}\n\n"
-                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[]})}\n\n"
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[],'diagnostics':bypass_diagnostics('greeting', 'conversation')})}\n\n"
                 return
 
             # ── Guided task-flow (wizard) ────────────────────────────────────
@@ -2138,12 +2362,14 @@ def stream_query():
                 if query_text.strip().lower() in (
                         'cancel', 'stop', 'exit', 'quit', 'cancel karo', 'rehne do'):
                     CONV_MEMORY.cancel_flow(session_id)
+                    yield bypass_context_event('guided_flow_cancel')
                     msg = "No problem — I've cancelled the guided registration. Ask me anything else."
                     yield f"data: {json.dumps({'type':'token','content':msg})}\n\n"
                     yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[]})}\n\n"
                     return
                 step = CONV_MEMORY.advance_flow(session_id, query_text)
                 out = step['summary'] if step['done'] else step['prompt']
+                yield bypass_context_event('guided_flow_step')
                 yield f"data: {json.dumps({'type':'token','content':out})}\n\n"
                 yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[]})}\n\n"
                 return
@@ -2153,6 +2379,7 @@ def stream_query():
             if _flow:
                 first_prompt = CONV_MEMORY.start_flow(session_id, _flow)
                 if first_prompt:
+                    yield bypass_context_event('guided_flow_start')
                     yield f"data: {json.dumps({'type':'token','content':first_prompt})}\n\n"
                     yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[]})}\n\n"
                     return
@@ -2184,45 +2411,225 @@ def stream_query():
                           f"-> re-answering {effective_query!r}")
             # 4) Classify intent on the resolved query (formal taxonomy).
             intent, intent_conf = classify_intent(effective_query)
+            # Actor and fine intent are production routing inputs, not merely
+            # benchmark metadata.  Keep them in this request state so normal
+            # generation, cached answers, and provider fallbacks use the same
+            # workflow boundary.
+            actor, actor_confidence = classify_actor(effective_query)
+            commodity = detect_commodity(effective_query)
+            fine_intent, fine_intent_confidence = classify_fine_intent(
+                effective_query, actor, intent, commodity
+            )
             topic = INTENT_TOPIC_PHRASE.get(intent, sess.last_topic)
             _ent_summary = entities_summary(entities)
-            print(f"[NLP] session={session_id} intent={intent}({intent_conf}) "
+            print(f"[NLP] session={session_id} actor={actor}({actor_confidence}) "
+                  f"intent={intent}({intent_conf}) fine_intent={fine_intent}({fine_intent_confidence}) "
                   f"coref={'yes' if coref_applied else 'no'} "
                   f"entities=[{_ent_summary}]")
             if coref_applied:
                 print(f"[NLP] coreference: {query_text!r} -> {effective_query!r}")
 
+            _routing_diagnostics = {
+                'detected_actor': actor,
+                'actor_confidence': actor_confidence,
+                'detected_intent': fine_intent,
+                'intent_confidence': fine_intent_confidence,
+                'commodity': commodity,
+            }
+
             # 5) Clarification: ask back when a required slot is missing.
             _clarify = needs_clarification(effective_query, intent, entities)
-            if _clarify and not coref_applied:
+            if _clarify and not coref_applied and not force_retrieval:
+                yield bypass_context_event('clarification_required')
                 yield f"data: {json.dumps({'type':'token','content':_clarify})}\n\n"
                 CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _clarify[:200])
-                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[]})}\n\n"
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[],'diagnostics':bypass_diagnostics('clarification_required'), **_routing_diagnostics})}\n\n"
+                return
+
+            _previous_vendor_answer = direct_previous_tender_vendor_answer(effective_query)
+            if _previous_vendor_answer and not force_retrieval:
+                _previous_vendor_sources = [
+                    'General Financial Rules',
+                    'Chhattisgarh Store Purchase Rules',
+                    'Manual for Procurement of Goods 2024',
+                ]
+                yield f"data: {json.dumps({'type':'status','message':'Using the previous-tender vendor policy'})}\n\n"
+                yield bypass_context_event('direct_previous_tender_vendor', _previous_vendor_sources)
+                yield f"data: {json.dumps({'type':'token','content':_previous_vendor_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _previous_vendor_answer[:300])
+                ANSWER_CACHE.put(effective_query, _previous_vendor_answer, _previous_vendor_sources)
+                _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
+                                           'direct_previous_tender_vendor': True,
+                                           'elapsed': round(time.time()-t0, 2)})
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_previous_vendor_sources,'answer':_previous_vendor_answer,'diagnostics':bypass_diagnostics('direct_previous_tender_vendor'), **_routing_diagnostics})}\n\n"
+                return
+
+            _two_bid_answer = direct_two_bid_cancellation_answer(effective_query)
+            if _two_bid_answer and not force_retrieval:
+                _two_bid_sources = [
+                    'General Financial Rules',
+                    'CVC procurement guidelines',
+                    'Manual for Procurement of Goods 2024',
+                ]
+                yield f"data: {json.dumps({'type':'status','message':'Using the two-bid tender evaluation policy'})}\n\n"
+                yield bypass_context_event('direct_two_bid_cancellation', _two_bid_sources)
+                yield f"data: {json.dumps({'type':'token','content':_two_bid_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _two_bid_answer[:300])
+                ANSWER_CACHE.put(effective_query, _two_bid_answer, _two_bid_sources)
+                _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
+                                           'direct_two_bid_cancellation': True,
+                                           'elapsed': round(time.time()-t0, 2)})
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_two_bid_sources,'answer':_two_bid_answer,'diagnostics':bypass_diagnostics('direct_two_bid_cancellation'), **_routing_diagnostics})}\n\n"
+                return
+
+            _methods_answer = direct_procurement_methods_overview_answer(effective_query)
+            if _methods_answer and not force_retrieval:
+                _methods_sources = [
+                    'Chhattisgarh Store Purchase Rules',
+                    'General Financial Rules',
+                    'Manual for Procurement of Goods 2024',
+                ]
+                yield f"data: {json.dumps({'type':'status','message':'Using the Chhattisgarh procurement methods overview'})}\n\n"
+                yield bypass_context_event('direct_procurement_methods_overview', _methods_sources)
+                yield f"data: {json.dumps({'type':'token','content':_methods_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _methods_answer[:300])
+                ANSWER_CACHE.put(effective_query, _methods_answer, _methods_sources)
+                _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
+                                           'direct_procurement_methods_overview': True,
+                                           'elapsed': round(time.time()-t0, 2)})
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_methods_sources,'answer':_methods_answer,'diagnostics':bypass_diagnostics('direct_procurement_methods_overview'), **_routing_diagnostics})}\n\n"
                 return
 
             # 6) Answer cache: serve near-duplicate questions instantly. Skip when
             #    the query is personalised (has a name) or is a context-dependent
             #    follow-up, since those need a fresh, tailored answer.
-            if not coref_applied and not entities.get('persons'):
+            if (not force_retrieval and not evaluation_diagnostics
+                    and not coref_applied and not entities.get('persons')):
                 _cached = ANSWER_CACHE.get(effective_query)
                 if _cached:
+                    _cached_answer = normalize_vendor_registration_portal_name(
+                        _cached['answer'], effective_query
+                    )
+                    _cached_answer = enforce_response_language(
+                        _cached_answer, detect_query_language(query_text)
+                    )
                     yield f"data: {json.dumps({'type':'status','message':'Instant answer (cached)'})}\n\n"
-                    yield f"data: {json.dumps({'type':'token','content':_cached['answer']})}\n\n"
+                    yield bypass_context_event('answer_cache', _cached['sources'])
+                    yield f"data: {json.dumps({'type':'token','content':_cached_answer})}\n\n"
                     _fu = suggest_followups(intent)
                     if _fu:
                         yield f"data: {json.dumps({'type':'followups','items':_fu})}\n\n"
-                    CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _cached['answer'][:300])
+                    CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _cached_answer[:300])
                     _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
                                                'cache_hit': True, 'elapsed': round(time.time()-t0, 2)})
-                    yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_cached['sources']})}\n\n"
+                    yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_cached['sources'],'answer':_cached_answer,'diagnostics':bypass_diagnostics('answer_cache', 'cache'), **_routing_diagnostics})}\n\n"
                     return
+
+            _laptop_answer = direct_department_laptop_planning_answer(effective_query)
+            if _laptop_answer and not force_retrieval:
+                _laptop_sources = [
+                    'Chhattisgarh Store Purchase Rules',
+                    'Manual for Procurement of Goods 2024',
+                ]
+                yield f"data: {json.dumps({'type':'status','message':'Using the department laptop procurement workflow'})}\n\n"
+                yield bypass_context_event('direct_laptop_workflow', _laptop_sources)
+                yield f"data: {json.dumps({'type':'token','content':_laptop_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _laptop_answer[:300])
+                ANSWER_CACHE.put(effective_query, _laptop_answer, _laptop_sources)
+                _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
+                                           'direct_laptop_workflow': True,
+                                           'elapsed': round(time.time()-t0, 2)})
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_laptop_sources,'answer':_laptop_answer,'diagnostics':bypass_diagnostics('direct_laptop_workflow'), **_routing_diagnostics})}\n\n"
+                return
 
             # Step 1: Retrieve context (expand synonyms/abbreviations for recall).
             # Use the coreference-resolved query so follow-ups find the right docs.
             yield f"data: {json.dumps({'type':'status','message':'🔍 Searching the procurement manuals…'})}\n\n"
-            context_results = retrieve_context(expand_query_for_retrieval(effective_query), num_context=num_context, rerank_query=effective_query)
+            _retrieval_route = route_for_query(fine_intent, effective_query)
+            context_results = retrieve_context(
+                expand_query_for_retrieval(effective_query),
+                num_context=num_context,
+                rerank_query=effective_query,
+                structured_intent=fine_intent,
+                retrieval_policy=_retrieval_route.to_retrieval_policy(),
+            )
             # Exact Rule/Section lookups beat dense retrieval's blind spot for numbers.
             context_results = prepend_lexical_rule_hits(effective_query, context_results)
+
+            # A small set of audited natural-language shapes repeatedly landed
+            # in the wrong source family (especially Hindi policy questions and
+            # portal troubleshooting). Supplement the normal retrieval with a
+            # canonical English source-contract query, then let the existing
+            # context packer/reranker choose the final evidence. This does not
+            # alter embeddings, Qdrant, chunking or reranking.
+            _contract_query = canonical_source_contract_query(effective_query, fine_intent)
+            _contract_targets = canonical_source_contract_sources(effective_query, fine_intent)
+
+            def _normal_source_token(value):
+                return ''.join(ch for ch in str(value or '').lower() if ch.isalnum())
+
+            _normal_retrieved_sources = {
+                _normal_source_token(
+                    getattr(result.get('point', {}), 'payload', {}).get('source', '')
+                    if isinstance(result, dict) else ''
+                )
+                for result in (context_results or [])
+            }
+            _contract_evidence_present = any(
+                _normal_source_token(target) in source
+                for target in _contract_targets
+                for source in _normal_retrieved_sources
+            )
+            if _contract_query and not _contract_evidence_present:
+                _contract_results = retrieve_context(
+                    _contract_query, num_context=num_context, rerank_query=_contract_query,
+                    structured_intent=fine_intent,
+                    retrieval_policy=_retrieval_route.to_retrieval_policy(),
+                )
+                if _contract_results:
+                    context_results = list(_contract_results) + [
+                        result for result in (context_results or [])
+                        if str(getattr(result.get('point', {}), 'payload', {}).get('source', '')
+                               if isinstance(result, dict) else '') not in {
+                            str(getattr(item.get('point', {}), 'payload', {}).get('source', '')
+                                if isinstance(item, dict) else '') for item in _contract_results
+                        }
+                    ]
+
+            # A supplier-delay question needs contract-performance evidence, not
+            # the portal manuals that happen to share the word "delivery". Use a
+            # narrow canonical retrieval only for this policy answer; all other
+            # retrieval paths and ranking remain unchanged.
+            if (fine_intent == 'purchase_order'
+                    and requires_deterministic_policy_answer(effective_query, fine_intent)):
+                _delivery_contract_query = (
+                    'purchase order supplier delivery delay delivery schedule '
+                    'contract performance extension remedies inspection acceptance '
+                    'Manual for Procurement of Goods'
+                )
+                _delivery_context = retrieve_context(
+                    _delivery_contract_query, num_context=num_context,
+                    rerank_query=_delivery_contract_query,
+                    structured_intent=fine_intent,
+                    retrieval_policy=_retrieval_route.to_retrieval_policy(),
+                )
+                _delivery_excluded_sources = (
+                    'bid_submission', 'auctionmanual', 'corrigendum',
+                )
+                _delivery_context = [
+                    result for result in (_delivery_context or [])
+                    if not any(
+                        marker in str(
+                            getattr(result.get('point', {}), 'payload', {}).get('source', '')
+                            if isinstance(result, dict) else ''
+                        ).lower()
+                        for marker in _delivery_excluded_sources
+                    )
+                ]
+                if _delivery_context:
+                    context_results = prepend_lexical_rule_hits(
+                        _delivery_contract_query, _delivery_context
+                    )
 
             # Meta-question filter: if asking about the chatbot itself, only use Chatbot_Capabilities.
             # Always re-retrieve with a canonical English query so both the embedder and the
@@ -2251,17 +2658,6 @@ def stream_query():
                     # but at least filter out non-procurement noise (leave context_results as-is)
                     pass
 
-            # Scope gate (retrieval-relevance based): refuse out-of-scope questions
-            # AFTER retrieval, so typos / Hinglish-in-Devanagari / new document
-            # domains are not falsely rejected by a fixed keyword list. A keyword
-            # hit is a fast-accept; clearly unrelated questions retrieve nothing
-            # relevant and are refused.
-            if not context_results or not query_in_scope(effective_query, context_results):
-                refusal = REFUSAL_LINES.get(detect_query_language(query_text), REFUSAL_LINES['en'])
-                yield f"data: {json.dumps({'type':'token','content':refusal})}\n\n"
-                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[]})}\n\n"
-                return
-
             # Send context cards immediately
             formatted = []
             query_words = [w for w in effective_query.lower().split() if len(w) > 3]
@@ -2276,6 +2672,29 @@ def stream_query():
                                    'actual_pdf': actual_pdf, 'score': r.get('score',0),
                                    'text': text, 'excerpt': excerpt})
             yield f"data: {json.dumps({'type':'context','results':formatted})}\n\n"
+
+            # Scope-gated refusals still expose the retrieval trace above so API
+            # clients can distinguish an empty/irrelevant search from a shortcut.
+            # A narrow, deterministic policy contract is already routed to an
+            # in-scope procurement intent and still has retrieved evidence. Do
+            # not let the generic lexical scope heuristic turn that grounded
+            # answer into a false “not found” refusal (for example, CVC-style
+            # specification questions using natural Hinglish wording).
+            _has_policy_contract = (
+                fine_intent == 'procurement_methods_overview'
+                or requires_deterministic_policy_answer(effective_query, fine_intent)
+            )
+            if (not context_results or not query_in_scope(effective_query, context_results)) and not (
+                    _has_policy_contract and context_results):
+                refusal = REFUSAL_LINES.get(detect_query_language(query_text), REFUSAL_LINES['en'])
+                _scope_diagnostics = {
+                    'provider': 'scope_gate',
+                    'retrieval_skipped': False,
+                    'force_retrieval': force_retrieval,
+                }
+                yield f"data: {json.dumps({'type':'token','content':refusal})}\n\n"
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[],'diagnostics':_scope_diagnostics, **_routing_diagnostics})}\n\n"
+                return
 
             # Confidence from the top reranker score (low → caveat note in answer).
             _top_score = context_results[0].get('score', 0) if context_results else 0
@@ -2299,30 +2718,88 @@ def stream_query():
             # refusals.
             CTX_CHAR_BUDGET = 7000
             PER_CHUNK_CAP   = 1600
-            context_parts = []
-            source_refs   = []
-            used = 0
-            for i, r in enumerate(context_results, 1):
-                point = r.get('point', {})
-                src  = point.payload.get('source','') if hasattr(point,'payload') else ''
-                txt  = point.payload.get('text','')   if hasattr(point,'payload') else ''
-                apdf = _rag_module.get_actual_filename(src) if '_rag_module' in globals() else src
-                body = strip_chunk_header(txt)[:PER_CHUNK_CAP]
-                if context_parts and used + len(body) > CTX_CHAR_BUDGET:
-                    break
-                if apdf not in source_refs:
-                    source_refs.append(apdf)
-                context_parts.append(f"[Source {i}: {apdf}]\n{body}")
-                used += len(body)
-
-            context_text = "\n\n".join(context_parts)
+            # Keep broad retrieval unchanged for the source drawer, then pack a
+            # diverse, route-authoritative subset for generation.  The citation
+            # list is derived from this exact subset, never from un-sent chunks.
+            _context_route = route_for_query(fine_intent, effective_query)
+            _packing_budget = CTX_CHAR_BUDGET
+            if os.getenv('ANSWER_PROVIDER', 'ollama').strip().lower() == 'sarvam':
+                # Pack to Sarvam's actual context allowance now, rather than
+                # slicing the completed prompt later.  This ensures every
+                # listed citation corresponds to evidence Sarvam received.
+                try:
+                    _packing_budget = min(
+                        CTX_CHAR_BUDGET,
+                        max(1800, int(os.getenv('SARVAM_CONTEXT_CHAR_BUDGET', '4500'))),
+                    )
+                except (TypeError, ValueError):
+                    pass
+            context_text, source_refs, _selected_context_results = pack_context(
+                context_results, _context_route, effective_query, strip_chunk_header,
+                lambda src: _rag_module.get_actual_filename(src)
+                if '_rag_module' in globals() else src,
+                char_budget=_packing_budget, per_chunk_cap=PER_CHUNK_CAP,
+            )
+            if (fine_intent == 'purchase_order'
+                    and requires_deterministic_policy_answer(effective_query, fine_intent)):
+                # The direct answer is grounded in procurement/contract evidence;
+                # do not display an incidental bidder-manual chunk as if it were
+                # authority for a department's delivery-delay decision.
+                source_refs = [
+                    source for source in source_refs
+                    if 'bid_submission' not in (source or '').lower()
+                ]
             sources_str  = ", ".join(source_refs)
+
+            # Keep narrow, high-risk policy answers grounded and decision-first.
+            # This runs only after normal retrieval selected the source context;
+            # it does not change retrieval, actor policy or source selection.
+            if (fine_intent == 'procurement_methods_overview'
+                    or requires_deterministic_policy_answer(effective_query, fine_intent)):
+                _policy_answer = render_fine_intent_fallback(
+                    build_fine_intent_fallback(
+                        effective_query, actor,
+                        fine_intent, detect_query_language(query_text),
+                        commodity, 'Chhattisgarh', 'grounded_deterministic',
+                        tuple(source_refs),
+                    )
+                )
+                _policy_answer = enforce_response_language(
+                    _policy_answer, detect_query_language(query_text)
+                )
+                yield f"data: {json.dumps({'type':'token','content':_policy_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _policy_answer[:300])
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':source_refs,'answer':_policy_answer,'diagnostics':{'provider':'deterministic','retrieval_skipped':False,'force_retrieval':force_retrieval,'deterministic_fallback':True,'fallback_reason_code':'policy_answer_contract'}, **_routing_diagnostics})}\n\n"
+                return
             system_msg   = SYSTEM_PROMPT.strip() + f"\n\nAvailable source documents: {sources_str}"
             user_msg     = f"Context from documents:\n{context_text}\n\nQuestion: {query_text}\n\nAnswer:"
 
             # ── Step 2: Ollama (llama3.2 on Intel Arc GPU) ───────────────────
             OLLAMA_MODEL = os.getenv('OLLAMA_MODEL', 'llama3.2')
             OLLAMA_URL   = os.getenv('OLLAMA_URL', 'http://localhost:11434')
+            ANSWER_PROVIDER = os.getenv('ANSWER_PROVIDER', 'ollama').strip().lower()
+            MODEL_FALLBACK_ENABLED = os.getenv(
+                'ENABLE_MODEL_FALLBACK', 'true'
+            ).strip().lower() in ('1', 'true', 'yes', 'on')
+            SARVAM_MODEL = os.getenv('SARVAM_MODEL', 'sarvam-30b')
+            # Sarvam is a remote 30B model: its prompt prefill and tail latency
+            # are materially higher than the local Ollama path.  Keep the full
+            # retrieved context for the UI and diagnostics, but send a bounded
+            # top-of-context slice to Sarvam so the model does not spend most of
+            # the request re-reading low-ranked passages.
+            _prompt_context_text = context_text
+            if ANSWER_PROVIDER == 'sarvam':
+                try:
+                    _sarvam_context_budget = max(
+                        1800, int(os.getenv('SARVAM_CONTEXT_CHAR_BUDGET', '4500'))
+                    )
+                    if len(_prompt_context_text) > _sarvam_context_budget:
+                        _prompt_context_text = (
+                            _prompt_context_text[:_sarvam_context_budget].rstrip()
+                            + "\n[Additional lower-ranked context omitted for latency.]"
+                        )
+                except (TypeError, ValueError):
+                    pass
             _src_count = len(source_refs)
             yield f"data: {json.dumps({'type':'status','message':f'📖 Reading {_src_count} relevant document(s)…'})}\n\n"
             yield f"data: {json.dumps({'type':'status','message':'✍️ Composing your answer…'})}\n\n"
@@ -2334,22 +2811,26 @@ def stream_query():
             # Tell the client the target language so it can enforce Roman-script
             # Hinglish if gemma3:4b drifts into Devanagari (client romanises).
             yield f"data: {json.dumps({'type':'lang','lang':_lang})}\n\n"
-            ollama_system = PROCUREMENT_SYSTEM_PROMPT.strip() + language_directive(_lang)
+            # Preserve the existing base prompt; attach only the already
+            # classified actor/intent boundary for this request.
+            ollama_system = (
+                PROCUREMENT_SYSTEM_PROMPT.strip()
+                + language_directive(_lang)
+                + actor_generation_directive(actor)
+                + generation_directive(route_for_intent(fine_intent))
+            )
             if _lang == 'hi':
                 _final = ("\n\n>>> महत्वपूर्ण: ऊपर दी गई सामग्री अंग्रेज़ी में है, फिर भी पूरा उत्तर "
-                          "केवल हिंदी (Devanagari लिपि) में, निर्धारित प्रारूप (💡 उत्तर / 📋 प्रक्रिया / "
-                          "📘 स्रोत) में लिखें। कोई वाक्य अंग्रेज़ी में न लिखें; तकनीकी शब्द (EMD, Tender, "
+                          "केवल हिंदी (Devanagari लिपि) में लिखें। कोई वाक्य अंग्रेज़ी में न लिखें; तकनीकी शब्द (EMD, Tender, "
                           "Bid, GFR, DSC आदि) ज्यों के त्यों रखें (उदा. Bid को 'बोली' या 'Bid' लिखें, 'बिंद' नहीं)।")
             elif _lang == 'hinglish':
                 _final = ("\n\n>>> IMPORTANT: Even though the Context is in English, you MUST "
                           "translate it and reply ENTIRELY in HINGLISH (sentences in Roman script, "
                           "e.g. 'E-procurement ka matlab hai...'). DO NOT write your answer in plain English. "
                           "CRITICAL: You MUST use ONLY the English alphabet (A-Z, a-z). ABSOLUTELY NO Devanagari or Bengali scripts allowed. "
-                          "Keep technical terms (EMD, Tender, Bid, DSC, NIT, GFR, e-Procurement) in English. For 'Bid', use 'Boli' or 'Bid', never 'Bind'. "
-                          "Use the English emoji headings (💡 Answer / 📋 Process / 📘 Source).")
+                          "Keep technical terms (EMD, Tender, Bid, DSC, NIT, GFR, e-Procurement) in English. For 'Bid', use 'Boli' or 'Bid', never 'Bind'.")
             else:
-                _final = ("\n\n>>> IMPORTANT: Reply ENTIRELY in English, using the English "
-                          "headings (💡 Answer / 📋 Process / 📘 Source).")
+                _final = ("\n\n>>> IMPORTANT: Reply ENTIRELY in English, in a direct, natural conversational style.")
             # Memory block: known user details (name/company) + previous turn so
             # the LLM can personalise and resolve follow-ups. Empty on turn 1.
             _mem_block = CONV_MEMORY.memory_block(session_id)
@@ -2364,16 +2845,30 @@ def stream_query():
             # When a follow-up was coreference-resolved, give the LLM the resolved
             # (self-contained) question so it answers the right subject.
             _llm_question = effective_query if coref_applied else query_text
-            
+            _parts = _decompose_question(_llm_question)
+            _hardness, _hardness_reasons = estimate_prompt_hardness(
+                _llm_question,
+                intent=intent,
+                part_count=len(_parts),
+                source_count=len(source_refs),
+                top_score=_top_score,
+            )
+            _selected_model = choose_ollama_model_for_prompt(OLLAMA_MODEL, _lang, _hardness)
+            print(f"[model-router] {_hardness} -> {_selected_model} "
+                  f"({'; '.join(_hardness_reasons)})")
+            OLLAMA_MODEL = _selected_model
+            if os.getenv('SHOW_MODEL_ROUTING', '').lower() in ('1', 'true', 'yes'):
+                yield f"data: {json.dumps({'type':'status','message':f'Model route: {_hardness}'})}\n\n"
+             
             if _lang == 'hinglish':
                 _ans_prefix = "\n\nAnswer (in Roman script Hinglish):"
-                ollama_user = f">>> CRITICAL: READ THE ENGLISH CONTEXT, BUT REPLY ENTIRELY IN HINGLISH (ROMAN SCRIPT). DO NOT REPLY IN ENGLISH. <<<\n\nContext:\n{context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
+                ollama_user = f">>> CRITICAL: READ THE ENGLISH CONTEXT, BUT REPLY ENTIRELY IN HINGLISH (ROMAN SCRIPT). DO NOT REPLY IN ENGLISH. <<<\n\nContext:\n{_prompt_context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
             elif _lang == 'hi':
                 _ans_prefix = "\n\nAnswer (in Devanagari Hindi):"
-                ollama_user = f">>> CRITICAL: READ THE ENGLISH CONTEXT, BUT REPLY ENTIRELY IN HINDI (DEVANAGARI). <<<\n\nContext:\n{context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
+                ollama_user = f">>> CRITICAL: READ THE ENGLISH CONTEXT, BUT REPLY ENTIRELY IN HINDI (DEVANAGARI). <<<\n\nContext:\n{_prompt_context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
             else:
                 _ans_prefix = "\n\nAnswer:"
-                ollama_user = f"Context:\n{context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
+                ollama_user = f"Context:\n{_prompt_context_text}\n\n{_mem_prefix}{_entity_hints}Question: {_llm_question}{_final}{_ans_prefix}"
 
             # ── Multi-part questions: TRUE decomposition ─────────────────────
             # gemma3:4b answers only the FIRST clause of a compound question and
@@ -2383,8 +2878,8 @@ def stream_query():
             # works). So generate each sub-answer in its own call and merge. The
             # whole branch is wrapped so any failure falls through to the normal
             # single-pass generation below (the single-question path is untouched).
-            _parts = _decompose_question(_llm_question)
-            if len(_parts) >= 2 and not is_meta_question(query_text) and not coref_applied:
+            if (len(_parts) >= 2 and ANSWER_PROVIDER != 'sarvam'
+                    and not is_meta_question(query_text) and not coref_applied):
                 import re as _re
                 # Carry the subject into later parts so a bare pronoun ("when is
                 # IT exempted?") isn't retrieved/answered in isolation (which
@@ -2407,16 +2902,13 @@ def stream_query():
                 # "📘 Source" lines would break the client's answer renderer); we
                 # wrap them under one heading and one source-chip set.
                 if _lang == 'hi':
-                    _sub_dir = ("\n\n>>> उत्तर पूरा हिंदी में दें। केवल सीधा उत्तर लिखें — "
-                                "कोई 💡/📋/📘 शीर्षक या स्रोत पंक्ति नहीं।")
+                    _sub_dir = ("\n\n>>> उत्तर पूरा हिंदी में दें। केवल सीधा उत्तर लिखें — ")
                 elif _lang == 'hinglish':
                     _sub_dir = ("\n\n>>> IMPORTANT: Translate the Context and reply in HINGLISH "
-                                "(sentences in Roman script). Give ONLY the direct answer — no 💡/📋/📘 "
-                                "headings, no Source line. DO NOT answer in plain English. "
+                                "(sentences in Roman script). Give ONLY the direct answer. DO NOT answer in plain English. "
                                 "CRITICAL: Use ONLY the English alphabet (A-Z, a-z). No Devanagari or Bengali script allowed.")
                 else:
-                    _sub_dir = ("\n\n>>> Answer in English. Give ONLY the direct answer text — "
-                                "no 💡/📋/📘 headings, no Source line.")
+                    _sub_dir = ("\n\n>>> Answer in English. Give ONLY the direct answer text.")
 
                 def _strip_struct(t):
                     out = []
@@ -2465,7 +2957,6 @@ def stream_query():
 
                 try:
                     yield f"data: {json.dumps({'type':'status','message':f'🧩 Answering {len(_parts)} parts…'})}\n\n"
-                    _hdr = '💡 उत्तर' if _lang == 'hi' else '💡 Answer'
                     _union, _subtexts, _ok = [], [], False
                     for _i, _sub in enumerate(_subqs, 1):
                         _a, _ss = _answer_sub(_sub)
@@ -2476,7 +2967,9 @@ def stream_query():
                                 _union.append(_s)
                         _subtexts.append(f"**{_i}. {_sub.rstrip('?')}**\n{_a or '—'}")
                     if _ok:
-                        _merged = f"{_hdr}\n" + "\n\n".join(_subtexts)
+                        _merged = normalize_vendor_registration_portal_name(
+                            "\n\n".join(_subtexts), _llm_question
+                        )
                         for _k in range(0, len(_merged), 60):
                             yield f"data: {json.dumps({'type':'token','content':_merged[_k:_k+60]})}\n\n"
                         _fu = suggest_followups(intent)
@@ -2505,12 +2998,6 @@ def stream_query():
             # answer token was streamed — a mid-stream crash after partial output
             # can't be cleanly restarted.
             FALLBACK_MODEL = os.getenv('OLLAMA_FALLBACK_MODEL', 'llama3:8b')
-
-            # Language-based model routing: English queries use a faster model
-            # (Mistral 7B). Hindi and Hinglish stay on the primary model because
-            # Gemma3 12B has proven multilingual quality; Mistral is weak on both.
-            if _lang == 'en' and os.getenv('OLLAMA_MODEL_EN'):
-                OLLAMA_MODEL = os.getenv('OLLAMA_MODEL_EN')
 
             # ── Deterministic lines injected after the answer heading (the LLM
             #    is too unreliable to format these): deadline urgency, numeric
@@ -2548,6 +3035,153 @@ def stream_query():
                 on `state` whether any content was produced ('content_streamed')
                 and whether it failed before producing output
                 ('failed_before_output') so the caller can fall back."""
+                if ANSWER_PROVIDER == 'sarvam' and model.startswith('sarvam-'):
+                    import httpx
+                    import queue
+                    _sarvam_started = time.perf_counter()
+                    _sarvam_first_token_budget = max(
+                        5.0, float(os.getenv('SARVAM_FIRST_TOKEN_TIMEOUT', '20'))
+                    )
+                    _sarvam_total_budget = max(
+                        _sarvam_first_token_budget,
+                        float(os.getenv('SARVAM_TOTAL_TIMEOUT', '35')),
+                    )
+                    _sarvam_answer_budget = min(
+                        _sarvam_total_budget,
+                        max(5.0, float(os.getenv('SARVAM_ANSWER_TOKEN_TIMEOUT', '18'))),
+                    )
+                    state['sarvam_started_at'] = _sarvam_started
+                    sarvam_key = os.getenv('SARVAM_API_KEY', '').strip()
+                    if not sarvam_key or '...' in sarvam_key:
+                        state['failed_before_output'] = True
+                        state['error'] = 'SARVAM_API_KEY is missing or truncated'
+                        return
+                    payload = {
+                        'model': model,
+                        'messages': [
+                            {'role': 'system', 'content': ollama_system},
+                            {'role': 'user', 'content': ollama_user},
+                        ],
+                        'temperature': 0,
+                        'stream': True,
+                        # Honour the configured output allowance.  The former
+                        # hard 768-token cap let sarvam-30b exhaust its entire
+                        # response on hidden reasoning and return no visible
+                        # answer, even when SARVAM_MAX_TOKENS was set higher.
+                        'max_tokens': max(128, int(os.getenv('SARVAM_MAX_TOKENS', '1024'))),
+                        # Sarvam's hidden reasoning is useful for complex tasks,
+                        # but it is counterproductive for a retrieval-grounded
+                        # chatbot: it can consume the whole completion before a
+                        # user-visible answer is emitted. JSON null disables it.
+                        'reasoning_effort': configured_reasoning_effort(),
+                    }
+                    headers = {
+                        'api-subscription-key': sarvam_key,
+                        'Content-Type': 'application/json',
+                    }
+                    events = queue.Queue()
+                    stop_event = threading.Event()
+
+                    def _sarvam_worker():
+                        try:
+                            with httpx.stream(
+                                    'POST', 'https://api.sarvam.ai/v1/chat/completions',
+                                    headers=headers, json=payload,
+                                    timeout=httpx.Timeout(
+                                        connect=10.0,
+                                        read=max(5.0, float(os.getenv('SARVAM_READ_TIMEOUT', '8'))),
+                                        write=30.0, pool=10.0)) as resp:
+                                if resp.status_code != 200:
+                                    detail = resp.read().decode('utf-8', errors='replace')[:500]
+                                    events.put(('error', f'Sarvam HTTP {resp.status_code}: {detail}'))
+                                    return
+                                for line in resp.iter_lines():
+                                    if stop_event.is_set():
+                                        return
+                                    content, reasoning, is_done = parse_sarvam_sse_line(line)
+                                    if reasoning:
+                                        events.put(('reasoning', reasoning))
+                                    if content:
+                                        events.put(('content', content))
+                                    if is_done:
+                                        return
+                        except Exception as exc:
+                            events.put(('error', exc))
+                        finally:
+                            events.put(('done', None))
+
+                    threading.Thread(
+                        target=_sarvam_worker,
+                        name='sarvam-stream',
+                        daemon=True,
+                    ).start()
+                    while True:
+                        elapsed = time.perf_counter() - _sarvam_started
+                        if (not state.get('content_streamed')
+                                and elapsed > _sarvam_answer_budget):
+                            stop_event.set()
+                            state['sarvam_answer_token_timeout'] = True
+                            state['failed_before_output'] = True
+                            state['sarvam_timeout'] = True
+                            state['fallback_reason_code'] = 'sarvam_first_visible_answer_timeout'
+                            state['error'] = 'Sarvam did not produce a visible answer token in time'
+                            return
+                        if elapsed > _sarvam_total_budget:
+                            stop_event.set()
+                            state['sarvam_total_timeout'] = True
+                            if not state.get('content_streamed'):
+                                state['failed_before_output'] = True
+                                state['sarvam_timeout'] = True
+                                state['fallback_reason_code'] = 'sarvam_total_generation_timeout'
+                                state['error'] = 'Sarvam generation timeout'
+                            return
+                        try:
+                            kind, value = events.get(timeout=0.25)
+                        except queue.Empty:
+                            continue
+                        if kind == 'content':
+                            state['content_streamed'] = True
+                            if 'sarvam_first_token_elapsed' not in state:
+                                state['sarvam_first_token_elapsed'] = (
+                                    time.perf_counter() - _sarvam_started
+                                )
+                            state.setdefault('answer_buf', []).append(value)
+                            yield f"data: {json.dumps({'type': 'token', 'content': value})}\n\n"
+                        elif kind == 'reasoning':
+                            state['sarvam_reasoning_chunks'] = state.get('sarvam_reasoning_chunks', 0) + 1
+                            if 'sarvam_first_activity_elapsed' not in state:
+                                state['sarvam_first_activity_elapsed'] = time.perf_counter() - _sarvam_started
+                            if not state.get('sarvam_reasoning_notified'):
+                                state['sarvam_reasoning_notified'] = True
+                                yield f"data: {json.dumps({'type': 'status', 'message': 'Sarvam is preparing the answer…'})}\n\n"
+                            elif state['sarvam_reasoning_chunks'] % 20 == 0:
+                                yield ': ping\n\n'
+                        elif kind == 'error':
+                            if not state.get('content_streamed'):
+                                state['failed_before_output'] = True
+                                # Any provider failure before the first token
+                                # is latency-equivalent for the user: do not
+                                # start a second slow model attempt.  The
+                                # grounded responder below handles both read
+                                # timeouts and transient upstream errors.
+                                state['sarvam_timeout'] = True
+                                state['fallback_reason_code'] = 'sarvam_provider_error_before_answer'
+                                state['error'] = (
+                                    'Sarvam first-token timeout'
+                                    if isinstance(value, httpx.ReadTimeout)
+                                    else str(value)
+                                )
+                            else:
+                                yield f"data: {json.dumps({'type': 'error', 'message': f'Sarvam error: {value}'})}\n\n"
+                            return
+                        elif kind == 'done':
+                            if not state.get('content_streamed'):
+                                state['failed_before_output'] = True
+                                state['sarvam_timeout'] = True
+                                state['fallback_reason_code'] = 'sarvam_empty_response'
+                                state['error'] = 'Sarvam returned no content'
+                            return
+                    return
                 try:
                     resp = requests.post(
                         f"{OLLAMA_URL}/api/chat",
@@ -2674,8 +3308,10 @@ def stream_query():
                     else:
                         yield f"data: {json.dumps({'type':'error','message':f'Ollama error: {e}'})}\n\n"
 
-            state = {'content_streamed': False, 'failed_before_output': False}
-            for sse in _stream_model(OLLAMA_MODEL, state):
+            state = {'content_streamed': False, 'failed_before_output': False, 'answer_buf': []}
+            _primary_model = SARVAM_MODEL if ANSWER_PROVIDER == 'sarvam' else OLLAMA_MODEL
+            yield f"data: {json.dumps({'type': 'status', 'message': f'Generating with {_primary_model}…'})}\n\n"
+            for sse in _stream_model(_primary_model, state):
                 yield sse
 
             # Transparent fallback to the lighter model when the primary either
@@ -2683,8 +3319,9 @@ def stream_query():
             # (gemma4 occasionally emits nothing on mixed Hindi+Hinglish queries
             # where the language directive conflicts). Either way the user would
             # otherwise see nothing useful, so retry on llama3:8b before giving up.
-            if ((state['failed_before_output'] or not state['content_streamed'])
-                    and FALLBACK_MODEL and FALLBACK_MODEL != OLLAMA_MODEL):
+            if (MODEL_FALLBACK_ENABLED
+                    and (state['failed_before_output'] or not state['content_streamed'])
+                    and FALLBACK_MODEL and not state.get('sarvam_timeout')):
                 yield f"data: {json.dumps({'type':'status','message':'Switching to a lighter model...'})}\n\n"
                 # Free the iGPU BEFORE falling back. gemma4:12b (~8GB) and the
                 # fallback model both resident on the Arc iGPU exhaust its VRAM,
@@ -2706,6 +3343,32 @@ def stream_query():
 
             content_streamed = state['content_streamed']
 
+            # A remote Sarvam request that has produced no token within the
+            # latency budget must not keep the browser waiting for the provider
+            # read timeout.  Reuse the already-grounded deterministic responder
+            # so actor/language/intent-safe content is returned immediately.
+            if state.get('sarvam_timeout') and not content_streamed:
+                try:
+                    _timeout_lang = detect_query_language(query_text)
+                    _timeout_answer = render_fine_intent_fallback(
+                        build_fine_intent_fallback(
+                            effective_query, actor,
+                            fine_intent, _timeout_lang, commodity,
+                            'Chhattisgarh', 'sarvam_timeout', tuple(source_refs),
+                        )
+                    )
+                    if _timeout_answer:
+                        _timeout_answer = enforce_response_language(
+                            _timeout_answer, _timeout_lang
+                        )
+                        state['answer_buf'] = [_timeout_answer]
+                        state['content_streamed'] = True
+                        content_streamed = True
+                        state['deterministic_fallback'] = True
+                        yield f"data: {json.dumps({'type': 'token', 'content': _timeout_answer})}\n\n"
+                except Exception as _fallback_error:
+                    print(f'[SARVAM FALLBACK] {_fallback_error}', flush=True)
+
             # Empty-answer guard: the model occasionally streams zero content
             # tokens (observed with llama3:8b on Hinglish queries), leaving a
             # blank bubble in the UI. Emit a graceful fallback instead.
@@ -2720,6 +3383,10 @@ def stream_query():
             # Record this turn in conversation memory so the NEXT question can use
             # coreference ("tell me more about it") and remembered details.
             _answer_text = ''.join(state.get('answer_buf', []))
+            _answer_text = normalize_vendor_registration_portal_name(
+                _answer_text, _llm_question
+            )
+            _answer_text = enforce_response_language(_answer_text, _lang)
             # Clean ungrounded rule numbers before this text is cached/recorded so
             # non-browser consumers (cache replays, logs, exports) match the
             # client-sanitised UI view. The live stream is cleaned client-side.
@@ -2775,11 +3442,28 @@ def stream_query():
             })
 
             elapsed = f"{time.time()-t0:.2f}s"
+            _generation_diagnostics = {
+                'provider': ANSWER_PROVIDER,
+                'retrieval_skipped': False,
+                'force_retrieval': force_retrieval,
+                'sarvam_first_token_seconds': round(
+                    state.get('sarvam_first_token_elapsed', 0.0), 3
+                ) if state.get('sarvam_first_token_elapsed') is not None else None,
+                'sarvam_timeout': bool(state.get('sarvam_timeout')),
+                'sarvam_total_timeout': bool(state.get('sarvam_total_timeout')),
+                'sarvam_answer_token_timeout': bool(state.get('sarvam_answer_token_timeout')),
+                'sarvam_first_activity_seconds': round(
+                    state.get('sarvam_first_activity_elapsed', 0.0), 3
+                ) if state.get('sarvam_first_activity_elapsed') is not None else None,
+                'sarvam_reasoning_chunks': int(state.get('sarvam_reasoning_chunks', 0)),
+                'deterministic_fallback': bool(state.get('deterministic_fallback')),
+                'fallback_reason_code': state.get('fallback_reason_code'),
+            }
             # Expose the server-sanitised full answer on the done event so EVERY
             # consumer (API clients, eval harness, exports) gets the same
             # ungrounded-rule-number cleaning the browser applies client-side —
             # not just the raw live token stream.
-            yield f"data: {json.dumps({'type':'done','elapsed':elapsed,'sources':source_refs,'answer':_answer_text})}\n\n"
+            yield f"data: {json.dumps({'type':'done','elapsed':elapsed,'sources':source_refs,'answer':_answer_text,'diagnostics':_generation_diagnostics, **_routing_diagnostics})}\n\n"
 
         except Exception as e:
             import traceback

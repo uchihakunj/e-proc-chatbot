@@ -1,0 +1,18 @@
+{
+  "total": 50,
+  "classification_counts": {
+    "Pass": 20,
+    "Partial": 30
+  },
+  "actor_accuracy_percent": 100.0,
+  "fine_intent_accuracy_percent": 100.0,
+  "answer_mode_accuracy_percent": 100.0,
+  "citation_accuracy_percent": 100.0,
+  "language_accuracy_percent": 100.0,
+  "latency_seconds": {
+    "median": 4.63,
+    "p90": 7.462,
+    "p95": 9.233,
+    "maximum": 13.382
+  }
+}
