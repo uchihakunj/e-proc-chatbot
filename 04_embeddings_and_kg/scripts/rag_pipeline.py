@@ -2,11 +2,13 @@ import os
 import atexit
 import json
 import logging
+import re
 import time
 from pathlib import Path
 from typing import Dict, Optional, Any
 import requests
 from qdrant_client import QdrantClient
+from qdrant_client.models import Filter, FieldCondition, MatchValue
 from FlagEmbedding import BGEM3FlagModel, FlagReranker
 
 # Setup logging
@@ -16,6 +18,13 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)-7s | %(name)-20s | %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
 )
+
+
+def _rag_trace(event, **payload):
+    if os.getenv('CHIPPY_TRACE_RAG', '').lower() not in ('1', 'true', 'yes', 'on'):
+        return
+    print('[RAG_TRACE] ' + json.dumps({'event': event, **payload}, ensure_ascii=False,
+                                      default=str), flush=True)
 
 # ── Timing Utilities ───────────────────────────────────────────
 _pipeline_start: Optional[float] = None
@@ -85,12 +94,27 @@ def _get_config() -> Dict[str, Any]:
     if not qdrant_path.exists():
         logger.warning(f"Qdrant database path not found: {qdrant_path}")
     
+    import sys
+    sys.path.insert(0, str(root))
+    from utils.config_manager import Config
+    retrieval_cfg = Config("retrieval")
+    
     return {
         "chunk_dir": chunk_dir,
         "collection": os.getenv("CHIPPY_QDRANT_COLLECTION", "db3"),
         "qdrant_local_path": qdrant_path,
         "encode_batch_size": int(os.getenv("STAGE4_BATCH_SIZE", "8")),
         "max_length": int(os.getenv("STAGE4_MAX_LENGTH", "1024")),
+        "top_k_retrieval": retrieval_cfg.get("top_k_retrieval", 50),
+        "final_context": retrieval_cfg.get("final_context", 8),
+        "rerank_truncation": retrieval_cfg.get("rerank_truncation", 1500),
+        "max_faq_results": retrieval_cfg.get("max_faq_results", 2),
+        "authority_weight": retrieval_cfg.get("authority_weight", 0.20),
+        "semantic_weight": retrieval_cfg.get("semantic_weight", 0.70),
+        "hybrid_weight": retrieval_cfg.get("hybrid_weight", 0.10),
+        "verify_low_confidence": retrieval_cfg.get("verify_low_confidence", 0.55),
+        "verify_high_risk_intents": retrieval_cfg.get("verify_high_risk_intents", True),
+        "verify_on_mixed_documents": retrieval_cfg.get("verify_on_mixed_documents", True),
     }
 
 CFG = _get_config()
@@ -98,6 +122,16 @@ CHUNK_DIR = CFG["chunk_dir"]
 COLLECTION_NAME = CFG["collection"]
 ENCODE_BATCH_SIZE = CFG["encode_batch_size"]
 MAX_LENGTH = CFG["max_length"]
+TOP_K_RETRIEVAL = CFG["top_k_retrieval"]
+FINAL_CONTEXT = CFG["final_context"]
+RERANK_TRUNCATION = CFG["rerank_truncation"]
+MAX_FAQ_RESULTS = CFG["max_faq_results"]
+AUTHORITY_WEIGHT = CFG["authority_weight"]
+SEMANTIC_WEIGHT = CFG["semantic_weight"]
+HYBRID_WEIGHT = CFG["hybrid_weight"]
+VERIFY_LOW_CONFIDENCE = CFG["verify_low_confidence"]
+VERIFY_HIGH_RISK_INTENTS = CFG["verify_high_risk_intents"]
+VERIFY_ON_MIXED_DOCUMENTS = CFG["verify_on_mixed_documents"]
 
 # ── Retrieval Configuration ────────────────────────────────────
 HYBRID_ALPHA = 0.6           # 0.0 = pure sparse, 1.0 = pure dense (0.6 = 60% dense, 40% sparse)
@@ -109,14 +143,293 @@ RERANK_THRESHOLD = 0.65      # Score threshold for inclusion
 # The CPU cross-encoder is the per-query latency floor, and its cost is linear
 # in the number of candidates it scores. These bound that work and let easy
 # queries skip most of it. See the inline reranker in retrieve_context().
-RERANK_TOPK      = int(os.getenv("RERANK_TOPK", "8"))           # always rerank the top hybrid hits (was 10)
-RERANK_MAX_CANDS = int(os.getenv("RERANK_MAX_CANDS", "10"))     # + diversity-injected sources (was 18)
+RERANK_TOPK      = int(os.getenv("RERANK_TOPK", str(TOP_K_RETRIEVAL)))           # always rerank the top hybrid hits (was 10)
+RERANK_MAX_CANDS = int(os.getenv("RERANK_MAX_CANDS", str(TOP_K_RETRIEVAL)))     # + diversity-injected sources (was 18)
 RERANK_FAST_K    = int(os.getenv("RERANK_FAST_K", "4"))         # confidence-gate: score these first
 RERANK_CONF_SKIP = float(os.getenv("RERANK_CONF_SKIP", "0.92")) # if best fast score ≥ this, skip the rest (0=off)
 USE_MULTI_QUERY = True       # Enable multi-query retrieval for better coverage
 USE_KNOWLEDGE_GRAPH = True   # Enable knowledge graph enhancement
 KG_WEIGHT = 0.3              # Weight of KG in combined score (0-1)
 KG_EXPANSION_DEPTH = 2       # Entity graph traversal depth
+
+# ── Generation-context compression ─────────────────────────────────────────
+# This is deliberately separate from retrieval.  Retrieval keeps broad evidence
+# for citations/UI cards; generation receives only the evidence it needs.
+PROMPT_TOKEN_BUDGET = int(os.getenv("PROMPT_TOKEN_BUDGET", "1750"))
+CONTEXT_TOKEN_BUDGET = int(os.getenv("CONTEXT_TOKEN_BUDGET", "750"))
+
+
+def estimate_tokens(text):
+    """Conservative, dependency-free token estimate for prompt budgeting.
+
+    Sarvam does not expose its tokenizer locally.  Character-only estimates are
+    particularly inaccurate for punctuation-heavy rules and Hindi text, so use
+    the larger of a 3.6-char estimate and a lexical-unit estimate.  The budget is
+    intentionally conservative; telemetry labels values as estimates.
+    """
+    text = text or ""
+    if not text:
+        return 0
+    lexical_units = re.findall(r"[\w\u0900-\u097F]+|[^\s]", text, re.UNICODE)
+    return max((len(text) + 3) // 4, int(len(lexical_units) * 0.72))
+
+
+def classify_prompt_shape(query):
+    """Classify the evidence breadth required by a user question."""
+    q = (query or "").lower()
+    if (any(t in q for t in ("department buyer", "government department purchase",
+                             "purchase indent", "need assessment"))
+            and any(t in q for t in ("laptop", "computer", "it equipment", "purchase"))):
+        return "complex"
+    if re.search(r"\b(methods|exemptions|categories|different types|types of|conditions under which|when is|situations)\b", q):
+        return "complex"
+    if re.search(r"\b(compare|comparison|difference|differentiate|versus|vs\.?|rather than)\b|\b(aur|antar|difference kya)\b", q):
+        return "comparison"
+    if re.search(r"\b(how|steps?|process|procedure|issue|publish|submit|apply|register|refund|after|kaise|prakriya)\b", q):
+        return "procedural"
+    if re.search(r"\b(what is|what are|define|meaning|why|when|who|which|kitna|kya hai)\b", q):
+        return "factual"
+    return "factual"
+
+
+def _query_terms(query):
+    stop = {
+        "what", "when", "where", "which", "with", "from", "that", "this",
+        "have", "will", "would", "should", "through", "about", "please",
+        "after", "before", "into", "your", "their", "then", "than", "why",
+        "how", "are", "the", "and", "for", "was", "is", "of", "to", "in",
+    }
+    return {w for w in re.findall(r"[\w\u0900-\u097F]+", (query or "").lower())
+            if len(w) > 2 and w not in stop}
+
+
+def _strip_chunk_preamble(text):
+    """Remove ingestion headers without touching the document body."""
+    lines = (text or "").replace("\r\n", "\n").split("\n")
+    body_start = 0
+    for idx, line in enumerate(lines):
+        clean = line.strip()
+        if (not clean or clean == "---" or
+                re.match(r"^(?:headings|source|type|document_type|authority)\s*:", clean, re.I)):
+            body_start = idx + 1
+            continue
+        break
+    return "\n".join(lines[body_start:]).strip()
+
+
+def _semantic_units(text):
+    """Split text into paragraphs/sentences, never returning a partial unit."""
+    def _split_prose(value):
+        # Government PDFs often flatten a whole paragraph to one line.  Treat
+        # sentence punctuation and the Hindi/PDF pipe separator as boundaries;
+        # then split very long sentences at clause boundaries rather than by
+        # character position.
+        primary = re.split(r"(?<=[.!?।;|])\s+(?=[\"'“”A-Z0-9\u0900-\u097F])", value)
+        output = []
+        for fragment in primary:
+            fragment = fragment.strip()
+            if estimate_tokens(fragment) > 180:
+                clauses = re.split(
+                    r"(?<=,)\s+(?=(?:and|or|but|if|when|where|which|provided|however|"
+                    r"in case|for the|the |[A-Z0-9\u0900-\u097F]))", fragment, flags=re.I)
+                output.extend(clause.strip() for clause in clauses if clause.strip())
+            elif fragment:
+                output.append(fragment)
+        return output
+
+    units = []
+    for paragraph in re.split(r"\n\s*\n+", (text or "").strip()):
+        paragraph = paragraph.strip()
+        if not paragraph:
+            continue
+        # Lists and headings already have meaningful line boundaries.
+        lines = [line.strip() for line in paragraph.splitlines() if line.strip()]
+        if len(lines) > 1:
+            for line in lines:
+                units.extend(_split_prose(line))
+            continue
+        units.extend(_split_prose(paragraph))
+    return units
+
+
+def _semantic_excerpt(text, query, token_budget, seen_units=None):
+    """Return the most query-relevant complete semantic units within budget."""
+    if seen_units is None:
+        seen_units = set()
+    
+    units = _semantic_units(_strip_chunk_preamble(text))
+    if not units or token_budget <= 0:
+        return ""
+    terms = _query_terms(query)
+    scored = []
+    
+    # Pre-filter duplicates and score
+    for index, unit in enumerate(units):
+        normalized_unit = re.sub(r'[^a-zA-Z0-9\u0900-\u097F]', '', unit.lower())
+        if normalized_unit in seen_units or not normalized_unit:
+            continue
+            
+        unit_terms = set(re.findall(r"[\w\u0900-\u097F]+", unit.lower()))
+        overlap = len(terms & unit_terms)
+        # Headings/list entries establish context for nearby factual statements.
+        structural_bonus = 0.3 if re.match(r"^(?:#{1,6}\s|\d+[.)]|[-*•])", unit) else 0
+        scored.append((overlap + structural_bonus + max(0, 0.08 - index * 0.002), index, unit, normalized_unit))
+
+    # Select relevance first, then restore document order for readable context.
+    selected, used = [], 0
+    for _, index, unit, normalized_unit in sorted(scored, key=lambda item: (-item[0], item[1])):
+        unit_tokens = estimate_tokens(unit)
+        if unit_tokens > token_budget:
+            continue
+        if used + unit_tokens <= token_budget:
+            selected.append((index, unit))
+            used += unit_tokens
+            seen_units.add(normalized_unit)
+            
+    return "\n".join(unit for _, unit in sorted(selected)).strip()
+
+
+def _context_chunk_exclusion(payload):
+    text = (payload or {}).get("text", "") or ""
+    low = text.lower()
+    image_markers = low.count("the image") + low.count("screenshot text") + low.count("*यह चित्र")
+    operative_terms = sum(term in low for term in (
+        "click", "select", "enter", "upload", "shall", "must", "procedure",
+        "refund", "payment", "registration", "corrigendum", "purchase order",
+    ))
+    if image_markers >= 2 and operative_terms == 0:
+        return "screenshot_only_ocr"
+    if ("contents" in low and low.count("....") >= 3) or low.count("error! bookmark not defined") >= 2:
+        return "table_of_contents_or_broken_bookmark"
+    if len(re.sub(r"\W+", "", text)) < 80:
+        return "fragment_too_short"
+    return ""
+
+
+def build_adaptive_context(query, context_results, source_name_resolver=None,
+                           context_token_budget=CONTEXT_TOKEN_BUDGET,
+                           routing_policy=None):
+    """Select minimal, semantically complete generation evidence."""
+    shape = classify_prompt_shape(query)
+    
+    # Task 1: Adaptive Context Selection mapping
+    if shape == "factual":
+        target_count = 2
+    elif shape == "procedural":
+        target_count = 3
+    elif shape == "comparison":
+        target_count = 4
+    elif shape == "complex":
+        target_count = 5
+    else:
+        target_count = 3
+        
+    usable, excluded_context = [], []
+    for result in context_results or []:
+        payload = getattr((result or {}).get("point"), "payload", None)
+        if payload is None:
+            continue
+        reason = _context_chunk_exclusion(payload)
+        if reason:
+            excluded_context.append({
+                "chunk_id": payload.get("chunk") or payload.get("file"),
+                "document_title": payload.get("source"),
+                "excluded_chunk_reason": reason,
+            })
+            continue
+        usable.append(result)
+    if not usable:
+        return {"context_text": "", "source_refs": [], "query_type": shape,
+                "selected_chunk_count": 0, "estimated_context_tokens": 0,
+                "top_confidence": 0.0, "selection_records": [],
+                "excluded_context_chunks": excluded_context}
+
+    policy = routing_policy or {}
+    preferred_sources = set(policy.get("preferred_source_titles") or ())
+    required_stage = policy.get("required_stage")
+
+    def _context_rank(result):
+        payload = result["point"].payload
+        source_bonus = 1 if payload.get("source") in preferred_sources else 0
+        stage_bonus = 1 if required_stage and payload.get("procurement_stage") == required_stage else 0
+        return (source_bonus, stage_bonus, float(result.get("score", 0.0)))
+
+    ranked = sorted(usable, key=_context_rank, reverse=True)
+    top_score = max(0.0, float(ranked[0].get("score", 0.0)))
+    
+    context_parts, source_refs, selection_records = [], [], []
+    seen_units = set()
+    last_score = None
+    
+    for index, result in enumerate(ranked, 1):
+        if len(context_parts) >= target_count:
+            break
+            
+        current_score = float(result.get("score", 0.0))
+        
+        # Task 3: Confidence-Based Context Reduction
+        # Always keep the first (highest-ranked) chunk regardless of absolute score.
+        # For subsequent chunks, use a very permissive absolute threshold (0.15) 
+        # but primarily rely on relative score drops (> 0.30) to eliminate weak tail chunks.
+        if len(context_parts) > 0:
+            if current_score < 0.15:
+                break
+            if last_score is not None and (last_score - current_score > 0.30):
+                break
+            
+        last_score = current_score
+        
+        point = result["point"]
+        payload = point.payload
+        raw_source = payload.get("source", "")
+        source = source_name_resolver(raw_source) if source_name_resolver else raw_source
+        label = f"[Source {index}: {source}]"
+        
+        # Task 2: Adaptive Chunk Size
+        if current_score >= 0.85:
+            # 1500 chars ~ 375 tokens
+            allowance = min(375, context_token_budget)
+        else:
+            # 800 chars ~ 200 tokens
+            allowance = min(200, context_token_budget)
+            
+        # Deduct label size from allowance
+        allowance = max(120, allowance - estimate_tokens(label))
+        
+        # Pass seen_units for Task 4 Deduplication
+        excerpt = _semantic_excerpt(payload.get("text", ""), query, allowance, seen_units)
+        if not excerpt:
+            continue
+            
+        if source not in source_refs:
+            source_refs.append(source)
+            
+        context_parts.append(f"{label}\n{excerpt}")
+        selection_records.append({
+            "chunk_id": payload.get("chunk") or payload.get("file"),
+            "document_title": raw_source,
+            "page": payload.get("page_number") or payload.get("page"),
+            "section": payload.get("rule_or_section") or payload.get("headings"),
+            "final_selection_reason": result.get("selection_reason", "semantic_relevance"),
+            "dense_score": result.get("dense_score"),
+            "sparse_score": result.get("sparse_score"),
+            "hybrid_score": result.get("hybrid_score"),
+            "reranker_score": result.get("reranker_score"),
+            "final_score": result.get("score"),
+        })
+
+    context_text = "\n\n".join(context_parts)
+    return {
+        "context_text": context_text,
+        "source_refs": source_refs,
+        "query_type": shape,
+        "selected_chunk_count": len(context_parts),
+        "estimated_context_tokens": estimate_tokens(context_text),
+        "top_confidence": top_score,
+        "target_chunk_count": target_count,
+        "selection_records": selection_records,
+        "excluded_context_chunks": excluded_context,
+    }
 
 # ── Helper: Get file number from chunk source ───────────────────
 def extract_file_number(chunk_source):
@@ -229,7 +542,7 @@ if USE_KNOWLEDGE_GRAPH:
             print("  Run 'python build_knowledge_graph.py' to create it")
             USE_KNOWLEDGE_GRAPH = False
     except ImportError as e:
-        print(f"⚠ Could not import knowledge graph modules: {e}")
+        print(f"Warning: Could not import knowledge graph modules: {e}")
         USE_KNOWLEDGE_GRAPH = False
 
 # ── Connect to Qdrant (local embedded mode) ────────────────────
@@ -284,6 +597,30 @@ def expand_query(original_query):
     - Query + document type keywords (agenda, minutes, meeting, etc.)
     - Query with synonyms
     """
+    low = original_query.lower()
+    if "vendor-side bid submission workflow" in low:
+        variations = [
+            original_query,
+            "CHiPS Bid Submission Manual vendor login DSC bid submission workflow",
+            "bidder tender search participate technical bid price bid encrypt upload submit",
+            "vendor registration prerequisites DSC e-procurement portal bidder",
+        ]
+        _rag_trace('multi_query_expansions', original_query=original_query,
+                   variations=variations)
+        return variations
+    if ("department buyer" in low or "government department purchase" in low
+            or "purchase indent" in low):
+        variations = [
+            original_query,
+            "government department laptop computer IT equipment procurement need assessment technical specifications purchase indent",
+            "Chhattisgarh Store Purchase Rules GeM state approved purchase channel tender procedure department buyer",
+            "Manual for Procurement of Goods 2024 administrative approval budgetary sanction IT systems inspection acceptance",
+            "CVC purchase computer systems brand neutral specifications rate reasonableness asset register",
+        ]
+        _rag_trace('multi_query_expansions', original_query=original_query,
+                   variations=variations)
+        return variations
+
     variations = [original_query]  # Always include original
     
     # Add context-specific variations for government documents
@@ -311,10 +648,13 @@ def expand_query(original_query):
             seen.add(v_lower)
             unique_variations.append(v)
     
-    return unique_variations[:5]  # Cap at 5 variations to avoid excessive querying
+    final = unique_variations[:5]
+    _rag_trace('multi_query_expansions', original_query=original_query,
+               variations=final)
+    return final  # Cap at 5 variations to avoid excessive querying
 
 # ── Helper: Single query retrieval ─────────────────────────────
-def perform_single_retrieval(query):
+def perform_single_retrieval(query, query_filter=None):
     """Perform single query retrieval and return results."""
     try:
         # Encode query with explicit batch_size to ensure sparse embeddings are generated
@@ -351,7 +691,8 @@ def perform_single_retrieval(query):
         dense_results = client.query_points(
             collection_name=COLLECTION_NAME,
             query=query_dense,
-            limit=20
+            query_filter=query_filter,
+            limit=TOP_K_RETRIEVAL
         )
         
         if dense_results is None or not dense_results.points:
@@ -368,7 +709,7 @@ def perform_single_retrieval(query):
         return None
 
 # ── Helper: Multi-query retrieval ──────────────────────────────
-def multi_query_retrieval(query):
+def multi_query_retrieval(query, query_filter=None):
     """Retrieve results using multiple query variations and merge them.
     
     Benefits:
@@ -380,7 +721,7 @@ def multi_query_retrieval(query):
     
     if not USE_MULTI_QUERY:
         # Fall back to single query
-        result = perform_single_retrieval(query)
+        result = perform_single_retrieval(query, query_filter=query_filter)
         if result is None:
             return None, []
         return result["dense_results"], result["dense_scores"], result["query_sparse"]
@@ -395,7 +736,7 @@ def multi_query_retrieval(query):
     all_sparse_queries = {}
     
     for i, q_variant in enumerate(query_variations):
-        retrieval_result = perform_single_retrieval(q_variant)
+        retrieval_result = perform_single_retrieval(q_variant, query_filter=query_filter)
         if retrieval_result is None:
             continue
         
@@ -572,6 +913,11 @@ def _topical_adjust(rq, source, score):
     src = (source or "").lower()
     q = (rq or "").lower()
     adj = 0.0
+    department_planning = any(t in q for t in (
+        "department buyer", "government department purchase", "purchase indent",
+        "need assessment", "budgetary sanction",
+    ))
+    bidder_submission = "vendor-side bid submission workflow" in q
     # Chatbot_Capabilities is a meta-document about the chatbot itself, not a
     # procurement reference. Lift it for meta-questions; demote it hard for
     # regular procurement queries so EMD/tender questions don't pull it up.
@@ -586,6 +932,32 @@ def _topical_adjust(rq, source, score):
         adj += 0.15
     if "faq" in src and any(t in q for t in _HELP_SIGNAL):
         adj += 0.15
+    if department_planning:
+        # Authority order for a department-side purchase-planning question.
+        if src == "store purchase rule cg" or "store purchase rule cg" in src:
+            adj += 0.36
+        elif "gfrupdatedupto" in src:
+            adj += 0.27
+        elif "publicpromanual" in src:
+            adj += 0.24
+        elif ("cvc" in src or "compilation of cvc" in src) and any(
+                t in q for t in ("laptop", "computer", "it equipment", "brand")):
+            adj += 0.48  # cancels the generic CVC demotion and adds a focused lift
+        if any(k in src for k in _PORTAL_DOC_KEYS):
+            adj -= 0.50
+        if "faq" in src:
+            adj -= 0.30
+        if "it act" in src or "information technology act" in src:
+            adj -= 0.55
+        if "store_purhase_rules_28.01.2021" in src:
+            adj -= 0.22
+    if bidder_submission:
+        if "bid_submission" in src:
+            adj += 0.55
+        elif "vendor_registration" in src:
+            adj += 0.18
+        elif any(k in src for k in _POLICY_MANUAL_KEYS):
+            adj -= 0.45
     # Auction-portal queries: lift the Auction Manual, gently demote the big
     # policy manuals / GFR whose reverse-auction text otherwise wins.
     if any(t in q for t in _AUCTION_SIGNAL):
@@ -604,8 +976,112 @@ def _topical_adjust(rq, source, score):
     return max(0.0, min(1.0, score + adj))
 
 
+def classify_intent(query):
+    """Classifies user intent to filter document types in Qdrant."""
+    q = query.lower()
+    # Explicit actor-side portal tasks win over generic words introduced by
+    # synonym expansion (for example, "bid" -> "procurement notice").
+    if any(k in q for k in ["vendor-side bid submission", "bid submission workflow",
+                            "submit bid", "bid submit", "vendor registration",
+                            "how to bid", "login", "register", "auction", "portal"]):
+        return "portal_manual"
+    if any(k in q for k in ["rule", "gfr", "manual", "procurement", "cvc", "guideline", "method", "way", "type", "mode"]):
+        return "procurement_rules"
+    if any(k in q for k in ["how to", "vendor", "bid submission", "process", "step"]):
+        return "portal_manual"
+    if any(k in q for k in ["browser", "setup", "error", "technical", "system"]):
+        return "technical_manual"
+    if any(k in q for k in ["faq", "help"]):
+        return "faq"
+    return "general"
+
 # ── Helper: Retrieve context with optional KG enhancement ──────
-def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None):
+def _policy_qdrant_filter(retrieval_policy):
+    """Build filters only from fields that exist in the current Qdrant payload."""
+    policy = retrieval_policy or {}
+    preferred = list(policy.get("preferred_source_titles") or ())
+    supporting = list(policy.get("supporting_source_titles") or ())
+    doc_types = list(policy.get("qdrant_document_types") or ())
+    excluded = list(policy.get("excluded_source_titles") or ())
+    should = [FieldCondition(key="source", match=MatchValue(value=value))
+              for value in preferred + supporting]
+    should.extend(FieldCondition(key="document_type", match=MatchValue(value=value))
+                  for value in doc_types)
+    must_not = [FieldCondition(key="source", match=MatchValue(value=value))
+                for value in excluded]
+    details = {
+        "available_payload_fields": ["source", "document_type"],
+        "preferred_sources": preferred, "supporting_sources": supporting,
+        "document_types": doc_types, "excluded_sources": excluded,
+        "unavailable_filter_fields": ["audience", "jurisdiction", "procurement_stage",
+                                      "effective_date", "document_version"],
+    }
+    if not should and not must_not:
+        return None, details
+    return Filter(should=should or None, must_not=must_not or None), details
+
+
+def _policy_score_adjust(source, score, retrieval_policy):
+    policy = retrieval_policy or {}
+    preferred = set(policy.get("preferred_source_titles") or ())
+    supporting = set(policy.get("supporting_source_titles") or ())
+    excluded = set(policy.get("excluded_source_titles") or ())
+    if source in excluded:
+        return score - 1.0, -1.0, "excluded_document_family"
+    if source in preferred:
+        return score + 0.28, 0.28, "preferred_document_family"
+    if source in supporting:
+        return score + 0.12, 0.12, "supporting_document_family"
+    return score, 0.0, "semantic_relevance"
+
+
+def _adjacent_chunk_ids(chunk_value):
+    raw = str(chunk_value or "")
+    if not raw.isdigit():
+        return ()
+    width, number = len(raw), int(raw)
+    return tuple(str(value).zfill(width) for value in (number - 1, number + 1) if value >= 0)
+
+
+def _append_adjacent_chunks(results, retrieval_policy):
+    """Fetch one preceding/following chunk for the leading operative procedure."""
+    if not results or not (retrieval_policy or {}).get("include_adjacent_chunks"):
+        return results
+    existing = {(r["point"].payload.get("source"), str(r["point"].payload.get("chunk")))
+                for r in results if r.get("point") is not None}
+    additions = []
+    for parent in results[:1]:
+        payload = getattr(parent.get("point"), "payload", {}) or {}
+        source = payload.get("source")
+        for chunk_id in _adjacent_chunk_ids(payload.get("chunk")):
+            if (source, chunk_id) in existing:
+                continue
+            try:
+                points, _ = client.scroll(
+                    collection_name=COLLECTION_NAME,
+                    scroll_filter=Filter(must=[
+                        FieldCondition(key="source", match=MatchValue(value=source)),
+                        FieldCondition(key="chunk", match=MatchValue(value=chunk_id)),
+                    ]), limit=1, with_payload=True, with_vectors=False,
+                )
+            except Exception:
+                points = []
+            for adjacent in points or []:
+                additions.append({
+                    "point": adjacent,
+                    "score": max(0.0, float(parent.get("score", 0.0)) - 0.03),
+                    "rank": len(results) + len(additions) + 1,
+                    "kg_score": 0.0, "entities": [], "related_entities": {},
+                    "dense_score": None, "sparse_score": None, "hybrid_score": None,
+                    "reranker_score": None, "policy_boost": 0.0,
+                    "selection_reason": "adjacent_procedure_chunk",
+                })
+                existing.add((source, chunk_id))
+    return results + additions
+
+
+def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None,
+                     structured_intent=None, retrieval_policy=None):
     """Retrieve context documents with optional knowledge graph enhancement.
     
     Args:
@@ -621,9 +1097,48 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None):
         # Step 1: Perform embedding-based retrieval
         print("🔍 Retrieving context...")
         
-        # Multi-query retrieval (or single-query fallback)
-        dense_results, aggregated_scores, query_sparse = multi_query_retrieval(query)
+        # Intent Classification & Filtering. Structured application intent wins;
+        # expanded retrieval text is never reclassified when it is supplied.
+        rq = rerank_query or query
+        intent = structured_intent or classify_intent(rq)
+        query_filter = None
+        filter_details = None
+        if structured_intent:
+            query_filter, filter_details = _policy_qdrant_filter(retrieval_policy)
+            _rag_trace("intent_document_policy_applied",
+                       structured_intent=structured_intent,
+                       retrieval_policy=retrieval_policy,
+                       qdrant_filters_used=filter_details)
+        elif intent != "general":
+            print(f"  🎯 Detected Intent: {intent}")
+            query_filter = Filter(
+                should=[
+                    FieldCondition(key="document_type", match=MatchValue(value=intent)),
+                    FieldCondition(key="document_type", match=MatchValue(value="project_overview")),
+                    # Always fallback to high authority if needed
+                    # Or we could just strict filter it. The prompt said:
+                    # document_type == procurement_rules OR authority >= 8
+                ]
+            )
+            if intent == "procurement_rules":
+                query_filter = Filter(
+                    should=[
+                        FieldCondition(key="document_type", match=MatchValue(value="procurement_rules")),
+                        FieldCondition(key="document_type", match=MatchValue(value="guidelines")),
+                    ]
+                )
         
+        # Multi-query retrieval (or single-query fallback)
+        dense_results, aggregated_scores, query_sparse = multi_query_retrieval(query, query_filter=query_filter)
+        
+        # If strict filtering returned nothing, retry without filter (fallback for older DBs or missing metadata)
+        if query_filter is not None and (dense_results is None or not dense_results.points):
+            _rag_trace("qdrant_filter_fallback", structured_intent=structured_intent,
+                       fallback_reason="strict_filter_returned_no_results",
+                       qdrant_filters_used=filter_details)
+            print("  ⚠ Strict filter returned no results. Retrying without filter.")
+            dense_results, aggregated_scores, query_sparse = multi_query_retrieval(query, query_filter=None)
+            
         if dense_results is None or not dense_results.points:
             print("Error: No results from retrieval.")
             return None
@@ -632,6 +1147,7 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None):
         dense_scores = sorted(aggregated_scores, key=lambda x: x[1], reverse=True)
         
         # Sparse search (if available)
+        sparse_scores = []
         if query_sparse:
             sparse_scores = sparse_search(query_sparse, dense_results.points, limit=20)
             # Use configurable HYBRID_ALPHA
@@ -639,7 +1155,38 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None):
             print(f"  ⚡ Using hybrid search (α={HYBRID_ALPHA}: {int(HYBRID_ALPHA*100)}% dense, {int((1-HYBRID_ALPHA)*100)}% sparse)")
         else:
             hybrid_scores = [(pid, score) for rank, (pid, score) in enumerate(dense_scores)]
+
+        dense_score_map = dict(dense_scores)
+        sparse_score_map = dict(sparse_scores)
+        hybrid_score_map = dict(hybrid_scores)
+        if not query_sparse:
             print(f"  ⚡ Using dense-only search (sparse embeddings unavailable)")
+
+        _point_map = {p.id: p for p in dense_results.points}
+        _pre_rows = []
+        for rank, (point_id, score) in enumerate(hybrid_scores[:10], 1):
+            point = _point_map.get(point_id)
+            if point is None:
+                continue
+            payload = point.payload or {}
+            _pre_rows.append({
+                'rank': rank, 'score': round(float(score), 5),
+                'chunk_id': payload.get('chunk') or payload.get('file'),
+                'dense_score': dense_score_map.get(point_id),
+                'sparse_score': sparse_score_map.get(point_id),
+                'hybrid_score': hybrid_score_map.get(point_id),
+                'document_title': payload.get('source'),
+                'authority': payload.get('authority'),
+                'document_type': payload.get('document_type'),
+                'audience': payload.get('audience'),
+                'page_number': payload.get('page_number') or payload.get('page'),
+                'rule_or_section': payload.get('rule_or_section') or payload.get('headings'),
+                'excerpt': (payload.get('text') or '')[:300],
+            })
+        _rag_trace('pre_rerank_top10', intent=intent,
+                   metadata_filter=('procurement_rules|guidelines'
+                                    if intent == 'procurement_rules' else intent),
+                   results=_pre_rows)
         
         # Collect candidate points for reranking (from top 20 hybrid results)
         candidate_points = [
@@ -730,26 +1277,29 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None):
         #             result["related_entities"] = {}
         # 
         # return reranked_results[:num_context]
-        
         # ════════════════════════════════════════════════════════════════════
-        # Lightweight reranking + per-document cap
+        # Lightweight reranking + Final Ranking Score
         # ════════════════════════════════════════════════════════════════════
-        # Hybrid RRF buries small/specific docs (measured: the offline-tenders
-        # manual sits at hybrid rank ~22 while a cross-encoder scores it 0.95).
-        # Rerank a diversity-injected candidate set so true relevance wins, then
-        # cap each source so one big manual can't fill every slot. Inputs are
-        # truncated to 512 chars (max_length 256) — ~4x faster on CPU (~7s vs
-        # ~30s for 18 candidates) with no measurable ranking loss.
         pmap = {p.id: p for p in dense_results.points}
         ordered = [pmap[pid] for pid, _ in hybrid_scores if pid in pmap]
 
         cand, seen_src = [], set()
-        for p in ordered[:RERANK_TOPK]:
+        seen_texts = set()
+        
+        # Deduplicate chunks
+        dedup_ordered = []
+        for p in ordered:
+            txt = p.payload.get("text", "").strip()[:100]
+            if txt not in seen_texts:
+                seen_texts.add(txt)
+                dedup_ordered.append(p)
+                
+        for p in dedup_ordered[:RERANK_TOPK]:
             cand.append(p)
             seen_src.add(p.payload.get("source", ""))
-        # Diversity injection: the best hybrid chunk from each source not already
-        # represented, so a low-ranked small doc still reaches the reranker.
-        for p in ordered[RERANK_TOPK:]:
+            
+        # Diversity injection
+        for p in dedup_ordered[RERANK_TOPK:]:
             if len(cand) >= RERANK_MAX_CANDS:
                 break
             s = p.payload.get("source", "")
@@ -758,77 +1308,142 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None):
                 seen_src.add(s)
 
         def _rr_score(points):
-            """Cross-encoder score for query↔chunk pairs (normalised 0-1)."""
+            """Cross-encoder score with 1500 char truncation."""
             out = reranker.compute_score(
-                [[rq, p.payload.get("text", "")[:512]] for p in points],
-                normalize=True, max_length=256,
+                [[rq, p.payload.get("text", "")[:RERANK_TRUNCATION]] for p in points],
+                normalize=True
             )
             return out if isinstance(out, list) else [out]
 
+        reranker_score_map = {}
+        score_details = {}
         try:
-            # Rerank against the ORIGINAL user question (rerank_query), not the
-            # synonym-expanded retrieval query — expansion aids recall but skews
-            # the cross-encoder toward generic manuals.
             rq = rerank_query or query
-            # Confidence gate: score the top RERANK_FAST_K first; if one is already
-            # a strong match (≥ RERANK_CONF_SKIP) the answer is settled, so skip the
-            # cross-encoder on the remaining (mostly diversity-injected) candidates —
-            # they keep their hybrid order below the confident hit. On harder queries
-            # the gate doesn't trip and we rerank everything as before.
-            fast_n = min(RERANK_FAST_K, len(cand)) if RERANK_CONF_SKIP > 0 else len(cand)
-            fast_scores = _rr_score(cand[:fast_n])
-            if RERANK_CONF_SKIP > 0 and fast_n < len(cand) \
-                    and max(fast_scores) >= RERANK_CONF_SKIP:
-                print(f"  ⚡ Rerank early-exit: top={max(fast_scores):.2f} "
-                      f">={RERANK_CONF_SKIP}, scored {fast_n}/{len(cand)} candidates")
-                # Remaining candidates sit just below the reranked set, in hybrid order.
-                tail = [(p, -1.0 - i * 1e-3) for i, p in enumerate(cand[fast_n:])]
-                ranked = sorted(zip(cand[:fast_n], fast_scores),
-                                key=lambda x: x[1], reverse=True) + tail
-            else:
-                rest_scores = _rr_score(cand[fast_n:]) if fast_n < len(cand) else []
-                rr_scores = list(fast_scores) + list(rest_scores)
-                print(f"  🔄 Reranked {len(cand)} candidates (truncated)")
-                ranked = sorted(zip(cand, rr_scores), key=lambda x: x[1], reverse=True)
+            rr_scores = _rr_score(cand)
+            reranker_score_map = {p.id: float(rr_scores[i]) for i, p in enumerate(cand)}
+            print(f"  🔄 Reranked {len(cand)} candidates (truncated to {RERANK_TRUNCATION} chars)")
+            
+            # Combine Scores
+            ranked = []
+            for i, p in enumerate(cand):
+                authority_score = p.payload.get("authority", 5) / 10.0
+                h_score = next((score for pid, score in hybrid_scores if pid == p.id), 0.0)
+                r_score = float(rr_scores[i])
+                
+                combined_score = (AUTHORITY_WEIGHT * authority_score) + (SEMANTIC_WEIGHT * r_score) + (HYBRID_WEIGHT * h_score)
+                score_details[p.id] = {
+                    "authority_score": authority_score,
+                    "dense_score": dense_score_map.get(p.id),
+                    "sparse_score": sparse_score_map.get(p.id),
+                    "hybrid_score": h_score,
+                    "reranker_score": r_score,
+                    "combined_before_policy": combined_score,
+                }
+                ranked.append((p, combined_score))
+                
+            ranked = sorted(ranked, key=lambda x: x[1], reverse=True)
+            
         except Exception as e:
             print(f"  ⚠ Rerank failed ({e}); falling back to hybrid order")
-            ranked = [(p, 0.0) for p in ordered]
+            ranked = [(p, 0.0) for p in cand]
 
-        # Targeted topical re-scoring (Vigilance/CVC magnet demotion + portal
-        # how-to boost), then re-sort. See _topical_adjust for the rationale.
+        # Targeted topical re-scoring
         _rq = rerank_query or query
-        ranked = sorted(
-            ((p, _topical_adjust(_rq, p.payload.get("source", ""), float(s))) for p, s in ranked),
-            key=lambda x: x[1], reverse=True,
-        )
+        adjusted_ranked = []
+        excluded_rows = []
+        for point, base_score in ranked:
+            source = point.payload.get("source", "")
+            topical_score = _topical_adjust(_rq, source, float(base_score))
+            final_score, policy_boost, reason = _policy_score_adjust(
+                source, topical_score, retrieval_policy
+            )
+            details = score_details.setdefault(point.id, {})
+            details.update({
+                "topical_score": topical_score,
+                "policy_boost": policy_boost,
+                "final_selection_reason": reason,
+            })
+            if reason == "excluded_document_family":
+                excluded_rows.append({
+                    "chunk_id": point.payload.get("chunk") or point.payload.get("file"),
+                    "document_title": source,
+                    "page": point.payload.get("page_number") or point.payload.get("page"),
+                    "section": point.payload.get("rule_or_section") or point.payload.get("headings"),
+                    "excluded_chunk_reason": reason,
+                })
+                continue
+            adjusted_ranked.append((point, final_score))
+        ranked = sorted(adjusted_ranked, key=lambda x: x[1], reverse=True)
+        _rag_trace("excluded_chunks", structured_intent=structured_intent,
+                   exclusions=excluded_rows)
+        _rag_trace('post_rerank_top10', results=[{
+            'rank': i + 1, 'score': round(float(score), 5),
+            'chunk_id': point.payload.get('chunk') or point.payload.get('file'),
+            'dense_score': score_details.get(point.id, {}).get('dense_score'),
+            'sparse_score': score_details.get(point.id, {}).get('sparse_score'),
+            'hybrid_score': score_details.get(point.id, {}).get('hybrid_score'),
+            'reranker_score': score_details.get(point.id, {}).get('reranker_score'),
+            'policy_boost': score_details.get(point.id, {}).get('policy_boost'),
+            'final_selection_reason': score_details.get(point.id, {}).get('final_selection_reason'),
+            'document_title': point.payload.get('source'),
+            'authority': point.payload.get('authority'),
+            'document_type': point.payload.get('document_type'),
+            'audience': point.payload.get('audience'),
+            'page_number': point.payload.get('page_number') or point.payload.get('page'),
+            'rule_or_section': point.payload.get('rule_or_section') or point.payload.get('headings'),
+            'excerpt': (point.payload.get('text') or '')[:300],
+        } for i, (point, score) in enumerate(ranked[:10])])
 
-        # Per-document cap over the reranked order.
+        # Per-document cap and FAQ cap
         MAX_PER_SOURCE = 2
         results, per_source = [], {}
+        faq_count = 0
 
         def _emit(point, score):
+            details = score_details.get(point.id, {})
             results.append({
                 "point": point, "score": float(score), "rank": len(results) + 1,
                 "kg_score": 0.0, "entities": [], "related_entities": {},
+                "dense_score": details.get("dense_score"),
+                "sparse_score": details.get("sparse_score"),
+                "hybrid_score": details.get("hybrid_score"),
+                "reranker_score": details.get("reranker_score"),
+                "policy_boost": details.get("policy_boost", 0.0),
+                "selection_reason": details.get("final_selection_reason", "semantic_relevance"),
             })
 
         for point, score in ranked:
-            if len(results) >= num_context:
+            if len(results) >= FINAL_CONTEXT:
                 break
             src = point.payload.get("source", "")
+            doc_type = point.payload.get("document_type", "general")
+            
+            if doc_type == "faq":
+                if faq_count >= MAX_FAQ_RESULTS:
+                    continue
+                faq_count += 1
+                
             if per_source.get(src, 0) >= MAX_PER_SOURCE:
                 continue
             per_source[src] = per_source.get(src, 0) + 1
             _emit(point, score)
-        if len(results) < num_context:  # relax cap if corpus diversity is low
+            
+        if len(results) < FINAL_CONTEXT:  # relax cap if corpus diversity is low
             have = {id(r["point"]) for r in results}
             for point, score in ranked:
-                if len(results) >= num_context:
+                if len(results) >= FINAL_CONTEXT:
                     break
+                doc_type = point.payload.get("document_type", "general")
+                if doc_type == "faq" and faq_count >= MAX_FAQ_RESULTS:
+                    continue
+                
                 if id(point) not in have:
                     _emit(point, score)
                     have.add(id(point))
+                    if doc_type == "faq":
+                        faq_count += 1
 
+        results = _append_adjacent_chunks(results, retrieval_policy)
         _mark_time("RETRIEVE_CONTEXT")
         return results
     

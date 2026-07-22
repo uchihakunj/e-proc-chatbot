@@ -33,13 +33,25 @@ _STAGE_DEFAULTS: Dict[str, Dict[str, Any]] = {
         "input_dir": str(_PROJECT_ROOT / "02_optimization" / "output"),
         "output_dir": str(_PROJECT_ROOT / "03_chunking" / "output"),
         "model": "BAAI/bge-m3",
-        "max_tokens": 1024,
+        "max_tokens": 400,
     },
     "embeddings": {
         "chunk_dir": str(_PROJECT_ROOT / "03_chunking" / "output"),
         "qdrant_path": str(_PROJECT_ROOT / "04_embeddings_and_kg" / "db" / "qdrant_local"),
         "collection": "db3",
         "batch_size": 8,
+    },
+    "retrieval": {
+        "top_k_retrieval": 50,
+        "final_context": 8,
+        "rerank_truncation": 1500,
+        "max_faq_results": 2,
+        "authority_weight": 0.20,
+        "semantic_weight": 0.70,
+        "hybrid_weight": 0.10,
+        "verify_low_confidence": 0.55,
+        "verify_high_risk_intents": True,
+        "verify_on_mixed_documents": True,
     },
 }
 

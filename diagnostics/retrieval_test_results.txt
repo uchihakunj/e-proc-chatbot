@@ -1,0 +1,45 @@
+Initializing RAG Pipeline functions...
+
+Query: What are different ways of government procurement in Chhattisgarh?
+
+Detecting Intent...
+Intent: procurement_rules
+
+Metadata Filter:
+document_type == 'procurement_rules'
+
+Retrieving Documents...
+
+Retrieved Docs & Scores:
+[1] Source: store purchase rule cg | Type: procurement_rules | Auth: 10
+    Score: 0.5048
+    Text: Type: procurement_rules Authority: 10 Source: store purchase rule cg --- निविदा प्रणाली के माध्यम से सामग्री॰ वस्तुयें एवं सेवाएं का क्रय करना चाहे तोवे निविदा के माध्यम से सामग्री॰ वस्तुयें एवं सेवाए...
+
+[2] Source: store purchase rule cg | Type: procurement_rules | Auth: 10
+    Score: 0.4760
+    Text: Type: procurement_rules Authority: 10 Source: store purchase rule cg --- कार्यालयों द्वारा सीधे इन इकाईयों समूहों से किया जा सकेगा जिसके लिए पृथक से निविदा बुलाना आवश्यक नहीं होगा | उपनियम 8.२ छत्तीसग...
+
+[3] Source: Store_Purhase_Rules_28.01.2021 | Type: procurement_rules | Auth: 10
+    Score: 0.4032
+    Text: Type: procurement_rules Authority: 10 Headings: ['मण्डार क्रय नियम'] Source: Store_Purhase_Rules_28.01.2021 --- 1. नियम-1 (1) ये नियम छत्तीसगढ़ शासन भण्डार क्रय नियम 2002 कहलायेगें। 2. (2) इनका विस्ता...
+
+[4] Source: mannual procurement | Type: procurement_rules | Auth: 9
+    Score: 0.3346
+    Text: Type: procurement_rules Authority: 9 Source: mannual procurement --- from e-procurement as the bidders may face problems in obtaining digital signatures which is pre-requisite for bidding. Details abo...
+
+[5] Source: Store_Purhase_Rules_28.01.2021 | Type: procurement_rules | Auth: 10
+    Score: 0.2436
+    Text: Type: procurement_rules Authority: 10 Source: Store_Purhase_Rules_28.01.2021 --- ૦ छत्तीसगढ़ शासन भण्डार क्रय नियम 2002 (यथा संशोधित 2020)...
+
+[6] Source: FInal_GFR_upto_31_07_2024 | Type: procurement_rules | Auth: 10
+    Score: 0.2139
+    Text: Type: procurement_rules Authority: 10 Headings: ['Rule 153 Reserved Items and other'] Source: FInal_GFR_upto_31_07_2024 --- Purchase/ Price Preference Policy. (i) [The Central Government, through admi...
+
+[7] Source: Manual_for_Procurement_of_works_2019 | Type: procurement_rules | Auth: 9
+    Score: 0.2108
+    Text: Type: procurement_rules Authority: 9 Source: Manual_for_Procurement_of_works_2019 --- Ministries/ Departments which do not have a large volume of procurement or carry out procurements required only fo...
+
+[8] Source: FInal_GFR_upto_31_07_2024 | Type: procurement_rules | Auth: 10
+    Score: 0.2106
+    Text: Type: procurement_rules Authority: 10 Headings: ['Rule 156 Deleted.²⁵'] Source: FInal_GFR_upto_31_07_2024 --- **Rule 157** A demand for goods should not be divided into small quantities to make piecem...
+

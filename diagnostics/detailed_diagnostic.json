@@ -1,0 +1,725 @@
+{
+  "intent": "procurement_rules",
+  "metadata_filter": "{'should': [{'key': 'document_type', 'match': {'value': 'procurement_rules'}, 'range': None, 'geo_bounding_box': None, 'geo_radius': None, 'geo_polygon': None, 'values_count': None, 'is_empty': None, 'is_null': None}, {'key': 'document_type', 'match': {'value': 'guidelines'}, 'range': None, 'geo_bounding_box': None, 'geo_radius': None, 'geo_polygon': None, 'values_count': None, 'is_empty': None, 'is_null': None}], 'min_should': None, 'must': None, 'must_not': None}",
+  "filter_fallback_triggered": true,
+  "top_50_before_reranking": [
+    {
+      "source": "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS)",
+      "document_type": null
+    },
+    {
+      "source": "Chatbot_Capabilities",
+      "document_type": null
+    },
+    {
+      "source": "Pr\u00e9cis  e-Procurement Project",
+      "document_type": null
+    },
+    {
+      "source": "CHiPS_Bid_Submission_Manual_English",
+      "document_type": null
+    },
+    {
+      "source": "CHiPS_Vendor_Registration_Manual_English",
+      "document_type": null
+    },
+    {
+      "source": "Manual_for_Procurement_of_works_2019",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "Manual_for_Procurement_of_works_2019",
+      "document_type": null
+    },
+    {
+      "source": "Store_Purhase_Rules_28.01.2021",
+      "document_type": null
+    },
+    {
+      "source": "Store_Purhase_Rules_28.01.2021",
+      "document_type": null
+    },
+    {
+      "source": "store purchase rule cg",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS)",
+      "document_type": null
+    },
+    {
+      "source": "Guidelines_To_Bidders_EPS_v1.6",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "store purchase rule cg",
+      "document_type": null
+    },
+    {
+      "source": "FInal_GFR_upto_31_07_2024",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "CHiPS_Bid_Submission_Manual_English",
+      "document_type": null
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "Guidelines_To_Bidders_EPS_v1.6",
+      "document_type": null
+    },
+    {
+      "source": "Manual_for_Procurement_of_works_2019",
+      "document_type": null
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null
+    },
+    {
+      "source": "store purchase rule cg",
+      "document_type": null
+    },
+    {
+      "source": "Corrigendum_Instructions_to_department_users_and_bidders",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "Guidelines_To_Bidders_EPS_v1.6",
+      "document_type": null
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null
+    },
+    {
+      "source": "Manual_for_Procurement_of_works_2019",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "CHiPS_Bid_Submission_Manual_English",
+      "document_type": null
+    },
+    {
+      "source": "FInal_GFR_upto_31_07_2024",
+      "document_type": null
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null
+    }
+  ],
+  "ranked_chunks": [
+    {
+      "source": "Pr\u00e9cis  e-Procurement Project",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8863212466239929,
+      "cross_encoder_score": 0.8714636180862982,
+      "combined_score": 0.7986566424369812,
+      "text": "Source: Pr\u00e9cis  e-Procurement Project\n---\nPr\u00e9cis  e-Procurement Project\n\nTo increase the efficiency and transparency in public procurement activity, Government of Chhattisgarh was implemented a compre"
+    },
+    {
+      "source": "Chatbot_Capabilities",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8875334858894348,
+      "cross_encoder_score": 0.8182185649577243,
+      "combined_score": 0.7615063190460205,
+      "text": "[Title: Overview]\n\n# CHiPS e-Procurement AI Chatbot \u2014 Capabilities & What I Can Help With\n\n## Overview\n\n\u092e\u0948\u0902 CHiPS (Chhattisgarh e-Procurement Portal) \u0915\u0947 \u0932\u093f\u090f \u090f\u0915 AI \u0938\u0939\u093e\u092f\u0915 \u0939\u0942\u0901\u0964 \u092e\u0948\u0902 \u0906\u092a\u0915\u094b \u0938\u0930\u0915\u093e\u0930\u0940 \u0916\u0930\u0940\u0926 (Gove"
+    },
+    {
+      "source": "CHiPS_Bid_Submission_Manual_English",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8794276714324951,
+      "cross_encoder_score": 0.7014877255892386,
+      "combined_score": 0.6789841651916504,
+      "text": "Source: CHiPS_Bid_Submission_Manual_English\n---\n<!-- Page 3 -->\nReleasing \nCorrigendum \nPart \u2013 I \nOpening \nPart \u2013 II \nOpening \nCreate Tender \nWorkflow \nTrouble Shoot \n \n \n \n \nChhattisgarh infotech and"
+    },
+    {
+      "source": "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS)",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.9447593688964844,
+      "cross_encoder_score": 0.669470193978648,
+      "combined_score": 0.6631050705909729,
+      "text": "Source: FAQ of Chhattisgarh Infotech Promotion Society(CHIPS)\n---\nFAQ of Chhattisgarh Infotech Promotion \nSociety(CHIPS) \n1. What is E-Procurement? \nE-procurement (electronic procurement, sometimes al"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.801200922866828,
+      "cross_encoder_score": 0.6295846941893586,
+      "combined_score": 0.6208293782192338,
+      "text": "Headings: ['Chhattisgarh e-Procurement module']\nSource: structured\n---\nEMD online Payment Manual Version:2 31/10/2018\nSECTION 1: EMD Payment via CHALLAN\nSECTION 2: EMD Payment via INTERNET BANKING\nSEC"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8303894996643066,
+      "cross_encoder_score": 0.5433089064310033,
+      "combined_score": 0.5633551478385925,
+      "text": "Headings: ['Credible Chhattisgarh']\nSource: structured\n---\n GATEWAY (ATOM). PAY NOW, Forms = INDUSIND PAYMENT GATEWAY (ATOM). PAY NOW, eAuction = INDUSIND PAYMENT GATEWAY (ATOM). PAY NOW, Web Link = I"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7866837313362914,
+      "cross_encoder_score": 0.430273980854225,
+      "combined_score": 0.4798601597315867,
+      "text": "Headings: ['Credible Chhattisgarh']\nSource: structured\n---\nhttps://eprocdemo.cgstate.gov.in/CHEPS/payment/signInPayment Welcome to e-Procurement...\n*\u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c \u0936\u093e\u0938\u0928*\n*Credible Chhattisgarh*\n*\u0935\u093f\u0936\u094d\u0935\u0938\u0928\u0940\u092f "
+    },
+    {
+      "source": "Guidelines_To_Bidders_EPS_v1.6",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7664484120821229,
+      "cross_encoder_score": 0.3887866918300203,
+      "combined_score": 0.44879552548922647,
+      "text": "Source: Guidelines_To_Bidders_EPS_v1.6\n---\n1\n \n \n \n \n \nGuidelines for bidders on using integrated eProcurement \nSystem Govt. of Chhattisgarh \n \nhttps://eproc.cgstate.gov.in\n\n2\nChange Log \n \nVersion \nA"
+    },
+    {
+      "source": "Corrigendum_Instructions_to_department_users_and_bidders",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.6633423114568598,
+      "cross_encoder_score": 0.32580665994603897,
+      "combined_score": 0.39439889310791326,
+      "text": "Headings: ['eProcurement Project Govt. of']\nSource: structured\n---\nChhattisgarh\nManual on Corrigendum Issuance\nVersion: 1.0\n- \u2610 x\n*\u092f\u0939 \u091b\u0935\u093f \u090f\u0915 \u0935\u0947\u092c \u092c\u094d\u0930\u093e\u0909\u091c\u093c\u0930 \u0935\u093f\u0902\u0921\u094b \u0915\u094b \u0915\u0948\u092a\u094d\u091a\u0930 \u0915\u0930\u0924\u0940 \u0939\u0948 \u091c\u094b \u090f\u0915 \u0938\u0930\u0915\u093e\u0930\u0940 \u092a\u094b\u0930\u094d\u091f\u0932, \u0935"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7733453645019217,
+      "cross_encoder_score": 0.24811923685647902,
+      "combined_score": 0.35101800224972746,
+      "text": "Headings: ['VERY IMPORTANT: READ AND ACCEPT BEFORE PROCEEDING AHEAD']\nSource: structured\n---\nIt is mandatory that one reads and agrees to the conditions of the Terms of Use before final Registration i"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.792177602551172,
+      "cross_encoder_score": 0.24061197989704636,
+      "combined_score": 0.3476461461830497,
+      "text": "Headings: ['VERY IMPORTANT: READ AND ACCEPT BEFORE PROCEEDING AHEAD']\nSource: structured\n---\nIt is mandatory that one reads and agrees to the conditions of the Terms of Use before final Registration i"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.778115999505922,
+      "cross_encoder_score": 0.21940544373545323,
+      "combined_score": 0.3313954105654095,
+      "text": "Headings: ['Credible Chhattisgarh']\nSource: structured\n---\nhttps://eprocdemo.cgstate.gov.in/CHEPS/business/getPaymentAddAction.do?refreshPaymentMode=Y&refreshPaymentType=Y&OWASP_CSRFTOKEN=4EDG-FX6E We"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.6507028069472353,
+      "cross_encoder_score": 0.23106663815556133,
+      "combined_score": 0.32681692740361645,
+      "text": "Headings: ['PAYMENT GATEWAY TRANSACTION DETAILS']\nSource: structured\n---\nZCHIPSUAT30903\nZCHIPSUAT30903\nClick on Close\nclose\nCHIPS\n\u00a9 2015 Chhattisgarh Infotech Promotion Society (CHiPS) 3rd Floor, Stat"
+    },
+    {
+      "source": "Guidelines_To_Bidders_EPS_v1.6",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.793697624841878,
+      "cross_encoder_score": 0.1883945632608074,
+      "combined_score": 0.311245956766753,
+      "text": "Headings: ['Guidelines for bidders on using integrated eProcurement']\nSource: structured\n---\nSystem Govt. of Chhattisgarh\nhttps://eproc.cgstate.gov.in\n*CHIPS*\nChhattisgarh Infotech Promotion Society\n1"
+    },
+    {
+      "source": "store purchase rule cg",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.787647724923892,
+      "cross_encoder_score": 0.14012158275880413,
+      "combined_score": 0.27684988042355213,
+      "text": "Source: store purchase rule cg.pdf\n---\n0 \u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c \u0936\u093e\u0938\u0928 \u092d.\u0921\u093e\u0930 \u0915\u094d\u0930\u092f \u0928\u093f\u092f\u092e] 2002 (\u092f\u0925\u093e \u0938\u0902\u0936\u094b\u0927\u093f\u0924) \u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c \u0936\u093e\u0938\u0928 \u0935\u093e\u0923\u093f\u091c\u094d\u092f \u090f\u0935\u0902 \u0909\u0926\u094d\u092f\u094b\u0917 \u0935\u093f\u092d\u093e\u0917 (11 \u091c\u0941\u0932\u093e\u0908] 2024 \u0924\u0915 \u0905\u0926\u094d\u092f\u0924\u0928) 1 \u0905\u0928\u0941\u0915\u094d\u0930\u092e\u0923\u093f\u0915\u093e \u0915\u094d\u0930- \u0928\u093f\u092f\u092e \u0915\u094d\u0930\u092e\u093e\u0902\u0915 \u0935\u093f\u0935\u0930\u0923 \u092a\u0943\u0937"
+    },
+    {
+      "source": "CHiPS_Bid_Submission_Manual_English",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7859517733876679,
+      "cross_encoder_score": 0.09355190846916497,
+      "combined_score": 0.2440815132671823,
+      "text": "Source: CHiPS_Bid_Submission_Manual_English\n---\n[Screenshot text (OCR): Debit/CreditINet Card 0.10 Credible Chhattisgart Digital Certificate change Password 7777777777 Tenderts) Order(s) Claritication"
+    },
+    {
+      "source": "CHiPS_Vendor_Registration_Manual_English",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8354989886283875,
+      "cross_encoder_score": 0.08236527566902788,
+      "combined_score": 0.2412055879831314,
+      "text": "Source: CHiPS_Vendor_Registration_Manual_English\n---\n<!-- Page 1 -->\nChhattisgarh e-Procurement module \n \nVersion 2.3 \n \n31/10/2018\n\n[Screenshot text (OCR): SUPPLIER REGISTRATION MANUAL]\n\n<!-- Page 2 "
+    },
+    {
+      "source": "CHiPS_Bid_Submission_Manual_English",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.4764562889681042,
+      "cross_encoder_score": 0.11856143719791112,
+      "combined_score": 0.23063863493534822,
+      "text": "Source: CHiPS_Bid_Submission_Manual_English\n---\n<!-- Page 1 -->\nChhattisgarh e-Procurement module \n \nVersion 2.3 \n \n31/10/2018\n\n[Screenshot text (OCR): SUPPLIER MANUAL]\n\n<!-- Page 2 -->\nReleasing \nCor"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8064562987239151,
+      "cross_encoder_score": 0.061679603352689315,
+      "combined_score": 0.22382135221927404,
+      "text": "Headings: ['redible Chhattisgarh']\nSource: structured\n---\n\u0935\u093f\u0936\u094d\u0935\u0938\u0928\u0940\u092f \u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c\n*\u092f\u0939 \u091b\u0935\u093f \u092a\u093f\u0915\u094d\u0938\u0947\u0932\u0947\u091f\u0947\u0921 (\u092a\u093f\u0915\u094d\u0938\u0947\u0932-\u0906\u0930\u094d\u091f) \u0936\u0948\u0932\u0940 \u092e\u0947\u0902 \u092a\u094d\u0930\u0938\u094d\u0924\u0941\u0924 \u090f\u0915 \u092d\u094c\u0917\u094b\u0932\u093f\u0915 \u092e\u093e\u0928\u091a\u093f\u0924\u094d\u0930 \u0939\u0948, \u091c\u094b \u0938\u0902\u092d\u0935\u0924\u0903 \u090f\u0915 \u0926\u094d\u0935\u0940\u092a \u092f\u093e \u0924\u091f\u0940\u092f \u0915\u094d\u0937\u0947\u0924\u094d\u0930 \u0915\u093e \u092a\u094d\u0930\u0924\u093f\u0928\u093f"
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7784404420509952,
+      "cross_encoder_score": 0.06510753166649862,
+      "combined_score": 0.22341931637164855,
+      "text": "Source: mannual procurement.pdf\n---\nCPPP or engage any other service provider following due process. There are other service providers in Public Sector (e.g. MSTC) and Private sector which can be util"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.5599553551139435,
+      "cross_encoder_score": 0.09529970801569815,
+      "combined_score": 0.22270533112238305,
+      "text": "Headings: ['Credible Chhattisgarh']\nSource: structured\n---\n*The image displays a screenshot of a payment gateway interface, specifically the 'Credit Card' payment mode section. The interface is brande"
+    },
+    {
+      "source": "Store_Purhase_Rules_28.01.2021",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.815336204389041,
+      "cross_encoder_score": 0.05114580527724782,
+      "combined_score": 0.21733568413297757,
+      "text": "Source: Store_Purhase_Rules_28.01.2021\n---\n\u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c \u0936\u093e\u0938\u0928 \u092d\u0923\u094d\u0921\u093e\u0930 \u0915\u094d\u0930\u092f \u0928\u093f\u092f\u092e \u0968\u0966\u0966\u0968 (\u092f\u0925\u093e \u0938\u0902\u0936\u094b\u0927\u093f\u0924 \u0968\u0966\u0968\u0966)\n\n\u092e\u0923\u094d\u0921\u093e\u0930 \u0915\u094d\u0930\u092f \u0928\u093f\u092f\u092e \u0968\u0966\u0966\u0968 \u0915\u093e \u0909\u0926\u0926\u0947\u0936\u094d\u092f\n(\u0905)\n\u0930\u093e\u091c\u094d\u092f \u0936\u093e\u0938\u0928 \u0915\u0947 \u0935\u093f\u092d\u093e\u0917\u094b\u0902 \u0915\u094b \u0909\u091a\u094d\u091a \u0917\u0941\u0923\u0935\u0924\u094d\u0924\u093e \u0935\u093e\u0932\u0940 \u0938\u093e\u092e\u0917\u094d\u0930\u0940 \u0909\u091a\u093f\u0924 \u0926\u0930\u094b\u0902 \u092a"
+    },
+    {
+      "source": "Store_Purhase_Rules_28.01.2021",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8183835981314904,
+      "cross_encoder_score": 0.04846976011855808,
+      "combined_score": 0.21576719189613972,
+      "text": "Headings: ['\u092e\u0923\u094d\u0921\u093e\u0930 \u0915\u094d\u0930\u092f \u0928\u093f\u092f\u092e']\nSource: structured\n---\n1. \u0928\u093f\u092f\u092e-1 (1) \u092f\u0947 \u0928\u093f\u092f\u092e \u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c \u0936\u093e\u0938\u0928 \u092d\u0923\u094d\u0921\u093e\u0930 \u0915\u094d\u0930\u092f \u0928\u093f\u092f\u092e 2002 \u0915\u0939\u0932\u093e\u092f\u0947\u0917\u0947\u0902\u0964\n2. (2) \u0907\u0928\u0915\u093e \u0935\u093f\u0938\u094d\u0924\u093e\u0930 \u0938\u0902\u092a\u0942\u0930\u094d\u0923 \u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c \u0930\u093e\u091c\u094d\u092f \u092e\u0947\u0902 \u0939\u094b\u0917\u093e\u0964\n3. (3) \u092f\u0947 \u0928\u093f\u092f\u092e \u0930\u093e\u091c\u092a\u0924\u094d\u0930"
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.6366413831710815,
+      "cross_encoder_score": 0.06807244790589638,
+      "combined_score": 0.211314857006073,
+      "text": "Source: publicProManual-1755343081262-715558279.pdf\n---\nused in public procurement are (GFR 201757): a) Advertised Modes: These modes of procurement aim for the widest possible competition through wid"
+    },
+    {
+      "source": "store purchase rule cg",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8066349999065169,
+      "cross_encoder_score": 0.042547399707735294,
+      "combined_score": 0.2104466797860664,
+      "text": "Source: store purchase rule cg.pdf\n---\n\u092a\u094d\u0930\u2019\u093e\u093e\u0938\u0915\u0940\u092f \u0935\u093f\u092d\u093e\u0917 \u0915\u0947 \u092e\u093e\u0927\u094d\u092f\u092e \u0938\u0947 \u0935\u093f\u0930\u0941\u093e \u0935\u093f\u092d\u093e\u0917 \u0938\u0947 \u0932\u093f\u0916\u093f\u0924 \u0938\u0939\u092e\u0924\u093f \u092a\u094d\u0930\u093e\u092a\u094d\u0924 \u0915\u0930\u0928\u0940 \u0939\u094b\u0917\u0940\u0964 \u0909\u092a\u0928\u093f\u092f\u092e-3-1-2 \u0910\u0938\u0940 \u0938\u093e\u092e\u0917\u094d\u0930\u0940] \u0935\u0938\u094d\u0924\u0941\u092f\u0947\u0902 \u090f\u0935\u0902 \u0938\u0947\u0935\u093e\u090f\u0902 \u091c\u093f\u0928\u0915\u0940 \u0926\u0930\u0947\u0902 \u090f\u0935\u0902 \u0935\u093f\u093f\u2019\u093e\u0937\u093f\u091f\u092f\u093e\u0902 \u092d\u093e\u0930\u0924 \u0938\u0930\u0915\u093e\u0930 \u0915"
+    },
+    {
+      "source": "Manual_for_Procurement_of_works_2019",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7655459877649204,
+      "cross_encoder_score": 0.04367711646663852,
+      "combined_score": 0.20712858030313902,
+      "text": "Source: Manual_for_Procurement_of_works_2019.pdf\n---\nBidding documents; details of bidders, their pre-qualification, enlistment, exclusions/ debarments; decisions taken regarding prequalification and "
+    },
+    {
+      "source": "Manual_for_Procurement_of_works_2019",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8284490704536438,
+      "cross_encoder_score": 0.028876669656808397,
+      "combined_score": 0.20305857062339783,
+      "text": "Source: Manual_for_Procurement_of_works_2019.pdf\n---\n\u201cProcurement\u201d or \u201cpublic procurement\u201d (or \u2018Purchase\u2019, or \u2018Government Procurement/ Purchase\u2019 in certain contacts) means acquisition by way of purcha"
+    },
+    {
+      "source": "Manual_for_Procurement_of_works_2019",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.8341191411018372,
+      "cross_encoder_score": 0.02144817700455611,
+      "combined_score": 0.19842565059661865,
+      "text": "Source: Manual_for_Procurement_of_works_2019.pdf\n---\nprocurements required only for day-to-day running of offices and al so have not initiated e-procurement through any other solution provided so far,"
+    },
+    {
+      "source": "store purchase rule cg",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.6831299687386273,
+      "cross_encoder_score": 0.04143989734470164,
+      "combined_score": 0.19732092501515386,
+      "text": "Source: store purchase rule cg.pdf\n---\n\u092e\u093f\u0932\u0947\u0964 \u092d.\u0921\u093e\u0930 \u0915\u094d\u0930\u092f \u0928\u093f\u092f\u092e \u0928\u093f\u092f\u092e-1 (1) \u092f\u0947 \u0928\u093f\u092f\u092e \u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c \u0936\u093e\u0938\u0928 \u092d.\u0921\u093e\u0930 \u0915\u094d\u0930\u092f \u0928\u093f\u092f\u092e 2002 \u0915\u0939\u0932\u093e\u092f\u0947\u0902\u0917\u0947\u0964 (2) \u0907\u0928\u0915\u093e \u0935\u093f\u0938\u094d\u0924\u093e\u0930 \u0938\u0902\u092a\u0942\u0930\u094d\u0923 \u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c \u0930\u093e\u091c\u094d\u092f \u092e\u0947\u0902 \u0939\u094b\u0917\u093e\u0964 (3) \u092f\u0947 \u0928\u093f\u092f\u092e \u0930\u093e\u091c\u092a\u0924\u094d\u0930 \u092e\u0947"
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7830686548986119,
+      "cross_encoder_score": 0.025345148507951526,
+      "combined_score": 0.19604846944542725,
+      "text": "Source: publicProManual-1755343081262-715558279.pdf\n---\nEntity may give due to weightage the past performance of the supplier. In case of a shortage of suppliers and in cases of less serious misdemean"
+    },
+    {
+      "source": "FInal_GFR_upto_31_07_2024",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7872261310104817,
+      "cross_encoder_score": 0.019755625187819825,
+      "combined_score": 0.19255155073252206,
+      "text": "Source: FInal_GFR_upto_31_07_2024.pdf\n---\nby obtaining bids. Except in cases covered under Rule 154 and 155, Ministries or Departments shall procure goods under the powers referred to in Rule 140 abov"
+    },
+    {
+      "source": "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS)",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7945091952838815,
+      "cross_encoder_score": 0.015340133804488435,
+      "combined_score": 0.1901890131915301,
+      "text": "Source: FAQ of Chhattisgarh Infotech Promotion Society(CHIPS)\n---\n\u25cf\u200b\nBuilders \n\u25cf\u200b\nAuthorized Dealer \n\u25cf\u200b\nVendor/Bidder \n8. I am a businessman residing outside the state of Chhattisgarh, can I participa"
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7751994757145095,
+      "cross_encoder_score": 0.013229138327854266,
+      "combined_score": 0.18678034440094896,
+      "text": "Source: publicProManual-1755343081262-715558279.pdf\n---\nwithout any human intervention. [Provided condition in sub-para iv) above is complied]. vii) Gem will permit this method only for such categorie"
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.6865329784989095,
+      "cross_encoder_score": 0.025507137505498087,
+      "combined_score": 0.18650829410373962,
+      "text": "Source: mannual procurement.pdf\n---\nthe organization concerned/ consultants as the case may be. iii) Analysis of Rates by taking market rates of labour, materials, cartage etc and their quantities for"
+    },
+    {
+      "source": "Manual_for_Procurement_of_works_2019",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.5946992542128917,
+      "cross_encoder_score": 0.03851385668959401,
+      "combined_score": 0.186429625104005,
+      "text": "Source: structured\n---\nMinistries/ Departments which do not have a large volume of procurement or carry out procurements required only for day-to-day running of offices and also have not initiated e-p"
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7808012180348383,
+      "cross_encoder_score": 0.004764949647742774,
+      "combined_score": 0.1814155865569038,
+      "text": "Headings: ['']\nSource: structured\n---\nManual for Procurement of Goods, Second Edition, 2024 73 be the last resort. It takes a lot of time and effort to develop, register and mature a new supplier. In "
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7504383630639547,
+      "cross_encoder_score": 0.007685479970167494,
+      "combined_score": 0.18042367228551273,
+      "text": "Source: mannual procurement.pdf\n---\neach other through the Central Public Procurement (CPPP). The Ministries/Departments will also ensure that whenever a contractor is debarred, the information regard"
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.764787779787057,
+      "cross_encoder_score": 0.005001204779973413,
+      "combined_score": 0.1799796213246871,
+      "text": "Source: mannual procurement.pdf\n---\nunder any other Act and in which the Central Government or a Central enterprise owns more than 50 (fifty) per cent of the issued share capital; vii) \"Central Purcha"
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.7530097292651631,
+      "cross_encoder_score": 0.005525317356391706,
+      "combined_score": 0.17916869507599054,
+      "text": "Source: mannual procurement.pdf\n---\nthere should be fair competition. Lay down criteria when prequalification in single stage or two stage bidding is warranted. Also lay down model PQC criteria for di"
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.6353650689125061,
+      "cross_encoder_score": 0.011412855433254852,
+      "combined_score": 0.1715255081653595,
+      "text": "Source: mannual procurement.pdf\n---\n[Page 2] i Manual for Procurement of Works (Updated June, 2022) Government of India Ministry of Finance Department of Expenditure [Page 3] ii [Page 5] iv [Page 6] F"
+    },
+    {
+      "source": "Guidelines_To_Bidders_EPS_v1.6",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.6474695628750131,
+      "cross_encoder_score": 0.006042090193323273,
+      "combined_score": 0.1689764194228276,
+      "text": "Headings: ['TABLE OF CONTENTS']\nSource: structured\n---\n1 Vendor / Bidder Registration on the e-Procurement System...................4 2 Digital Signature Certificates.................................."
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.5149736879029901,
+      "cross_encoder_score": 0.01745207325802767,
+      "combined_score": 0.1637138200709184,
+      "text": "Headings: ['']\nSource: structured\n---\n- Weightage (out of 100) should be pre-decided and declared in EoI documents by the CA based on an assessment of the required profiles of the potential bidders. T"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.5548436641693115,
+      "cross_encoder_score": 0.010309579695766409,
+      "combined_score": 0.1627010703086853,
+      "text": "Headings: ['Credible Chhattisgarh']\nSource: structured\n---\n\u0935\u093f\u0936\u094d\u0935\u0938\u0928\u0940\u092f \u091b\u0924\u094d\u0924\u0940\u0938\u0917\u0922\u093c\n*The provided image is a pixelated map or diagram, likely representing a terrain or a game map, rather than a data chart."
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.483038991689682,
+      "cross_encoder_score": 0.016939455854483556,
+      "combined_score": 0.16016151010990143,
+      "text": "Headings: ['Credible Chhattisgarh']\nSource: structured\n---\n\nPayment, About Us = Payment. Payment, Downloads \u25bc = Payment. Payment, Manuals = Payment. Payment, Forms = Payment. Payment, eAuction = Payme"
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.36703068017959595,
+      "cross_encoder_score": 0.029632602416575102,
+      "combined_score": 0.15744589269161224,
+      "text": "Headings: ['']\nSource: structured\n---\nManual for Procurement of Goods, Second Edition, 2024 11 process. The primary objective of the Central Public Procurement portal is to provide single- point acces"
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.5190874934196472,
+      "cross_encoder_score": 0.006136134820930498,
+      "combined_score": 0.15620404481887817,
+      "text": "Source: mannual procurement.pdf\n---\n16.09.2020 [Page 21] xx the subject matter of procurement, entered into between the procuring entity and the contractor, service provider or contractor on mutually "
+    },
+    {
+      "source": "FInal_GFR_upto_31_07_2024",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.4331184100317053,
+      "cross_encoder_score": 0.017029282157243895,
+      "combined_score": 0.15523233851324125,
+      "text": "Headings: ['Rule 153 Reserved Items and other']\nSource: structured\n---\nPurchase/ Price Preference Policy. (i) [The Central Government, through administrative instructions, has reserved all items of ha"
+    },
+    {
+      "source": "publicProManual-1755343081262-715558279",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.4270191491359683,
+      "cross_encoder_score": 0.013655537951193359,
+      "combined_score": 0.15226079147943217,
+      "text": "Source: publicProManual-1755343081262-715558279.pdf\n---\nor feasible. 4. In Global Tender Enquiry (by any mode \u2013 Open Tender, Limited Tender or Single Tender), e-procurement may not be mandatorily insi"
+    },
+    {
+      "source": "mannual procurement",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.3728373050689697,
+      "cross_encoder_score": 0.018622873542935885,
+      "combined_score": 0.15031974017620087,
+      "text": "Headings: ['']\nSource: structured\n---\nOver and above transparency and professionalism, the procuring authorities have also the responsibility and accountability to conduct public procurement in a mann"
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "document_type": null,
+      "authority_score": 0.5,
+      "hybrid_score": 0.3876152696256475,
+      "cross_encoder_score": 0.013520835794785472,
+      "combined_score": 0.14822611201891459,
+      "text": "Headings: ['Information']\nSource: structured\n---\nMy Live Tenders 0\nAll Live Tenders 1\nAll Tenders 358\nResponded But Not Quoted Tenders 0\nDrafted But Not Quoted Tenders 0\nIssued WO/PO 0\nAuction Return "
+    }
+  ],
+  "final_selected_chunks": [
+    {
+      "source": "Pr\u00e9cis  e-Procurement Project",
+      "score": 0.7115787848598222
+    },
+    {
+      "source": "CHiPS_Bid_Submission_Manual_English",
+      "score": 0.5925994054704645
+    },
+    {
+      "source": "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS)",
+      "score": 0.5702684800473486
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "score": 0.5415788511499423
+    },
+    {
+      "source": "EMD_CHALLAN_PAYMENT_V1.0",
+      "score": 0.48160570818591275
+    },
+    {
+      "source": "Guidelines_To_Bidders_EPS_v1.6",
+      "score": 0.372840339453428
+    },
+    {
+      "source": "Corrigendum_Instructions_to_department_users_and_bidders",
+      "score": 0.3287029598345677
+    },
+    {
+      "source": "Guidelines_To_Bidders_EPS_v1.6",
+      "score": 0.23272126470510038
+    }
+  ],
+  "all_sources_in_db": [
+    "GFR2017_HINDI",
+    "publicProManual-1755343081262-715558279",
+    "Compilation of CVC Circulars and Guidelines",
+    "Chatbot_Capabilities",
+    "160616_AMC_AC short tender",
+    "Pr\u00e9cis  e-Procurement Project",
+    "AuctionManual_FA",
+    "GFRupdatedupto31012026",
+    "Corrigendum_Instructions_to_department_users_and_bidders",
+    "Manual_for_Procurement_of_works_2019",
+    "mannual procurement",
+    "11.02.2004 transp in short term tender",
+    "Vigilance Manual (Updated 2021) English",
+    "Vigilance Manual 2021 (Hindi)",
+    "EMD_CHALLAN_PAYMENT_V1.0",
+    "short tender notice 2 days",
+    "FInal_GFR_upto_31_07_2024",
+    "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS)",
+    "Store_Purhase_Rules_28.01.2021",
+    "Online_EMD_Refund_Notice",
+    "Manual_Offline_Tenders_v.1.0",
+    "Preferred_System_Configuration_V_2",
+    "it_act_2000_updated hindi",
+    "PEF",
+    "CHiPS_Vendor_Registration_Manual_English",
+    "Guidelines_To_Bidders_EPS_v1.6",
+    "it_act_2000_updated english",
+    "CHiPS_Bid_Submission_Manual_English",
+    "EDGE_Browser_Setup_V1.0",
+    "store purchase rule cg"
+  ]
+}

@@ -13,9 +13,12 @@ import argparse
 import logging
 import sys
 from pathlib import Path
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Any
 import os
 import json
+
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
 
 try:
     from docling.document_converter import DocumentConverter
@@ -25,18 +28,112 @@ except ImportError:
     print("Error: Required packages not installed. Run: pip install -r requirements.txt")
     sys.exit(1)
 
-# Add parent directory to path to import config_manager
+# Add parent directory to path to import shared utilities
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from config_manager import Config, PathManager
+from utils.config_manager import Config, PathManager
 
 
 logger = logging.getLogger(__name__)
 
+DOCUMENT_METADATA = {
+    "store_purchase": {
+        "document_type": "procurement_rules",
+        "authority": 10
+    },
+    "store_purhase": {
+        "document_type": "procurement_rules",
+        "authority": 10
+    },
+    "gfr": {
+        "document_type": "procurement_rules",
+        "authority": 10
+    },
+    "manual_for_procurement": {
+        "document_type": "procurement_rules",
+        "authority": 9
+    },
+    "procurement_manual": {
+        "document_type": "procurement_rules",
+        "authority": 9
+    },
+    "mannual_procurement": {
+        "document_type": "procurement_rules",
+        "authority": 9
+    },
+    "publicpromanual": {
+        "document_type": "procurement_rules",
+        "authority": 9
+    },
+    "cvc": {
+        "document_type": "guidelines",
+        "authority": 9
+    },
+    "vigilance": {
+        "document_type": "guidelines",
+        "authority": 9
+    },
+    "it_act": {
+        "document_type": "legal",
+        "authority": 7
+    },
+    "faq": {
+        "document_type": "faq",
+        "authority": 3
+    },
+    "precis": {
+        "document_type": "project_overview",
+        "authority": 2
+    },
+    "précis": {
+        "document_type": "project_overview",
+        "authority": 2
+    },
+    "bid_submission": {
+        "document_type": "portal_manual",
+        "authority": 2
+    },
+    "auction": {
+        "document_type": "portal_manual",
+        "authority": 2
+    },
+    "vendor": {
+        "document_type": "portal_manual",
+        "authority": 2
+    },
+    "emd_challan": {
+        "document_type": "portal_manual",
+        "authority": 2
+    },
+    "offline_tenders": {
+        "document_type": "portal_manual",
+        "authority": 2
+    },
+    "chips_corrigendum": {
+        "document_type": "portal_manual",
+        "authority": 6
+    },
+    "refund": {
+        "document_type": "portal_manual",
+        "authority": 2
+    },
+    "browser": {
+        "document_type": "technical_manual",
+        "authority": 1
+    },
+    "preferred_system": {
+        "document_type": "technical_manual",
+        "authority": 1
+    },
+    "chatbot_capabilities": {
+        "document_type": "chatbot_meta",
+        "authority": 0
+    }
+}
 
 class DoclingChunker:
     """Intelligent document chunker using Docling."""
     
-    def __init__(self, model: str = "BAAI/bge-m3", max_tokens: int = 1024, merge_peers: bool = True):
+    def __init__(self, model: str = "BAAI/bge-m3", max_tokens: int = 400, merge_peers: bool = True):
         """
         Initialize chunker.
         
@@ -57,6 +154,17 @@ class DoclingChunker:
             max_tokens=max_tokens,
             merge_peers=merge_peers
         )
+        
+    def _get_meta(self, names_to_check: List[str]) -> tuple[Dict[str, Any], str]:
+        for name in names_to_check:
+            if not name:
+                continue
+            lname = name.lower()
+            for k, v in DOCUMENT_METADATA.items():
+                if k.replace("_", " ") in lname.replace("_", " "):
+                    return {"type": v["document_type"], "auth": v["authority"]}, name
+        return {"type": "general", "auth": 5}, "None"
+
     
     def chunk_file(self, input_path: str, output_dir: str, file_mapping: Optional[Dict] = None) -> int:
         """
@@ -82,20 +190,55 @@ class DoclingChunker:
             chunks = list(self.chunker.chunk(doc))
             
             doc_name = input_path.stem  # Filename without extension
-            original_name = file_mapping.get(doc_name, doc_name) if file_mapping else doc_name
+            parent_dir_name = input_path.parent.name
+            
+            if doc_name == "structured":
+                doc_name = parent_dir_name
+            
+            names_to_check = []
+            if file_mapping and doc_name in file_mapping:
+                names_to_check.append(file_mapping[doc_name])
+            
+            names_to_check.append(parent_dir_name)
+            names_to_check.append(doc_name)
+            
+            meta, source_used = self._get_meta(names_to_check)
+            
+            # Print verification log
+            print(f"\n====================================================")
+            print(f"Detected Document Name: {names_to_check[0] if names_to_check else doc_name}")
+            print(f"->")
+            print(f"{meta['type']}")
+            print(f"->")
+            print(f"{meta['auth']}")
+            print(f"->")
+            print(f"Source: {source_used}")
+            print(f"====================================================\n")
+            
+            if meta['type'] == "general":
+                logger.warning(f"Warning: Document {names_to_check[0] if names_to_check else doc_name} fell back to 'general' authority 5. Stopping processing for this document.")
+                return 0
+            
+            # Actually use the correct source name instead of "structured"
+            # If doc_name is "structured", use the parent directory as original_name
+            original_name = parent_dir_name if doc_name == "structured" else doc_name
+            if file_mapping and doc_name in file_mapping:
+                original_name = file_mapping[doc_name]
             
             for i, chunk in enumerate(chunks, 1):
                 filename = f"{doc_name}_chunk_{i:03d}.txt"
                 filepath = output_dir / filename
                 
                 with open(filepath, "w", encoding="utf-8") as f:
+                    f.write(f"Type: {meta['type']}\n")
+                    f.write(f"Authority: {meta['auth']}\n")
                     if hasattr(chunk.meta, 'headings') and chunk.meta.headings:
                         f.write(f"Headings: {chunk.meta.headings}\n")
                     f.write(f"Source: {original_name}\n")
                     f.write(f"---\n")
                     f.write(f"{chunk.text}\n")
             
-            logger.info(f"✅ {doc_name}: saved {len(chunks)} chunks")
+            logger.info(f"✅ {original_name}: saved {len(chunks)} chunks")
             return len(chunks)
             
         except Exception as e:
@@ -123,7 +266,7 @@ class DoclingChunker:
             logger.error(f"Input directory not found: {input_dir}")
             return results
         
-        files = sorted(input_dir.glob(pattern))
+        files = sorted(input_dir.rglob(pattern))
         logger.info(f"Found {len(files)} files matching {pattern}")
         
         for doc_path in files:
