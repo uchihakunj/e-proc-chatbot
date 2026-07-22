@@ -57,7 +57,7 @@
   .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 2px; bottom: 2px; background-color: white; transition: .2s; border-radius: 50%; }
   input:checked + .slider { background-color: #10b981; }
   input:checked + .slider:before { transform: translateX(14px); }
-  .auto-voice-toggle { display: flex; flex-direction: column; align-items: center; margin-left: auto; cursor: pointer; }
+  .auto-voice-toggle { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
 
   /* Chat area */
   #chat {
@@ -127,12 +127,18 @@
       <h1>eProcurement Assistant — powered by AI</h1>
       <div class="sub">(Hindi &amp; English) · Offline Voice</div>
     </div>
-    <div class="auto-voice-toggle" title="Toggle the Auto-Voice switch in the top header to automatically hear answers spoken aloud while you type">
-      <label class="switch" title="Toggle the Auto-Voice switch in the top header to automatically hear answers spoken aloud while you type">
-        <input type="checkbox" id="autoVoiceToggle">
-        <span class="slider round"></span>
-      </label>
-      <div style="font-size: 10px; margin-top: 2px; opacity: 0.9;">Auto-Voice</div>
+    <div style="display: flex; align-items: center; gap: 15px; margin-left: auto;">
+      <select id="langToggle" style="font-size: 12px; padding: 2px 4px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.5); background: transparent; color: white; cursor: pointer;">
+        <option value="en" style="color: black;">English</option>
+        <option value="hi" style="color: black;">हिंदी</option>
+      </select>
+      <div class="auto-voice-toggle" title="Toggle the Auto-Voice switch in the top header to automatically hear answers spoken aloud while you type">
+        <label class="switch" title="Toggle the Auto-Voice switch in the top header to automatically hear answers spoken aloud while you type">
+          <input type="checkbox" id="autoVoiceToggle">
+          <span class="slider round"></span>
+        </label>
+        <div style="font-size: 10px; margin-top: 2px; opacity: 0.9;">Auto-Voice</div>
+      </div>
     </div>
   </div>
 
@@ -222,11 +228,20 @@ function ask(text) { inputEl.value = text; sendMessage(); }
    =========================================================================== */
 function getAnswer(question) {
   const q = question.toLowerCase();
+  const lang = document.getElementById("langToggle").value;
 
   const has = (...words) => words.some(w => q.includes(w));
 
   // Vendor / supplier registration
-  if (has("register", "registration", "vendor", "supplier", "new user", "signup", "sign up")) {
+  if (has("register", "registration", "vendor", "supplier", "new user", "signup", "sign up", "पंजीकरण", "रजिस्टर")) {
+    if (lang === "hi") {
+      return "विक्रेता पंजीकरण (Vendor Registration):\n" +
+      "1. पोर्टल eproc.cgstate.gov.in पर जाएं और 'Register / New User' पर क्लिक करें।\n" +
+      "2. अपना पैन कार्ड नंबर तैयार रखें (अनिवार्य)।\n" +
+      "3. यदि आपकी विक्रेता श्रेणी A, B, C या D है, तो अपने CRN प्रमाणपत्र की स्कैन कॉपी अपलोड करें।\n" +
+      "4. पसंदीदा लॉगिन कोड चुनें और अपने व्यवसाय और बैंक का विवरण भरें।\n" +
+      "5. वन-टाइम पंजीकरण पूरा करने के लिए फॉर्म जमा करें।";
+    }
     return "Vendor Registration:\n" +
       "1. Visit the portal at eproc.cgstate.gov.in and click 'Register / New User'.\n" +
       "2. Keep your PAN card number ready (mandatory).\n" +
@@ -236,7 +251,14 @@ function getAnswer(question) {
   }
 
   // Bid submission
-  if (has("bid", "submit", "submission", "tender apply", "apply tender", "upload bid")) {
+  if (has("bid", "submit", "submission", "tender apply", "apply tender", "upload bid", "बोली", "जमा")) {
+    if (lang === "hi") {
+      return "बोली जमा करना (Bid Submission):\n" +
+      "• एक वैध डिजिटल सिग्नेचर सर्टिफिकेट (DSC) — क्लास II या क्लास III — आवश्यक है।\n" +
+      "• प्रत्येक अपलोड किया गया दस्तावेज़ 5 MB से कम होना चाहिए, और कुल आकार 50 MB से कम होना चाहिए।\n" +
+      "• तकनीकी और मूल्य बोली ऑनलाइन भरें, आवश्यक दस्तावेज़ संलग्न करें,\n" +
+      "  और बोली की अंतिम तिथि और समय से पहले डिजिटल रूप से हस्ताक्षर करके जमा करें।";
+    }
     return "Bid Submission:\n" +
       "• A valid Digital Signature Certificate (DSC) — Class II or Class III — is required.\n" +
       "• Each uploaded document must be under 5 MB, and the total size under 50 MB.\n" +
@@ -245,8 +267,14 @@ function getAnswer(question) {
   }
 
   // EMD payment
-  if (has("emd payment", "pay emd", "earnest money", "pay bid security") ||
+  if (has("emd payment", "pay emd", "earnest money", "pay bid security", "भुगतान") ||
       (has("emd") && has("pay", "payment", "deposit", "how"))) {
+    if (lang === "hi") {
+      return "ईएमडी भुगतान (EMD Payment):\n" +
+      "• ईएमडी (Earnest Money Deposit) का ऑनलाइन भुगतान NEFT / RTGS या ATOM पेमेंट गेटवे के माध्यम से करें।\n" +
+      "• पोर्टल से चालान जनरेट करें और अपने बैंक से भुगतान पूरा करें।\n" +
+      "• भुगतान सत्यापन में आमतौर पर 1-2 कार्य दिवस लगते हैं; उसके बाद ही बोली खोली जा सकती है।";
+    }
     return "EMD Payment:\n" +
       "• Pay the EMD (Earnest Money Deposit) online via NEFT / RTGS or the ATOM payment gateway.\n" +
       "• Generate the challan from the portal and complete the payment from your bank.\n" +
@@ -254,7 +282,13 @@ function getAnswer(question) {
   }
 
   // EMD refund
-  if (has("refund") || (has("emd") && has("return", "back", "release"))) {
+  if (has("refund", "रिफंड", "वापसी") || (has("emd") && has("return", "back", "release"))) {
+    if (lang === "hi") {
+      return "ईएमडी रिफंड (EMD Refund):\n" +
+      "• बोली मूल्यांकन के बाद संबंधित विभाग द्वारा ईएमडी रिफंड शुरू किया जाता है।\n" +
+      "• विभागीय मंजूरी के 1-2 दिन बाद राशि वापस खाते में जमा कर दी जाती है।\n" +
+      "• आप अपने बिडर लॉगिन के अंदर MIS अनुभाग में रिफंड स्थिति को ट्रैक कर सकते हैं।";
+    }
     return "EMD Refund:\n" +
       "• The EMD refund is initiated by the concerned department after bid evaluation.\n" +
       "• The amount is credited back 1–2 days after departmental approval.\n" +
@@ -262,7 +296,14 @@ function getAnswer(question) {
   }
 
   // Browser support
-  if (has("browser", "chrome", "firefox", "edge", "internet explorer", "ie ", "java", "supported")) {
+  if (has("browser", "chrome", "firefox", "edge", "internet explorer", "ie ", "java", "supported", "ब्राउज़र")) {
+    if (lang === "hi") {
+      return "समर्थित ब्राउज़र (Supported Browsers):\n" +
+      "• Google Chrome ('IE Tab' एक्सटेंशन के साथ), Mozilla Firefox,\n" +
+      "  Internet Explorer 9 / 11, और Microsoft Edge समर्थित हैं।\n" +
+      "• डिजिटल हस्ताक्षर के लिए जावा संस्करण 1.8.0_77 आवश्यक है।\n" +
+      "• सर्वोत्तम परिणामों के लिए पॉप-अप की अनुमति दें और पोर्टल को विश्वसनीय साइटों में जोड़ें।";
+    }
     return "Supported Browsers:\n" +
       "• Google Chrome (with the 'IE Tab' extension), Mozilla Firefox,\n" +
       "  Internet Explorer 9 / 11, and Microsoft Edge are supported.\n" +
@@ -271,7 +312,12 @@ function getAnswer(question) {
   }
 
   // DSC / digital signature
-  if (has("dsc", "digital signature", "signature certificate", "sign")) {
+  if (has("dsc", "digital signature", "signature certificate", "sign", "हस्ताक्षर")) {
+    if (lang === "hi") {
+      return "डिजिटल सिग्नेचर सर्टिफिकेट (DSC):\n" +
+      "• पोर्टल पर पंजीकरण करने, हस्ताक्षर करने और बोलियां जमा करने के लिए लाइसेंस प्राप्त प्रमाणन प्राधिकारी द्वारा जारी क्लास II या क्लास III DSC आवश्यक है।\n" +
+      "• अपनी मशीन पर DSC स्थापित करें और हस्ताक्षर करने से पहले सुनिश्चित करें कि जावा 1.8.0_77 सेट अप है।";
+    }
     return "Digital Signature Certificate (DSC):\n" +
       "• A Class II or Class III DSC issued by a licensed Certifying Authority is required\n" +
       "  to register, sign and submit bids on the portal.\n" +
@@ -279,16 +325,24 @@ function getAnswer(question) {
   }
 
   // Helpdesk
-  if (has("help", "helpdesk", "support", "contact", "phone", "call", "email", "problem", "issue")) {
-    return helpdesk();
+  if (has("help", "helpdesk", "support", "contact", "phone", "call", "email", "problem", "issue", "मदद", "संपर्क")) {
+    return helpdesk(lang);
   }
 
   // Default fallback
+  if (lang === "hi") {
+    return "मैं विक्रेता पंजीकरण, बोली जमा करने, ईएमडी भुगतान/रिफंड, DSC और समर्थित ब्राउज़रों के बारे में मदद कर सकता हूं।\n\n" + helpdesk(lang);
+  }
   return "I can help with vendor registration, bid submission, EMD payment/refund,\n" +
-         "DSC and supported browsers.\n\n" + helpdesk();
+         "DSC and supported browsers.\n\n" + helpdesk(lang);
 }
 
-function helpdesk() {
+function helpdesk(lang) {
+  if (lang === "hi") {
+    return "हेल्पडेस्क (Helpdesk):\n" +
+      "• टोल-फ्री: 1800 419 9140 (सुबह 9:00 बजे - रात 11:00 बजे, कार्यदिवस)\n" +
+      "• ईमेल: helpdesk.cgeproc@mjunction.in";
+  }
   return "Helpdesk:\n" +
     "• Toll-free: 1800 419 9140 (9:00 AM – 11:00 PM, weekdays)\n" +
     "• Email: helpdesk.cgeproc@mjunction.in";
@@ -313,14 +367,14 @@ async function toggleMic() {
       await sendToSTT(blob);
     };
 
-    mediaRecorder.start();
+    mediaRecorder.start(250);
     isRecording = true;
     micBtn.classList.add("recording");
     micBtn.textContent = "⏹";
     setStatus("Listening");
 
-    // auto-stop after 5 seconds
-    recordTimer = setTimeout(() => { if (isRecording) stopRecording(); }, 5000);
+    // auto-stop sooner on CPU-only mode so STT starts faster.
+    recordTimer = setTimeout(() => { if (isRecording) stopRecording(); }, 2000);
   } catch (err) {
     alert("Microphone access failed.\n" +
           "Make sure you opened this page via http://localhost:8000 (not file://) " +

@@ -881,6 +881,7 @@ async function initPipeline() {
       toast(data.error || 'Initialisation failed', 'error', 5000);
       ui.btnInit.textContent = 'Retry Init';
       ui.btnInit.disabled = false;
+      scheduleRagRecovery();
     }
   } catch (err) {
     if (err.message !== 'UNAUTHENTICATED') {
@@ -888,6 +889,7 @@ async function initPipeline() {
       toast('Cannot reach backend', 'error');
       ui.btnInit.textContent = 'Retry Init';
       ui.btnInit.disabled = false;
+      scheduleRagRecovery();
     }
   }
   updateFooterTime();
@@ -989,11 +991,16 @@ function appendMessage(role, text, meta = {}) {
 //   Mic  -> /stt -> fills the input -> runs the normal RAG /api/stream answer.
 //   /tts -> speaks an answer (per-message 🔊 Listen, and auto-speak for voice Qs).
 const VOICE_SERVER = 'http://localhost:5050';
+const BrowserSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
 let voiceRec = null, voiceChunks = [], voiceOn = false, voiceTimer = null;
+let browserRec = null, browserRecActive = false, browserRecFinal = '', browserRecSawResult = false;
 let pendingVoiceReply = false;     // true when the current query came from the mic
 const currentAudio = new Audio();
 let currentSpeakBtn = null;        // the Listen button whose audio is loading/playing
 let autoSpeakEnabled = localStorage.getItem('autoSpeakEnabled') !== 'false'; // true by default
+const VOICE_AUTO_STOP_MS = 8000;
+const TTS_STREAM_CHUNK_MAX = 220;
+const TTS_STREAM_CHUNK_MIN = 70;
 
 async function toggleMic() {
   if (state.loading) return;
@@ -1001,6 +1008,80 @@ async function toggleMic() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     toast('Microphone not available in this browser', 'error'); return;
   }
+  if (BrowserSpeechRecognition) {
+    startBrowserSTT();
+    return;
+  }
+  await startServerSTT();
+}
+
+function startBrowserSTT() {
+  try {
+    browserRec = new BrowserSpeechRecognition();
+    browserRec.lang = 'en-IN';
+    browserRec.interimResults = true;
+    browserRec.continuous = true;
+    browserRec.maxAlternatives = 1;
+    browserRecFinal = '';
+    browserRecSawResult = false;
+    browserRecActive = true;
+    voiceOn = true;
+    ui.btnMic.classList.add('recording');
+    ui.queryStatus.textContent = 'Listening…';
+
+    browserRec.onresult = (event) => {
+      browserRecSawResult = true;
+      let interim = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = (event.results[i][0] && event.results[i][0].transcript) || '';
+        if (event.results[i].isFinal) browserRecFinal += transcript + ' ';
+        else interim += transcript;
+      }
+      const shown = (browserRecFinal + interim).trim();
+      if (shown) {
+        ui.queryInput.value = shown;
+        autoResize();
+        ui.queryStatus.textContent = 'Transcribing…';
+      }
+    };
+
+    browserRec.onerror = async (event) => {
+      const code = event && event.error ? event.error : 'unknown';
+      stopMic(true);
+      if (code === 'not-allowed' || code === 'service-not-allowed') {
+        toast('Microphone permission denied', 'error');
+        return;
+      }
+      await startServerSTT();
+    };
+
+    browserRec.onend = async () => {
+      const finalText = (browserRecFinal || ui.queryInput.value || '').trim();
+      stopMic(true);
+      if (finalText) {
+        ui.queryInput.value = finalText;
+        autoResize();
+        pendingVoiceReply = true;
+        if (!ui.btnSend.disabled) sendQuery();
+        else { pendingVoiceReply = false; ui.queryStatus.textContent = 'Ready'; }
+        return;
+      }
+      if (!browserRecSawResult) {
+        await startServerSTT();
+      } else {
+        ui.queryStatus.textContent = 'Ready';
+        toast('No speech detected — please try again', 'error', 4000);
+      }
+    };
+
+    browserRec.start();
+    voiceTimer = setTimeout(() => { if (voiceOn) stopMic(); }, VOICE_AUTO_STOP_MS);
+  } catch (_) {
+    startServerSTT();
+  }
+}
+
+async function startServerSTT() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     voiceRec = new MediaRecorder(stream);
@@ -1010,18 +1091,24 @@ async function toggleMic() {
       stream.getTracks().forEach(t => t.stop());
       await sttSend(new Blob(voiceChunks, { type: 'audio/webm' }));
     };
-    voiceRec.start();
+    voiceRec.start(250);
     voiceOn = true;
     ui.btnMic.classList.add('recording');
     ui.queryStatus.textContent = '🔴 Listening…';
-    voiceTimer = setTimeout(() => { if (voiceOn) stopMic(); }, 12000);   // auto-stop 12s
+    voiceTimer = setTimeout(() => { if (voiceOn) stopMic(); }, VOICE_AUTO_STOP_MS);
   } catch (err) {
     toast('Microphone permission denied', 'error');
   }
 }
 
-function stopMic() {
+function stopMic(fromBrowserEnd = false) {
   if (voiceTimer) { clearTimeout(voiceTimer); voiceTimer = null; }
+  if (browserRec && browserRecActive) {
+    browserRecActive = false;
+    try { browserRec.onend = fromBrowserEnd ? browserRec.onend : null; } catch (_) {}
+    try { browserRec.stop(); } catch (_) {}
+    if (fromBrowserEnd) browserRec = null;
+  }
   if (voiceRec && voiceRec.state !== 'inactive') voiceRec.stop();
   voiceOn = false;
   ui.btnMic.classList.remove('recording');
@@ -1066,6 +1153,32 @@ function speechText(raw) {
     .replace(/[💡📋🔖📘*#>_`]/g, '')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function drainTtsChunks(buffer, flushAll = false) {
+  const emitted = [];
+  let rest = buffer || '';
+  while (rest) {
+    const strongBreak = rest.match(new RegExp(`^(.{1,${TTS_STREAM_CHUNK_MAX}}?[.?!।\\n:;])(.*)$`, 's'));
+    if (strongBreak) {
+      emitted.push(strongBreak[1]);
+      rest = strongBreak[2];
+      continue;
+    }
+    const softBreak = rest.match(new RegExp(`^(.{${TTS_STREAM_CHUNK_MIN},${TTS_STREAM_CHUNK_MAX}}?,)(.*)$`, 's'));
+    if (softBreak) {
+      emitted.push(softBreak[1]);
+      rest = softBreak[2];
+      continue;
+    }
+    if (flushAll || rest.length >= TTS_STREAM_CHUNK_MAX) {
+      emitted.push(rest.slice(0, TTS_STREAM_CHUNK_MAX));
+      rest = rest.slice(TTS_STREAM_CHUNK_MAX);
+      continue;
+    }
+    break;
+  }
+  return { emitted, rest };
 }
 
 // Toggle a Listen button between its idle (🔊 Listen) and playing (⏹ Stop) look.
@@ -1332,6 +1445,13 @@ async function sendQuery() {
   if (!text || state.loading) return;
   stopSpeak();
   
+  let queryPayload = text;
+  const langToggle = document.getElementById('lang-toggle');
+  if (langToggle) {
+    if (langToggle.value === 'en') queryPayload += '\n[Please reply in English]';
+    if (langToggle.value === 'hi') queryPayload += '\n[कृपया हिंदी में उत्तर दें / Please reply in Hindi]';
+  }
+
   // Unlock persistent audio object for Safari/Chrome Autoplay policies during user click
   currentAudio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
   currentAudio.play().catch(()=>{});
@@ -1417,7 +1537,7 @@ async function sendQuery() {
 
     const response = await fetch('/api/stream', {
       method: 'POST', headers, signal: controller.signal,
-      body: JSON.stringify({ query: text, num_results: numCtx, session_id: state.conversationId }),
+      body: JSON.stringify({ query: queryPayload, num_results: numCtx, session_id: state.conversationId }),
     });
 
     if (response.status === 401) { session.clear(); showLogin('Session expired.'); throw new Error('UNAUTHENTICATED'); }
@@ -1485,6 +1605,15 @@ async function sendQuery() {
             }
           }
           
+          if (speakReply && ttsQueue.active && ttsBuffer.length >= TTS_STREAM_CHUNK_MAX) {
+            const drained = drainTtsChunks(ttsBuffer, false);
+            ttsBuffer = drained.rest;
+            for (const chunk of drained.emitted) {
+              const clean = speechText(chunk);
+              if (clean) ttsQueue.push(clean);
+            }
+          }
+
           let _shown = stripSourceTags(streamText);
           if (answerLang === 'hinglish') _shown = toRomanHinglish(_shown);
           answerBody.innerHTML = renderMarkdown(_shown);
@@ -1498,6 +1627,12 @@ async function sendQuery() {
           const elapsed = evt.elapsed || `${((Date.now()-t0)/1000).toFixed(2)}s`;
           if (answerBody) {
             answerBody.classList.remove('stream-cursor');
+            // The server reconstructs and sanitizes the provider stream (for
+            // example, removing an echoed refusal or empty optional section).
+            // Prefer that authoritative final text when it is available.
+            if (typeof evt.answer === 'string' && evt.answer.trim()) {
+              streamText = evt.answer;
+            }
             // Strip any ungrounded rule/section numbers before finalising (also
             // keeps them out of the Listen/Export paths that read streamText).
             streamText = stripUngroundedRuleNumbers(streamText, contextResults);
@@ -1522,8 +1657,12 @@ async function sendQuery() {
             if (speakReply && listenBtn) {
               if (ttsQueue.active) {
                 // flush remaining buffer
-                const clean = speechText(ttsBuffer);
-                if (clean) ttsQueue.push(clean);
+                const drained = drainTtsChunks(ttsBuffer, true);
+                ttsBuffer = drained.rest;
+                for (const chunk of drained.emitted) {
+                  const clean = speechText(chunk);
+                  if (clean) ttsQueue.push(clean);
+                }
                 
                 ttsQueue.btn = listenBtn;
                 setListenBtnState(listenBtn, true);
@@ -1763,6 +1902,26 @@ async function pushSettings() {
 
 // ── RAG UI boot (runs after login) ───────────────────────────────────────
 let ragBooted = false;
+let ragRecoveryTimer = null;
+
+function scheduleRagRecovery() {
+  if (state.initialized || ragRecoveryTimer) return;
+
+  ragRecoveryTimer = setTimeout(async () => {
+    ragRecoveryTimer = null;
+    try {
+      const { ok, data } = await api.health();
+      if (ok && data.pipeline_initialized) {
+        state.initialized = true;
+        await refreshDbStatus();
+        enableQueryBar();
+        return;
+      }
+    } catch (_) {}
+    scheduleRagRecovery();
+  }, 3000);
+}
+
 async function bootRagUI() {
   if (ragBooted) return;
   ragBooted = true;
@@ -1789,9 +1948,11 @@ async function bootRagUI() {
       await initPipeline();
     } else {
       setAllStatus('idle','—','idle','—','idle','—');
+      scheduleRagRecovery();
     }
   } catch (_) {
     setAllStatus('error','unreachable','error','—','error','—');
+    scheduleRagRecovery();
   }
 
   ui.btnInit.addEventListener('click', initPipeline);
@@ -1799,16 +1960,53 @@ async function bootRagUI() {
   if (ui.btnStop) ui.btnStop.addEventListener('click', stopStreaming);
   if (ui.btnMic) ui.btnMic.addEventListener('click', toggleMic);
 
-  // Suggestion chips → fill the input and send
+  // Suggestion chips → fill the input and send, with mouse drag-to-scroll
   const chipRow = document.getElementById('suggestion-chips');
   if (chipRow) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let hasDragged = false;
+
+    chipRow.addEventListener('mousedown', (e) => {
+      isDown = true;
+      hasDragged = false;
+      chipRow.style.cursor = 'grabbing';
+      startX = e.pageX - chipRow.offsetLeft;
+      scrollLeft = chipRow.scrollLeft;
+    });
+
+    chipRow.addEventListener('mouseleave', () => {
+      isDown = false;
+      chipRow.style.cursor = '';
+    });
+
+    chipRow.addEventListener('mouseup', () => {
+      isDown = false;
+      chipRow.style.cursor = '';
+    });
+
+    chipRow.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - chipRow.offsetLeft;
+      const walk = (x - startX);
+      if (Math.abs(walk) > 3) hasDragged = true;
+      chipRow.scrollLeft = scrollLeft - walk;
+    });
+
     chipRow.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
       const chip = e.target.closest('.suggestion-chip');
       if (!chip || state.loading) return;
       ui.queryInput.value = chip.textContent.trim();
       autoResize();
       if (!ui.btnSend.disabled) sendQuery();
-    });
+    }, true);
   }
 
   ui.queryInput.addEventListener('keydown', e => {

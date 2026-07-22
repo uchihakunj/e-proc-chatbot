@@ -32,6 +32,7 @@
 import os
 import subprocess
 import tempfile
+import time
 
 from flask import Flask, request, jsonify, Response, stream_with_context
 from flask_cors import CORS
@@ -154,6 +155,11 @@ _WHISPER_MODEL = os.getenv("WHISPER_MODEL", "base")
 # cpu_threads: faster-whisper defaults to ~4; this box has more cores. A small
 # bump helps a little (the real cost is auto-detect + contention with Ollama).
 _WHISPER_THREADS = int(os.getenv("WHISPER_THREADS", "8"))
+_STT_FORCE_LANG = os.getenv("STT_FORCE_LANG", "auto").strip().lower()
+if _STT_FORCE_LANG not in {"auto", "en", "hi"}:
+    _STT_FORCE_LANG = "auto"
+_STT_VAD_MIN_SILENCE_MS = int(os.getenv("STT_VAD_MIN_SILENCE_MS", "300"))
+_STT_LOG_TIMINGS = os.getenv("STT_LOG_TIMINGS", "1").strip().lower() in ("1", "true", "yes", "on")
 print(f"Loading faster-whisper '{_WHISPER_MODEL}' model (downloads on first run) ...")
 stt_model = WhisperModel(
     _WHISPER_MODEL, device="cpu", compute_type="int8", cpu_threads=_WHISPER_THREADS,
@@ -195,6 +201,22 @@ def _safe_remove(path):
             pass
 
 
+def _prompt_for_lang(lang):
+    return STT_PROMPT_HI if lang == "hi" else STT_PROMPT_EN
+
+
+def _detect_supported_lang(pcm):
+    det_lang, det_prob, all_probs = stt_model.detect_language(pcm)
+    if det_lang == "en":
+        return "en", STT_PROMPT_EN, det_prob
+    if det_lang == "hi":
+        return "hi", STT_PROMPT_HI, det_prob
+    probs = dict(all_probs or [])
+    if probs.get("hi", 0.0) >= probs.get("en", 0.0):
+        return "hi", STT_PROMPT_HI, probs.get("hi", 0.0)
+    return "en", STT_PROMPT_EN, probs.get("en", 0.0)
+
+
 # -----------------------------------------------------------------------------
 # /stt  —  Speech to Text
 #   Accepts:  multipart/form-data with field "audio" (webm or wav)
@@ -203,6 +225,8 @@ def _safe_remove(path):
 @app.route("/stt", methods=["POST"])
 def stt():
     raw_path = wav_path = None
+    started = time.perf_counter()
+    marks = {}
     try:
         if "audio" not in request.files:
             return jsonify({"error": "No 'audio' file in request."}), 500
@@ -216,6 +240,7 @@ def stt():
         raw_path = raw_tmp.name
         raw_tmp.close()           # close our handle BEFORE writing/using it
         audio.save(raw_path)
+        marks["saved"] = time.perf_counter()
 
         # 2. Convert to 16 kHz mono WAV using ffmpeg.exe (must be on PATH).
         wav_tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".wav")
@@ -223,8 +248,9 @@ def stt():
         wav_tmp.close()
 
         result = subprocess.run(
-            ["ffmpeg", "-y", "-i", raw_path,
-             "-ar", "16000", "-ac", "1", wav_path],
+            ["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error", "-y",
+             "-i", raw_path, "-vn", "-sn", "-dn", "-ac", "1", "-ar", "16000",
+             wav_path],
             capture_output=True, text=True
         )
         if result.returncode != 0:
@@ -232,29 +258,25 @@ def stt():
                 "error": "ffmpeg conversion failed. Is ffmpeg on PATH? "
                          + (result.stderr or "")[-400:]
             }), 500
+        marks["ffmpeg"] = time.perf_counter()
 
         # 3a. Decode the WAV once into the float32 array Whisper wants, so we can
         #     run language detection AND transcription on it without re-reading.
         pcm = decode_audio(wav_path, sampling_rate=16000)
+        marks["decode"] = time.perf_counter()
 
         # 3b. Detect the spoken language FIRST, then lock the decoder to it with a
         #     single-language prompt. The split EN/HI prompts (not an English
         #     default) are what stop English from leaking into Devanagari, so we
         #     now TRUST the detector for both languages instead of biasing to
         #     English — biasing English was breaking genuine Hindi speech.
-        det_lang, det_prob, all_probs = stt_model.detect_language(pcm)
-        if det_lang == "en":
-            lang, prompt = "en", STT_PROMPT_EN
-        elif det_lang == "hi":
-            lang, prompt = "hi", STT_PROMPT_HI
+        if _STT_FORCE_LANG in {"en", "hi"}:
+            lang = _STT_FORCE_LANG
+            prompt = _prompt_for_lang(lang)
+            det_prob = 1.0
         else:
-            # Some other label fired (Urdu/Nepali often do on Hindi audio); pick
-            # whichever of our two supported languages scored higher.
-            probs = dict(all_probs or [])
-            if probs.get("hi", 0.0) >= probs.get("en", 0.0):
-                lang, prompt = "hi", STT_PROMPT_HI
-            else:
-                lang, prompt = "en", STT_PROMPT_EN
+            lang, prompt, det_prob = _detect_supported_lang(pcm)
+        marks["lang"] = time.perf_counter()
 
         # 3c. Transcribe with the language LOCKED and a single-language prompt.
         #     beam_size=1 (greedy) is far faster than the default 5; vad_filter
@@ -266,10 +288,24 @@ def stt():
             initial_prompt=prompt,
             beam_size=int(os.getenv("WHISPER_BEAM", "1")),
             vad_filter=True,
-            vad_parameters={"min_silence_duration_ms": 500},
+            vad_parameters={"min_silence_duration_ms": _STT_VAD_MIN_SILENCE_MS},
             condition_on_previous_text=False,
         )
         text = "".join(seg.text for seg in segments).strip()
+        marks["transcribe"] = time.perf_counter()
+
+        if _STT_LOG_TIMINGS:
+            print(
+                "[STT] "
+                f"lang={lang} model={_WHISPER_MODEL} "
+                f"save={marks['saved']-started:.3f}s "
+                f"ffmpeg={marks['ffmpeg']-marks['saved']:.3f}s "
+                f"decode={marks['decode']-marks['ffmpeg']:.3f}s "
+                f"lang_detect={marks['lang']-marks['decode']:.3f}s "
+                f"transcribe={marks['transcribe']-marks['lang']:.3f}s "
+                f"total={marks['transcribe']-started:.3f}s "
+                f"chars={len(text)}"
+            )
 
         return jsonify({"text": text, "lang": lang, "lang_prob": round(float(det_prob), 3)})
 
