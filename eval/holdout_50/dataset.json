@@ -1,0 +1,1238 @@
+[
+  {
+    "id": "H50-01",
+    "question": "Our office needs 30 laptops. How should we decide whether to use GeM or a tender?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "requirement",
+      "estimate",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "requirement",
+      "budget",
+      "method"
+    ],
+    "prohibited_unsafe_claims": [
+      "vendor registration",
+      "submit bid"
+    ]
+  },
+  {
+    "id": "H50-02",
+    "question": "Department ko ₹4 lakh ka furniture kharidna hai. Kaunsa procurement method use karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-03",
+    "question": "Can we buy an item directly if only one quotation is available on GeM?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "gem_direct_purchase_rule",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-04",
+    "question": "Agar item GeM par available nahi hai, department ko next kya karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-05",
+    "question": "Can a department invite quotations from three local suppliers instead of issuing an open tender?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-06",
+    "question": "Hamare office ko urgently printers chahiye, lekin emergency nahi hai. Fastest lawful option kya hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-07",
+    "question": "What factors should be checked before choosing Limited Tender?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-08",
+    "question": "When should an Open Tender be preferred over Limited Tender?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "comparison",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-09",
+    "question": "Can Single Tender be used because the earlier supplier already knows our system?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "policy_conditions",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "exceptional",
+      "justification",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "single source",
+      "written justification",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "convenience alone",
+      "automatic permission"
+    ]
+  },
+  {
+    "id": "H50-10",
+    "question": "Ek proprietary software sirf ek company provide karti hai. Kya Single Tender allowed hoga?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "policy_conditions",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "exceptional",
+      "justification",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "single source",
+      "written justification",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "convenience alone",
+      "automatic permission"
+    ]
+  },
+  {
+    "id": "H50-11",
+    "question": "Can the department purchase spare parts only from the original equipment manufacturer?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "exceptional",
+      "justification",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "single source",
+      "written justification",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "convenience alone",
+      "automatic permission"
+    ]
+  },
+  {
+    "id": "H50-12",
+    "question": "Government department ko dusre government undertaking se goods purchase karne hain. Kya tender zaroori hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "procurement_methods_overview",
+    "expected_answer_mode": "yes_no_policy",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-13",
+    "question": "Can we split a ₹10 lakh requirement into five smaller purchase orders?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_answer_mode": "restriction_or_prohibition",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "consolidated",
+      "split",
+      "requirement"
+    ],
+    "required_answer_concepts": [
+      "must not split",
+      "consolidated"
+    ],
+    "prohibited_unsafe_claims": [
+      "split to avoid",
+      "always direct purchase"
+    ]
+  },
+  {
+    "id": "H50-14",
+    "question": "Same item alag-alag months mein chahiye. Kya har month direct purchase kar sakte hain?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "consolidated",
+      "split",
+      "requirement"
+    ],
+    "required_answer_concepts": [
+      "must not split",
+      "consolidated"
+    ],
+    "prohibited_unsafe_claims": [
+      "split to avoid",
+      "always direct purchase"
+    ]
+  },
+  {
+    "id": "H50-15",
+    "question": "How should the department estimate the total procurement value before selecting the method?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "requirement",
+      "estimate",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "requirement",
+      "budget",
+      "method"
+    ],
+    "prohibited_unsafe_claims": [
+      "vendor registration",
+      "submit bid"
+    ]
+  },
+  {
+    "id": "H50-16",
+    "question": "Purchase start karne se pehle administrative approval aur financial sanction mein kya difference hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "comparison",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ]
+  },
+  {
+    "id": "H50-17",
+    "question": "Who should confirm budget availability before a tender is published?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ]
+  },
+  {
+    "id": "H50-18",
+    "question": "Can a tender be initiated before the budget is formally available?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ]
+  },
+  {
+    "id": "H50-19",
+    "question": "Department ke paas budget hai, lekin financial sanction pending hai. Kya GeM order place kar sakte hain?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ]
+  },
+  {
+    "id": "H50-20",
+    "question": "What records should be kept to prove that the selected procurement method was justified?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ]
+  },
+  {
+    "id": "H50-21",
+    "question": "Can the competent authority approve a purchase after the order has already been placed?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ]
+  },
+  {
+    "id": "H50-22",
+    "question": "What is delegated financial power, and how does it affect procurement method selection?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ]
+  },
+  {
+    "id": "H50-23",
+    "question": "Agar purchase value officer ki delegated power se zyada hai, to next approval kis stage par lena chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ]
+  },
+  {
+    "id": "H50-24",
+    "question": "Can the department use last year's approved rate without conducting a fresh procurement?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ]
+  },
+  {
+    "id": "H50-25",
+    "question": "How should price reasonableness be established when only one valid bid is received?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-26",
+    "question": "Kya lowest quotation milne ka matlab price reasonable hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-27",
+    "question": "What should the department do if all received bids are much higher than the estimated cost?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-28",
+    "question": "Can negotiations be conducted with the L1 bidder after opening financial bids?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-29",
+    "question": "Tender cancel karne ke liye kya reasons record karne chahiye?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_policy",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-30",
+    "question": "Can the department reject all bids without giving any reason?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-31",
+    "question": "Can we mention a preferred brand and write ‘or equivalent’ in the technical specifications?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "generic",
+      "measurable",
+      "competition"
+    ],
+    "required_answer_concepts": [
+      "generic",
+      "technical justification",
+      "equivalent"
+    ],
+    "prohibited_unsafe_claims": [
+      "brand automatically allowed",
+      "restrict competition"
+    ]
+  },
+  {
+    "id": "H50-32",
+    "question": "Laptop specification banate waqt processor brand mention karna allowed hai kya?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "generic",
+      "measurable",
+      "competition"
+    ],
+    "required_answer_concepts": [
+      "generic",
+      "technical justification",
+      "equivalent"
+    ],
+    "prohibited_unsafe_claims": [
+      "brand automatically allowed",
+      "restrict competition"
+    ]
+  },
+  {
+    "id": "H50-33",
+    "question": "How can specifications be written so that they do not favour one vendor?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "generic",
+      "measurable",
+      "competition"
+    ],
+    "required_answer_concepts": [
+      "generic",
+      "technical justification",
+      "equivalent"
+    ],
+    "prohibited_unsafe_claims": [
+      "brand automatically allowed",
+      "restrict competition"
+    ]
+  },
+  {
+    "id": "H50-34",
+    "question": "Can experience and turnover requirements be higher than the estimated tender value?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ]
+  },
+  {
+    "id": "H50-35",
+    "question": "Tender mein three-year experience mandatory rakhna kab justified hota hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ]
+  },
+  {
+    "id": "H50-36",
+    "question": "Can a startup be exempted from prior experience and turnover requirements?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_answer_mode": "specific_portal_step",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ]
+  },
+  {
+    "id": "H50-37",
+    "question": "Does MSME registration automatically make a bidder eligible for every tender?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_answer_mode": "specific_portal_step",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ]
+  },
+  {
+    "id": "H50-38",
+    "question": "Can EMD exemption be claimed without uploading the required registration certificate?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_exemption",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ]
+  },
+  {
+    "id": "H50-39",
+    "question": "What should happen if a bidder meets the technical specification but misses one mandatory document?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-40",
+    "question": "A bidder uploaded an expired certificate. Should the bid be rejected or can clarification be requested?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-41",
+    "question": "Technical evaluation ke baad financial bids kin bidders ki open honi chahiye?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_opening_portal_steps",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "bid",
+      "deadline",
+      "DSC"
+    ],
+    "required_answer_concepts": [
+      "portal",
+      "bid",
+      "deadline"
+    ],
+    "prohibited_unsafe_claims": [
+      "department approval",
+      "buyer workflow"
+    ]
+  },
+  {
+    "id": "H50-42",
+    "question": "Can a technically non-responsive bidder be selected because its price is the lowest?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-43",
+    "question": "L1 bidder ki rate estimate se 25% zyada hai. Department ko kya karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-44",
+    "question": "How should the evaluation committee record reasons for rejecting a bidder?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-45",
+    "question": "Can tender conditions be changed after bids have already been opened?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_policy",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "corrigendum",
+      "bid",
+      "tender"
+    ],
+    "required_answer_concepts": [
+      "corrigendum",
+      "check",
+      "submit"
+    ],
+    "prohibited_unsafe_claims": [
+      "department workflow for bidder"
+    ]
+  },
+  {
+    "id": "H50-46",
+    "question": "Purchase Order issue hone ke baad vendor delivery delay kare to department kya action le sakta hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "purchase_order",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ]
+  },
+  {
+    "id": "H50-47",
+    "question": "Goods receive ho gaye, but specification match nahi kar rahi. Payment release karna chahiye kya?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "inspection_and_acceptance",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "inspection",
+      "acceptance",
+      "payment"
+    ],
+    "required_answer_concepts": [
+      "inspection",
+      "acceptance"
+    ],
+    "prohibited_unsafe_claims": [
+      "release payment without acceptance"
+    ]
+  },
+  {
+    "id": "H50-48",
+    "question": "What documents should be completed before processing payment to the supplier?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "payment_and_asset_entry",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "inspection",
+      "acceptance",
+      "payment"
+    ],
+    "required_answer_concepts": [
+      "inspection",
+      "acceptance"
+    ],
+    "prohibited_unsafe_claims": [
+      "release payment without acceptance"
+    ]
+  },
+  {
+    "id": "H50-49",
+    "question": "Bid submit karne ke baad corrigendum se specifications change ho gayi. Kya mujhe bid dobara submit karni hogi?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bidder_corrigendum_tracking",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "corrigendum",
+      "bid",
+      "tender"
+    ],
+    "required_answer_concepts": [
+      "corrigendum",
+      "check",
+      "submit"
+    ],
+    "prohibited_unsafe_claims": [
+      "department workflow for bidder"
+    ]
+  },
+  {
+    "id": "H50-50",
+    "question": "EMD payment successful hai but portal par status pending dikh raha hai, aur deadline close hai. Main kya karun?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_payment_failure",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "Online_EMD_Refund_Notice.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "EMD",
+      "status",
+      "receipt"
+    ],
+    "required_answer_concepts": [
+      "EMD",
+      "status",
+      "support"
+    ],
+    "prohibited_unsafe_claims": [
+      "assume payment successful",
+      "ignore deadline"
+    ]
+  }
+]

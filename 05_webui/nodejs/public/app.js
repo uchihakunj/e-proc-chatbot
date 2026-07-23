@@ -1,8 +1,8 @@
 'use strict';
 
 // ── Token storage ─────────────────────────────────────────────────────────
-const TOKEN_KEY = 'chips_rag_token';
-const USER_KEY  = 'chips_rag_user';
+const TOKEN_KEY = 'eproc_chatbot_token';
+const USER_KEY  = 'eproc_chatbot_user';
 
 const session = {
   save(token, user)  { sessionStorage.setItem(TOKEN_KEY, token); sessionStorage.setItem(USER_KEY, JSON.stringify(user)); },
@@ -693,16 +693,16 @@ function runMenuAction(action) {
 }
 
 // ── Proactive greeting teaser near the toggle (attention grabber) ───────────
-const TEASER_KEY = 'chips_teaser_dismissed';
+let teaserDismissed = false;
 function showTeaserSoon() {
-  if (!ui.widgetTeaser || sessionStorage.getItem(TEASER_KEY)) return;
+  if (!ui.widgetTeaser || teaserDismissed) return;
   setTimeout(() => {
-    if (!state.widgetOpen && !sessionStorage.getItem(TEASER_KEY)) ui.widgetTeaser.classList.remove('hidden');
+    if (!state.widgetOpen && !teaserDismissed) ui.widgetTeaser.classList.remove('hidden');
   }, 2900);   // fire after the FAB wordmark peek (~0.45s→2.6s) so they don't stack
 }
 function dismissTeaser() {
   if (ui.widgetTeaser) ui.widgetTeaser.classList.add('hidden');
-  try { sessionStorage.setItem(TEASER_KEY, '1'); } catch (_) {}
+  teaserDismissed = true;
 }
 
 // ── Maximize / restore the popup ─────────────────────────────────────────────

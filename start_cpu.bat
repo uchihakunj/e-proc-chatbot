@@ -7,8 +7,8 @@ echo ========================================================
 set OLLAMA_INTEL_GPU=false
 set OLLAMA_LLM_LIBRARY=cpu
 
-:: 2. Force Python (PyTorch/OpenVINO) to ignore GPUs
-set CUDA_VISIBLE_DEVICES=-1
+:: 2. Allow GPU acceleration for ONNX/OpenVINO
+:: set CUDA_VISIBLE_DEVICES=-1
 
 :: 3. Restart Ollama in this terminal so it picks up the CPU flags
 echo Stopping any running Ollama instance...

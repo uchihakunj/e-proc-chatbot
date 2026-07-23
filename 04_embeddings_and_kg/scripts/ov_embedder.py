@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import glob
 import os
+import threading
 from pathlib import Path
 from typing import List, Sequence
 
@@ -58,6 +59,9 @@ class OVEmbedder:
 
         self.max_length = max_length
         self.return_sparse = True
+        # Optimum's default OpenVINO infer request is not re-entrant. Waitress
+        # may call this shared model from several request threads at once.
+        self._inference_lock = threading.Lock()
         cache = Path(cache_dir) if cache_dir else _DEFAULT_CACHE
         has_ir = cache.is_dir() and any(cache.glob("*.xml"))
 
@@ -101,7 +105,8 @@ class OVEmbedder:
             enc = self.tokenizer(batch, padding=True, truncation=True,
                                  max_length=ml, return_tensors="np")
             feed = {k: enc[k] for k in enc if k in ("input_ids", "attention_mask", "token_type_ids")}
-            out = self.model(**feed)
+            with self._inference_lock:
+                out = self.model(**feed)
             hidden = np.asarray(getattr(out, "last_hidden_state", None)
                                 if hasattr(out, "last_hidden_state") else out[0])  # [B,L,1024]
 

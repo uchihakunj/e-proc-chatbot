@@ -7,7 +7,7 @@
 
 // Load .env if present (dev convenience; in production set env vars directly)
 try {
-  require('dotenv').config();
+  require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 } catch (_) {
   // dotenv is optional — ignore if not installed
 }

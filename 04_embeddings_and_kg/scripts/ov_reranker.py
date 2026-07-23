@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import math
 import os
+import threading
 from pathlib import Path
 from typing import List, Sequence
 
@@ -30,6 +31,10 @@ class OVReranker:
         from transformers import AutoTokenizer
 
         self.max_length = max_length
+        # A compiled OpenVINO model owns a default infer request which cannot be
+        # used concurrently. Serialize only the device call; tokenization and
+        # score conversion can still run in parallel.
+        self._inference_lock = threading.Lock()
         cache = Path(cache_dir) if cache_dir else _DEFAULT_CACHE
         has_ir = cache.is_dir() and any(cache.glob("*.xml"))
 
@@ -63,7 +68,8 @@ class OVReranker:
         docs = [p[1] for p in pairs]
         enc = self.tokenizer(queries, docs, padding=True, truncation=True,
                              max_length=ml, return_tensors="np")
-        logits = self.model(**{k: enc[k] for k in enc}).logits
+        with self._inference_lock:
+            logits = self.model(**{k: enc[k] for k in enc}).logits
         logits = np.asarray(logits).reshape(-1)
         if normalize:
             return [1.0 / (1.0 + math.exp(-float(x))) for x in logits]

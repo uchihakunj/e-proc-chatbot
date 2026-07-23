@@ -1,5 +1,5 @@
 /**
- * CHiPS-RAG  –  Frontend application
+ * eproc-chatbot  –  Frontend application
  *
  * Handles login → token storage → RAG UI.
  * All /api/* requests include Authorization: Bearer <token>.
@@ -10,8 +10,8 @@
 'use strict';
 
 // ── Token storage (sessionStorage: cleared on tab/browser close) ──────────
-const TOKEN_KEY = 'chips_rag_token';
-const USER_KEY  = 'chips_rag_user';
+const TOKEN_KEY = 'eproc_chatbot_token';
+const USER_KEY  = 'eproc_chatbot_user';
 
 const session = {
   save(token, user)  {

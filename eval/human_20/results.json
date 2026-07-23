@@ -1,0 +1,2574 @@
+[
+  {
+    "id": "H01",
+    "persona": "store officer",
+    "language": "en",
+    "query": "Our district office needs 50 laptops for new staff. What should I prepare before choosing GeM or a tender?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "need",
+        "requirement"
+      ],
+      [
+        "specification"
+      ],
+      [
+        "approval",
+        "budget"
+      ]
+    ],
+    "expected_response_keywords": [
+      "requirement",
+      "specification",
+      "approval",
+      "gem",
+      "tender"
+    ],
+    "reference_answer": "Record the consolidated requirement and estimated cost, prepare neutral technical specifications, confirm budget and competent approval, then check whether the required laptops are available on GeM. If the applicable rules do not permit the selected GeM route or the item is unavailable, use the permitted tender route. Do not split the requirement merely to use a different method.",
+    "detected_actor": "department_buyer",
+    "detected_fine_intent": "procurement_planning",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "publicpromanual-1755343081262-715558279.pdf",
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "publicpromanual-1755343081262-715558279.pdf",
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "need",
+            "requirement"
+          ],
+          "matched": "need"
+        },
+        {
+          "alternatives": [
+            "specification"
+          ],
+          "matched": "specification"
+        },
+        {
+          "alternatives": [
+            "approval",
+            "budget"
+          ],
+          "matched": "approval"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "specification",
+        "approval",
+        "gem",
+        "tender"
+      ],
+      "missing_keywords": [
+        "requirement"
+      ],
+      "coverage": 0.8
+    },
+    "question_answer_cosine": 0.677,
+    "reference_answer_cosine": 0.7611,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 5.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer provides a comprehensive, step-by-step workflow that directly addresses the user's question. It correctly identifies the buyer's role and outlines the necessary preparatory steps before choosing between GeM and a tender. The workflow is safe and avoids common pitfalls. The only minor omis"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 4.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer provides a comprehensive, step-by-step workflow that aligns with the reference's core principles. It correctly identifies the need to record requirements, prepare specs, confirm budget, and check GeM availability. It also includes crucial safety and procedural steps like obtaining approva"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.843,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nThis is the department buyer/procuring-entity workflow for laptops/computers/IT equipment. The department creates the Tender or GeM Bid; Vendors submit Bids. The buyer must not start with vendor registration or vendor-side Bid submission.\n\n📋 Process\n1. Record the need for laptops/computers/IT equipment, purpose, quantity, users and delivery timeline.\n2. Prepare generic, measurable and competition-friendly specifications.\n3. Estimate the cost and confirm budget availability.\n4. Obtain applicable administrative approval and financial sanction.\n5. Create the approved purchase indent/procurement request.\n6. Check GeM and the applicable Chhattisgarh-approved purchase channel.\n7. Select the lawful method under current State rules and delegated powers; Single Tender requires exceptional grounds, written justification and competent approval.\n8. Publish the department Tender/GeM Bid and receive Vendor Bids.\n9. Document technical/commercial evaluation and rate reasonableness.\n10. Issue the Purchase Order/contract after competent approval.\n11. Inspect delivery and record formal acceptance.\n12. Process payment after acceptance and update the asset/stock register.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024"
+  },
+  {
+    "id": "H02",
+    "persona": "department buyer",
+    "language": "hinglish",
+    "query": "Department ko 100 chairs chahiye. Kya direct purchase ho sakti hai ya tender karna padega?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "GeM",
+        "portal"
+      ],
+      [
+        "limited tender",
+        "open tender",
+        "direct purchase"
+      ]
+    ],
+    "expected_response_keywords": [
+      "GeM",
+      "estimated value",
+      "rules",
+      "approval",
+      "direct purchase"
+    ],
+    "reference_answer": "Pehle estimated value, specifications aur GeM availability check karein. Direct purchase, limited tender ya open tender sirf current Chhattisgarh rules, delegated powers aur approval ke mutabik choose karein. Requirement ko split karke doosra method use na karein.",
+    "detected_actor": "department_buyer",
+    "detected_fine_intent": "procurement_method_selection",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_sources": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "GeM",
+            "portal"
+          ],
+          "matched": "GeM"
+        },
+        {
+          "alternatives": [
+            "limited tender",
+            "open tender",
+            "direct purchase"
+          ],
+          "matched": null
+        }
+      ],
+      "coverage": 0.5
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "GeM",
+        "estimated value",
+        "rules",
+        "approval",
+        "direct purchase"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.5803,
+    "reference_answer_cosine": 0.8357,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "Answer correctly identifies that the method is not determined by convenience and provides a safe, rule-based workflow. It avoids making unsupported claims and gives actionable, safe steps. The only minor omission is not explicitly stating that the decision is based on the estimated value and the ava"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "Answer correctly identifies that the method is not decided by convenience and accurately lists the required checks (value, GeM, rules, powers). It correctly advises against splitting the requirement. The process steps are a safe and accurate paraphrase of the reference. The only minor omission is no"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.605,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nDirect purchase ya Tender convenience se decide nahi hota. Pehle estimated value, GeM par item/service availability, current rules aur delegated powers check karein. In conditions se jo method permit ho wahi choose karein aur justification/approval record karein.\n\n📋 Process\n1. Consolidated requirement aur estimate record karein.\n2. GeM par item availability check karein.\n3. Applicable value/rule conditions ke mutabik direct purchase, bidding ya Tender method choose karein.\n4. Different method use karne ke liye requirement split na karein.\n5. Aage badhne se pehle approval aur method justification file par rakhein.\n\n📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules"
+  },
+  {
+    "id": "H03",
+    "persona": "IT procurement officer",
+    "language": "en",
+    "query": "Can I write Dell-only in the laptop specification because our team already uses Dell?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "brand",
+        "Dell"
+      ],
+      [
+        "functional",
+        "performance",
+        "specification"
+      ]
+    ],
+    "expected_response_keywords": [
+      "brand",
+      "functional",
+      "measurable",
+      "technical justification",
+      "equivalent"
+    ],
+    "reference_answer": "Normally use generic, functional and measurable specifications rather than a brand-only requirement. A brand or model restriction should be used only where a genuine technical or compatibility necessity is recorded in writing and the applicable rules allow it; include an equivalent provision where appropriate.",
+    "detected_actor": "department_buyer",
+    "detected_fine_intent": "specification_preparation",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "compilation of cvc circulars and guidelines.pdf",
+        "publicpromanual-1755343081262-715558279.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "compilation of cvc circulars and guidelines.pdf",
+        "publicpromanual-1755343081262-715558279.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "brand",
+            "Dell"
+          ],
+          "matched": "brand"
+        },
+        {
+          "alternatives": [
+            "functional",
+            "performance",
+            "specification"
+          ],
+          "matched": "functional"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "brand",
+        "functional",
+        "measurable",
+        "technical justification",
+        "equivalent"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.4463,
+    "reference_answer_cosine": 0.7388,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer correctly advises against brand-specific specifications to ensure competition, which is directly relevant to the question. It provides a safe, generic workflow. It is slightly incomplete as it doesn't explicitly state that using Dell is permissible if the rules allow for it, but this is a"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly paraphrases the reviewer's core message, emphasizing generic specifications and the high bar for brand-only requirements. It provides a safe, actionable workflow and is fully grounded in the provided reference. The only minor omission is the explicit mention of 'equivalent provi"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.81,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nPrepare generic, measurable and competition-friendly specifications based on the department's functional and performance need. Avoid a brand or model unless the rules permit it with recorded technical justification and an equivalent provision.\n\n📋 Process\n1. Define the required function, capacity, quality and operating environment.\n2. State measurable performance, safety and compatibility parameters.\n3. Use applicable standards and define tests, inspection and acceptance criteria.\n4. Avoid restrictive brand-specific features that reduce competition.\n5. Have the specifications reviewed by the user/technical committee before approval.\n\n📘 Source: Manual for Procurement of Goods 2024; Compilation of CVC Circulars and Guidelines"
+  },
+  {
+    "id": "H04",
+    "persona": "accounts officer",
+    "language": "hinglish",
+    "query": "Office ke AC ka AMC renew karna hai. Tender se pehle scope mein kya kya likhna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "service",
+        "specification"
+      ],
+      [
+        "inspection",
+        "acceptance",
+        "payment"
+      ]
+    ],
+    "expected_response_keywords": [
+      "scope",
+      "SLA",
+      "response time",
+      "spares",
+      "approval"
+    ],
+    "reference_answer": "AMC scope mein covered AC units and sites, service frequency, response time, uptime or SLA, spares coverage, exclusions, penalty terms, contract period and payment milestones define karein. Estimated value and approvals record karke permitted procurement method choose karein.",
+    "detected_actor": "department_buyer",
+    "detected_fine_intent": "procurement_planning",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "publicpromanual-1755343081262-715558279.pdf",
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "publicpromanual-1755343081262-715558279.pdf",
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "service",
+            "specification"
+          ],
+          "matched": "service"
+        },
+        {
+          "alternatives": [
+            "inspection",
+            "acceptance",
+            "payment"
+          ],
+          "matched": "inspection"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "scope",
+        "SLA",
+        "response time",
+        "spares",
+        "approval"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.6149,
+    "reference_answer_cosine": 0.8092,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "Answer is highly relevant and helpful, providing a structured workflow. It correctly identifies key scope elements and process steps. The only minor omission is the explicit mention of the GeM portal or specific portal click paths, which the prompt allows to be declined. The workflow advice is safe "
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 4.0,
+        "helpfulness": 4.0
+      },
+      "reason": "Answer correctly paraphrases the reference, covering all key scope elements and workflow steps. It avoids inventing unsupported details and provides a safe, actionable workflow. Minor omission of 'penalty terms' in the workflow list is a minor gap, but the core information is fully present and accur"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.925,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nAC AMC ke liye goods-delivery workflow se pehle service scope define karein: covered AC units/sites, service frequency, response time, spares coverage, exclusions, uptime/penalty terms, contract period aur payment milestones.\n\n📋 Process\n1. Asset list aur service/SLA scope banayein, including response time aur spares responsibility.\n2. Contract value estimate karke budget aur required approvals confirm karein.\n3. GeM/approved route check karke current rules aur delegated powers ke mutabik method choose karein.\n4. Technical service capability, SLA compliance aur financial offer evaluate karein.\n5. AMC contract issue/monitor karein, service calls/performance record karein aur completed service ke against invoice certify karein.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024"
+  },
+  {
+    "id": "H05",
+    "persona": "emergency store officer",
+    "language": "en",
+    "query": "Flooding damaged our office network equipment. Can we buy replacements immediately?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "natural disaster",
+        "emergency",
+        "law and order"
+      ],
+      [
+        "approval",
+        "reasons"
+      ]
+    ],
+    "expected_response_keywords": [
+      "emergency",
+      "recorded reasons",
+      "competent approval",
+      "applicable rules"
+    ],
+    "reference_answer": "Emergency procurement may be used only as an exceptional response to the urgent situation. Record the facts and reasons, obtain competent-authority approval, purchase only what is necessary, and follow the applicable Chhattisgarh rules. It is not an unrestricted direct-purchase route.",
+    "detected_actor": "department_buyer",
+    "detected_fine_intent": "procurement_method_selection",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_sources": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "natural disaster",
+            "emergency",
+            "law and order"
+          ],
+          "matched": null
+        },
+        {
+          "alternatives": [
+            "approval",
+            "reasons"
+          ],
+          "matched": "approval"
+        }
+      ],
+      "coverage": 0.5
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "applicable rules"
+      ],
+      "missing_keywords": [
+        "emergency",
+        "recorded reasons",
+        "competent approval"
+      ],
+      "coverage": 0.25
+    },
+    "question_answer_cosine": 0.4383,
+    "reference_answer_cosine": 0.7476,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer correctly addresses the procurement workflow for replacements, emphasizing the need for consolidated requirements, checking GeM, and applying specific rules. It avoids unsafe advice and provides a safe, structured process. The only minor omission is not directly answering the 'Can we buy "
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly grounds the response in the reference's principles of exceptional emergency procurement, provides a safe and structured workflow, and is highly helpful. It is missing a direct answer to 'Can we buy immediately?' but this is a minor omission as the provided workflow is the correc"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.603,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nDo not choose one procurement method by convenience. First prepare the consolidated requirement, specifications and estimated value; check whether suitable goods are available on GeM; then apply the current Chhattisgarh rules, delegated powers and required approval. Use direct purchase, bidding, Limited Tender or Open Tender only where those conditions permit it.\n\n📋 Process\n1. Record the full requirement, specifications and estimated value.\n2. Check GeM/other approved channels for suitable items.\n3. Apply the applicable rules and delegated powers to select the permitted route.\n4. Do not split the requirement to use a different method.\n5. Record the method justification and approval before proceeding.\n\n📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules"
+  },
+  {
+    "id": "H06",
+    "persona": "first-time vendor",
+    "language": "en",
+    "query": "I have never used the Chhattisgarh e-procurement portal. How do I become a registered bidder?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "vendor_registration",
+    "expected_source_documents": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "New User",
+        "registration"
+      ],
+      [
+        "PAN"
+      ],
+      [
+        "DSC",
+        "Digital Signature"
+      ]
+    ],
+    "expected_response_keywords": [
+      "New User",
+      "PAN",
+      "DSC",
+      "registration",
+      "portal"
+    ],
+    "reference_answer": "Open the Chhattisgarh e-procurement portal, choose New User under registration, enter the required PAN and organisation details, upload the required information, select or map the appropriate DSC, accept the terms and conditions, and retain the generated registration number. Follow the current portal instructions for fees and approval.",
+    "detected_actor": "vendor_bidder",
+    "detected_fine_intent": "vendor_registration",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "AuctionManual_FA.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "final_sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "AuctionManual_FA.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "chips_vendor_registration_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "chips_vendor_registration_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "New User",
+            "registration"
+          ],
+          "matched": "New User"
+        },
+        {
+          "alternatives": [
+            "PAN"
+          ],
+          "matched": "PAN"
+        },
+        {
+          "alternatives": [
+            "DSC",
+            "Digital Signature"
+          ],
+          "matched": "DSC"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "PAN",
+        "DSC",
+        "registration",
+        "portal"
+      ],
+      "missing_keywords": [
+        "New User"
+      ],
+      "coverage": 0.8
+    },
+    "question_answer_cosine": 0.6035,
+    "reference_answer_cosine": 0.7609,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer is highly relevant and helpful, providing a clear, step-by-step workflow for a new supplier. It correctly identifies the CHiPS portal and key steps like PAN, CRN, and DSC. The workflow is safe and avoids unsafe advice. The only minor omission is not mentioning the need for a valid DSC bef"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 3.0,
+        "workflow_safety": 4.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly identifies the CHiPS portal and the New Supplier Registration workflow, providing a safe and helpful overview. It omits specific details from the reference (e.g., 'New User', 'DSC mapping', 'retain registration number') but does not introduce any contradictions. The missing mate"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.048,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nA new domestic supplier registers through the CHiPS e-Procurement portal's New Supplier Registration workflow.\n\n📋 Process\n1. Select New Supplier Registration on the portal.\n2. Enter the supplier's PAN details.\n3. Upload the CRN certificate where the applicable vendor class requires it.\n4. Create the preferred login code and enter the business/contact details.\n5. Review and submit the registration, then complete the valid DSC mapping required for authenticated portal transactions.\n\n📘 Source: Vendor Registration Manual (CHiPS)"
+  },
+  {
+    "id": "H07",
+    "persona": "existing bidder",
+    "language": "hinglish",
+    "query": "Mera DSC renew ho gaya hai, ab portal par purana certificate kaise replace karun?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "dsc_mapping",
+    "expected_source_documents": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "DSC",
+        "Digital Signature"
+      ],
+      [
+        "select",
+        "mapping",
+        "registration"
+      ]
+    ],
+    "expected_response_keywords": [
+      "DSC",
+      "login",
+      "select",
+      "confirm",
+      "portal"
+    ],
+    "reference_answer": "Apne vendor account mein login karke DSC selection or mapping screen par renewed DSC select karein, required confirmation complete karein, aur portal status verify karein. Valid signing/encryption DSC use karein; tender-specific signing steps alag ho sakte hain.",
+    "detected_actor": "vendor_bidder",
+    "detected_fine_intent": "dsc_mapping",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "AuctionManual_FA.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "final_sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "chips_vendor_registration_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "chips_vendor_registration_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "DSC",
+            "Digital Signature"
+          ],
+          "matched": "DSC"
+        },
+        {
+          "alternatives": [
+            "select",
+            "mapping",
+            "registration"
+          ],
+          "matched": "select"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "DSC",
+        "login",
+        "select",
+        "confirm",
+        "portal"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.5698,
+    "reference_answer_cosine": 0.7571,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "Answer provides a correct, safe, and relevant workflow for replacing a DSC. It correctly identifies the need to map the new DSC to the bidder account and outlines the key steps. The process is safe and avoids unsafe advice. The only minor omission is the specific portal click path, which is acceptab"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 4.0,
+        "helpfulness": 4.0
+      },
+      "reason": "Answer correctly maps the DSC renewal to the portal process, covering key steps like login, selection, and verification. It avoids inventing unsupported details and provides a safe, actionable workflow. Minor omission is the explicit mention of 'confirmation' as a separate step, but the overall proc"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 1.98,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nBid submit karne se pehle valid DSC ko registered bidder account ke saath map/register karein.\n\n📋 Process\n1. DSC token drivers aur required portal signing utility install karein.\n2. Valid signing/encryption DSC insert karke registered bidder account se login karein.\n3. DSC registration/mapping option kholkar correct certificate select karein.\n4. Prompt par authenticate/sign karke mapping submit karein.\n5. Portal par DSC registered confirmation check karein; renewed/replaced DSC ko Bid se pehle dobara map karein.\n\n📘 Source: Vendor Registration Manual (CHiPS)"
+  },
+  {
+    "id": "H08",
+    "persona": "vendor",
+    "language": "en",
+    "query": "My EMD payment failed, but the bank has debited the amount. What should I do before the bid deadline?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_payment_failure",
+    "expected_source_documents": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "EMD",
+        "payment"
+      ],
+      [
+        "receipt",
+        "transaction",
+        "status"
+      ]
+    ],
+    "expected_response_keywords": [
+      "EMD",
+      "transaction",
+      "payment status",
+      "receipt",
+      "helpdesk"
+    ],
+    "reference_answer": "Do not assume that a bank debit means the EMD is successful. Check the portal payment status and transaction details, retain the bank and portal reference or receipt, and contact the portal/payment helpdesk promptly if the status remains unsuccessful. Complete a valid EMD payment before the bid deadline where the tender requires it.",
+    "detected_actor": "vendor_bidder",
+    "detected_fine_intent": "emd_payment_failure",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf"
+    ],
+    "final_sources": [
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [],
+      "missing_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "coverage": 0.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "EMD",
+            "payment"
+          ],
+          "matched": "EMD"
+        },
+        {
+          "alternatives": [
+            "receipt",
+            "transaction",
+            "status"
+          ],
+          "matched": "receipt"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "EMD",
+        "transaction",
+        "payment status",
+        "receipt"
+      ],
+      "missing_keywords": [
+        "helpdesk"
+      ],
+      "coverage": 0.8
+    },
+    "question_answer_cosine": 0.7534,
+    "reference_answer_cosine": 0.7838,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 5.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 5.0
+      },
+      "reason": "The answer directly addresses the user's urgent problem with a failed EMD payment, providing clear, safe, and relevant steps. It correctly advises against using screenshots and emphasizes using the official tender's payment-support route, which is a critical workflow safety measure. The only minor o"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly identifies the core issue: a bank debit does not guarantee a successful EMD payment. It accurately advises checking the portal status and preserving evidence, which aligns with the reference. It correctly emphasizes not using screenshots and using the official payment-support ro"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.804,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nIf an EMD/Bid Security eChallan payment failed after the amount was debited, and it is not credited to the beneficiary account by the Tender's Bid Due Date, the payment may be returned to the source account and the Bid may be treated as unpaid or rejected. Do not use a screenshot's amount or date; the specific Tender controls.\n\n📋 Process\n1. Check the transaction and EMD/Bid Security payment status in the relevant Tender.\n2. Compare the credited amount and time with that Tender's current Bid Due Date.\n3. Do not re-use the same challan for another Tender.\n4. If the status is not Successful or the credit has not reached the beneficiary, preserve the receipt/reference and use the Tender's official payment-support route before submitting a Bid.\n\n📘 Source: EMD CHALLAN PAYMENT V1.0"
+  },
+  {
+    "id": "H09",
+    "persona": "unsuccessful bidder",
+    "language": "hinglish",
+    "query": "Technical bid mein reject ho gaya hoon. Meri EMD refund kab aur kaise aayegi?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_refund_unsuccessful_bidder",
+    "expected_source_documents": [
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "unsuccessful",
+        "Technical Bid"
+      ],
+      [
+        "department",
+        "approver"
+      ],
+      [
+        "bank",
+        "refund"
+      ]
+    ],
+    "expected_response_keywords": [
+      "department",
+      "approver",
+      "bank",
+      "refund",
+      "status"
+    ],
+    "reference_answer": "Unsuccessful bidder ki EMD refund department/tender owner opening and evaluation ke baad initiate karta hai, aur authorised department approver verification ke baad approve karta hai. System registered bank account ko refund instruction bhejta hai; bidder portal par refund status check kar sakta hai.",
+    "detected_actor": "vendor_bidder",
+    "detected_fine_intent": "emd_refund_unsuccessful_bidder",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "Online_EMD_Refund_Notice.pdf",
+      "Online_EMD_Refund_Notice.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "final_sources": [
+      "Online_EMD_Refund_Notice.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "online_emd_refund_notice.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "online_emd_refund_notice.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "unsuccessful",
+            "Technical Bid"
+          ],
+          "matched": "unsuccessful"
+        },
+        {
+          "alternatives": [
+            "department",
+            "approver"
+          ],
+          "matched": "department"
+        },
+        {
+          "alternatives": [
+            "bank",
+            "refund"
+          ],
+          "matched": "bank"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "department",
+        "approver",
+        "bank",
+        "refund",
+        "status"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.5859,
+    "reference_answer_cosine": 0.885,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "Answer provides a correct, safe, and relevant workflow for the EMD refund process. It accurately paraphrases the standard procedure without inventing unsupported details. The only minor omission is the specific timeline for the refund, which is often not publicly disclosed and varies by department, "
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "Answer correctly paraphrases the reference, covering the key steps and actors. It omits the specific 'opening and evaluation' trigger and the 'authorised department approver' verification, which are minor omissions. The workflow is safe and the answer is helpful, though it could be more complete by "
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.803,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nUnsuccessful bidder ki EMD refund process applicable Bid opening/evaluation stage ke baad Department Admin initiate karta hai.\n\n📋 Process\n1. Department Admin eligible unsuccessful bidder ki EMD select kare.\n2. Department Approver refund verify karke approve kare.\n3. e-Procurement system approved refund instruction bank ko bheje.\n4. Amount bidder ke registered bank account mein credit hone ke baad portal status check karein.\n\n📘 Source: EMD Refund Guidelines (CHiPS); Manual for Procurement of Goods 2024"
+  },
+  {
+    "id": "H10",
+    "persona": "bidder",
+    "language": "en",
+    "query": "My technical documents are uploaded. Where do I enter the price bid and how do I know it was submitted?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bid_submission_portal_steps",
+    "expected_source_documents": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "Price bid",
+        "Financial Bid",
+        "BOQ"
+      ],
+      [
+        "DSC",
+        "signed"
+      ],
+      [
+        "confirmation",
+        "submit"
+      ]
+    ],
+    "expected_response_keywords": [
+      "Financial Bid",
+      "BOQ",
+      "DSC",
+      "submit",
+      "acknowledgement"
+    ],
+    "reference_answer": "Use the Financial Bid, Price Bid or BOQ part of the same tender, enter or upload the required price values, validate the figures, sign or encrypt using the valid DSC where required, save and submit before the deadline, and verify the final acknowledgement or status.",
+    "detected_actor": "vendor_bidder",
+    "detected_fine_intent": "bid_submission_portal_steps",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "AuctionManual_FA.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "Online_EMD_Refund_Notice.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "final_sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "Price bid",
+            "Financial Bid",
+            "BOQ"
+          ],
+          "matched": "Price bid"
+        },
+        {
+          "alternatives": [
+            "DSC",
+            "signed"
+          ],
+          "matched": "DSC"
+        },
+        {
+          "alternatives": [
+            "confirmation",
+            "submit"
+          ],
+          "matched": "confirmation"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "DSC",
+        "submit",
+        "acknowledgement"
+      ],
+      "missing_keywords": [
+        "Financial Bid",
+        "BOQ"
+      ],
+      "coverage": 0.6
+    },
+    "question_answer_cosine": 0.6704,
+    "reference_answer_cosine": 0.7234,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer correctly identifies the user's role and the required actions (using a DSC, logging into the portal, and submitting the price bid). It provides a clear, step-by-step process that directly addresses the user's questions about where to enter the price and how to verify submission. The workf"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 4.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly identifies the need for a DSC and provides a clear, step-by-step workflow that aligns with the reference. It covers the key actions: registration, document upload, price bid entry, and submission/verification. The answer is safe, factual, and helpful, with only minor omissions l"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.429,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nYou are acting as a Vendor/Bidder. Use a registered bidder account and the valid signing/encryption DSC required by the CHiPS Bid Submission Manual.\n\n📋 Process\n1. Complete Vendor registration if it is pending.\n2. Register the signing/encryption DSC and log in to the secured portal.\n3. Find the relevant Tender/NIT and mark participation where applicable.\n4. Review eligibility, dates, corrigenda, fees and EMD/Bid Security conditions.\n5. Open Respond to Tender/NIT and upload the required technical documents.\n6. Complete the Price Bid, review the submission and submit it with the DSC before the deadline.\n7. Save the portal acknowledgement and monitor the Tender status.\n\n📘 Source: CHiPS Bid Submission Manual; CHiPS Vendor Registration Manual"
+  },
+  {
+    "id": "H11",
+    "persona": "bidder",
+    "language": "hinglish",
+    "query": "Bid submit kar di thi, lekin deadline ke baad rate galat dikha. Kya edit kar sakta hoon?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bid_submission_portal_steps",
+    "expected_source_documents": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "submission",
+        "confirmation"
+      ],
+      [
+        "deadline",
+        "bid"
+      ]
+    ],
+    "expected_response_keywords": [
+      "deadline",
+      "modify",
+      "tender",
+      "corrigendum"
+    ],
+    "reference_answer": "Nahi. Bid-submission deadline ke baad bid ko alter or modify nahi kiya ja sakta. Submitted acknowledgement preserve karein aur agar tender owner corrigendum or clarification issue kare to uske tender-specific instructions follow karein.",
+    "detected_actor": "vendor_bidder",
+    "detected_fine_intent": "bid_submission_portal_steps",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "final_sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "submission",
+            "confirmation"
+          ],
+          "matched": "submission"
+        },
+        {
+          "alternatives": [
+            "deadline",
+            "bid"
+          ],
+          "matched": "deadline"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "deadline",
+        "modify",
+        "tender",
+        "corrigendum"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.7265,
+    "reference_answer_cosine": 0.9215,
+    "llm_judge_without_reference": {
+      "score": 5.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 5.0,
+        "helpfulness": 5.0,
+        "workflow_safety": 5.0
+      },
+      "reason": "Answer is accurate, safe, and directly addresses the user's question about post-deadline bid edits. It correctly advises against modification and points to the proper procedure (acknowledgement and following tender instructions), which is the only safe and correct workflow."
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "Answer correctly states the bid cannot be altered and advises preserving the acknowledgement. It adds a helpful, safe clarification about not using pre-deadline steps, which aligns with the reference. Minor omission is the lack of a specific action to take if a corrigendum is issued, but the core ad"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.592,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nNahi. Bid-submission deadline ke baad bidder Bid ko alter ya modify nahi kar sakta. Submitted acknowledgement preserve karein aur tender-specific corrigendum/clarification instruction follow karein; pre-deadline edit ya withdrawal steps use na karein.\n\n📘 Source: Bid Submission Manual (CHiPS)"
+  },
+  {
+    "id": "H12",
+    "persona": "startup founder",
+    "language": "en",
+    "query": "Our startup wants to bid for a government tender. Does startup status automatically remove every eligibility and EMD condition?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_source_documents": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "tender",
+        "bid"
+      ],
+      [
+        "eligibility",
+        "documents"
+      ]
+    ],
+    "expected_response_keywords": [
+      "startup",
+      "tender conditions",
+      "eligibility",
+      "EMD",
+      "recognition"
+    ],
+    "reference_answer": "No. A startup may participate if it meets the tender conditions. Any startup relaxation or preference must be expressly available under the applicable rule and tender; startup status does not automatically remove technical compliance, every eligibility condition, EMD, or submission requirements.",
+    "detected_actor": "general_information_user",
+    "detected_fine_intent": "tender_eligibility",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Online_EMD_Refund_Notice.pdf",
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "final_sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "tender",
+            "bid"
+          ],
+          "matched": "tender"
+        },
+        {
+          "alternatives": [
+            "eligibility",
+            "documents"
+          ],
+          "matched": "documents"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "startup",
+        "tender conditions",
+        "eligibility",
+        "EMD",
+        "recognition"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.7221,
+    "reference_answer_cosine": 0.9541,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer correctly clarifies that startup status is not an automatic waiver for all conditions, which is the core of the question. It provides a safe, actionable workflow by advising to check the tender and submit evidence, avoiding any unsafe or speculative advice. The minor omission is not penal"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly states that startup status does not automatically remove eligibility or EMD conditions, aligning with the reference. It adds a helpful, safe workflow step to check the tender and submit evidence, without inventing unsupported details. The only minor omission is not explicitly li"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.546,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nYes, a startup may participate if it meets the tender conditions. A recognised startup may receive any relaxation or procurement preference expressly available under the applicable rules and tender, but startup status does not automatically waive technical compliance, every eligibility condition, EMD, or submission requirements. Check the tender clause and submit the required recognition/evidence before claiming a benefit.\n\n📘 Source: Bid Submission Manual (CHiPS)"
+  },
+  {
+    "id": "H13",
+    "persona": "foreign supplier",
+    "language": "hinglish",
+    "query": "Hum foreign company hain. CG tender ke liye DSC aur registration ka practical process kya hoga?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "vendor_registration",
+    "expected_source_documents": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "foreign vendor",
+        "Indian Embassy"
+      ],
+      [
+        "DSC",
+        "Certificate Authority"
+      ]
+    ],
+    "expected_response_keywords": [
+      "foreign",
+      "DSC",
+      "Indian Embassy",
+      "Certificate Authority",
+      "tender"
+    ],
+    "reference_answer": "Specific tender ki foreign-bidder conditions pehle check karein. DSC ke liye licensed Certificate Authority ka application process follow karein, required organisation and identity documents Indian Embassy se certify karayein where applicable, then CA instructions ke according documents/payment complete karke DSC or token obtain karein. Tender-specific eligibility and registration requirements still apply.",
+    "detected_actor": "vendor_bidder",
+    "detected_fine_intent": "vendor_registration",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "AuctionManual_FA.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "Online_EMD_Refund_Notice.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "final_sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "chips_vendor_registration_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "chips_vendor_registration_manual_english.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "foreign vendor",
+            "Indian Embassy"
+          ],
+          "matched": "foreign vendor"
+        },
+        {
+          "alternatives": [
+            "DSC",
+            "Certificate Authority"
+          ],
+          "matched": "DSC"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "foreign",
+        "DSC",
+        "Indian Embassy",
+        "tender"
+      ],
+      "missing_keywords": [
+        "Certificate Authority"
+      ],
+      "coverage": 0.8
+    },
+    "question_answer_cosine": 0.6944,
+    "reference_answer_cosine": 0.8612,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "Answer is relevant and helpful, providing a correct, safe workflow. It correctly identifies the need to check eligibility first and outlines the key steps for DSC and registration. It avoids unsafe advice and does not invent unsupported details. The minor omission is not providing the exact portal o"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 4.0,
+        "helpfulness": 4.0
+      },
+      "reason": "Answer correctly paraphrases the reference, covering all key steps and conditions. It avoids inventing unsupported details and maintains workflow safety. Minor omission of mentioning the 'token' as an alternative to the DSC is the only slight gap, but the core process is fully and safely described."
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 1.275,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nForeign company pehle specific Tender ki foreign-bidder eligibility aur conditions check kare. Portal DSC ke liye licensed CA se application form lein, required organisation/identity documents ke saath Indian Embassy se certification karayein, CA ko prescribed payment/document dispatch karein, aur issued DSC/e-token receive karein. Tender-specific eligibility, currency aur registration instructions still control karengi.\n\n📘 Source: Vendor Registration Manual (CHiPS)"
+  },
+  {
+    "id": "H14",
+    "persona": "auction bidder",
+    "language": "en",
+    "query": "I have been invited to a forward e-auction. What should I check before placing a bid?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "auction_participation",
+    "expected_source_documents": [
+      "AuctionManual_FA.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "Auction",
+        "View/Respond"
+      ],
+      [
+        "opening price",
+        "minimum bid"
+      ],
+      [
+        "DSC",
+        "login"
+      ]
+    ],
+    "expected_response_keywords": [
+      "DSC",
+      "auction",
+      "opening price",
+      "minimum bid",
+      "submit"
+    ],
+    "reference_answer": "Log in with the bidder credentials and DSC, open the Auction tab, select the relevant auction and View/Respond to the RFX, review the opening price and minimum bid-change conditions, then place and submit bids only in accordance with those conditions.",
+    "detected_actor": "vendor_bidder",
+    "detected_fine_intent": "auction_participation",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "AuctionManual_FA.pdf",
+      "AuctionManual_FA.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "final_sources": [
+      "AuctionManual_FA.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "auctionmanual_fa.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "auctionmanual_fa.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "Auction",
+            "View/Respond"
+          ],
+          "matched": "Auction"
+        },
+        {
+          "alternatives": [
+            "opening price",
+            "minimum bid"
+          ],
+          "matched": "opening price"
+        },
+        {
+          "alternatives": [
+            "DSC",
+            "login"
+          ],
+          "matched": "DSC"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "DSC",
+        "auction",
+        "opening price",
+        "minimum bid",
+        "submit"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.7556,
+    "reference_answer_cosine": 0.8161,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer is highly relevant and helpful, providing a clear, step-by-step workflow. It correctly emphasizes checking the specific auction conditions and avoids unsafe advice. The only minor omission is not explicitly mentioning the need to verify the auction's end time, but this is a minor detail i"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer accurately paraphrases the reference, covering all key steps and conditions. It correctly emphasizes using the specific auction's displayed information and avoids inventing details. The workflow is safe and complete, with minor omissions in the step-by-step list that don't affect the core"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.441,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nFor a bidder invited to participate in a Forward e-Auction, use the auction-specific workflow in the CHiPS Auction Manual. Before placing a bid, confirm that you are in the correct auction and check the opening price and the minimum bid-change condition shown for that auction.\n\n📋 Process\n1. Log in with the bidder user ID, password and the valid DSC.\n2. Open the Forward Auction tab and select the relevant auction.\n3. Open **View/Respond to RFX** and review the auction details before bidding.\n4. Check the displayed opening price and minimum bid-change requirement.\n5. Enter the bid only on the basis permitted by those auction conditions, then submit it through the auction screen.\n6. Monitor the auction screen for the current status and ranking; the manual notes that it refreshes automatically.\n\nUse the exact conditions displayed for the specific auction; do not assume a price or bid increment that is not shown there.\n\n📘 Source: AuctionManual FA"
+  },
+  {
+    "id": "H15",
+    "persona": "department operator",
+    "language": "en",
+    "query": "I am the department operator. What do I need ready before creating a tender in the portal?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_portal_steps",
+    "expected_source_documents": [
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "Create Tender",
+        "tender"
+      ],
+      [
+        "specification",
+        "approval"
+      ]
+    ],
+    "expected_response_keywords": [
+      "approval",
+      "specification",
+      "tender",
+      "documents",
+      "authorised"
+    ],
+    "reference_answer": "Before creating the tender, ensure the approved requirement, estimate, procurement method, specifications, eligibility and evaluation conditions, tender schedule, supporting documents, and authorised department-user access are ready. Create only the approved procurement; bidders should not be given department-side workflow steps.",
+    "detected_actor": "department_operator",
+    "detected_fine_intent": "tender_creation_portal_steps",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf"
+    ],
+    "final_sources": [
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "manual_offline_tenders_v.1.0.pdf"
+      ],
+      "missing_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "coverage": 0.5
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "manual_offline_tenders_v.1.0.pdf"
+      ],
+      "missing_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "coverage": 0.5
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "Create Tender",
+            "tender"
+          ],
+          "matched": "tender"
+        },
+        {
+          "alternatives": [
+            "specification",
+            "approval"
+          ],
+          "matched": "specification"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "approval",
+        "specification",
+        "tender",
+        "documents",
+        "authorised"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.6866,
+    "reference_answer_cosine": 0.8007,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer is highly relevant and helpful, providing a comprehensive checklist. It correctly identifies the need for pre-prepared inputs and workflow considerations. The only minor omission is not explicitly stating that the exact portal steps may vary, which is a subtle point but not a material err"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly identifies the required inputs and workflow, aligning with the reference. It provides a detailed, safe, and helpful checklist. The only minor omission is the explicit mention of 'procurement method' and 'supporting documents' as separate items, but they are covered under 'eligib"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.157,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nBefore creating a Tender, prepare the approved procurement inputs first. The available CHiPS manual then supports entering the Manual/Offline Tender record; it does not establish a universal online-Tender screen sequence.\n\n📋 Checklist\n1. Keep the approved requirement, estimated cost and competent approvals ready.\n2. Finalise neutral technical specifications, the Bid parts, eligibility/document requirements and evaluation conditions.\n3. Prepare the NIT reference, tender call number, description, PAC (where applicable), office/division and Tender schedule, including bid dates.\n4. Keep the applicable Tender attachments, bidder documents and payment/EMD details ready.\n5. Confirm that an authorised department Tender Creator with the required DSC/workflow access will create the record.\n6. Then enter and save the Manual Tender Header Detail and attachments in the authorised portal workflow.\n\nDo not publish until the completed Tender record, dates and attachments have been checked against the approved procurement case.\n\n📘 Source: Offline Tender Upload Manual (CHiPS); Manual for Procurement of Goods 2024"
+  },
+  {
+    "id": "H16",
+    "persona": "department operator",
+    "language": "hinglish",
+    "query": "Tender publish ho chuka hai aur last date badhani hai. Corrigendum kaise issue karun?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "expected_source_documents": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "Date Corrigendum",
+        "Corrigendum"
+      ],
+      [
+        "publish",
+        "Tender Owner",
+        "Department User"
+      ]
+    ],
+    "expected_response_keywords": [
+      "corrigendum",
+      "revised date",
+      "authorised",
+      "publish",
+      "tender"
+    ],
+    "reference_answer": "Authorised department user relevant tender par date corrigendum create kare, revised deadline and related details verify kare, required approval/route complete kare, aur corrigendum publish kare. Published revised date bidders ko portal par visible honi chahiye.",
+    "detected_actor": "department_operator",
+    "detected_fine_intent": "corrigendum_portal_steps",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf"
+    ],
+    "final_sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "chips_corrigendum_issuance_manual.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "chips_corrigendum_issuance_manual.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "Date Corrigendum",
+            "Corrigendum"
+          ],
+          "matched": "Date Corrigendum"
+        },
+        {
+          "alternatives": [
+            "publish",
+            "Tender Owner",
+            "Department User"
+          ],
+          "matched": "publish"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "corrigendum",
+        "authorised",
+        "publish",
+        "tender"
+      ],
+      "missing_keywords": [
+        "revised date"
+      ],
+      "coverage": 0.8
+    },
+    "question_answer_cosine": 0.5986,
+    "reference_answer_cosine": 0.7345,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer provides a correct, step-by-step workflow for issuing a corrigendum, covering key actions like selecting the type, handling attachments, and the approval process. It is safe and directly addresses the user's question. The only minor omission is not explicitly mentioning the need to check "
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 4.0,
+        "helpfulness": 4.0
+      },
+      "reason": "Answer correctly outlines the core steps for issuing a corrigendum, including creation, verification, and publication. It accurately reflects the material facts from the reference. The workflow is safe and complete, though it could be slightly more concise. It correctly avoids inventing unsupported "
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.332,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nDepartment User relevant Tender open karke required Corrigendum banata hai, Bid-deletion effect verify karta hai aur approval workflow se publish karta hai.\n\n📋 Process\n1. Authorised credentials se login karke Tender search karein, RFQ/Tender code select karein aur Go to RFQ kholein.\n2. Required type select karein: Header, Date, EMD/Bid Security, Tender Term, Attachment, Required Attachment ya Item Corrigendum.\n3. Changes fill karke Submit/Save aur Close karein. Attachment ke liye document browse, DSC-sign, upload aur Attach karein; Item ke liye prescribed BOQ update karke upload karein.\n4. Publish All Corrigendum/Addendum par components aur Bid-deletion setting verify karein. EMD/Bid Security aur Item Corrigendum existing Bid ko mandatorily delete karte hain.\n5. Publish karein; approver, remarks aur attachment fill karke Initiate karein aur authorised DSC select karein.\n6. Approver Workflow Inbox mein Detail open karke review, remarks/DSC ke saath Approve kare.\n7. Workflow approved aur Corrigendum published successfully status verify karein.\n\n📘 Source: Corrigendum Issuance Manual (CHiPS)"
+  },
+  {
+    "id": "H17",
+    "persona": "bid opener",
+    "language": "en",
+    "query": "The technical-bid opening time has arrived. As the bid opener, what is the safe portal workflow?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_opening_portal_steps",
+    "expected_source_documents": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "Opening",
+        "technical bid"
+      ],
+      [
+        "department",
+        "tender"
+      ]
+    ],
+    "expected_response_keywords": [
+      "technical bid",
+      "authorised",
+      "opening",
+      "record",
+      "tender"
+    ],
+    "reference_answer": "Use the authorised department account and the relevant tender after the scheduled opening time. Open the technical bid stage according to the portal and tender process, preserve the bid-opening record, and proceed with eligibility and technical evaluation under the published conditions. Do not disclose or open the price bid unless the applicable stage permits it.",
+    "detected_actor": "department_operator",
+    "detected_fine_intent": "bid_opening_portal_steps",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf"
+    ],
+    "final_sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [],
+      "missing_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "coverage": 0.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [],
+      "missing_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "coverage": 0.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "Opening",
+            "technical bid"
+          ],
+          "matched": "Opening"
+        },
+        {
+          "alternatives": [
+            "department",
+            "tender"
+          ],
+          "matched": "department"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "authorised",
+        "opening",
+        "record",
+        "tender"
+      ],
+      "missing_keywords": [
+        "technical bid"
+      ],
+      "coverage": 0.8
+    },
+    "question_answer_cosine": 0.6104,
+    "reference_answer_cosine": 0.867,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer is highly relevant and helpful, providing a safe workflow and correctly advising against using generic information. It is safe and avoids unsafe advice, though it could be slightly more direct by omitting the final sentence about manuals, which is a minor omission."
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 4.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly identifies the core workflow and safety rules, such as using the authorized account and not opening price bids prematurely. It provides a safe, general workflow that aligns with the reference. It is slightly less direct by adding a minor point about two-bid processes, which is h"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.374,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nUse only the authorised department account after the tender's scheduled opening time. Record the opening, check the required bid parts and documents against the published tender conditions, and preserve the system-generated opening record. Evaluate technical responsiveness before opening or evaluating price bids where the tender uses a two-bid process. The available local manuals do not establish a universal screen/button sequence, so follow the department's authorised portal workflow rather than relying on generic menu names.\n\n📘 Source: Manual for Procurement of Goods 2024"
+  },
+  {
+    "id": "H18",
+    "persona": "department accounts operator",
+    "language": "hinglish",
+    "query": "Unsuccessful bidders ka EMD refund department side se initiate kaise hota hai?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "emd_remittance_to_department",
+    "expected_source_documents": [
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "tender owner",
+        "department admin"
+      ],
+      [
+        "approver",
+        "refund"
+      ],
+      [
+        "bank",
+        "account"
+      ]
+    ],
+    "expected_response_keywords": [
+      "department",
+      "refund",
+      "approver",
+      "bank",
+      "status"
+    ],
+    "reference_answer": "Tender owner or department admin unsuccessful bidders ke liye EMD remittance/refund process initiate karta hai after the applicable opening and evaluation stages. Department approver verification ke baad approval deta hai, aur system registered bidder bank accounts ko refund instruction bhejta hai.",
+    "detected_actor": "department_operator",
+    "detected_fine_intent": "emd_remittance_to_department",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "Online_EMD_Refund_Notice.pdf",
+      "Online_EMD_Refund_Notice.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "AuctionManual_FA.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "final_sources": [
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "online_emd_refund_notice.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "online_emd_refund_notice.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "tender owner",
+            "department admin"
+          ],
+          "matched": "tender owner"
+        },
+        {
+          "alternatives": [
+            "approver",
+            "refund"
+          ],
+          "matched": "approver"
+        },
+        {
+          "alternatives": [
+            "bank",
+            "account"
+          ],
+          "matched": "bank"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "department",
+        "refund",
+        "approver",
+        "bank",
+        "status"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.7253,
+    "reference_answer_cosine": 0.8374,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "Answer provides a clear, step-by-step workflow for the EMD refund process from the department side, covering key actions and system interactions. It correctly identifies the initiator, approver, and the final bank credit step. The answer is safe, avoids inventing unsupported details, and is directly"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "Answer correctly covers the core workflow and key actors. It omits the specific 'applicable opening and evaluation stages' trigger mentioned in the reference but provides a safe, accurate, and complete process. The minor omission of the exact trigger point is not a material contradiction or safety i"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 1.787,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nUnsuccessful bidder ki EMD refund process applicable Bid opening/evaluation stage ke baad department process karta hai.\n\n📋 Process\n1. Department Admin eligible unsuccessful bidder ki EMD refund/remittance initiate kare.\n2. Department Approver details aur eligibility verify karke approve kare.\n3. Approval ke baad e-Procurement system bank ko refund instruction bhejta hai.\n4. Amount bidder ke registered bank account mein credit hota hai; Department Admin MIS/portal status mein completion verify kare. Department approval ke baad credit normally 1–2 din le sakta hai.\n\n📘 Source: EMD Refund Guidelines (CHiPS)"
+  },
+  {
+    "id": "H19",
+    "persona": "new procurement officer",
+    "language": "en",
+    "query": "I am new in the office: when should I think about GeM and when is the state e-procurement portal relevant?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "gem_eproc_comparison",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "GeM",
+        "Government e Marketplace"
+      ],
+      [
+        "tender",
+        "bid",
+        "e-procurement"
+      ]
+    ],
+    "expected_response_keywords": [
+      "GeM",
+      "e-procurement",
+      "tender",
+      "purchase",
+      "rules"
+    ],
+    "reference_answer": "GeM is the Government e-Marketplace channel used where the goods or services and the permitted purchase route are available there. The state e-procurement portal is used for portal-managed tender, bid and related processes. The department must select the route permitted by current Chhattisgarh rules and approvals.",
+    "detected_actor": "general_information_user",
+    "detected_fine_intent": "gem_eproc_comparison",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "coverage": 0.5
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [
+        "chips_bid_submission_manual_english.pdf"
+      ],
+      "coverage": 0.5
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "GeM",
+            "Government e Marketplace"
+          ],
+          "matched": "GeM"
+        },
+        {
+          "alternatives": [
+            "tender",
+            "bid",
+            "e-procurement"
+          ],
+          "matched": "tender"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "GeM",
+        "e-procurement",
+        "tender",
+        "purchase",
+        "rules"
+      ],
+      "missing_keywords": [],
+      "coverage": 1.0
+    },
+    "question_answer_cosine": 0.722,
+    "reference_answer_cosine": 0.8468,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "The answer correctly distinguishes between GeM and the state portal, provides a clear comparison table, and offers safe, actionable workflow advice. It avoids making unsupported claims and is well-structured for a new user."
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 5.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "The answer correctly distinguishes the two platforms and provides a clear, safe workflow. It accurately reflects the reference's core facts about GeM and the state portal's distinct purposes. The only minor omission is not explicitly listing all supported activities for GeM, but the provided table i"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.491,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 Answer\nGeM and the State e-Procurement portal are related, but they are not the same.\n\n| Point | GeM | State e-Procurement portal |\n|---|---|---|\n| Nature | Government marketplace and procurement channel | Tender-lifecycle channel |\n| Main use | Procurement of goods/services | Publishing and managing tenders |\n| Supported activity | Direct Purchase, L1 purchase, bidding, Reverse Auction | Tender publication, corrigenda, bid receipt/opening, process record |\n| Department decision | Choose a method under applicable GeM rules | Use after selecting the lawful tender route |\n\nA department should first select the lawful procurement method under the applicable rule and then use the correct channel.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024"
+  },
+  {
+    "id": "H20",
+    "persona": "citizen information seeker",
+    "language": "hi",
+    "query": "छत्तीसगढ़ में सरकारी खरीद के मुख्य तरीके कौन-कौन से हैं?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "procurement_methods_overview",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf"
+    ],
+    "expected_chunk_terms": [
+      [
+        "GeM",
+        "ऑनलाईन पोर्टल"
+      ],
+      [
+        "निविदा",
+        "tender"
+      ],
+      [
+        "अन्य विभाग",
+        "आपदा"
+      ]
+    ],
+    "expected_response_keywords": [
+      "GeM",
+      "निविदा",
+      "प्रत्यक्ष",
+      "विभाग",
+      "नियम"
+    ],
+    "reference_answer": "छत्तीसगढ़ में सरकारी खरीद के लिए लागू नियमों के अनुसार GeM अथवा राज्य ऑनलाइन पोर्टल, निविदा प्रक्रिया, दूसरे सरकारी विभाग या उपक्रम से खरीद, और आपदा या कानून-व्यवस्था जैसी असाधारण परिस्थितियों में अनुमत विशेष खरीद मार्ग हो सकते हैं। हर मार्ग पर लागू नियम, स्वीकृति और शर्तें लागू रहती हैं।",
+    "detected_actor": "general_information_user",
+    "detected_fine_intent": "procurement_methods_overview",
+    "actor_correct": true,
+    "fine_intent_correct": true,
+    "retrieved_sources_top10": [
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_sources": [
+      "store purchase rule cg.pdf"
+    ],
+    "retrieved_expected_source": {
+      "matched_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "final_expected_source": {
+      "matched_expected_sources": [
+        "store purchase rule cg.pdf"
+      ],
+      "missing_expected_sources": [],
+      "coverage": 1.0
+    },
+    "retrieved_expected_chunk": {
+      "groups": [
+        {
+          "alternatives": [
+            "GeM",
+            "ऑनलाईन पोर्टल"
+          ],
+          "matched": "GeM"
+        },
+        {
+          "alternatives": [
+            "निविदा",
+            "tender"
+          ],
+          "matched": "निविदा"
+        },
+        {
+          "alternatives": [
+            "अन्य विभाग",
+            "आपदा"
+          ],
+          "matched": "अन्य विभाग"
+        }
+      ],
+      "coverage": 1.0
+    },
+    "response_keyword_coverage": {
+      "hit_keywords": [
+        "GeM",
+        "प्रत्यक्ष",
+        "विभाग"
+      ],
+      "missing_keywords": [
+        "निविदा",
+        "नियम"
+      ],
+      "coverage": 0.6
+    },
+    "question_answer_cosine": 0.6343,
+    "reference_answer_cosine": 0.771,
+    "llm_judge_without_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "relevance": 4.0,
+        "helpfulness": 4.0,
+        "workflow_safety": 4.0
+      },
+      "reason": "उत्तर मुख्य खरीद विधियों (GeM, Tenders) और नियमों को सही ढंग से पहचानता है, जो उच्च प्रासंगिकता और उपयोगिता को दर्शाता है। यह सुरक्षित और तथ्यात्मक रूप से सुदृढ़ है, हालांकि इसमें 'Single/Limited/Open Tender' के अलावा अन्य खरीद विधियों की विस्तृत सूची की कमी है, जो एक मामूली चूक है।"
+    },
+    "llm_judge_with_reference": {
+      "score": 4.0,
+      "pass": true,
+      "model_pass": true,
+      "dimensions": {
+        "factual_grounding": 4.0,
+        "material_completeness": 4.0,
+        "workflow_safety": 5.0,
+        "helpfulness": 4.0
+      },
+      "reason": "उत्तर मुख्य खरीद विधियों (GeM, निविदा, अंतर-विभागीय, विशेष) की सही पहचान करता है और Chhattisgarh Store Purchase Rules का संदर्भ देता है। यह 'सहायक माध्यम' (approved channels) जैसे सहायक विवरणों के साथ कवरेज को बढ़ाता है। यह तथ्यात्मक रूप से सुदृढ़, सुरक्षित और सहायक है, हालांकि इसमें 'असाधारण परिस्थ"
+    },
+    "fallback_reason_code": null,
+    "validation_issues": [],
+    "response_time_seconds": 2.743,
+    "http_status": 200,
+    "error": null,
+    "answer": "💡 उत्तर\nछत्तीसगढ़ Store Purchase Rules राज्य के अधीन विभागों/कार्यालयों द्वारा stores, goods और लागू services की सरकारी procurement/खरीद को नियंत्रित करते हैं। इनमें GeM जैसे अनुमोदित माध्यम, Single/Limited/Open Tender विधियाँ, अनुमत प्रत्यक्ष/अंतर-विभागीय खरीद तथा specifications, competition, evaluation और award के नियंत्रण शामिल हैं।\n\n📘 स्रोत: Chhattisgarh Store Purchase Rules"
+  }
+]

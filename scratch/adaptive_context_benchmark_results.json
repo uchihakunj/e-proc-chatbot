@@ -1,0 +1,140 @@
+{
+  "summary": {
+    "average_before_prompt_tokens": 4825.5,
+    "average_after_prompt_tokens": 987.8,
+    "average_before_generation_ms": 25798.8,
+    "average_after_generation_ms": 11040.6,
+    "average_before_coverage": 0.62,
+    "average_after_coverage": 0.75
+  },
+  "queries": [
+    {
+      "question": "What is EMD and why is it required?",
+      "retrieval_ms": 1473.3,
+      "before": {
+        "prompt_tokens_estimate": 4821,
+        "prompt_characters": 19282,
+        "chunks": 4,
+        "latency_ms": 8419.5,
+        "time_to_first_token_ms": 7430.9,
+        "answer": "💡 Answer\nEMD, also known as Bid Security or Earnest Money Deposit, is a refundable money deposit obtained from bidders along with their bids. It is required to safeguard against a bidder withdrawing or altering its bid during the bid validity period. Bids not accompanied by the requisite bid security are considered non-responsive and can be rejected.\n\n| Aspect | Details |\n|---|---|\n| **What is EMD?** | A Bid Security, also known as Earnest Money Deposit (EMD), which is a refundable money deposit. |\n| **Why is it required?** | To safeguard against a bidder's withdrawing or altering its bid during the bid validity period and to ensure bids are responsive. |\n\n📘 Source: Manual_for_Procurement_of_works_2019, publicProManual-1755343081262-715558279.pdf",
+        "coverage": {
+          "matched_terms": 4,
+          "expected_terms": 4,
+          "score": 1.0
+        }
+      },
+      "after": {
+        "prompt_tokens_estimate": 965,
+        "prompt_characters": 3858,
+        "chunks": 2,
+        "query_type": "factual",
+        "confidence": 0.8281977006206659,
+        "latency_ms": 14644.9,
+        "time_to_first_token_ms": 14008.2,
+        "answer": "**Answer**\nEMD, or Bid Security, is to be obtained from bidders along with their bids to safeguard against a bidder's with drawing or altering its bid during the bid validity period.\n**Source**\nSource: Manual_for_Procurement_of_works_2019.pdf, publicProManual-1755343081262-715558279.pdf",
+        "coverage": {
+          "matched_terms": 3,
+          "expected_terms": 4,
+          "score": 0.75
+        }
+      }
+    },
+    {
+      "question": "What is Performance Security and when is it required?",
+      "retrieval_ms": 1274.5,
+      "before": {
+        "prompt_tokens_estimate": 4818,
+        "prompt_characters": 19272,
+        "chunks": 4,
+        "latency_ms": 23419.6,
+        "time_to_first_token_ms": 18979.6,
+        "answer": "💡 Answer\nPerformance Security is a guarantee obtained from the successful bidder to ensure due performance of the contract. It safeguards the purchaser's interest and can be furnished in the form of an Insurance Surety Bond, Account Payee Demand Draft, Fixed Deposit Receipt from a commercial bank, Bank Guarantee (including e-Bank Guarantee) from a commercial bank, or online payment.\n\nThe need for Performance Security depends on the type of contract and market conditions:\n- For contracts of Goods and Consultancy Services, it is for three to five per cent (3-5%) of the contract value.\n- For works contracts, it is usually five percent of the contract value.\n- Submission of Performance Security is not necessary for contracts with a value up to Rs. one lakh.\n- In case of a Joint Venture (JV), all partners must provide the Bank Guarantee in proportion to their participation.\n- For GTE tenders, the Bank Guarantee must be in the same currency as the contract.\n- Due to the COVID-19 pandemic, the required percentage was reduced to three percent (3%) for all contracts until March 31, 2023. This reduced percentage continues for the entire duration of the contract, and an exception for higher security requires approval from a higher authority.\n\n📋 Process\n(Not applicable as the question does not ask for a step-by-step process)\n\nRule/Provision\n- \"Performance Security is to be obtained from the successful bidder awarded the contract. Performance Security, [in respect of procurement only of Goods/ Consultancy Services/ ... Non Consultancy Services, should be for an amount of three to five per cent (3-5%) of the value of the contract as specified in the bid documents.\" (FInal_GFR_upto_31_07_2024)\n- \"In works contract it is usual to take five percent of contract value Performance Security.\" (Manual_for_Procurement_of_works_2019)\n- \"Submission of Performance Security is not necessary for a contract value upto Rs. one lakh.\" (Manual_for_Procurement_of_works_2019)\n- \"On account of the COVID-19 pandemic, that caused slowdown in economy, it is decided to reduce Performance Security from existing five to ten percent to three (3) percent of the value of the contract for all existing contracts till 31.03.2023.\" (mannual procurement.pdf)\n\nExplanation\n(Not applicable as the question is direct and does not require clarification beyond the provided text)\n\n📘 Source\nFInal_GFR_upto_31_07_2024, Manual_for_Procurement_of_works_2019, mannual procurement.pdf",
+        "coverage": {
+          "matched_terms": 4,
+          "expected_terms": 4,
+          "score": 1.0
+        }
+      },
+      "after": {
+        "prompt_tokens_estimate": 990,
+        "prompt_characters": 3960,
+        "chunks": 2,
+        "query_type": "factual",
+        "confidence": 0.8425101128458031,
+        "latency_ms": 12907.0,
+        "time_to_first_token_ms": 11987.0,
+        "answer": "**Answer**\nPerformance Security is a security obtained from the successful bidder to ensure due performance of the contract. It can be furnished in the form of an Insurance Surety Bond, Account Payee Demand Draft, Fixed Deposit Receipt, Bank Guarantee (including e-Bank Guarantee), or online payment. The amount is 3% to 10% of the contract value, or 5% to 10% for works contracts. It should remain valid for sixty days beyond the date of completion of all contractual obligations. Submission of Performance Security is not necessary for a contract value up to Rs. one lakh.\n\n**Source**\nFInal_GFR_upto_31_07_2024.pdf, Manual_for_Procurement_of_works_2019.pdf",
+        "coverage": {
+          "matched_terms": 4,
+          "expected_terms": 4,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "question": "Should I purchase through GeM or through the Chhattisgarh e-Procurement portal? What is the difference?",
+      "retrieval_ms": 1102.9,
+      "before": {
+        "prompt_tokens_estimate": 4839,
+        "prompt_characters": 19353,
+        "chunks": 4,
+        "latency_ms": 50619.2,
+        "time_to_first_token_ms": 0,
+        "answer": "",
+        "coverage": {
+          "matched_terms": 0,
+          "expected_terms": 4,
+          "score": 0.0
+        }
+      },
+      "after": {
+        "prompt_tokens_estimate": 1006,
+        "prompt_characters": 4021,
+        "chunks": 3,
+        "query_type": "comparison",
+        "confidence": 0.8207816900290268,
+        "latency_ms": 9764.4,
+        "time_to_first_token_ms": 9377.6,
+        "answer": "**Answer**\nसंदर्भ के आधार पर, GeM पर उपलब्ध वस्तुओं और सेवाओं की खरीद मंत्रालयों या विभागों के लिए अनिवार्य है। छत्तीसगढ़ ई-प्रोक्योरमेंट पोर्टल (e-Procurement portal) का भी एक विकल्प के रूप में उल्लेख किया गया है। संदर्भ स्पष्ट रूप से दोनों के बीच के अंतर को स्पष्ट नहीं करता है।\n\n**स्रोत**\nmannual procurement.pdf, FInal_GFR_upto_31_07_2024.pdf, store purchase rule cg.pdf",
+        "coverage": {
+          "matched_terms": 3,
+          "expected_terms": 4,
+          "score": 0.75
+        }
+      }
+    },
+    {
+      "question": "How can I issue a corrigendum after publishing a tender?",
+      "retrieval_ms": 1116.3,
+      "before": {
+        "prompt_tokens_estimate": 4824,
+        "prompt_characters": 19295,
+        "chunks": 4,
+        "latency_ms": 20736.8,
+        "time_to_first_token_ms": 7189.7,
+        "answer": "💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.pdf\n---\n💡 Answer\nA corrigendum can be issued as a \"formal corrigendum\" rather than just using meeting minutes. This formal corrigendum must be shared with all bidders who have purchased or have purchased the bid documents.\n\n📋 Process\n1.  The procuring entity considers the need to revise the techno-commercial requirements.\n2.  A formal corrigendum is issued to make the necessary changes.\n3.  This corrigendum is then shared with all relevant bidders.\n\n📘 Source\nmannual procurement.pdf and CHiPS_Bid_Submission_Manual_English.",
+        "coverage": {
+          "matched_terms": 2,
+          "expected_terms": 4,
+          "score": 0.5
+        }
+      },
+      "after": {
+        "prompt_tokens_estimate": 990,
+        "prompt_characters": 3958,
+        "chunks": 4,
+        "query_type": "procedural",
+        "confidence": 0.3564286887314555,
+        "latency_ms": 6845.9,
+        "time_to_first_token_ms": 6635.0,
+        "answer": "A corrigendum can be issued by way of a formal corrigendum. The mere minutes of the meeting of the pre-bid conference would not suffice. It must be shared with all the bidders who purchase or have purchased the bid documents.\n\n**Source:** mannual procurement.pdf",
+        "coverage": {
+          "matched_terms": 2,
+          "expected_terms": 4,
+          "score": 0.5
+        }
+      }
+    }
+  ]
+}

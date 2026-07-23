@@ -1,0 +1,182 @@
+[
+  {
+    "id": "H01", "persona": "store officer", "language": "en",
+    "query": "Our district office needs 50 laptops for new staff. What should I prepare before choosing GeM or a tender?",
+    "expected_actor": "department_buyer", "expected_fine_intent": "procurement_planning",
+    "expected_source_documents": ["store purchase rule cg.pdf", "publicProManual-1755343081262-715558279.pdf"],
+    "expected_chunk_terms": [["need", "requirement"], ["specification"], ["approval", "budget"]],
+    "expected_response_keywords": ["requirement", "specification", "approval", "gem", "tender"],
+    "reference_answer": "Record the consolidated requirement and estimated cost, prepare neutral technical specifications, confirm budget and competent approval, then check whether the required laptops are available on GeM. If the applicable rules do not permit the selected GeM route or the item is unavailable, use the permitted tender route. Do not split the requirement merely to use a different method."
+  },
+  {
+    "id": "H02", "persona": "department buyer", "language": "hinglish",
+    "query": "Department ko 100 chairs chahiye. Kya direct purchase ho sakti hai ya tender karna padega?",
+    "expected_actor": "department_buyer", "expected_fine_intent": "procurement_method_selection",
+    "expected_source_documents": ["store purchase rule cg.pdf"],
+    "expected_chunk_terms": [["GeM", "portal"], ["limited tender", "open tender", "direct purchase"]],
+    "expected_response_keywords": ["GeM", "estimated value", "rules", "approval", "direct purchase"],
+    "reference_answer": "Pehle estimated value, specifications aur GeM availability check karein. Direct purchase, limited tender ya open tender sirf current Chhattisgarh rules, delegated powers aur approval ke mutabik choose karein. Requirement ko split karke doosra method use na karein."
+  },
+  {
+    "id": "H03", "persona": "IT procurement officer", "language": "en",
+    "query": "Can I write Dell-only in the laptop specification because our team already uses Dell?",
+    "expected_actor": "department_buyer", "expected_fine_intent": "specification_preparation",
+    "expected_source_documents": ["publicProManual-1755343081262-715558279.pdf", "Compilation of CVC Circulars and Guidelines.pdf"],
+    "expected_chunk_terms": [["brand", "Dell"], ["functional", "performance", "specification"]],
+    "expected_response_keywords": ["brand", "functional", "measurable", "technical justification", "equivalent"],
+    "reference_answer": "Normally use generic, functional and measurable specifications rather than a brand-only requirement. A brand or model restriction should be used only where a genuine technical or compatibility necessity is recorded in writing and the applicable rules allow it; include an equivalent provision where appropriate."
+  },
+  {
+    "id": "H04", "persona": "accounts officer", "language": "hinglish",
+    "query": "Office ke AC ka AMC renew karna hai. Tender se pehle scope mein kya kya likhna chahiye?",
+    "expected_actor": "department_buyer", "expected_fine_intent": "procurement_planning",
+    "expected_source_documents": ["store purchase rule cg.pdf", "publicProManual-1755343081262-715558279.pdf"],
+    "expected_chunk_terms": [["service", "specification"], ["inspection", "acceptance", "payment"]],
+    "expected_response_keywords": ["scope", "SLA", "response time", "spares", "approval"],
+    "reference_answer": "AMC scope mein covered AC units and sites, service frequency, response time, uptime or SLA, spares coverage, exclusions, penalty terms, contract period and payment milestones define karein. Estimated value and approvals record karke permitted procurement method choose karein."
+  },
+  {
+    "id": "H05", "persona": "emergency store officer", "language": "en",
+    "query": "Flooding damaged our office network equipment. Can we buy replacements immediately?",
+    "expected_actor": "department_buyer", "expected_fine_intent": "procurement_method_selection",
+    "expected_source_documents": ["store purchase rule cg.pdf"],
+    "expected_chunk_terms": [["natural disaster", "emergency", "law and order"], ["approval", "reasons"]],
+    "expected_response_keywords": ["emergency", "recorded reasons", "competent approval", "applicable rules"],
+    "reference_answer": "Emergency procurement may be used only as an exceptional response to the urgent situation. Record the facts and reasons, obtain competent-authority approval, purchase only what is necessary, and follow the applicable Chhattisgarh rules. It is not an unrestricted direct-purchase route."
+  },
+  {
+    "id": "H06", "persona": "first-time vendor", "language": "en",
+    "query": "I have never used the Chhattisgarh e-procurement portal. How do I become a registered bidder?",
+    "expected_actor": "vendor_bidder", "expected_fine_intent": "vendor_registration",
+    "expected_source_documents": ["CHiPS_Vendor_Registration_Manual_English.pdf"],
+    "expected_chunk_terms": [["New User", "registration"], ["PAN"], ["DSC", "Digital Signature"]],
+    "expected_response_keywords": ["New User", "PAN", "DSC", "registration", "portal"],
+    "reference_answer": "Open the Chhattisgarh e-procurement portal, choose New User under registration, enter the required PAN and organisation details, upload the required information, select or map the appropriate DSC, accept the terms and conditions, and retain the generated registration number. Follow the current portal instructions for fees and approval."
+  },
+  {
+    "id": "H07", "persona": "existing bidder", "language": "hinglish",
+    "query": "Mera DSC renew ho gaya hai, ab portal par purana certificate kaise replace karun?",
+    "expected_actor": "vendor_bidder", "expected_fine_intent": "dsc_mapping",
+    "expected_source_documents": ["CHiPS_Vendor_Registration_Manual_English.pdf"],
+    "expected_chunk_terms": [["DSC", "Digital Signature"], ["select", "mapping", "registration"]],
+    "expected_response_keywords": ["DSC", "login", "select", "confirm", "portal"],
+    "reference_answer": "Apne vendor account mein login karke DSC selection or mapping screen par renewed DSC select karein, required confirmation complete karein, aur portal status verify karein. Valid signing/encryption DSC use karein; tender-specific signing steps alag ho sakte hain."
+  },
+  {
+    "id": "H08", "persona": "vendor", "language": "en",
+    "query": "My EMD payment failed, but the bank has debited the amount. What should I do before the bid deadline?",
+    "expected_actor": "vendor_bidder", "expected_fine_intent": "emd_payment_failure",
+    "expected_source_documents": ["CHiPS_Bid_Submission_Manual_English.pdf"],
+    "expected_chunk_terms": [["EMD", "payment"], ["receipt", "transaction", "status"]],
+    "expected_response_keywords": ["EMD", "transaction", "payment status", "receipt", "helpdesk"],
+    "reference_answer": "Do not assume that a bank debit means the EMD is successful. Check the portal payment status and transaction details, retain the bank and portal reference or receipt, and contact the portal/payment helpdesk promptly if the status remains unsuccessful. Complete a valid EMD payment before the bid deadline where the tender requires it."
+  },
+  {
+    "id": "H09", "persona": "unsuccessful bidder", "language": "hinglish",
+    "query": "Technical bid mein reject ho gaya hoon. Meri EMD refund kab aur kaise aayegi?",
+    "expected_actor": "vendor_bidder", "expected_fine_intent": "emd_refund_unsuccessful_bidder",
+    "expected_source_documents": ["Online_EMD_Refund_Notice.pdf"],
+    "expected_chunk_terms": [["unsuccessful", "Technical Bid"], ["department", "approver"], ["bank", "refund"]],
+    "expected_response_keywords": ["department", "approver", "bank", "refund", "status"],
+    "reference_answer": "Unsuccessful bidder ki EMD refund department/tender owner opening and evaluation ke baad initiate karta hai, aur authorised department approver verification ke baad approve karta hai. System registered bank account ko refund instruction bhejta hai; bidder portal par refund status check kar sakta hai."
+  },
+  {
+    "id": "H10", "persona": "bidder", "language": "en",
+    "query": "My technical documents are uploaded. Where do I enter the price bid and how do I know it was submitted?",
+    "expected_actor": "vendor_bidder", "expected_fine_intent": "bid_submission_portal_steps",
+    "expected_source_documents": ["CHiPS_Bid_Submission_Manual_English.pdf"],
+    "expected_chunk_terms": [["Price bid", "Financial Bid", "BOQ"], ["DSC", "signed"], ["confirmation", "submit"]],
+    "expected_response_keywords": ["Financial Bid", "BOQ", "DSC", "submit", "acknowledgement"],
+    "reference_answer": "Use the Financial Bid, Price Bid or BOQ part of the same tender, enter or upload the required price values, validate the figures, sign or encrypt using the valid DSC where required, save and submit before the deadline, and verify the final acknowledgement or status."
+  },
+  {
+    "id": "H11", "persona": "bidder", "language": "hinglish",
+    "query": "Bid submit kar di thi, lekin deadline ke baad rate galat dikha. Kya edit kar sakta hoon?",
+    "expected_actor": "vendor_bidder", "expected_fine_intent": "bid_submission_portal_steps",
+    "expected_source_documents": ["CHiPS_Bid_Submission_Manual_English.pdf"],
+    "expected_chunk_terms": [["submission", "confirmation"], ["deadline", "bid"]],
+    "expected_response_keywords": ["deadline", "modify", "tender", "corrigendum"],
+    "reference_answer": "Nahi. Bid-submission deadline ke baad bid ko alter or modify nahi kiya ja sakta. Submitted acknowledgement preserve karein aur agar tender owner corrigendum or clarification issue kare to uske tender-specific instructions follow karein."
+  },
+  {
+    "id": "H12", "persona": "startup founder", "language": "en",
+    "query": "Our startup wants to bid for a government tender. Does startup status automatically remove every eligibility and EMD condition?",
+    "expected_actor": "general_information_user", "expected_fine_intent": "tender_eligibility",
+    "expected_source_documents": ["CHiPS_Bid_Submission_Manual_English.pdf"],
+    "expected_chunk_terms": [["tender", "bid"], ["eligibility", "documents"]],
+    "expected_response_keywords": ["startup", "tender conditions", "eligibility", "EMD", "recognition"],
+    "reference_answer": "No. A startup may participate if it meets the tender conditions. Any startup relaxation or preference must be expressly available under the applicable rule and tender; startup status does not automatically remove technical compliance, every eligibility condition, EMD, or submission requirements."
+  },
+  {
+    "id": "H13", "persona": "foreign supplier", "language": "hinglish",
+    "query": "Hum foreign company hain. CG tender ke liye DSC aur registration ka practical process kya hoga?",
+    "expected_actor": "vendor_bidder", "expected_fine_intent": "vendor_registration",
+    "expected_source_documents": ["CHiPS_Vendor_Registration_Manual_English.pdf"],
+    "expected_chunk_terms": [["foreign vendor", "Indian Embassy"], ["DSC", "Certificate Authority"]],
+    "expected_response_keywords": ["foreign", "DSC", "Indian Embassy", "Certificate Authority", "tender"],
+    "reference_answer": "Specific tender ki foreign-bidder conditions pehle check karein. DSC ke liye licensed Certificate Authority ka application process follow karein, required organisation and identity documents Indian Embassy se certify karayein where applicable, then CA instructions ke according documents/payment complete karke DSC or token obtain karein. Tender-specific eligibility and registration requirements still apply."
+  },
+  {
+    "id": "H14", "persona": "auction bidder", "language": "en",
+    "query": "I have been invited to a forward e-auction. What should I check before placing a bid?",
+    "expected_actor": "vendor_bidder", "expected_fine_intent": "auction_participation",
+    "expected_source_documents": ["AuctionManual_FA.pdf"],
+    "expected_chunk_terms": [["Auction", "View/Respond"], ["opening price", "minimum bid"], ["DSC", "login"]],
+    "expected_response_keywords": ["DSC", "auction", "opening price", "minimum bid", "submit"],
+    "reference_answer": "Log in with the bidder credentials and DSC, open the Auction tab, select the relevant auction and View/Respond to the RFX, review the opening price and minimum bid-change conditions, then place and submit bids only in accordance with those conditions."
+  },
+  {
+    "id": "H15", "persona": "department operator", "language": "en",
+    "query": "I am the department operator. What do I need ready before creating a tender in the portal?",
+    "expected_actor": "department_operator", "expected_fine_intent": "tender_creation_portal_steps",
+    "expected_source_documents": ["Manual_Offline_Tenders_v.1.0.pdf", "store purchase rule cg.pdf"],
+    "expected_chunk_terms": [["Create Tender", "tender"], ["specification", "approval"]],
+    "expected_response_keywords": ["approval", "specification", "tender", "documents", "authorised"],
+    "reference_answer": "Before creating the tender, ensure the approved requirement, estimate, procurement method, specifications, eligibility and evaluation conditions, tender schedule, supporting documents, and authorised department-user access are ready. Create only the approved procurement; bidders should not be given department-side workflow steps."
+  },
+  {
+    "id": "H16", "persona": "department operator", "language": "hinglish",
+    "query": "Tender publish ho chuka hai aur last date badhani hai. Corrigendum kaise issue karun?",
+    "expected_actor": "department_operator", "expected_fine_intent": "corrigendum_portal_steps",
+    "expected_source_documents": ["CHiPS_Corrigendum_Issuance_Manual.pdf"],
+    "expected_chunk_terms": [["Date Corrigendum", "Corrigendum"], ["publish", "Tender Owner", "Department User"]],
+    "expected_response_keywords": ["corrigendum", "revised date", "authorised", "publish", "tender"],
+    "reference_answer": "Authorised department user relevant tender par date corrigendum create kare, revised deadline and related details verify kare, required approval/route complete kare, aur corrigendum publish kare. Published revised date bidders ko portal par visible honi chahiye."
+  },
+  {
+    "id": "H17", "persona": "bid opener", "language": "en",
+    "query": "The technical-bid opening time has arrived. As the bid opener, what is the safe portal workflow?",
+    "expected_actor": "department_operator", "expected_fine_intent": "bid_opening_portal_steps",
+    "expected_source_documents": ["CHiPS_Bid_Submission_Manual_English.pdf"],
+    "expected_chunk_terms": [["Opening", "technical bid"], ["department", "tender"]],
+    "expected_response_keywords": ["technical bid", "authorised", "opening", "record", "tender"],
+    "reference_answer": "Use the authorised department account and the relevant tender after the scheduled opening time. Open the technical bid stage according to the portal and tender process, preserve the bid-opening record, and proceed with eligibility and technical evaluation under the published conditions. Do not disclose or open the price bid unless the applicable stage permits it."
+  },
+  {
+    "id": "H18", "persona": "department accounts operator", "language": "hinglish",
+    "query": "Unsuccessful bidders ka EMD refund department side se initiate kaise hota hai?",
+    "expected_actor": "department_operator", "expected_fine_intent": "emd_remittance_to_department",
+    "expected_source_documents": ["Online_EMD_Refund_Notice.pdf"],
+    "expected_chunk_terms": [["tender owner", "department admin"], ["approver", "refund"], ["bank", "account"]],
+    "expected_response_keywords": ["department", "refund", "approver", "bank", "status"],
+    "reference_answer": "Tender owner or department admin unsuccessful bidders ke liye EMD remittance/refund process initiate karta hai after the applicable opening and evaluation stages. Department approver verification ke baad approval deta hai, aur system registered bidder bank accounts ko refund instruction bhejta hai."
+  },
+  {
+    "id": "H19", "persona": "new procurement officer", "language": "en",
+    "query": "I am new in the office: when should I think about GeM and when is the state e-procurement portal relevant?",
+    "expected_actor": "general_information_user", "expected_fine_intent": "gem_eproc_comparison",
+    "expected_source_documents": ["store purchase rule cg.pdf", "CHiPS_Bid_Submission_Manual_English.pdf"],
+    "expected_chunk_terms": [["GeM", "Government e Marketplace"], ["tender", "bid", "e-procurement"]],
+    "expected_response_keywords": ["GeM", "e-procurement", "tender", "purchase", "rules"],
+    "reference_answer": "GeM is the Government e-Marketplace channel used where the goods or services and the permitted purchase route are available there. The state e-procurement portal is used for portal-managed tender, bid and related processes. The department must select the route permitted by current Chhattisgarh rules and approvals."
+  },
+  {
+    "id": "H20", "persona": "citizen information seeker", "language": "hi",
+    "query": "छत्तीसगढ़ में सरकारी खरीद के मुख्य तरीके कौन-कौन से हैं?",
+    "expected_actor": "general_information_user", "expected_fine_intent": "procurement_methods_overview",
+    "expected_source_documents": ["store purchase rule cg.pdf"],
+    "expected_chunk_terms": [["GeM", "ऑनलाईन पोर्टल"], ["निविदा", "tender"], ["अन्य विभाग", "आपदा"]],
+    "expected_response_keywords": ["GeM", "निविदा", "प्रत्यक्ष", "विभाग", "नियम"],
+    "reference_answer": "छत्तीसगढ़ में सरकारी खरीद के लिए लागू नियमों के अनुसार GeM अथवा राज्य ऑनलाइन पोर्टल, निविदा प्रक्रिया, दूसरे सरकारी विभाग या उपक्रम से खरीद, और आपदा या कानून-व्यवस्था जैसी असाधारण परिस्थितियों में अनुमत विशेष खरीद मार्ग हो सकते हैं। हर मार्ग पर लागू नियम, स्वीकृति और शर्तें लागू रहती हैं।"
+  }
+]

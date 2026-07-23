@@ -1,0 +1,617 @@
+[
+  {
+    "id": "H50-12",
+    "question": "Government department ko dusre government undertaking se goods purchase karne hain. Kya tender zaroori hai?",
+    "expected_actor": "general_information_user",
+    "expected_intent": "procurement_methods_overview",
+    "actor": "department_buyer",
+    "intent": "procurement_planning",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nYeh required item ke liye department buyer/procuring entity ka workflow hai. Department Tender ya GeM Bid create karega; Vendors Bid submit karenge. Buyer ko vendor registration ya vendor-side Bid submission se process start nahi karna hai.\n\n📋 Process\n1. required item ki need assessment karein: purpose, users, quantity aur delivery timeline record karein.\n2. Generic, measurable aur competition-friendly technical specifications banayein; brand name avoid karein.\n3. Realistic estimated cost aur budget availability confirm karein.\n4. Applicable administrative approval aur financial sanction lein.\n5. Approved details ke saath purchase indent/procurement request create karein.\n6. GeM aur applicable Chhattisgarh-approved purchase channel par availability check karein.\n7. Estimated value, current State rules aur delegated powers ke hisab se lawful procurement method select karein. Single Tender normal option nahi hai; exceptional grounds, written justification aur competent approval chahiye.\n8. Department Tender/GeM Bid publish karega; Vendors apni Bids submit karenge. DSC/portal credential ki requirement selected workflow aur authorized role par depend karegi.\n9. Technical/commercial evaluation, competition aur rate reasonableness document karein; thresholds assume na karein.\n10. Competent approval ke baad Purchase Order/contract issue karein.\n11. Delivery par inspection, specification/warranty verification aur formal acceptance karein.\n12. Acceptance ke baad payment process karein aur required item ko asset/stock register mein enter karein.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024",
+    "latency": 3.54,
+    "error": null
+  },
+  {
+    "id": "H50-13",
+    "question": "Can we split a ₹10 lakh requirement into five smaller purchase orders?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_planning",
+    "actor": "general_information_user",
+    "intent": "purchase_order",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nIssue the Purchase Order only after evaluation, recommendation and competent approval are complete.\n\n📋 Process\n1. Finalise the responsive successful bidder and document rate reasonableness.\n2. Obtain approval of the award from the competent authority.\n3. Prepare Purchase Order terms covering item, quantity, specifications, price/taxes, delivery, warranty, inspection, acceptance and payment.\n4. Verify the Purchase Order against the approved bid and sanction, then issue it through the authorised channel.\n5. Record acknowledgement and monitor delivery/contract performance.\n\n📘 Source: Manual for Procurement of Goods 2024; Chhattisgarh Store Purchase Rules",
+    "latency": 2.82,
+    "error": null
+  },
+  {
+    "id": "H50-14",
+    "question": "Same item alag-alag months mein chahiye. Kya har month direct purchase kar sakte hain?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_planning",
+    "actor": "department_buyer",
+    "intent": "procurement_method_selection",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nProcurement method convenience se choose na karein. Pehle consolidated requirement, specifications aur estimated value prepare karein; suitable goods GeM par available hain ya nahi check karein; phir current Chhattisgarh rules, delegated powers aur required approval apply karein. Direct purchase, bidding, Limited Tender ya Open Tender sirf tab use karein jab ye conditions permit karein.\n\n📋 Process\n1. Full requirement, specifications aur estimated value record karein.\n2. Suitable items ke liye GeM/other approved channels check karein.\n3. Applicable rules aur delegated powers ke mutabik permitted route choose karein.\n4. Different method use karne ke liye requirement split na karein.\n5. Aage badhne se pehle method justification aur approval record karein.\n\n📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules",
+    "latency": 3.45,
+    "error": null
+  },
+  {
+    "id": "H50-15",
+    "question": "How should the department estimate the total procurement value before selecting the method?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_planning",
+    "actor": "department_buyer",
+    "intent": "procurement_planning",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nThis is the department buyer/procuring-entity workflow for the requested goods. The department creates the Tender or GeM Bid; Vendors submit Bids. The buyer must not start with vendor registration or vendor-side Bid submission.\n\n📋 Process\n1. Record the need for the requested goods, purpose, quantity, users and delivery timeline.\n2. Prepare generic, measurable and competition-friendly specifications.\n3. Estimate the cost and confirm budget availability.\n4. Obtain applicable administrative approval and financial sanction.\n5. Create the approved purchase indent/procurement request.\n6. Check GeM and the applicable Chhattisgarh-approved purchase channel.\n7. Select the lawful method under current State rules and delegated powers; Single Tender requires exceptional grounds, written justification and competent approval.\n8. Publish the department Tender/GeM Bid and receive Vendor Bids.\n9. Document technical/commercial evaluation and rate reasonableness.\n10. Issue the Purchase Order/contract after competent approval.\n11. Inspect delivery and record formal acceptance.\n12. Process payment after acceptance and update the asset/stock register.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024",
+    "latency": 3.62,
+    "error": null
+  },
+  {
+    "id": "H50-16",
+    "question": "Purchase start karne se pehle administrative approval aur financial sanction mein kya difference hai?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_and_budget",
+    "actor": "general_information_user",
+    "intent": "approval_and_budget",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nProcurement se pehle department ko need, realistic estimate, available budget aur delegated powers ke mutabik competent approvals establish karne chahiye.\n\n📋 Process\n1. Requirement aur estimated cost record karein.\n2. Correct budget head mein availability confirm karein.\n3. Requirement ke liye administrative approval lein.\n4. Competent authority se expenditure/financial sanction lein.\n5. GeM ya Tender action se pehle approvals ko purchase indent ke saath file karein.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024",
+    "latency": 2.74,
+    "error": null
+  },
+  {
+    "id": "H50-17",
+    "question": "Who should confirm budget availability before a tender is published?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_and_budget",
+    "actor": "general_information_user",
+    "intent": "approval_and_budget",
+    "sources": [
+      "store purchase rule cg.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nBefore procurement, the department should establish the need, realistic estimate, available budget and the competent approvals applicable to its delegated powers.\n\n📋 Process\n1. Record the requirement and estimated cost.\n2. Confirm budget availability under the correct head.\n3. Obtain administrative approval for the requirement.\n4. Obtain expenditure/financial sanction from the competent authority.\n5. Place the approvals with the purchase indent before starting GeM or Tender action.\n\n📘 Source: Chhattisgarh Store Purchase Rules",
+    "latency": 3.13,
+    "error": null
+  },
+  {
+    "id": "H50-18",
+    "question": "Can a tender be initiated before the budget is formally available?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_and_budget",
+    "actor": "general_information_user",
+    "intent": "approval_and_budget",
+    "sources": [
+      "store purchase rule cg.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nBefore procurement, the department should establish the need, realistic estimate, available budget and the competent approvals applicable to its delegated powers.\n\n📋 Process\n1. Record the requirement and estimated cost.\n2. Confirm budget availability under the correct head.\n3. Obtain administrative approval for the requirement.\n4. Obtain expenditure/financial sanction from the competent authority.\n5. Place the approvals with the purchase indent before starting GeM or Tender action.\n\n📘 Source: Chhattisgarh Store Purchase Rules",
+    "latency": 2.89,
+    "error": null
+  },
+  {
+    "id": "H50-19",
+    "question": "Department ke paas budget hai, lekin financial sanction pending hai. Kya GeM order place kar sakte hain?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_and_budget",
+    "actor": "department_buyer",
+    "intent": "gem_department_purchase_process",
+    "sources": [
+      "GFRupdatedupto31012026.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nGeM par Department buyer hota hai; vendors Department ki GeM Bid ka response dete hain.\n\n📋 Process\n1. Need, quantity, specifications, estimate, budget aur approval record karein.\n2. GeM par item aur applicable purchase method check karein.\n3. Bidding ke liye neutral specifications, eligibility, delivery aur evaluation conditions ke saath GeM Bid create/publish karein.\n4. Published criteria se vendor Bids evaluate karke price reasonableness record karein.\n5. Award approval lekar GeM contract/Purchase Order issue karein.\n6. Delivery inspect/accept karke payment process aur asset/stock entry karein.\n\n📘 Source: General Financial Rules; Chhattisgarh Store Purchase Rules",
+    "latency": 3.1,
+    "error": null
+  },
+  {
+    "id": "H50-20",
+    "question": "What records should be kept to prove that the selected procurement method was justified?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_and_budget",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerTo prove that the selected procurement method was justified, the following records must be kept:- Documents pertaining to the determination of the need for procurement- Description of the subject matter of the procurement- Statement of the justification for choosing a procurement method other than open competitive bidding\n\n📋 Process1. Identify the procurement need and document it2. Clearly describe the subject matter being procured3. Prepare a formal statement justifying the chosen procurement method4. Retain all related documents in chronological order5. Store files securely for easy retrieval by oversight agencies\n\n📘 Source: Manual_for_Procurement_of_works_2019.pdf, mannual procurement.pdf",
+    "latency": 5.33,
+    "error": null
+  },
+  {
+    "id": "H50-21",
+    "question": "Can the competent authority approve a purchase after the order has already been placed?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_and_budget",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerNo, the competent authority cannot approve a purchase after the order has already been placed. The context indicates that a debarment order, once issued, prohibits any contract with the debarred firm, and this restriction applies even in cases of risk purchase. Additionally, the procurement process requires that the competent authority's approval precedes the placement of an order, as the authority's decision is a prerequisite for the procurement action.\n\n📋 Process1. The competent authority must approve the procurement decision before an order is placed.2. Once an order is placed, it cannot be approved retroactively by the same authority.3. Any procurement involving a debarred firm is prohibited, and this restriction is immediate upon the issuance of the debarment order.\n\n📘 Source: mannual procurement.pdf, FInal_GFR_upto_31_07_2024.pdf",
+    "latency": 6.01,
+    "error": null
+  },
+  {
+    "id": "H50-22",
+    "question": "What is delegated financial power, and how does it affect procurement method selection?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_and_budget",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerDelegated financial power refers to the authority granted to specific officers to approve procurement decisions and financial matters within their designated limits. This delegation is crucial as it determines the procurement method selection, as only officials with such delegated powers can approve tenders, process payments, and make financial commitments. Without proper delegation, procurement actions cannot be legally executed.\n\n📋 Process1. Identify the procurement decision requiring financial approval.2. Verify if the designated officer has been delegated financial powers under relevant rules.3. Ensure the officer's authority aligns with the procurement value and method.4. Proceed with approval only if delegation is confirmed.\n\n📘 Source: Final_GFR_upto_31_07_2024.pdf\n\nExplanationThe delegation of financial power ensures that procurement decisions are made by authorized personnel, maintaining financial control and compliance with regulations. This directly impacts which procurement methods can be used, as certain methods may require higher-level approvals based on the delegated authority.",
+    "latency": 9.46,
+    "error": null
+  },
+  {
+    "id": "H50-23",
+    "question": "Agar purchase value officer ki delegated power se zyada hai, to next approval kis stage par lena chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_and_budget",
+    "actor": "general_information_user",
+    "intent": "approval_and_budget",
+    "sources": [
+      "store purchase rule cg.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nProcurement se pehle department ko need, realistic estimate, available budget aur delegated powers ke mutabik competent approvals establish karne chahiye.\n\n📋 Process\n1. Requirement aur estimated cost record karein.\n2. Correct budget head mein availability confirm karein.\n3. Requirement ke liye administrative approval lein.\n4. Competent authority se expenditure/financial sanction lein.\n5. GeM ya Tender action se pehle approvals ko purchase indent ke saath file karein.\n\n📘 Source: Chhattisgarh Store Purchase Rules",
+    "latency": 5.19,
+    "error": null
+  },
+  {
+    "id": "H50-24",
+    "question": "Can the department use last year's approved rate without conducting a fresh procurement?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_method_selection",
+    "actor": "department_buyer",
+    "intent": "procurement_planning",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nThis is the department buyer/procuring-entity workflow for the requested goods. The department creates the Tender or GeM Bid; Vendors submit Bids. The buyer must not start with vendor registration or vendor-side Bid submission.\n\n📋 Process\n1. Record the need for the requested goods, purpose, quantity, users and delivery timeline.\n2. Prepare generic, measurable and competition-friendly specifications.\n3. Estimate the cost and confirm budget availability.\n4. Obtain applicable administrative approval and financial sanction.\n5. Create the approved purchase indent/procurement request.\n6. Check GeM and the applicable Chhattisgarh-approved purchase channel.\n7. Select the lawful method under current State rules and delegated powers; Single Tender requires exceptional grounds, written justification and competent approval.\n8. Publish the department Tender/GeM Bid and receive Vendor Bids.\n9. Document technical/commercial evaluation and rate reasonableness.\n10. Issue the Purchase Order/contract after competent approval.\n11. Inspect delivery and record formal acceptance.\n12. Process payment after acceptance and update the asset/stock register.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024",
+    "latency": 3.75,
+    "error": null
+  },
+  {
+    "id": "H50-25",
+    "question": "How should price reasonableness be established when only one valid bid is received?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "bid_evaluation",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerPrice reasonableness with a single valid bid is established by verifying three specific conditions: (1) The procurement was satisfactorily advertised with sufficient time for bid submission; (2) The qualification criteria were not unduly restrictive; and (3) The quoted price is reasonable in comparison to market values. These conditions must be satisfied for the contract to be considered valid.\n\n📋 Process1. Verify that the procurement was advertised satisfactorily and adequate time was provided for bid submission.2. Confirm that the qualification criteria were not unduly restrictive.3. Compare the quoted price with market rates to ensure it is reasonable.\n\n📘 Source: Manual_for_Procurement_of_works_2019.pdf, publicProManual-1755343081262-715558279.pdf\n\nExplanation: The context emphasizes that even with a single bid, the process remains valid only if these three conditions are met. The price must be deemed reasonable relative to market values, and the procurement process must be transparent and non-restrictive. This ensures fairness and prevents potential issues with abnormally low bids.\n\nSource: Manual_for_Procurement_of_works_2019.pdf, publicProManual-1755343081262-715558279.pdf",
+    "latency": 5.91,
+    "error": null
+  },
+  {
+    "id": "H50-26",
+    "question": "Kya lowest quotation milne ka matlab price reasonable hai?",
+    "expected_actor": "general_information_user",
+    "expected_intent": "bid_evaluation",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 uttarahaan, lowest quotation milane kaa matalaba hai ki price reasonable hai. jaba kisee item ke lie multiple bids aatee hain, to jo lowest price offer hotee hai, use hee lowest quotation maanaa jaataa hai. yaha price competitive hotee hai aura market rate ke hisaaba se reasonable hotee hai.\n\n📋 Process1. Department Admin tender issue karataa hai.2. Bidders specified time men bid submit karate hain.3. Department Admin sabhee received bids ko compare karataa hai.4. Lowest bid vaale bidder ko contract milataa hai.5. Contract award hone ke baada EMD refund process shuroo hotaa hai.\n\n📘 Source: GFR2017_HINDI.pdf & FInal_GFR_upto_31_07_2024.pdf\n\nkyaa aapa EMD refund process ke baare men aura jaananaa chaahate hain?",
+    "latency": 3.59,
+    "error": null
+  },
+  {
+    "id": "H50-27",
+    "question": "What should the department do if all received bids are much higher than the estimated cost?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "bid_evaluation",
+    "actor": "department_buyer",
+    "intent": "procurement_planning",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nThis is the department buyer/procuring-entity workflow for the requested goods. The department creates the Tender or GeM Bid; Vendors submit Bids. The buyer must not start with vendor registration or vendor-side Bid submission.\n\n📋 Process\n1. Record the need for the requested goods, purpose, quantity, users and delivery timeline.\n2. Prepare generic, measurable and competition-friendly specifications.\n3. Estimate the cost and confirm budget availability.\n4. Obtain applicable administrative approval and financial sanction.\n5. Create the approved purchase indent/procurement request.\n6. Check GeM and the applicable Chhattisgarh-approved purchase channel.\n7. Select the lawful method under current State rules and delegated powers; Single Tender requires exceptional grounds, written justification and competent approval.\n8. Publish the department Tender/GeM Bid and receive Vendor Bids.\n9. Document technical/commercial evaluation and rate reasonableness.\n10. Issue the Purchase Order/contract after competent approval.\n11. Inspect delivery and record formal acceptance.\n12. Process payment after acceptance and update the asset/stock register.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024",
+    "latency": 4.18,
+    "error": null
+  },
+  {
+    "id": "H50-28",
+    "question": "Can negotiations be conducted with the L1 bidder after opening financial bids?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "bid_evaluation",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerYes, negotiations can be conducted with the L1 bidder after opening financial bids, but only under specific circumstances. Normally, negotiations should not be held. If negotiations are decided, they should be conducted only with the lowest acceptable bidder (L1), who is techno-commercially responsive and would have been selected but for the decision to negotiate. The period of validity of the original offer must be extended before negotiations, and the tenderer should be addressed as per the format in Annexure 4. Revised bids must be obtained in writing from the selected tenderers at the end of the negotiations.\n\n📋 Process1. Determine if negotiations are necessary (e.g., L1 price is unreasonable, procurement is on a nomination basis, or requirements are urgent).2. Extend the period of validity of the original offer.3. Address the L1 bidder as per the format in Annexure 4.4. Conduct negotiations and obtain a signed declaration from the contractor.5. Obtain revised bids in writing from the selected tenderers.\n\n📘 Source: Manual_for_Procurement_of_works_2019.pdf, mannual procurement.pdf, publicProManual-1755343081262-715558279.pdf.",
+    "latency": 6.65,
+    "error": null
+  },
+  {
+    "id": "H50-29",
+    "question": "Tender cancel karne ke liye kya reasons record karne chahiye?",
+    "expected_actor": "department_operator",
+    "expected_intent": "tender_creation_policy",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 uttaraCHiPS ke stora khareeda niyamon ke anusaara, nividaa ko kisee bhee samaya sakshama adhikaaree dvaaraa binaa kisee kaarana ke radda kiyaa jaa sakataa hai.\n\n📋 prakriyaa1. sakshama adhikaaree nividaa radda karane kaa nirnaya letaa hai.2. kisee vishishta kaarana kee aavashyakataa naheen hai.3. nividaa ko aadhikaarika taura para radda kiyaa jaataa hai.\n\n📘 srota: Store_Purhase_Rules_28.01.2021.pdf (4.4.3)\n\nkyaa aapa nividaa radda karane kee prakriyaa ke baare men aura jaanakaaree chaahate hain?",
+    "latency": 4.71,
+    "error": null
+  },
+  {
+    "id": "H50-30",
+    "question": "Can the department reject all bids without giving any reason?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "bid_evaluation",
+    "actor": "department_buyer",
+    "intent": "procurement_planning",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nThis is the department buyer/procuring-entity workflow for the requested goods. The department creates the Tender or GeM Bid; Vendors submit Bids. The buyer must not start with vendor registration or vendor-side Bid submission.\n\n📋 Process\n1. Record the need for the requested goods, purpose, quantity, users and delivery timeline.\n2. Prepare generic, measurable and competition-friendly specifications.\n3. Estimate the cost and confirm budget availability.\n4. Obtain applicable administrative approval and financial sanction.\n5. Create the approved purchase indent/procurement request.\n6. Check GeM and the applicable Chhattisgarh-approved purchase channel.\n7. Select the lawful method under current State rules and delegated powers; Single Tender requires exceptional grounds, written justification and competent approval.\n8. Publish the department Tender/GeM Bid and receive Vendor Bids.\n9. Document technical/commercial evaluation and rate reasonableness.\n10. Issue the Purchase Order/contract after competent approval.\n11. Inspect delivery and record formal acceptance.\n12. Process payment after acceptance and update the asset/stock register.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024",
+    "latency": 4.17,
+    "error": null
+  },
+  {
+    "id": "H50-31",
+    "question": "Can we mention a preferred brand and write ‘or equivalent’ in the technical specifications?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "specification_preparation",
+    "actor": "general_information_user",
+    "intent": "specification_preparation",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nPrepare generic, measurable and competition-friendly specifications based on the department's functional and performance need. Avoid a brand or model unless the rules permit it with recorded technical justification and an equivalent provision.\n\n📋 Process\n1. Define the required function, capacity, quality and operating environment.\n2. State measurable performance, safety and compatibility parameters.\n3. Use applicable standards and define tests, inspection and acceptance criteria.\n4. Avoid restrictive brand-specific features that reduce competition.\n5. Have the specifications reviewed by the user/technical committee before approval.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "latency": 4.32,
+    "error": null
+  },
+  {
+    "id": "H50-32",
+    "question": "Laptop specification banate waqt processor brand mention karna allowed hai kya?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "specification_preparation",
+    "actor": "department_buyer",
+    "intent": "specification_preparation",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nSpecifications department ki functional aur performance need par generic, measurable aur competition-friendly honi chahiye. Brand/model tabhi likhein jab rules permit karein, technical justification record ho aur equivalent option diya ja sake.\n\n📋 Process\n1. Required function, capacity, quality aur operating environment define karein.\n2. Measurable performance, safety aur compatibility parameters likhein.\n3. Applicable standards ke saath test, inspection aur acceptance criteria define karein.\n4. Competition restrict karne wale brand-specific features avoid karein.\n5. Approval se pehle user/technical committee review karayein.\n\n📘 Source: Manual for Procurement of Goods 2024; Compilation of CVC Circulars and Guidelines",
+    "latency": 4.34,
+    "error": null
+  },
+  {
+    "id": "H50-33",
+    "question": "How can specifications be written so that they do not favour one vendor?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "specification_preparation",
+    "actor": "general_information_user",
+    "intent": "specification_preparation",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nPrepare generic, measurable and competition-friendly specifications based on the department's functional and performance need. Avoid a brand or model unless the rules permit it with recorded technical justification and an equivalent provision.\n\n📋 Process\n1. Define the required function, capacity, quality and operating environment.\n2. State measurable performance, safety and compatibility parameters.\n3. Use applicable standards and define tests, inspection and acceptance criteria.\n4. Avoid restrictive brand-specific features that reduce competition.\n5. Have the specifications reviewed by the user/technical committee before approval.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "latency": 4.38,
+    "error": null
+  },
+  {
+    "id": "H50-34",
+    "question": "Can experience and turnover requirements be higher than the estimated tender value?",
+    "expected_actor": "general_information_user",
+    "expected_intent": "tender_eligibility",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerNo, experience and turnover requirements cannot be higher than the estimated tender value. The tender value must be sufficient to cover all qualifying factors, including the bidder's experience and turnover, as specified in the procurement documents.\n\n📋 Process1. The tender value is determined based on the estimated cost of the work.2. Qualifying factors, including experience and turnover, are specified in the pre-qualification document.3. The tender value must be high enough to ensure that only capable bidders with the required experience and turnover can participate.\n\n📘 Source: Manual for Procurement of Works 2019, Chapter - 3, the relevant section.3.7; mannual procurement.pdf, the relevant section & 2.",
+    "latency": 3.94,
+    "error": null
+  },
+  {
+    "id": "H50-35",
+    "question": "Tender mein three-year experience mandatory rakhna kab justified hota hai?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "tender_eligibility",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 uttarateena saala kaa anubhava anivaarya rakhanaa taba uchita hotaa hai jaba kaarya kee prakriti jatila ho aura usamen vishesha kaushala kee aavashyakataa ho. jaise ki takaneekee nividaa (Technical Bid) men, jahaan nividaakartaa ko apanee takaneekee yogyataa siddha karanee hotee hai.\n\n📋 prakriyaa1. nividaa vijnyapti (NIT) men anubhava kee aavashyakataa spashta roopa se likhee honee chaahie.2. anubhava kee sharta takaneekee yogyataa (Technical Bid) se sanbandhita honee chaahie.3. vibhaaga ke adhikaaree dvaaraa anubhava kee pushti kee jaanee chaahie.\n\n📘 srota: Store_Purhase_Rules_28.01.2021.pdf, GFR2017_HINDI.pdf",
+    "latency": 6.63,
+    "error": null
+  },
+  {
+    "id": "H50-36",
+    "question": "Can a startup be exempted from prior experience and turnover requirements?",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "tender_eligibility",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerYes, a startup can be exempted from prior experience and turnover requirements. The Procuring Entity has the authority to relax these conditions for recognized start-up enterprises, including those recognized by the Department for Industry. This relaxation may be applied based on the nature of the new technology product or other specific circumstances.\n\n📋 Process1. The Procuring Entity must recognize the startup as such (e.g., through Department for Industry recognition).2. The Entity evaluates the specific circumstances, such as the nature of the new technology product.3. The Entity decides to relax the prior experience and turnover requirements.4. The decision is documented and communicated to the startup.\n\n📘 Source: Manual for Procurement of Goods 2024 (publicProManual-1755343081262-715558279.pdf)",
+    "latency": 6.03,
+    "error": null
+  },
+  {
+    "id": "H50-37",
+    "question": "Does MSME registration automatically make a bidder eligible for every tender?",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "tender_eligibility",
+    "actor": "general_information_user",
+    "intent": "tender_eligibility",
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nYes. A startup may participate in a Tender if it meets that Tender's eligibility and submission conditions. Startup status does not automatically waive a criterion.\n\n📋 Check\n1. Review the Tender notice for eligibility, experience/turnover and required documents.\n2. Verify the evidence required for any startup/MSME or other benefit stated in that Tender.\n3. Submit a Bid only on the conditions expressly applicable in the Tender.\n\n📘 Source: Bid Submission Manual (CHiPS)",
+    "latency": 4.25,
+    "error": null
+  },
+  {
+    "id": "H50-38",
+    "question": "Can EMD exemption be claimed without uploading the required registration certificate?",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "emd_exemption",
+    "actor": "general_information_user",
+    "intent": "emd_exemption",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nYes. Under the applicable GFR provision, Micro and Small Enterprises (MSEs) covered by the MSE Procurement Policy, or registered with the Central Purchase Organisation or the concerned Ministry/Department, are excepted from Bid Security/EMD. Confirm the tender notice's eligibility and required evidence before claiming the exemption.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "latency": 3.78,
+    "error": null
+  },
+  {
+    "id": "H50-39",
+    "question": "What should happen if a bidder meets the technical specification but misses one mandatory document?",
+    "expected_actor": "department_operator",
+    "expected_intent": "bid_evaluation",
+    "actor": "general_information_user",
+    "intent": "specification_preparation",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nPrepare generic, measurable and competition-friendly specifications based on the department's functional and performance need. Avoid a brand or model unless the rules permit it with recorded technical justification and an equivalent provision.\n\n📋 Process\n1. Define the required function, capacity, quality and operating environment.\n2. State measurable performance, safety and compatibility parameters.\n3. Use applicable standards and define tests, inspection and acceptance criteria.\n4. Avoid restrictive brand-specific features that reduce competition.\n5. Have the specifications reviewed by the user/technical committee before approval.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "latency": 3.76,
+    "error": null
+  },
+  {
+    "id": "H50-40",
+    "question": "A bidder uploaded an expired certificate. Should the bid be rejected or can clarification be requested?",
+    "expected_actor": "department_operator",
+    "expected_intent": "bid_evaluation",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerClarification can be requested for an expired certificate. The purchaser may ask the bidder for clarification on the bid, including missing or incomplete documents, but no new supply order should be asked for to qualify the bidder.\n\n📋 Process1. The purchaser identifies the expired certificate in the bid.2. The purchaser issues a written request for clarification via registered post, speed post, courier, or email.3. The request specifies a date for the bidder to comply.4. If the bidder does not comply by the specified date, the tender may be rejected.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf, the relevant section.3.6 and 7.4.3.",
+    "latency": 3.66,
+    "error": null
+  },
+  {
+    "id": "H50-41",
+    "question": "Technical evaluation ke baad financial bids kin bidders ki open honi chahiye?",
+    "expected_actor": "department_operator",
+    "expected_intent": "bid_opening_portal_steps",
+    "actor": "general_information_user",
+    "intent": "bid_evaluation",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nBids ko published Tender criteria ke against evaluate karein: pehle eligibility, technical responsiveness, required documents aur compliance; financial bids ko Tender conditions ke mutabik evaluate karein. Sirf lowest quoted bidder automatically winner nahi hota—proposed awardee eligible, responsive aur technically acceptable bhi hona chahiye.\n\n📋 Process\n1. Bid opening record karke eligibility aur required submissions verify karein.\n2. Technical specifications, Tender conditions aur compliance check karein.\n3. Published criteria ke mutabik technically responsive bids identify karein.\n4. Applicable case mein sirf eligible/responsive bidders ki financial bids evaluate karein.\n5. Evaluated bids rank karke reasons record karein aur award se pehle competent approval lein.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "latency": 3.55,
+    "error": null
+  },
+  {
+    "id": "H50-42",
+    "question": "Can a technically non-responsive bidder be selected because its price is the lowest?",
+    "expected_actor": "general_information_user",
+    "expected_intent": "bid_evaluation",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerNo, a technically non-responsive bidder cannot be selected even if their price is the lowest. The TC must select the lowest (L1) bidder who meets all eligibility/qualification criteria and techno-commercial aspects. Technical non-responsiveness disqualifies a bidder regardless of price.\n\n📋 Process1. Evaluate all responsive bids for techno-commercial compliance.2. Verify conformity to eligibility criteria, technical specifications, and quality assurance.3. Assess financial, technical, and production capabilities.4. Select L1 bidder only if all criteria are met.5. Reject non-responsive bidders, even with lowest prices.\n\n📘 Source: publicProManual-1755343081262-715558279.pdf, mannual procurement.pdf",
+    "latency": 2.9,
+    "error": null
+  },
+  {
+    "id": "H50-43",
+    "question": "L1 bidder ki rate estimate se 25% zyada hai. Department ko kya karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "bid_evaluation",
+    "actor": "department_buyer",
+    "intent": "bid_evaluation",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nBids ko published Tender criteria ke against evaluate karein: pehle eligibility, technical responsiveness, required documents aur compliance; financial bids ko Tender conditions ke mutabik evaluate karein. Sirf lowest quoted bidder automatically winner nahi hota—proposed awardee eligible, responsive aur technically acceptable bhi hona chahiye.\n\n📋 Process\n1. Bid opening record karke eligibility aur required submissions verify karein.\n2. Technical specifications, Tender conditions aur compliance check karein.\n3. Published criteria ke mutabik technically responsive bids identify karein.\n4. Applicable case mein sirf eligible/responsive bidders ki financial bids evaluate karein.\n5. Evaluated bids rank karke reasons record karein aur award se pehle competent approval lein.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024",
+    "latency": 3.33,
+    "error": null
+  },
+  {
+    "id": "H50-44",
+    "question": "How should the evaluation committee record reasons for rejecting a bidder?",
+    "expected_actor": "department_operator",
+    "expected_intent": "bid_evaluation",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerThe evaluation committee should record detailed reasons for rejecting a bidder, especially when the tender accepting authority relies on the Committee's recommendation. The reasons must be formally documented in the tender committee report (Annexure 3) and recorded in the system. If the Committee's recommendation is not followed, the authority must record detailed reasons for the final decision.\n\n📋 Process1. The Tender Committee (TC) evaluates bids and makes formal recommendations in Annexure 3.2. The tender accepting authority reviews the TC's recommendation.3. If the authority deviates from the TC's recommendation, it must record detailed reasons for the decision.4. Reasons are documented in the tender committee report and system records.\n\n📘 Source: CHiPS Manual for Procurement of Goods 2024, Manual for Procurement of Works 2019, and CHiPS FAQ.",
+    "latency": 3.12,
+    "error": null
+  },
+  {
+    "id": "H50-45",
+    "question": "Can tender conditions be changed after bids have already been opened?",
+    "expected_actor": "department_operator",
+    "expected_intent": "corrigendum_policy",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerNo, tender conditions cannot be changed after bids have already been opened. Once bids are opened, the evaluation and award process must proceed based on the original terms. Any changes to tender conditions after bid opening would compromise the fairness and integrity of the procurement process.\n\n📋 Process1. Bids are opened and evaluated according to the original tender conditions.2. If issues arise during evaluation, the Procuring Entity may consider risk mitigation strategies but cannot alter the fundamental terms of the tender.3. If the Procuring Entity needs to make significant changes, it must re-tender the process rather than modifying the existing tender.\n\n📘 Source: Manual for Procurement of Works 2019, the relevant section.6.9; Manual for Procurement of Goods 2024, the relevant section.8\n\nThis ensures transparency and prevents anti-competitive practices. Any changes to tender conditions after bid opening would violate procurement principles and could lead to legal challenges.",
+    "latency": 3.65,
+    "error": null
+  },
+  {
+    "id": "H50-46",
+    "question": "Purchase Order issue hone ke baad vendor delivery delay kare to department kya action le sakta hai?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "purchase_order",
+    "actor": "department_buyer",
+    "intent": "inspection_and_acceptance",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "AuctionManual_FA.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nPurchase Order issue hone ke baad department delivery ko PO aur contract conditions ke against inspect karke formal acceptance record kare.\n\n📋 Process\n1. Delivered quantity, specifications, warranty aur condition ko PO se match karein.\n2. Shortage, damage ya deviation ko inspection record mein note karein.\n3. Non-compliant supply ke liye supplier se rectification ya replacement karayein.\n4. Compliant supply ki receipt aur formal acceptance record banayein.\n5. Acceptance aur required invoice/supporting documents ke baad payment process karke item ko stock/asset register mein enter karein.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "latency": 2.14,
+    "error": null
+  },
+  {
+    "id": "H50-47",
+    "question": "Goods receive ho gaye, but specification match nahi kar rahi. Payment release karna chahiye kya?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "inspection_and_acceptance",
+    "actor": "department_buyer",
+    "intent": "specification_preparation",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nSpecifications department ki functional aur performance need par generic, measurable aur competition-friendly honi chahiye. Brand/model tabhi likhein jab rules permit karein, technical justification record ho aur equivalent option diya ja sake.\n\n📋 Process\n1. Required function, capacity, quality aur operating environment define karein.\n2. Measurable performance, safety aur compatibility parameters likhein.\n3. Applicable standards ke saath test, inspection aur acceptance criteria define karein.\n4. Competition restrict karne wale brand-specific features avoid karein.\n5. Approval se pehle user/technical committee review karayein.\n\n📘 Source: Manual for Procurement of Goods 2024; Compilation of CVC Circulars and Guidelines",
+    "latency": 2.16,
+    "error": null
+  },
+  {
+    "id": "H50-48",
+    "question": "What documents should be completed before processing payment to the supplier?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "payment_and_asset_entry",
+    "actor": "general_information_user",
+    "intent": "unknown",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "fallback": "",
+    "answer": "\n💡 AnswerBefore processing payment to the supplier, the following documents must be completed:1. GRIR (General Requirements for Invoice Release) must be issued.2. The invoice from the supplier, supported by relevant documents proving the purchase order/contract award and material/service receipt.3. Supplier's certification on the bill confirming the payment is in strict terms of the contract and all obligations are fulfilled.\n\n📋 Process1. Issue GRIR to the supplier.2. Receive invoice with supporting documents from the supplier.3. Verify documents against contract stipulations.4. Obtain supplier's certification on the bill.5. Release payment after verification.\n\n📘 Source: Manual for Procurement of Goods 2024 (publicProManual-1755343081262-715558279.pdf)",
+    "latency": 4.79,
+    "error": null
+  },
+  {
+    "id": "H50-49",
+    "question": "Bid submit karne ke baad corrigendum se specifications change ho gayi. Kya mujhe bid dobara submit karni hogi?",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "bidder_corrigendum_tracking",
+    "actor": "vendor_bidder",
+    "intent": "bidder_corrigendum_tracking",
+    "sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nBidder ko relevant Tender ka Corrigendum/Addendum portal par dekhkar changed dates, conditions aur documents check karne chahiye.\n\n📋 Process\n1. Supplier login se relevant live Tender open karein.\n2. Tender page par View Corrigendum/Addendum option dekhein.\n3. Har amendment aur revised Bid submission date/condition padhein.\n4. Portal/email alerts ke saath deadline tak Tender ko dobara check karte rahein.\n5. Bid pehle submit ho chuki ho to uska status check karke revised Tender instructions ke mutabik required update ya resubmission karein.\n\n📘 Source: Corrigendum Issuance Manual (CHiPS)",
+    "latency": 2.13,
+    "error": null
+  },
+  {
+    "id": "H50-50",
+    "question": "EMD payment successful hai but portal par status pending dikh raha hai, aur deadline close hai. Main kya karun?",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "emd_payment_failure",
+    "actor": "vendor_bidder",
+    "intent": "emd_payment",
+    "sources": [
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "fallback": null,
+    "answer": "💡 Answer\nSpecific Tender mein diya exact amount aur deadline use karein: the tender-specified amount, the tender deadline tak. Manual screenshots ke values sirf examples ho sakte hain; unhe user ke Tender amount/date se replace na karein.\n\n📋 Process\n1. e-Procurement portal par relevant Tender kholein aur uska payment option select karein.\n2. EMD/Bid Security select karke Tender-specified amount enter karein.\n3. Tender mein enabled payment mode se transaction complete karke receipt save karein.\n4. Bid submit karne se pehle payment status Successful verify karein. Amount, date ya mode alag dikhe to payment rok kar Tender notice/department se confirm karein.\n\n📘 Source: EMD CHALLAN PAYMENT V1.0",
+    "latency": 2.49,
+    "error": null
+  }
+]

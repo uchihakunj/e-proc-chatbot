@@ -1,0 +1,952 @@
+[
+    {
+        "question": "What are the different methods of government procurement in Chhattisgarh?",
+        "category": "Procurement Methods",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "The different methods include Open Tender, Limited Tender, Single Tender, and procurement through GeM."
+    },
+    {
+        "question": "When can a Single Tender method be used?",
+        "category": "Procurement Methods",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Single Tender is used for proprietary items or in emergency situations where only one supplier is available."
+    },
+    {
+        "question": "What is the monetary limit for purchasing goods without quotation?",
+        "category": "Procurement Methods",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Purchases up to Rs. 25,000 can be made without quotation on the certificate of the competent authority."
+    },
+    {
+        "question": "Is there a limit for Local Purchase Committee procurement?",
+        "category": "Procurement Methods",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Yes, purchase of goods costing above Rs. 25,000 and up to Rs. 2,50,000 can be made on the recommendation of a Local Purchase Committee."
+    },
+    {
+        "question": "Can I use Reverse Auction for any procurement?",
+        "category": "Procurement Methods",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Reverse Auction is typically used for standardized items where price is the sole deciding factor, provided the estimated value justifies it."
+    },
+    {
+        "question": "What is a Rate Contract?",
+        "category": "Procurement Methods",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "A Rate Contract is an agreement between the purchaser and supplier to supply specific goods at specified prices during the period covered by the contract."
+    },
+    {
+        "question": "When is a two-stage bidding process applicable?",
+        "category": "Procurement Methods",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Two-stage bidding is used when the procuring entity is unable to formulate detailed specifications without taking input from the industry."
+    },
+    {
+        "question": "What are the conditions for using Limited Tender?",
+        "category": "Procurement Methods",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Limited Tender is used when the estimated value is low, or there are limited known suppliers, or in cases of urgency."
+    },
+    {
+        "question": "What is the difference between Open Tender and Limited Tender?",
+        "category": "Tender Types",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "Open Tender is open to all interested bidders via press publicity, while Limited Tender is restricted to a pre-selected list of known vendors."
+    },
+    {
+        "question": "What is a Global Tender Enquiry (GTE)?",
+        "category": "Tender Types",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "GTE is used when required goods or services are not available domestically, allowing foreign bidders to participate."
+    },
+    {
+        "question": "What is an Expression of Interest (EoI)?",
+        "category": "Tender Types",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "EoI is the first stage of a two-stage bidding process to identify capable vendors before issuing the detailed RFP."
+    },
+    {
+        "question": "Define Request for Proposal (RFP).",
+        "category": "Tender Types",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "RFP is a document issued to prospective bidders requesting them to submit their technical and financial proposals."
+    },
+    {
+        "question": "What is a Request for Quotation (RFQ)?",
+        "category": "Tender Types",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "RFQ is used for standard, off-the-shelf items where price is the primary consideration."
+    },
+    {
+        "question": "What is a proprietary article certificate?",
+        "category": "Tender Types",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "It is a certificate issued when goods can only be supplied by a specific manufacturer or its authorized dealer."
+    },
+    {
+        "question": "What are the criteria for a pre-qualification bid?",
+        "category": "Tender Types",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "Criteria usually include financial standing, past experience, technical capabilities, and manufacturing capacity."
+    },
+    {
+        "question": "How does a Quality-and-Cost-Based Selection (QCBS) work?",
+        "category": "Tender Types",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "QCBS evaluates proposals based on a weighted combination of technical quality and financial cost."
+    },
+    {
+        "question": "What is EMD and why is it required?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "Earnest Money Deposit (EMD) is a security deposit to safeguard against bidders withdrawing or altering their bids before acceptance."
+    },
+    {
+        "question": "Who is exempted from submitting EMD?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "Micro and Small Enterprises (MSEs) and startups are generally exempted from paying EMD."
+    },
+    {
+        "question": "What is the standard percentage for EMD?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "EMD is typically 2% to 5% of the estimated value of the goods or services."
+    },
+    {
+        "question": "When is the EMD refunded to unsuccessful bidders?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "EMD is refunded to unsuccessful bidders shortly after the award of the contract."
+    },
+    {
+        "question": "When is EMD refunded to the successful bidder?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "EMD of the successful bidder is refunded after they sign the contract and furnish the Performance Security."
+    },
+    {
+        "question": "Can EMD be submitted as a Bank Guarantee?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "Yes, EMD can usually be submitted via Demand Draft, Banker\u2019s Cheque, or Bank Guarantee."
+    },
+    {
+        "question": "Under what conditions can EMD be forfeited?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "EMD is forfeited if the bidder withdraws their bid during validity or fails to furnish the Performance Security."
+    },
+    {
+        "question": "Does an EMD earn interest?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "No, EMD does not carry any interest."
+    },
+    {
+        "question": "What happens if I fail to submit the EMD?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "The bid will generally be treated as unresponsive and summarily rejected."
+    },
+    {
+        "question": "Is EMD required for all tenders?",
+        "category": "EMD",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Store_Purhase_Rules_28.01.2021.pdf",
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "It is required for most competitive tenders, but not for direct purchases below a certain threshold or from exempted entities."
+    },
+    {
+        "question": "What is Performance Security?",
+        "category": "Performance Security",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Performance Security is a deposit by the successful bidder to ensure the proper execution of the contract."
+    },
+    {
+        "question": "When is Performance Security required?",
+        "category": "Performance Security",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "It is required within a specified timeframe (e.g., 14-21 days) after the issuance of the Letter of Award."
+    },
+    {
+        "question": "What is the usual percentage for Performance Security?",
+        "category": "Performance Security",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "It is typically 5% to 10% of the contract value."
+    },
+    {
+        "question": "Who is exempted from Performance Security?",
+        "category": "Performance Security",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Generally, no entity is exempted from Performance Security, unlike EMD."
+    },
+    {
+        "question": "In what forms can Performance Security be submitted?",
+        "category": "Performance Security",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "It can be submitted as a Bank Guarantee, Demand Draft, or Fixed Deposit Receipt."
+    },
+    {
+        "question": "When is the Performance Security released?",
+        "category": "Performance Security",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "It is released after the completion of all contractual obligations, including warranty periods, plus an additional 60 days."
+    },
+    {
+        "question": "Can EMD be converted into Performance Security?",
+        "category": "Performance Security",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "Sometimes, but usually, the bidder submits a fresh Performance Security and the EMD is refunded."
+    },
+    {
+        "question": "What happens if the contractor fails to perform?",
+        "category": "Performance Security",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf",
+            "Store_Purhase_Rules_28.01.2021.pdf"
+        ],
+        "expected_answer_summary": "The Performance Security is forfeited, and the contractor may be debarred or penalized."
+    },
+    {
+        "question": "Should I purchase through GeM or the e-Procurement portal?",
+        "category": "GeM",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "FInal_GFR_upto_31_07_2024.pdf",
+            "mannual procurement.pdf"
+        ],
+        "expected_answer_summary": "For goods and services available on GeM, it is mandatory for Ministries and Departments to procure through GeM."
+    },
+    {
+        "question": "What is the Government e-Marketplace (GeM)?",
+        "category": "GeM",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "FInal_GFR_upto_31_07_2024.pdf",
+            "mannual procurement.pdf"
+        ],
+        "expected_answer_summary": "GeM is the national public procurement portal for online purchasing of common use Goods and Services."
+    },
+    {
+        "question": "Are there monetary limits for direct purchase on GeM?",
+        "category": "GeM",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "FInal_GFR_upto_31_07_2024.pdf",
+            "mannual procurement.pdf"
+        ],
+        "expected_answer_summary": "Yes, up to Rs. 25,000 can be purchased directly from any available supplier on GeM."
+    },
+    {
+        "question": "How do I procure items costing between Rs. 25,000 and Rs. 5 Lakhs on GeM?",
+        "category": "GeM",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "FInal_GFR_upto_31_07_2024.pdf",
+            "mannual procurement.pdf"
+        ],
+        "expected_answer_summary": "Through the GeM bidding process or choosing the L1 vendor among at least three different OEMs."
+    },
+    {
+        "question": "What if the item is not available on GeM?",
+        "category": "GeM",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "FInal_GFR_upto_31_07_2024.pdf",
+            "mannual procurement.pdf"
+        ],
+        "expected_answer_summary": "If the item is not on GeM, you must generate a GeM Availability Report and Past Transaction Summary (GEAR-PTS) and then procure outside GeM."
+    },
+    {
+        "question": "Can I float a custom bid on GeM?",
+        "category": "GeM",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "FInal_GFR_upto_31_07_2024.pdf",
+            "mannual procurement.pdf"
+        ],
+        "expected_answer_summary": "Yes, GeM allows Custom Bids for items with unique specifications."
+    },
+    {
+        "question": "Who mandates the use of GeM?",
+        "category": "GeM",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "FInal_GFR_upto_31_07_2024.pdf",
+            "mannual procurement.pdf"
+        ],
+        "expected_answer_summary": "Rule 149 of the General Financial Rules (GFR) mandates GeM procurement."
+    },
+    {
+        "question": "Are services available on GeM?",
+        "category": "GeM",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "FInal_GFR_upto_31_07_2024.pdf",
+            "mannual procurement.pdf"
+        ],
+        "expected_answer_summary": "Yes, various services like transport, housekeeping, and IT services are available on GeM."
+    },
+    {
+        "question": "How do I register as a vendor on the Chhattisgarh e-Procurement portal?",
+        "category": "Vendor Registration",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "Vendor Registration Manual.pdf",
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Go to the portal, click on Online Bidder Enrollment, fill in the required details, and create a Login ID and password."
+    },
+    {
+        "question": "What documents are required for vendor registration?",
+        "category": "Vendor Registration",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "Vendor Registration Manual.pdf",
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "PAN Card, GST Registration, Firm Registration Certificate, and a valid Email ID and Mobile Number."
+    },
+    {
+        "question": "Do I need a Digital Signature Certificate (DSC) to register?",
+        "category": "Vendor Registration",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "Vendor Registration Manual.pdf",
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Yes, a valid Class II or Class III DSC is required to map to your account for bidding."
+    },
+    {
+        "question": "How do I map my DSC to my account?",
+        "category": "Vendor Registration",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "Vendor Registration Manual.pdf",
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Login with your credentials, go to the DSC tab, plug in your DSC token, and map it to your profile."
+    },
+    {
+        "question": "Is there a registration fee?",
+        "category": "Vendor Registration",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "Vendor Registration Manual.pdf",
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Registration on the standard portal is usually free, but certain departmental enrollments may have fees."
+    },
+    {
+        "question": "How long does vendor approval take?",
+        "category": "Vendor Registration",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "Vendor Registration Manual.pdf",
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Vendor enrollment is typically auto-approved upon successful email/mobile verification, but department approvals may take a few days."
+    },
+    {
+        "question": "I forgot my password, how do I reset it?",
+        "category": "Vendor Registration",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "Vendor Registration Manual.pdf",
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Use the Forgot Password link, enter your registered email/mobile, and follow the OTP verification process."
+    },
+    {
+        "question": "Can an international vendor register on the portal?",
+        "category": "Vendor Registration",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "Vendor Registration Manual.pdf",
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Yes, international vendors can register if the tender permits it, though they may require specific document formats."
+    },
+    {
+        "question": "How do I submit my bid online after downloading the tender documents?",
+        "category": "Bid Submission",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Login, search for the tender, prepare documents, upload them in the specified format, sign with DSC, and click Freeze Bid Submission."
+    },
+    {
+        "question": "What is the maximum file size for uploading bid documents?",
+        "category": "Bid Submission",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Typically, the portal specifies limits (e.g., 20MB per file) and recommends using PDF format."
+    },
+    {
+        "question": "Can I modify my bid after submission?",
+        "category": "Bid Submission",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Yes, you can modify or withdraw your bid anytime before the tender submission deadline."
+    },
+    {
+        "question": "How do I withdraw a submitted bid?",
+        "category": "Bid Submission",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Go to My Bids, select the tender, and choose the withdrawal option before the deadline."
+    },
+    {
+        "question": "What format should the BoQ be in?",
+        "category": "Bid Submission",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "The Bill of Quantities (BoQ) must be in the exact Excel format provided in the tender; do not alter cell structures."
+    },
+    {
+        "question": "How do I know my bid was successfully submitted?",
+        "category": "Bid Submission",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "You will receive a bid acknowledgment message containing a bid ID and timestamp upon successful submission."
+    },
+    {
+        "question": "Do I need to submit hard copies as well?",
+        "category": "Bid Submission",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Hard copies are generally only required for EMD/original bank guarantees as specified in the tender document."
+    },
+    {
+        "question": "What happens if I miss the bid submission deadline?",
+        "category": "Bid Submission",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "The portal will not accept bids after the exact deadline time has passed."
+    },
+    {
+        "question": "How can I issue a corrigendum after publishing a tender?",
+        "category": "Corrigendum",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Login as a department user, select the published tender, choose Create Corrigendum, upload the changes, and publish."
+    },
+    {
+        "question": "What types of corrigenda can be issued?",
+        "category": "Corrigendum",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Date extensions, BoQ modifications, specification changes, or cancellation."
+    },
+    {
+        "question": "Can I issue a corrigendum after the bid opening date?",
+        "category": "Corrigendum",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "No, corrigenda can only be issued before the bid submission end date."
+    },
+    {
+        "question": "If a BoQ is modified via corrigendum, what do bidders do?",
+        "category": "Corrigendum",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Bidders must download the new BoQ, fill it, and resubmit their bids."
+    },
+    {
+        "question": "Are bidders notified of a corrigendum?",
+        "category": "Corrigendum",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Registered bidders who have downloaded the tender usually receive an email/SMS alert."
+    },
+    {
+        "question": "Can I extend the tender deadline without a corrigendum?",
+        "category": "Corrigendum",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "No, any change to the deadline must be done formally through a date extension corrigendum."
+    },
+    {
+        "question": "Why is my DSC not being recognized by the portal?",
+        "category": "Technical Issues",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf",
+            "Vendor Registration Manual.pdf"
+        ],
+        "expected_answer_summary": "Ensure Java is installed, the DSC token drivers are correctly installed, and the token is plugged in."
+    },
+    {
+        "question": "I am getting a Java error during bid submission.",
+        "category": "Technical Issues",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf",
+            "Vendor Registration Manual.pdf"
+        ],
+        "expected_answer_summary": "Clear your Java cache, update Java to the required version, and add the portal URL to the Java Security Exception Site List."
+    },
+    {
+        "question": "What should I do if my EMD payment fails but the amount is deducted?",
+        "category": "Technical Issues",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf",
+            "Vendor Registration Manual.pdf"
+        ],
+        "expected_answer_summary": "Wait for the payment gateway reconciliation (usually 24-48 hours) or contact the helpdesk with the transaction ID."
+    },
+    {
+        "question": "The portal is loading very slowly.",
+        "category": "Technical Issues",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf",
+            "Vendor Registration Manual.pdf"
+        ],
+        "expected_answer_summary": "Check your internet connection, clear browser cache, or try accessing the portal during non-peak hours."
+    },
+    {
+        "question": "Why can I not upload my PDF document?",
+        "category": "Technical Issues",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf",
+            "Vendor Registration Manual.pdf"
+        ],
+        "expected_answer_summary": "Ensure the PDF is not password protected, corrupted, and is within the file size limit."
+    },
+    {
+        "question": "The BOQ Excel file shows Macros Disabled.",
+        "category": "Technical Issues",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf",
+            "Vendor Registration Manual.pdf"
+        ],
+        "expected_answer_summary": "Enable macros in Excel settings to allow the BoQ file to validate calculations."
+    },
+    {
+        "question": "I am unable to login despite correct credentials.",
+        "category": "Technical Issues",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf",
+            "Vendor Registration Manual.pdf"
+        ],
+        "expected_answer_summary": "Ensure caps lock is off, clear browser cookies, or check if your account was locked due to multiple failed attempts."
+    },
+    {
+        "question": "Whom do I contact for technical support?",
+        "category": "Technical Issues",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf",
+            "Vendor Registration Manual.pdf"
+        ],
+        "expected_answer_summary": "Contact the 24x7 e-Procurement helpdesk via the toll-free number or email provided on the portal homepage."
+    },
+    {
+        "question": "What constitutes a breach of contract by the vendor?",
+        "category": "Contract Management",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "Failure to deliver goods on time, providing substandard quality, or violating any terms specified in the agreement."
+    },
+    {
+        "question": "What is Liquidated Damages?",
+        "category": "Contract Management",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "It is a penalty levied on the supplier for delayed delivery, usually a percentage of the delayed goods value per week."
+    },
+    {
+        "question": "Can a contract be terminated for convenience?",
+        "category": "Contract Management",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "Some contracts include a clause allowing the buyer to terminate the contract with notice, even without vendor default."
+    },
+    {
+        "question": "What is a Force Majeure clause?",
+        "category": "Contract Management",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "It protects parties from liability if they cannot fulfill obligations due to unforeseeable, unavoidable events like natural disasters."
+    },
+    {
+        "question": "How are payment terms usually structured?",
+        "category": "Contract Management",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "Payments are typically made upon successful delivery, installation, and acceptance of goods, often within 30 days of invoice."
+    },
+    {
+        "question": "What is a price variation clause?",
+        "category": "Contract Management",
+        "expected_intent": "procurement_rules",
+        "expected_documents": [
+            "Manual_for_Procurement_of_works_2019.pdf"
+        ],
+        "expected_answer_summary": "A clause that allows for the adjustment of the contract price based on changes in material/labor costs during the contract period."
+    },
+    {
+        "question": "What is a Reverse Auction in e-Procurement?",
+        "category": "Reverse Auction",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "It is an online real-time bidding process where bidders compete by lowering their prices."
+    },
+    {
+        "question": "When is Reverse Auction conducted?",
+        "category": "Reverse Auction",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "It is conducted after the technical evaluation, among the technically qualified bidders."
+    },
+    {
+        "question": "Can I see other bidders prices during the auction?",
+        "category": "Reverse Auction",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "Usually, you can see the current lowest price (L1) but not the identities of other bidders."
+    },
+    {
+        "question": "How long does a Reverse Auction last?",
+        "category": "Reverse Auction",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "It has a fixed duration, but it auto-extends by a set time (e.g., 5 mins) if a new bid is placed near the end."
+    },
+    {
+        "question": "What is the decrement value in Reverse Auction?",
+        "category": "Reverse Auction",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "It is the minimum amount by which a bidder must reduce the current lowest price to place a valid bid."
+    },
+    {
+        "question": "Is participation in Reverse Auction mandatory?",
+        "category": "Reverse Auction",
+        "expected_intent": "user_manuals",
+        "expected_documents": [
+            "CHiPS_Bid_Submission_Manual_English.pdf"
+        ],
+        "expected_answer_summary": "If the tender specifies Reverse Auction, participation is required to win, though your initial financial bid acts as your starting price."
+    },
+    {
+        "question": "What is the primary objective of the Chhattisgarh e-Procurement system?",
+        "category": "General Queries",
+        "expected_intent": "general",
+        "expected_documents": [
+            "general"
+        ],
+        "expected_answer_summary": "To ensure transparency, efficiency, and fairness in public procurement."
+    },
+    {
+        "question": "Who manages the e-Procurement portal?",
+        "category": "General Queries",
+        "expected_intent": "general",
+        "expected_documents": [
+            "general"
+        ],
+        "expected_answer_summary": "It is managed by CHiPS (Chhattisgarh infotech Promotion Society)."
+    },
+    {
+        "question": "Is the portal available 24/7?",
+        "category": "General Queries",
+        "expected_intent": "general",
+        "expected_documents": [
+            "general"
+        ],
+        "expected_answer_summary": "Yes, the portal is available 24/7, though maintenance windows may occur."
+    },
+    {
+        "question": "What is the CPPP?",
+        "category": "General Queries",
+        "expected_intent": "general",
+        "expected_documents": [
+            "general"
+        ],
+        "expected_answer_summary": "Central Public Procurement Portal, a national portal for e-tendering."
+    },
+    {
+        "question": "Can NGOs participate in government tenders?",
+        "category": "General Queries",
+        "expected_intent": "general",
+        "expected_documents": [
+            "general"
+        ],
+        "expected_answer_summary": "Yes, if they meet the eligibility criteria specified in the specific tender document."
+    },
+    {
+        "question": "What is the role of the tender evaluation committee?",
+        "category": "General Queries",
+        "expected_intent": "general",
+        "expected_documents": [
+            "general"
+        ],
+        "expected_answer_summary": "To evaluate bids technically and financially to ensure they meet the tender requirements and determine the lowest responsive bidder."
+    },
+    {
+        "question": "What is L1 in tendering?",
+        "category": "General Queries",
+        "expected_intent": "general",
+        "expected_documents": [
+            "general"
+        ],
+        "expected_answer_summary": "L1 refers to the Lowest Bidder in the financial evaluation."
+    },
+    {
+        "question": "What is H1 in tendering?",
+        "category": "General Queries",
+        "expected_intent": "general",
+        "expected_documents": [
+            "general"
+        ],
+        "expected_answer_summary": "H1 refers to the Highest Bidder, typically used in e-auctions for selling or leasing."
+    },
+    {
+        "question": "How do I apply for a driving license in Chhattisgarh?",
+        "category": "Out-of-Scope Queries",
+        "expected_intent": "out_of_scope",
+        "expected_documents": [
+            "out_of_scope"
+        ],
+        "expected_answer_summary": "I am specialized in Chhattisgarh e-Procurement. I cannot answer queries about driving licenses."
+    },
+    {
+        "question": "What is the weather like in Raipur today?",
+        "category": "Out-of-Scope Queries",
+        "expected_intent": "out_of_scope",
+        "expected_documents": [
+            "out_of_scope"
+        ],
+        "expected_answer_summary": "I only have knowledge regarding procurement rules and manuals. I cannot provide weather information."
+    },
+    {
+        "question": "Can you write a Python script for web scraping?",
+        "category": "Out-of-Scope Queries",
+        "expected_intent": "out_of_scope",
+        "expected_documents": [
+            "out_of_scope"
+        ],
+        "expected_answer_summary": "I am an e-Procurement assistant. Please consult a general-purpose AI for coding assistance."
+    },
+    {
+        "question": "Who won the recent cricket match?",
+        "category": "Out-of-Scope Queries",
+        "expected_intent": "out_of_scope",
+        "expected_documents": [
+            "out_of_scope"
+        ],
+        "expected_answer_summary": "I do not have access to sports news. My scope is limited to Chhattisgarh government procurement."
+    },
+    {
+        "question": "How do I pay my electricity bill online?",
+        "category": "Out-of-Scope Queries",
+        "expected_intent": "out_of_scope",
+        "expected_documents": [
+            "out_of_scope"
+        ],
+        "expected_answer_summary": "I assist with e-Procurement tenders. For electricity bills, please visit the state electricity board website."
+    },
+    {
+        "question": "What are the symptoms of COVID-19?",
+        "category": "Out-of-Scope Queries",
+        "expected_intent": "out_of_scope",
+        "expected_documents": [
+            "out_of_scope"
+        ],
+        "expected_answer_summary": "I am not a medical assistant. I only answer questions related to e-Procurement and tenders."
+    },
+    {
+        "question": "Tell me a joke.",
+        "category": "Out-of-Scope Queries",
+        "expected_intent": "out_of_scope",
+        "expected_documents": [
+            "out_of_scope"
+        ],
+        "expected_answer_summary": "I am a professional procurement assistant and do not tell jokes."
+    },
+    {
+        "question": "What is the capital of India?",
+        "category": "Out-of-Scope Queries",
+        "expected_intent": "out_of_scope",
+        "expected_documents": [
+            "out_of_scope"
+        ],
+        "expected_answer_summary": "I am specialized in e-Procurement. I cannot answer general knowledge questions."
+    }
+]

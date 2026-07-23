@@ -276,6 +276,49 @@ html, body {
   background: #4ade80;
   box-shadow: 0 0 0 2px rgba(74,222,128,.3);
 }
+.popup-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ── Popup subheader (secondary toggles layer) ───────────────────── */
+#popup-subheader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 6px 16px;
+  background: var(--accent-50);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.subheader-icon-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  padding: 4px 8px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.subheader-icon-btn:hover {
+  background: var(--surface);
+  color: var(--text);
+  border-color: rgba(0,0,0,0.15);
+}
+#lang-toggle { display: none !important; }
+select.subheader-icon-btn {
+  height: 26px;
+  padding: 0 4px;
+}
 
 /* ══ Info / About card ══════════════════════════════════════════════ */
 #popup-info {

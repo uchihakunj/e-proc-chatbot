@@ -1,0 +1,135 @@
+3: Simple Flask-based interface for document question-answering
+43: #    answer cache, task-flow wizard) ──
+48:     suggest_followups, AnswerCache, detect_flow_trigger,
+164:     generate_answer = _rag_module.generate_answer
+181: Promotion Society (CHIPS). Answer ONLY from the documents provided as "Context"
+185: - Answer strictly from the Context. Never assume, infer, or hallucinate.
+188:   X AND when is it Y?", "X and Y", or a list), you MUST answer EVERY part. Do not
+190:   each, and address them all in the answer. (e.g. "What is EMD and when is it
+205:   to the context sources by number/bracket anywhere in your answer prose. State
+208:   answer the question yourself from the Context. NEVER brush the user off to "go
+212:   detail exists, GIVE the answer first, then you may add a brief, FORMAL offer to
+213:   help further, in the answer's language — e.g.
+219: - SCOPE: You ONLY answer questions about government procurement — tenders, bids,
+223:   current affairs, etc.) OR the Context does not actually contain the answer, you
+233: - Keep ONE language consistent across the WHOLE response — the answer, every
+238: - If the answer is not in the Context, reply with ONLY one line, in the question's
+240:     English → The answer to this question was not found in the available documents.
+263: - Answer a query that uses ANY synonym exactly as if the canonical term were used
+265:   answer).
+266: - In the answer, prefer the term the SOURCE document uses, and mention the common
+291: Write a direct, conversational, and natural response as a helpful AI assistant. Do NOT use rigid headers like "💡 Answer", "📋 Process", "Rule/Provision:", or "Explanation:".
+292: Instead, structure the answer fluidly:
+293: 1. Start with a direct, friendly answer to the user's question.
+304: - Do NOT repeat the same content across Answer, Process and Explanation.
+313: 💡 Answer
+326: 💡 उत्तर
+340: throughout the answer. For example, if Ramesh is registering as a vendor, say
+349: A: The answer to this question was not found in the available documents.
+360:     cached, logged and decomposed answers are clean too, not just the browser view.
+395:     gemma3:4b answers only the first clause of a multi-part question and silently
+397:     exemption answer is retrieved but never written). Reformulating the question
+426: # Near-duplicate answer cache — instant replies for repeated/rephrased questions.
+427: ANSWER_CACHE = AnswerCache(ttl_seconds=86400, max_entries=2000)
+449:     type in English but ask for another language — e.g. "what is EMD, answer in
+466:         r'(?:\b(?:in|into|reply in|answer in|respond in|response in|explain in|'
+502:                 "it. Use ONLY the Hindi headings: 💡 उत्तर, 📋 प्रक्रिया, नियम/प्रावधान:, "
+515:                 "7. Use ONLY the English emoji headings: 💡 Answer, 📋 Process, 📘 Source.")
+518:             "Use ONLY the English headings: 💡 Answer, 📋 Process, Rule/Provision:, "
+573:     'hinglish': 'Is question ka answer uplabdh documents mein nahi mila.',
+574:     'en':       'The answer to this question was not found in the available documents.',
+795:     LLM context, the model parrots it back into answers (e.g. citing
+810:     sees and answers."""
+848: # chunk, so the LLM answers "not found" even when the rule plainly exists in
+853: # the context, so deleted or rarely-phrased rules are answered correctly —
+972:                 # "25 Deleted vide DoE OM ..." line) so the answer can cite it.
+1062:     names/implies no rule. Appended under the answer so the shown figures are ground
+1213: # specific helpline number or fee figure, so the model truthfully answers "not
+1289:     answer never misses a phone number or fee figure that IS in the corpus.
+1380:     # Lead with a crisp, answer-shaped restatement of the §3.5.7 fact.
+1475: # portal "regret items" answer. For a regret query we DROP these from context (the
+1731:             'success': True, 'query': query_text, 'answer': reply,
+1754:                 'success': True, 'query': query_text, 'answer': refusal,
+1758:         # Step 2: Generate answer
+1759:         print(f"[Web UI] Generating answer...")
+1760:         answer_start = time.time()
+1761:         answer = generate_answer(query_text, context_results)
+1762:         answer_time = time.time() - answer_start
+1763:         print(f"⏱️ [FLASK] Answer generation completed in {answer_time:.2f}s")
+1803:             'answer': answer,
+1946:     exact passage the answer was grounded in. We locate the chunk text with
+2091:             # the answer to the current step (unless the user cancels).
+2128:             #     re-answer the PREVIOUS question in the requested language instead
+2139:                           f"-> re-answering {effective_query!r}")
+2158:             # 6) Answer cache: serve near-duplicate questions instantly. Skip when
+2160:             #    follow-up, since those need a fresh, tailored answer.
+2162:                 _cached = ANSWER_CACHE.get(effective_query)
+2164:                     yield f"data: {json.dumps({'type':'status','message':'Instant answer (cached)'})}\n\n"
+2165:                     yield f"data: {json.dumps({'type':'token','content':_cached['answer']})}\n\n"
+2169:                     CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _cached['answer'][:300])
+2235:             # Confidence from the top reranker score (low → caveat note in answer).
+2242:             # (gemma4 produced only "💡"). Reranking already orders the most
+2276:             user_msg     = f"Context from documents:\n{context_text}\n\nQuestion: {query_text}\n\nAnswer:"
+2283:             yield f"data: {json.dumps({'type':'status','message':'✍️ Composing your answer…'})}\n\n"
+2295:                           "केवल हिंदी (Devanagari लिपि) में, निर्धारित प्रारूप (💡 उत्तर / 📋 प्रक्रिया / "
+2301:                           "e.g. 'E-procurement ka matlab hai...'). DO NOT write your answer in plain English. "
+2304:                           "Use the English emoji headings (💡 Answer / 📋 Process / 📘 Source).")
+2307:                           "headings (💡 Answer / 📋 Process / 📘 Source).")
+2314:             # answer heading — see _deadline_line below — not left to the LLM.)
+2320:             # (self-contained) question so it answers the right subject.
+2324:                 _ans_prefix = "\n\nAnswer (in Roman script Hinglish):"
+2327:                 _ans_prefix = "\n\nAnswer (in Devanagari Hindi):"
+2330:                 _ans_prefix = "\n\nAnswer:"
+2334:             # gemma3:4b answers only the FIRST clause of a compound question and
+2335:             # silently drops the rest, even when the answer is in Context — but it
+2336:             # answers each sub-question correctly IN ISOLATION (verified: a trailing
+2338:             # works). So generate each sub-answer in its own call and merge. The
+2345:                 # IT exempted?") isn't retrieved/answered in isolation (which
+2361:                 # Sub-answers must NOT carry their own 💡/📋/📘 structure (multiple
+2362:                 # "📘 Source" lines would break the client's answer renderer); we
+2366:                                 "कोई 💡/📋/📘 शीर्षक या स्रोत पंक्ति नहीं।")
+2369:                                 "(sentences in Roman script). Give ONLY the direct answer — no 💡/📋/📘 "
+2370:                                 "headings, no Source line. DO NOT answer in plain English. "
+2373:                     _sub_dir = ("\n\n>>> Answer in English. Give ONLY the direct answer text — "
+2374:                                 "no 💡/📋/📘 headings, no Source line.")
+2380:                         if s and (s[0] in '💡📋📘🔖'
+2386:                 def _answer_sub(sub_q):
+2422:                     yield f"data: {json.dumps({'type':'status','message':f'🧩 Answering {len(_parts)} parts…'})}\n\n"
+2423:                     _hdr = '💡 उत्तर' if _lang == 'hi' else '💡 Answer'
+2426:                         _a, _ss = _answer_sub(_sub)
+2443:                                 ANSWER_CACHE.put(effective_query, _merged, _union)
+2460:             # answer token was streamed — a mid-stream crash after partial output
+2470:             # ── Deterministic lines injected after the answer heading (the LLM
+2496:             # prepended to the answer — it read as the bot doubting itself. A
+2519:                               # budget and no answer content streams. llama3 ignores.
+2523:                                   # must yield the same answer (factual gov Q&A bot).
+2572:                                 # "💡 Answer" heading stays first and the deadline
+2581:                                         state.setdefault('answer_buf', []).append(out)
+2587:                                         state.setdefault('answer_buf', []).append(buf)
+2592:                                     state.setdefault('answer_buf', []).append(content)
+2596:                                 # Flush any buffered heading content (short/single-line answer).
+2606:                                     state.setdefault('answer_buf', []).append(out)
+2621:                         state.setdefault('answer_buf', []).append(out)
+2646:                 # so the fallback OOMs too and the user gets an empty answer.
+2648:                 # immediate unload) so llama3:8b has headroom to actually answer.
+2664:             # Empty-answer guard: the model occasionally streams zero content
+2670:                     'hinglish': 'Sorry, answer generate nahi ho paya. Please question thoda badal kar dobara poochhein.',
+2671:                     'en':       'Sorry, an answer could not be generated. Please try rephrasing your question.',
+2677:             _answer_text = ''.join(state.get('answer_buf', []))
+2681:             _answer_text = _sanitize_rule_numbers(_answer_text, context_text)
+2689:                     if _gn and _gn[:40] not in _answer_text:
+2692:                         _answer_text += _gblock
+2696:                 _summary = _answer_text.strip()[:300]
+2701:             # Cache the answer for near-duplicate future questions (skip personalised /
+2702:             # follow-up / refusal answers — those aren't reusable).
+2704:                 _is_refusal = any(rl[:25] in _answer_text for rl in REFUSAL_LINES.values())
+2705:                 # Do NOT cache LOW-confidence answers: the reranker's top score was
+2706:                 # weak, so the answer is likely grounded in the wrong passage (this is
+2707:                 # exactly how the Q91 "Rule 192 / Rs 1-10 lakh" wrong answer got frozen
+2708:                 # and replayed). Only cache medium/high-confidence, non-refusal answers.
+2712:                     ANSWER_CACHE.put(effective_query, _answer_text, source_refs)
+2733:             # Expose the server-sanitised full answer on the done event so EVERY
+2737:             yield f"data: {json.dumps({'type':'done','elapsed':elapsed,'sources':source_refs,'answer':_answer_text})}\n\n"
+2754:     """Record a thumbs up/down on an answer (Tier 2 #8)."""
+2767:         'answer': (data.get('answer') or '')[:1000],
+2768:         'sources': _sources,          # cited docs, so bad answers can be traced

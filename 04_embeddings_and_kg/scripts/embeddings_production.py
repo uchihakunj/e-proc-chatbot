@@ -20,11 +20,15 @@ from datetime import datetime
 from typing import Dict, List, Set
 import atexit
 
+os.environ["HF_HUB_OFFLINE"] = "1"
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+
 try:
     from qdrant_client import QdrantClient
     from qdrant_client.models import VectorParams, Distance, PointStruct
-    from FlagEmbedding import BGEM3FlagModel, FlagReranker
     from tqdm import tqdm
+    from ov_embedder import OVEmbedder
+    from FlagEmbedding import FlagReranker
 except ImportError:
     print("Error: Required packages not installed.")
     print("Run: pip install qdrant-client FlagEmbedding torch tqdm")
@@ -136,14 +140,44 @@ class EmbeddingsManifest:
 
 manifest = EmbeddingsManifest(MANIFEST_FILE)
 
+
+def get_safe_next_point_id() -> int:
+    """Allocate after both the manifest and the actual Qdrant ID range.
+
+    Older one-off imports can leave valid points in Qdrant that are absent from
+    the incremental manifest. Relying only on the manifest maximum would then
+    overwrite those points. Scanning IDs is inexpensive for the local collection
+    and makes every future incremental upsert collision-safe.
+    """
+    manifest_next = manifest.get_next_id()
+    if not client.collection_exists(COLLECTION_NAME):
+        return manifest_next
+
+    max_collection_id = -1
+    offset = None
+    while True:
+        points, next_offset = client.scroll(
+            collection_name=COLLECTION_NAME,
+            offset=offset,
+            limit=512,
+            with_payload=False,
+            with_vectors=False,
+        )
+        for point in points:
+            if isinstance(point.id, int):
+                max_collection_id = max(max_collection_id, point.id)
+        if next_offset is None:
+            break
+        offset = next_offset
+    return max(manifest_next, max_collection_id + 1)
+
 # ────────────────────────────────────────────────────────────────
 # Load Models
 # ────────────────────────────────────────────────────────────────
 
 logger.info("Loading BGE-M3 embedding model...")
 try:
-    model = BGEM3FlagModel("BAAI/bge-m3", use_fp16=True)
-    model.return_sparse = True
+    model = OVEmbedder("BAAI/bge-m3")
 except Exception as e:
     logger.error(f"Failed to load embedding model: {e}")
     exit(1)
@@ -229,6 +263,20 @@ def index_new_chunks():
         try:
             text = chunk_file.read_text(encoding='utf-8').strip()
             
+            doc_type = "general"
+            authority = 5
+            
+            # Extract metadata from headers
+            lines = text.split('\n')
+            for line in lines:
+                if line.startswith("Type: "):
+                    doc_type = line.replace("Type: ", "").strip()
+                elif line.startswith("Authority: "):
+                    try:
+                        authority = int(line.replace("Authority: ", "").strip())
+                    except:
+                        pass
+            
             # Extract metadata from filename
             name = chunk_file.stem
             chunk_marker = "_chunk_"
@@ -239,9 +287,6 @@ def index_new_chunks():
                 chunk_id = "0"
 
             # Prefer the PARENT FOLDER name as the document source.
-            # Chunks live in CHUNK_DIR/<doc_name>/<file>_chunk_NNN.txt — the folder
-            # is the real document name. The filename stem is often just "structured"
-            # (when chunked from a structured.md), so it must NOT be used as source.
             if chunk_file.parent != CHUNK_DIR:
                 doc_name = chunk_file.parent.name
             else:
@@ -254,7 +299,9 @@ def index_new_chunks():
                 "file": relative_path,  # Use relative path for manifest
                 "text": text,
                 "source": doc_name,
-                "chunk": chunk_id
+                "chunk": chunk_id,
+                "document_type": doc_type,
+                "authority": authority
             })
         except Exception as e:
             logger.warning(f"Could not read {chunk_file.name}: {e}")
@@ -284,7 +331,8 @@ def index_new_chunks():
     sparse_embeddings = encoding_result.get("lexical_weights", [None] * len(chunks_data))
     
     # Build points with incremental IDs
-    next_id = manifest.get_next_id()
+    next_id = get_safe_next_point_id()
+    logger.info(f"Allocating new Qdrant point IDs from {next_id}")
     points = []
     
     logger.info("Building point objects...")
@@ -297,8 +345,17 @@ def index_new_chunks():
             "text": chunk_data["text"],
             "source": chunk_data["source"],
             "chunk": chunk_data["chunk"],
-            "file": chunk_data["file"]
+            "file": chunk_data["file"],
+            "document_type": chunk_data.get("document_type", "general"),
+            "authority": chunk_data.get("authority", 5)
         }
+        
+        if i == 0:
+            print("\n====================================================")
+            print("PAYLOAD VERIFICATION")
+            print("====================================================")
+            print(json.dumps({k: (v[:100] + '...' if k == 'text' else v) for k, v in payload.items()}, indent=2))
+            print("====================================================\n")
         
         # Store sparse embeddings
         if s_embedding is not None:

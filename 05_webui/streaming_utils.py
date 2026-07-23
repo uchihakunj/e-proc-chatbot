@@ -43,6 +43,21 @@ def new_stream_state():
     }
 
 
+def should_retry_with_fallback(state, fallback_enabled, fallback_model):
+    """Return True when a second model attempt is worth trying."""
+    if not fallback_enabled:
+        return False
+
+    model = (fallback_model or "").strip()
+    if not model:
+        return False
+
+    return bool(
+        state.get("failed_before_output")
+        or not state.get("content_streamed")
+    )
+
+
 def record_stream_content(state, content):
     """Record provider output and return only the new text to emit.
 

@@ -31,6 +31,8 @@ import time
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
+from actor_policy import classify_procurement_actor
+
 
 # ════════════════════════════════════════════════════════════════════════════
 # 1. NAMED ENTITY RECOGNITION (NER)
@@ -207,9 +209,109 @@ def entities_summary(entities: Dict[str, object]) -> str:
 # 2. INTENT CLASSIFICATION
 # ════════════════════════════════════════════════════════════════════════════
 
+_PURCHASE_ACTION_SIGNALS = (
+    "kharid", "purchase", "buy", "procure", "chahiye", "requirement",
+    "needs", "need ", "amc", "maintenance contract", "direct from gem",
+    "gem se direct", "open tender", "limited tender", "खरीद", "क्रय",
+)
+_PERSONAL_SIGNALS = (
+    "personal use", "for myself", "apne liye", "ghar ke liye", "home use",
+)
+
+
+def classify_actor(query: str) -> Tuple[str, float]:
+    """Compatibility entry point for the explicit actor-policy layer."""
+    return classify_procurement_actor(query)
+
+
+def detect_commodity(query: str) -> str:
+    """Normalize the commodity only where a reliable category is explicit."""
+    q = (query or "").lower()
+    if any(s in q for s in ("laptop", "notebook computer", "computer", "desktop", "pc ", "लैपटॉप", "कंप्यूटर")):
+        return "laptops_computers_it_equipment"
+    if any(s in q for s in ("server", "router", "network equipment", "it equipment")):
+        return "it_equipment"
+    if any(s in q for s in ("printer", "scanner", "multifunction printer", "mfp")):
+        return "printers_office_equipment"
+    if any(s in q for s in ("furniture", "chair", "chairs", "desk", "table", "kursi", "kursiyan", "फर्नीचर", "कुर्सी")):
+        return "furniture"
+    if any(s in q for s in ("vehicle", "car", "jeep", "वाहन")):
+        return "vehicle"
+    if any(s in q for s in ("software", "licence", "license", "सॉफ्टवेयर")):
+        return "software"
+    if any(s in q for s in ("amc", "annual maintenance", "maintenance contract")):
+        return "amc_services"
+    if any(s in q for s in ("emergency purchase", "emergency procurement", "आपातकालीन खरीद")):
+        return "emergency_goods"
+    return "unspecified"
+
+
+def is_personal_purchase_query(query: str) -> bool:
+    q = (query or "").lower()
+    return any(s in q for s in _PERSONAL_SIGNALS) and any(
+        s in q for s in _PURCHASE_ACTION_SIGNALS
+    )
+
+
 # Ordered intent taxonomy. Each intent maps to keyword/phrase signals (English +
 # Hinglish + Hindi). More specific intents are listed first so they win ties.
 INTENT_TAXONOMY: List[Tuple[str, List[str]]] = [
+    ("OFFLINE_TENDER_UPLOAD", [
+        "upload offline tender", "offline tender portal", "offline tender upload",
+        "manual tender upload", "upload an offline tender",
+    ]),
+    ("OPERATOR_EMD_REFUND", [
+        "process bidders emd refund", "process bidder emd refund",
+        "department operator emd refund", "operator emd refund process",
+    ]),
+    ("CORRIGENDUM_MANAGEMENT", [
+        "issue a corrigendum", "issue corrigendum", "corrigendum issue",
+        "publish corrigendum", "corrigendum जारी",
+    ]),
+    ("BID_OPENING", [
+        "open the technical bid", "open technical bid", "open the price bid",
+        "open price bid", "bid opening", "बिड खोल", "बोली खोल",
+    ]),
+    ("TENDER_PUBLICATION", [
+        "publish the department tender", "publish the tender", "publish tender",
+        "tender publication", "tender publish", "निविदा प्रकाशित",
+    ]),
+    ("TENDER_CREATION", [
+        "create a tender", "create the tender", "create tender", "tender creation",
+        "tender create", "tender ko create",
+        "tender kaise banaye", "tender बनाएं", "निविदा बनाएं",
+    ]),
+    ("CORRIGENDUM_TRACKING", [
+        "track a corrigendum", "track corrigendum", "corrigendum tracking",
+        "bidder corrigendum", "corrigendum check kare", "corrigendum ko portal",
+        "amendment aaye", "corrigendum dekhe", "corrigendum देखें",
+    ]),
+    ("TENDER_ELIGIBILITY", [
+        "eligible to bid", "bidder eligibility", "tender eligibility", "eligibility criteria",
+        "eligibility to bid", "पात्रता",
+    ]),
+    ("PROCUREMENT_METHODS", [
+        "procurement methods", "ways of government procurement",
+        "different ways of govt procurement", "सरकारी खरीद के तरीके",
+        "खरीद की विधियां", "खरीद के तरीके",
+    ]),
+    ("GEM_EPROC_COMPARISON", [
+        "difference between gem and e-procurement", "gem vs e-procurement",
+        "gem aur e-procurement", "gem और e-procurement", "gem और ई-प्रोक्योरमेंट",
+    ]),
+    ("LIMITED_TENDER_DEFINITION", [
+        "what is limited tender", "limited tender kya", "limited tender क्या",
+    ]),
+    ("SINGLE_TENDER_DEFINITION", [
+        "what is single tender", "single tender kya", "single tender क्या",
+        "single tender का अर्थ",
+    ]),
+    ("PROCUREMENT_PLANNING_OR_PURCHASE_PROCEDURE", [
+        "department ke liye kharid", "departments k liye", "department k liye",
+        "hamare office ko purchase", "government office ke liye",
+        "department wants to buy", "department ko purchase", "department buy",
+        "procurement planning", "purchase procedure", "purchase indent",
+    ]),
     ("EMD_REFUND", [
         "emd refund", "emd wapas", "emd return", "refund emd", "refund of emd",
         "emd vapas", "earnest money refund", "धरोहर वापस", "emd kab milega",
@@ -221,9 +323,10 @@ INTENT_TAXONOMY: List[Tuple[str, List[str]]] = [
         "धरोहर जमा", "emd ka payment",
     ]),
     ("VENDOR_REGISTRATION", [
-        "vendor registration", "register as vendor", "supplier registration",
+        "vendor registration", "register as vendor", "register as a vendor", "supplier registration",
         "new user registration", "vendor register", "registration kaise",
         "register karna", "panjikaran", "panjiyan", "kaise register",
+        "विक्रेता के रूप में पंजीकरण", "विक्रेता पंजीकरण",
         "how to register", "sign up", "signup", "enroll", "पंजीकरण", "पंजीयन",
     ]),
     ("DSC", [
@@ -236,7 +339,7 @@ INTENT_TAXONOMY: List[Tuple[str, List[str]]] = [
         "bid kaise", "boli jama", "technical bid", "price bid", "financial bid",
         "commercial bid", "modify bid", "resubmit", "बोली जमा", "bid submit",
         "participate in", "participate", "participation", "how to bid",
-        "place a bid", "apply for tender", "bid for",
+        "place a bid", "apply for tender", "bid for", "bid कैसे जमा", "बिड कैसे जमा",
     ]),
     ("TENDER_SEARCH", [
         "search tender", "find tender", "active tender", "available tender",
@@ -283,6 +386,30 @@ def classify_intent(query: str) -> Tuple[str, float]:
     """
     if not query:
         return ("UNKNOWN", 0.0)
+    actor, _ = classify_actor(query)
+    q_low = query.lower()
+    if ("gem" in q_low
+            and any(term in q_low for term in ("e-procurement", "e procurement", "ई-प्रोक्योरमेंट"))
+            and any(term in q_low for term in ("difference", "compare", "comparison", "antar", "अंतर", "फर्क"))):
+        return ("GEM_EPROC_COMPARISON", 0.95)
+    if (any(term in q_low for term in ("ways", "methods", "modes", "तरीके", "विधियां"))
+            and any(term in q_low for term in ("procurement", "government purchase", "सरकारी खरीद", "क्रय"))):
+        return ("PROCUREMENT_METHODS", 0.95)
+    if (any(term in q_low for term in ("limited tender", "लिमिटेड टेंडर", "सीमित निविदा"))
+            and any(term in q_low for term in ("what is", "kya", "क्या", "meaning", "अर्थ"))):
+        return ("LIMITED_TENDER_DEFINITION", 0.95)
+    if (any(term in q_low for term in ("single tender", "एकल निविदा"))
+            and any(term in q_low for term in ("what is", "kya", "क्या", "meaning", "अर्थ"))):
+        return ("SINGLE_TENDER_DEFINITION", 0.95)
+    if actor == "department_operator":
+        for operator_intent, signals in INTENT_TAXONOMY[:6]:
+            if any(signal in q_low for signal in signals):
+                return (operator_intent, 0.95)
+    if (actor == "department_buyer"
+            and any(s in q_low for s in _PURCHASE_ACTION_SIGNALS)):
+        return ("PROCUREMENT_PLANNING_OR_PURCHASE_PROCEDURE", 0.95)
+    if "auction" in q_low or "nilami" in q_low or "नीलामी" in q_low:
+        return ("AUCTION", 0.9)
     q = " " + query.lower() + " "
     best_intent, best_score = "UNKNOWN", 0
     for intent, signals in INTENT_TAXONOMY:
@@ -299,6 +426,7 @@ def classify_intent(query: str) -> Tuple[str, float]:
 # Map an intent to a short human topic phrase, used for coreference rewriting
 # and as the "current topic" stored in memory.
 INTENT_TOPIC_PHRASE = {
+    "PROCUREMENT_PLANNING_OR_PURCHASE_PROCEDURE": "department purchase procedure",
     "EMD_REFUND":            "EMD refund",
     "EMD_PAYMENT":           "EMD payment",
     "EMD_GENERAL":           "EMD",
@@ -726,7 +854,7 @@ _VOCAB = sorted({
     "performance", "security", "bank", "guarantee", "portal", "payment",
     "challan", "refund", "document", "documents", "certificate", "signature",
     "digital", "submission", "submit", "technical", "financial", "commercial",
-    "price", "eligibility", "quotation", "participate", "participation",
+    "price", "eligibility", "quotation", "participate", "participating", "participation",
     "process", "deadline", "manual", "guidelines", "blacklist", "penalty",
 })
 

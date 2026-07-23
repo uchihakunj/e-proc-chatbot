@@ -1,0 +1,202 @@
+﻿id,persona,language,query,expected_actor,detected_actor,expected_fine_intent,detected_fine_intent,response_time_seconds,fallback_reason_code,answer
+H01,store officer,en,Our district office needs 50 laptops for new staff. What should I prepare before choosing GeM or a tender?,department_buyer,department_buyer,procurement_planning,procurement_planning,2.843,,"💡 Answer
+This is the department buyer/procuring-entity workflow for laptops/computers/IT equipment. The department creates the Tender or GeM Bid; Vendors submit Bids. The buyer must not start with vendor registration or vendor-side Bid submission.
+
+📋 Process
+1. Record the need for laptops/computers/IT equipment, purpose, quantity, users and delivery timeline.
+2. Prepare generic, measurable and competition-friendly specifications.
+3. Estimate the cost and confirm budget availability.
+4. Obtain applicable administrative approval and financial sanction.
+5. Create the approved purchase indent/procurement request.
+6. Check GeM and the applicable Chhattisgarh-approved purchase channel.
+7. Select the lawful method under current State rules and delegated powers; Single Tender requires exceptional grounds, written justification and competent approval.
+8. Publish the department Tender/GeM Bid and receive Vendor Bids.
+9. Document technical/commercial evaluation and rate reasonableness.
+10. Issue the Purchase Order/contract after competent approval.
+11. Inspect delivery and record formal acceptance.
+12. Process payment after acceptance and update the asset/stock register.
+
+📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024"
+H02,department buyer,hinglish,Department ko 100 chairs chahiye. Kya direct purchase ho sakti hai ya tender karna padega?,department_buyer,department_buyer,procurement_method_selection,procurement_method_selection,2.605,,"💡 Answer
+Direct purchase ya Tender convenience se decide nahi hota. Pehle estimated value, GeM par item/service availability, current rules aur delegated powers check karein. In conditions se jo method permit ho wahi choose karein aur justification/approval record karein.
+
+📋 Process
+1. Consolidated requirement aur estimate record karein.
+2. GeM par item availability check karein.
+3. Applicable value/rule conditions ke mutabik direct purchase, bidding ya Tender method choose karein.
+4. Different method use karne ke liye requirement split na karein.
+5. Aage badhne se pehle approval aur method justification file par rakhein.
+
+📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules"
+H03,IT procurement officer,en,Can I write Dell-only in the laptop specification because our team already uses Dell?,department_buyer,department_buyer,specification_preparation,specification_preparation,2.81,,"💡 Answer
+Prepare generic, measurable and competition-friendly specifications based on the department's functional and performance need. Avoid a brand or model unless the rules permit it with recorded technical justification and an equivalent provision.
+
+📋 Process
+1. Define the required function, capacity, quality and operating environment.
+2. State measurable performance, safety and compatibility parameters.
+3. Use applicable standards and define tests, inspection and acceptance criteria.
+4. Avoid restrictive brand-specific features that reduce competition.
+5. Have the specifications reviewed by the user/technical committee before approval.
+
+📘 Source: Manual for Procurement of Goods 2024; Compilation of CVC Circulars and Guidelines"
+H04,accounts officer,hinglish,Office ke AC ka AMC renew karna hai. Tender se pehle scope mein kya kya likhna chahiye?,department_buyer,department_buyer,procurement_planning,procurement_planning,2.925,,"💡 Answer
+AC AMC ke liye goods-delivery workflow se pehle service scope define karein: covered AC units/sites, service frequency, response time, spares coverage, exclusions, uptime/penalty terms, contract period aur payment milestones.
+
+📋 Process
+1. Asset list aur service/SLA scope banayein, including response time aur spares responsibility.
+2. Contract value estimate karke budget aur required approvals confirm karein.
+3. GeM/approved route check karke current rules aur delegated powers ke mutabik method choose karein.
+4. Technical service capability, SLA compliance aur financial offer evaluate karein.
+5. AMC contract issue/monitor karein, service calls/performance record karein aur completed service ke against invoice certify karein.
+
+📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024"
+H05,emergency store officer,en,Flooding damaged our office network equipment. Can we buy replacements immediately?,department_buyer,department_buyer,procurement_method_selection,procurement_method_selection,2.603,,"💡 Answer
+Do not choose one procurement method by convenience. First prepare the consolidated requirement, specifications and estimated value; check whether suitable goods are available on GeM; then apply the current Chhattisgarh rules, delegated powers and required approval. Use direct purchase, bidding, Limited Tender or Open Tender only where those conditions permit it.
+
+📋 Process
+1. Record the full requirement, specifications and estimated value.
+2. Check GeM/other approved channels for suitable items.
+3. Apply the applicable rules and delegated powers to select the permitted route.
+4. Do not split the requirement to use a different method.
+5. Record the method justification and approval before proceeding.
+
+📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules"
+H06,first-time vendor,en,I have never used the Chhattisgarh e-procurement portal. How do I become a registered bidder?,vendor_bidder,vendor_bidder,vendor_registration,vendor_registration,2.048,,"💡 Answer
+A new domestic supplier registers through the CHiPS e-Procurement portal's New Supplier Registration workflow.
+
+📋 Process
+1. Select New Supplier Registration on the portal.
+2. Enter the supplier's PAN details.
+3. Upload the CRN certificate where the applicable vendor class requires it.
+4. Create the preferred login code and enter the business/contact details.
+5. Review and submit the registration, then complete the valid DSC mapping required for authenticated portal transactions.
+
+📘 Source: Vendor Registration Manual (CHiPS)"
+H07,existing bidder,hinglish,"Mera DSC renew ho gaya hai, ab portal par purana certificate kaise replace karun?",vendor_bidder,vendor_bidder,dsc_mapping,dsc_mapping,1.98,,"💡 Answer
+Bid submit karne se pehle valid DSC ko registered bidder account ke saath map/register karein.
+
+📋 Process
+1. DSC token drivers aur required portal signing utility install karein.
+2. Valid signing/encryption DSC insert karke registered bidder account se login karein.
+3. DSC registration/mapping option kholkar correct certificate select karein.
+4. Prompt par authenticate/sign karke mapping submit karein.
+5. Portal par DSC registered confirmation check karein; renewed/replaced DSC ko Bid se pehle dobara map karein.
+
+📘 Source: Vendor Registration Manual (CHiPS)"
+H08,vendor,en,"My EMD payment failed, but the bank has debited the amount. What should I do before the bid deadline?",vendor_bidder,vendor_bidder,emd_payment_failure,emd_payment_failure,2.804,,"💡 Answer
+If an EMD/Bid Security eChallan payment failed after the amount was debited, and it is not credited to the beneficiary account by the Tender's Bid Due Date, the payment may be returned to the source account and the Bid may be treated as unpaid or rejected. Do not use a screenshot's amount or date; the specific Tender controls.
+
+📋 Process
+1. Check the transaction and EMD/Bid Security payment status in the relevant Tender.
+2. Compare the credited amount and time with that Tender's current Bid Due Date.
+3. Do not re-use the same challan for another Tender.
+4. If the status is not Successful or the credit has not reached the beneficiary, preserve the receipt/reference and use the Tender's official payment-support route before submitting a Bid.
+
+📘 Source: EMD CHALLAN PAYMENT V1.0"
+H09,unsuccessful bidder,hinglish,Technical bid mein reject ho gaya hoon. Meri EMD refund kab aur kaise aayegi?,vendor_bidder,vendor_bidder,emd_refund_unsuccessful_bidder,emd_refund_unsuccessful_bidder,2.803,,"💡 Answer
+Unsuccessful bidder ki EMD refund process applicable Bid opening/evaluation stage ke baad Department Admin initiate karta hai.
+
+📋 Process
+1. Department Admin eligible unsuccessful bidder ki EMD select kare.
+2. Department Approver refund verify karke approve kare.
+3. e-Procurement system approved refund instruction bank ko bheje.
+4. Amount bidder ke registered bank account mein credit hone ke baad portal status check karein.
+
+📘 Source: EMD Refund Guidelines (CHiPS); Manual for Procurement of Goods 2024"
+H10,bidder,en,My technical documents are uploaded. Where do I enter the price bid and how do I know it was submitted?,vendor_bidder,vendor_bidder,bid_submission_portal_steps,bid_submission_portal_steps,2.429,,"💡 Answer
+You are acting as a Vendor/Bidder. Use a registered bidder account and the valid signing/encryption DSC required by the CHiPS Bid Submission Manual.
+
+📋 Process
+1. Complete Vendor registration if it is pending.
+2. Register the signing/encryption DSC and log in to the secured portal.
+3. Find the relevant Tender/NIT and mark participation where applicable.
+4. Review eligibility, dates, corrigenda, fees and EMD/Bid Security conditions.
+5. Open Respond to Tender/NIT and upload the required technical documents.
+6. Complete the Price Bid, review the submission and submit it with the DSC before the deadline.
+7. Save the portal acknowledgement and monitor the Tender status.
+
+📘 Source: CHiPS Bid Submission Manual; CHiPS Vendor Registration Manual"
+H11,bidder,hinglish,"Bid submit kar di thi, lekin deadline ke baad rate galat dikha. Kya edit kar sakta hoon?",vendor_bidder,vendor_bidder,bid_submission_portal_steps,bid_submission_portal_steps,2.592,,"💡 Answer
+Nahi. Bid-submission deadline ke baad bidder Bid ko alter ya modify nahi kar sakta. Submitted acknowledgement preserve karein aur tender-specific corrigendum/clarification instruction follow karein; pre-deadline edit ya withdrawal steps use na karein.
+
+📘 Source: Bid Submission Manual (CHiPS)"
+H12,startup founder,en,Our startup wants to bid for a government tender. Does startup status automatically remove every eligibility and EMD condition?,general_information_user,general_information_user,tender_eligibility,tender_eligibility,2.546,,"💡 Answer
+Yes, a startup may participate if it meets the tender conditions. A recognised startup may receive any relaxation or procurement preference expressly available under the applicable rules and tender, but startup status does not automatically waive technical compliance, every eligibility condition, EMD, or submission requirements. Check the tender clause and submit the required recognition/evidence before claiming a benefit.
+
+📘 Source: Bid Submission Manual (CHiPS)"
+H13,foreign supplier,hinglish,Hum foreign company hain. CG tender ke liye DSC aur registration ka practical process kya hoga?,vendor_bidder,vendor_bidder,vendor_registration,vendor_registration,1.275,,"💡 Answer
+Foreign company pehle specific Tender ki foreign-bidder eligibility aur conditions check kare. Portal DSC ke liye licensed CA se application form lein, required organisation/identity documents ke saath Indian Embassy se certification karayein, CA ko prescribed payment/document dispatch karein, aur issued DSC/e-token receive karein. Tender-specific eligibility, currency aur registration instructions still control karengi.
+
+📘 Source: Vendor Registration Manual (CHiPS)"
+H14,auction bidder,en,I have been invited to a forward e-auction. What should I check before placing a bid?,vendor_bidder,vendor_bidder,auction_participation,auction_participation,2.441,,"💡 Answer
+For a bidder invited to participate in a Forward e-Auction, use the auction-specific workflow in the CHiPS Auction Manual. Before placing a bid, confirm that you are in the correct auction and check the opening price and the minimum bid-change condition shown for that auction.
+
+📋 Process
+1. Log in with the bidder user ID, password and the valid DSC.
+2. Open the Forward Auction tab and select the relevant auction.
+3. Open **View/Respond to RFX** and review the auction details before bidding.
+4. Check the displayed opening price and minimum bid-change requirement.
+5. Enter the bid only on the basis permitted by those auction conditions, then submit it through the auction screen.
+6. Monitor the auction screen for the current status and ranking; the manual notes that it refreshes automatically.
+
+Use the exact conditions displayed for the specific auction; do not assume a price or bid increment that is not shown there.
+
+📘 Source: AuctionManual FA"
+H15,department operator,en,I am the department operator. What do I need ready before creating a tender in the portal?,department_operator,department_operator,tender_creation_portal_steps,tender_creation_portal_steps,2.157,,"💡 Answer
+Before creating a Tender, prepare the approved procurement inputs first. The available CHiPS manual then supports entering the Manual/Offline Tender record; it does not establish a universal online-Tender screen sequence.
+
+📋 Checklist
+1. Keep the approved requirement, estimated cost and competent approvals ready.
+2. Finalise neutral technical specifications, the Bid parts, eligibility/document requirements and evaluation conditions.
+3. Prepare the NIT reference, tender call number, description, PAC (where applicable), office/division and Tender schedule, including bid dates.
+4. Keep the applicable Tender attachments, bidder documents and payment/EMD details ready.
+5. Confirm that an authorised department Tender Creator with the required DSC/workflow access will create the record.
+6. Then enter and save the Manual Tender Header Detail and attachments in the authorised portal workflow.
+
+Do not publish until the completed Tender record, dates and attachments have been checked against the approved procurement case.
+
+📘 Source: Offline Tender Upload Manual (CHiPS); Manual for Procurement of Goods 2024"
+H16,department operator,hinglish,Tender publish ho chuka hai aur last date badhani hai. Corrigendum kaise issue karun?,department_operator,department_operator,corrigendum_portal_steps,corrigendum_portal_steps,2.332,,"💡 Answer
+Department User relevant Tender open karke required Corrigendum banata hai, Bid-deletion effect verify karta hai aur approval workflow se publish karta hai.
+
+📋 Process
+1. Authorised credentials se login karke Tender search karein, RFQ/Tender code select karein aur Go to RFQ kholein.
+2. Required type select karein: Header, Date, EMD/Bid Security, Tender Term, Attachment, Required Attachment ya Item Corrigendum.
+3. Changes fill karke Submit/Save aur Close karein. Attachment ke liye document browse, DSC-sign, upload aur Attach karein; Item ke liye prescribed BOQ update karke upload karein.
+4. Publish All Corrigendum/Addendum par components aur Bid-deletion setting verify karein. EMD/Bid Security aur Item Corrigendum existing Bid ko mandatorily delete karte hain.
+5. Publish karein; approver, remarks aur attachment fill karke Initiate karein aur authorised DSC select karein.
+6. Approver Workflow Inbox mein Detail open karke review, remarks/DSC ke saath Approve kare.
+7. Workflow approved aur Corrigendum published successfully status verify karein.
+
+📘 Source: Corrigendum Issuance Manual (CHiPS)"
+H17,bid opener,en,"The technical-bid opening time has arrived. As the bid opener, what is the safe portal workflow?",department_operator,department_operator,bid_opening_portal_steps,bid_opening_portal_steps,2.374,,"💡 Answer
+Use only the authorised department account after the tender's scheduled opening time. Record the opening, check the required bid parts and documents against the published tender conditions, and preserve the system-generated opening record. Evaluate technical responsiveness before opening or evaluating price bids where the tender uses a two-bid process. The available local manuals do not establish a universal screen/button sequence, so follow the department's authorised portal workflow rather than relying on generic menu names.
+
+📘 Source: Manual for Procurement of Goods 2024"
+H18,department accounts operator,hinglish,Unsuccessful bidders ka EMD refund department side se initiate kaise hota hai?,department_operator,department_operator,emd_remittance_to_department,emd_remittance_to_department,1.787,,"💡 Answer
+Unsuccessful bidder ki EMD refund process applicable Bid opening/evaluation stage ke baad department process karta hai.
+
+📋 Process
+1. Department Admin eligible unsuccessful bidder ki EMD refund/remittance initiate kare.
+2. Department Approver details aur eligibility verify karke approve kare.
+3. Approval ke baad e-Procurement system bank ko refund instruction bhejta hai.
+4. Amount bidder ke registered bank account mein credit hota hai; Department Admin MIS/portal status mein completion verify kare. Department approval ke baad credit normally 1–2 din le sakta hai.
+
+📘 Source: EMD Refund Guidelines (CHiPS)"
+H19,new procurement officer,en,I am new in the office: when should I think about GeM and when is the state e-procurement portal relevant?,general_information_user,general_information_user,gem_eproc_comparison,gem_eproc_comparison,2.491,,"💡 Answer
+GeM and the State e-Procurement portal are related, but they are not the same.
+
+| Point | GeM | State e-Procurement portal |
+|---|---|---|
+| Nature | Government marketplace and procurement channel | Tender-lifecycle channel |
+| Main use | Procurement of goods/services | Publishing and managing tenders |
+| Supported activity | Direct Purchase, L1 purchase, bidding, Reverse Auction | Tender publication, corrigenda, bid receipt/opening, process record |
+| Department decision | Choose a method under applicable GeM rules | Use after selecting the lawful tender route |
+
+A department should first select the lawful procurement method under the applicable rule and then use the correct channel.
+
+📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024"
+H20,citizen information seeker,hi,छत्तीसगढ़ में सरकारी खरीद के मुख्य तरीके कौन-कौन से हैं?,general_information_user,general_information_user,procurement_methods_overview,procurement_methods_overview,2.743,,"💡 उत्तर
+छत्तीसगढ़ Store Purchase Rules राज्य के अधीन विभागों/कार्यालयों द्वारा stores, goods और लागू services की सरकारी procurement/खरीद को नियंत्रित करते हैं। इनमें GeM जैसे अनुमोदित माध्यम, Single/Limited/Open Tender विधियाँ, अनुमत प्रत्यक्ष/अंतर-विभागीय खरीद तथा specifications, competition, evaluation और award के नियंत्रण शामिल हैं।
+
+📘 स्रोत: Chhattisgarh Store Purchase Rules"

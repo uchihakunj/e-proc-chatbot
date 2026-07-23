@@ -1,4 +1,4 @@
-# CHiPS-RAG - Updated Stable Requirements (Pinned from working env)
+# eproc-chatbot - Updated Stable Requirements (Pinned from working env)
 
 # Generated from pip list for reproducible builds
 

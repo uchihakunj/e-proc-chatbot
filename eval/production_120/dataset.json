@@ -1,0 +1,1644 @@
+[
+  {
+    "id": 1,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "Tell me the process to purchase laptops for our department.",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "laptop procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 2,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "The department needs to purchase 50 laptops.",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "laptop procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 3,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "We need printers for the government office; what should we do first?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "printer procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 4,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "What is the departmental process for buying office furniture?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "furniture procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 5,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "Our department must procure a vehicle. Explain the planning workflow.",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "vehicle procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 6,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "How should a department procure 200 software licences?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "software procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 7,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "We need an annual maintenance contract for servers; give the procurement steps.",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "AMC procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 8,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "Which purchase method should our department choose during an emergency?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "topic": "emergency purchase",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "current_procurement_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 9,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "Can our department purchase a printer directly from GeM?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "gem_direct_purchase_rule",
+    "topic": "direct GeM purchase",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "current_procurement_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 10,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "How should we prepare unbiased technical specifications for laptops?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "topic": "technical specifications",
+    "expected_document_families": [
+      "procurement_manual",
+      "cvc_guidance"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 11,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "What budget and administrative approvals are needed before a department purchase?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "topic": "budget and approvals",
+    "expected_document_families": [
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 12,
+    "bucket": "department_buyer",
+    "language": "en",
+    "query": "How should the department evaluate technical and financial bids?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "topic": "evaluation",
+    "expected_document_families": [
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 13,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "Department ke liye printer ki specifications kaise banayein?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "topic": "technical specifications",
+    "expected_document_families": [
+      "procurement_manual",
+      "cvc_guidance"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 14,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "Hamare office ko open tender se furniture lena hai, planning kya hogi?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "open tender",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 15,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "Limited tender kab choose kare department buyer?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "topic": "limited tender",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "current_procurement_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 16,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "Bid evaluation ke baad purchase order issue karne ka process batao.",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "purchase_order",
+    "topic": "purchase order",
+    "expected_document_families": [
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 17,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "PO ke baad maal ka inspection aur acceptance kaise karein?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "inspection_and_acceptance",
+    "topic": "inspection and acceptance",
+    "expected_document_families": [
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 18,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "Supplier ko payment aur asset register entry ka workflow kya hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "payment_and_asset_entry",
+    "topic": "payment and asset entry",
+    "expected_document_families": [
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 19,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "GeM par L1 purchase department kaise kare?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "gem_l1_purchase",
+    "topic": "GeM",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 20,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "Department ko GeM bidding se computer kharidne hain, kya process hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "gem_department_purchase_process",
+    "topic": "GeM",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "current_procurement_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 21,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "GeM reverse auction department kab use kare?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "gem_reverse_auction",
+    "topic": "auction",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 22,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "Office k liye 100 kursiyan kharidni hain, next kya karna hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "furniture procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 23,
+    "bucket": "department_buyer",
+    "language": "hinglish",
+    "query": "Software renewal AMC purchase karna hai department ke liye.",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "AMC procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 24,
+    "bucket": "department_buyer",
+    "language": "hi",
+    "query": "विभाग को 25 लैपटॉप खरीदने हैं। पूरी खरीद प्रक्रिया बताइए।",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "laptop procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 25,
+    "bucket": "department_buyer",
+    "language": "hi",
+    "query": "प्रिंटर की तकनीकी विनिर्देश निष्पक्ष रूप से कैसे तैयार करें?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "topic": "technical specifications",
+    "expected_document_families": [
+      "procurement_manual",
+      "cvc_guidance"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 26,
+    "bucket": "department_buyer",
+    "language": "hi",
+    "query": "विभागीय खरीद से पहले बजट और प्रशासनिक स्वीकृति कैसे लें?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "topic": "budget and approvals",
+    "expected_document_families": [
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 27,
+    "bucket": "department_buyer",
+    "language": "hi",
+    "query": "बोली मूल्यांकन के बाद क्रय आदेश जारी करने की प्रक्रिया क्या है?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "purchase_order",
+    "topic": "purchase order",
+    "expected_document_families": [
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 28,
+    "bucket": "department_buyer",
+    "language": "hi",
+    "query": "आपूर्ति मिलने पर निरीक्षण और स्वीकृति कैसे की जाए?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "inspection_and_acceptance",
+    "topic": "inspection and acceptance",
+    "expected_document_families": [
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 29,
+    "bucket": "department_buyer",
+    "language": "hi",
+    "query": "भुगतान के बाद स्टॉक और संपत्ति रजिस्टर में प्रविष्टि कैसे करें?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "payment_and_asset_entry",
+    "topic": "payment and asset entry",
+    "expected_document_families": [
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 30,
+    "bucket": "department_buyer",
+    "language": "hi",
+    "query": "आपातकाल में विभाग को तुरंत सामान खरीदना हो तो कौन सी विधि चुनें?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "topic": "emergency purchase",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "current_procurement_rules"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 31,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "How do I register as a new vendor on the portal?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "vendor_registration",
+    "topic": "vendor registration",
+    "expected_document_families": [
+      "vendor_registration_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 32,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "Which documents are required for new supplier registration?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "vendor_registration_documents",
+    "topic": "vendor registration",
+    "expected_document_families": [
+      "vendor_registration_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 33,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "Is there a vendor registration fee and how is it paid?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "vendor_registration_fee",
+    "topic": "vendor registration",
+    "expected_document_families": [
+      "vendor_registration_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 34,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "I forgot my vendor login password. How can I reset it?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "password_recovery",
+    "topic": "vendor registration",
+    "expected_document_families": [
+      "vendor_registration_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 35,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "As a bidder, how do I obtain a DSC?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "dsc_obtainment",
+    "topic": "DSC",
+    "expected_document_families": [
+      "vendor_registration_manual",
+      "bid_submission_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 36,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "How do I map my renewed DSC on the e-procurement portal?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "dsc_mapping",
+    "topic": "DSC",
+    "expected_document_families": [
+      "vendor_registration_manual",
+      "bidder_guidelines"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 37,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "I need to pay Rs 50,000 EMD by 15 June 2026. How do I do it?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_payment",
+    "topic": "EMD payment",
+    "expected_document_families": [
+      "emd_online_payment_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 38,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "My EMD payment failed but the amount was debited. What next?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_payment_failure",
+    "topic": "EMD payment",
+    "expected_document_families": [
+      "emd_online_payment_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 39,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "When will an unsuccessful bidder receive the EMD refund?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_refund_unsuccessful_bidder",
+    "topic": "EMD refund",
+    "expected_document_families": [
+      "emd_refund_notice",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 40,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "How can I submit my technical and price bid online?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bid_submission_portal_steps",
+    "topic": "tender participation",
+    "expected_document_families": [
+      "bid_submission_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 41,
+    "bucket": "vendor_bidder",
+    "language": "en",
+    "query": "Am I eligible to participate in this government tender?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "tender_eligibility",
+    "topic": "tender eligibility",
+    "expected_document_families": [
+      "bid_submission_manual",
+      "bidder_guidelines"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 42,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Main vendor hoon, portal par register kaise karun?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "vendor_registration",
+    "topic": "vendor registration",
+    "expected_document_families": [
+      "vendor_registration_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 43,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Vendor registrtion ke liye kya dokuments lagenge?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "vendor_registration_documents",
+    "topic": "vendor registration",
+    "expected_document_families": [
+      "vendor_registration_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 44,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Mera vendor password bhool gaya, reset kaise hoga?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "password_recovery",
+    "topic": "vendor registration",
+    "expected_document_families": [
+      "vendor_registration_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 45,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Bidder DSC token ko portal se map kaise kare?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "dsc_mapping",
+    "topic": "DSC",
+    "expected_document_families": [
+      "vendor_registration_manual",
+      "bidder_guidelines"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 46,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Renewed DSC se login nahi ho raha, kya karun?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "dsc_login_problem",
+    "topic": "DSC",
+    "expected_document_families": [
+      "vendor_registration_manual",
+      "system_configuration"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 47,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "EMD 2 lakh jama karni hai 30 July 2026 tak, steps batao.",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_payment",
+    "topic": "EMD payment",
+    "expected_document_families": [
+      "emd_online_payment_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 48,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Unsuccessful bidder ki EMD wapas kab aati hai?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_refund_unsuccessful_bidder",
+    "topic": "EMD refund",
+    "expected_document_families": [
+      "emd_refund_notice",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 49,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "L1 bidder ki EMD ka kya hota hai?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_refund_l1_bidder",
+    "topic": "EMD refund",
+    "expected_document_families": [
+      "procurement_manual",
+      "emd_refund_notice"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 50,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Tender me bid submit kaise karu?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bid_submission_portal_steps",
+    "topic": "tender participation",
+    "expected_document_families": [
+      "bid_submission_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 51,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Submitted bid ko deadline se pehle modify aur resubmit kaise karein?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bid_submission_portal_steps",
+    "topic": "tender participation",
+    "expected_document_families": [
+      "bid_submission_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 52,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Bidder corrigendum check kaha kare?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bidder_corrigendum_tracking",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "bid_submission_manual",
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 53,
+    "bucket": "vendor_bidder",
+    "language": "hinglish",
+    "query": "Reverse auction mein vendor kaise participate kare?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "auction_participation",
+    "topic": "auction",
+    "expected_document_families": [
+      "chips_auction_manual",
+      "bid_submission_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 54,
+    "bucket": "vendor_bidder",
+    "language": "hi",
+    "query": "मैं नया विक्रेता हूँ। पोर्टल पर पंजीकरण कैसे करूँ?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "vendor_registration",
+    "topic": "vendor registration",
+    "expected_document_families": [
+      "vendor_registration_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 55,
+    "bucket": "vendor_bidder",
+    "language": "hi",
+    "query": "बोलीदाता अपना डिजिटल हस्ताक्षर प्रमाणपत्र कैसे जोड़े?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "dsc_mapping",
+    "topic": "DSC",
+    "expected_document_families": [
+      "vendor_registration_manual",
+      "bidder_guidelines"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 56,
+    "bucket": "vendor_bidder",
+    "language": "hi",
+    "query": "मुझे ईएमडी जमा करनी है। ऑनलाइन भुगतान प्रक्रिया बताइए।",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_payment",
+    "topic": "EMD payment",
+    "expected_document_families": [
+      "emd_online_payment_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 57,
+    "bucket": "vendor_bidder",
+    "language": "hi",
+    "query": "असफल बोलीदाता की ईएमडी वापसी कैसे होती है?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_refund_unsuccessful_bidder",
+    "topic": "EMD refund",
+    "expected_document_families": [
+      "emd_refund_notice",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 58,
+    "bucket": "vendor_bidder",
+    "language": "hi",
+    "query": "तकनीकी और मूल्य बोली ऑनलाइन कैसे जमा करें?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bid_submission_portal_steps",
+    "topic": "tender participation",
+    "expected_document_families": [
+      "bid_submission_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 59,
+    "bucket": "vendor_bidder",
+    "language": "hi",
+    "query": "शुद्धिपत्र आने पर मेरी जमा बोली का क्या होगा?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bid_deletion_after_corrigendum",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual",
+      "bid_submission_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 60,
+    "bucket": "vendor_bidder",
+    "language": "hi",
+    "query": "ई-नीलामी में बोलीदाता कैसे भाग ले?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "auction_participation",
+    "topic": "auction",
+    "expected_document_families": [
+      "chips_auction_manual",
+      "bid_submission_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 61,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "As department operator, how do I create a tender on the portal?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_portal_steps",
+    "topic": "tender creation",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 62,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "How does the tender owner publish a completed tender?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_publication_portal_steps",
+    "topic": "tender publication",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 63,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "How does a department issue a corrigendum on the portal?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 64,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "Give the portal steps for issuing a Date Corrigendum.",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 65,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "How does a tender owner issue an EMD/Bid Security Corrigendum?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 66,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "How should the bid opener open the technical bid online?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_opening_portal_steps",
+    "topic": "bid opening",
+    "expected_document_families": [
+      "department_tender_creation_manual",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 67,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "How does the department operator open the price bid?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_opening_portal_steps",
+    "topic": "bid opening",
+    "expected_document_families": [
+      "department_tender_creation_manual",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 68,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "How do department users process bidders' EMD refunds?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "emd_remittance_to_department",
+    "topic": "EMD refund",
+    "expected_document_families": [
+      "emd_refund_notice"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 69,
+    "bucket": "department_operator",
+    "language": "en",
+    "query": "How can an operator upload and publish an offline tender?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_portal_steps",
+    "topic": "offline tender",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 70,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Tender owner portal par naya tender create kaise kare?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_portal_steps",
+    "topic": "tender creation",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 71,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Department operator tender publish kaise kare?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_publication_portal_steps",
+    "topic": "tender publication",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 72,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Date corrigendum portal par issue karne ke steps?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 73,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Tender term corrigendum kaise jari kare department user?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 74,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Attachment corrigendum upload aur publish kaise hoga?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 75,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Required attachment corrigendum me bid deletion option kya kare?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 76,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Technical bid open karne ka operator workflow batao.",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_opening_portal_steps",
+    "topic": "bid opening",
+    "expected_document_families": [
+      "department_tender_creation_manual",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 77,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Department approver EMD refund process kaise complete kare?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "emd_remittance_to_department",
+    "topic": "EMD refund",
+    "expected_document_families": [
+      "emd_refund_notice"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 78,
+    "bucket": "department_operator",
+    "language": "hinglish",
+    "query": "Offline tendr portal pe upload kaise karna hai?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_portal_steps",
+    "topic": "offline tender",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 79,
+    "bucket": "department_operator",
+    "language": "hi",
+    "query": "विभागीय ऑपरेटर पोर्टल पर निविदा कैसे बनाए?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_portal_steps",
+    "topic": "tender creation",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 80,
+    "bucket": "department_operator",
+    "language": "hi",
+    "query": "निविदा स्वामी निविदा प्रकाशित कैसे करे?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_publication_portal_steps",
+    "topic": "tender publication",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 81,
+    "bucket": "department_operator",
+    "language": "hi",
+    "query": "विभागीय उपयोगकर्ता ईएमडी शुद्धिपत्र कैसे जारी करे?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 82,
+    "bucket": "department_operator",
+    "language": "hi",
+    "query": "आइटम शुद्धिपत्र जारी करने की पोर्टल प्रक्रिया बताइए।",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_portal_steps",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "chips_corrigendum_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 83,
+    "bucket": "department_operator",
+    "language": "hi",
+    "query": "तकनीकी बोली खोलने की ऑनलाइन प्रक्रिया क्या है?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_opening_portal_steps",
+    "topic": "bid opening",
+    "expected_document_families": [
+      "department_tender_creation_manual",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 84,
+    "bucket": "department_operator",
+    "language": "hi",
+    "query": "विभाग असफल बोलीदाताओं की ईएमडी वापसी कैसे संसाधित करे?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "emd_remittance_to_department",
+    "topic": "EMD refund",
+    "expected_document_families": [
+      "emd_refund_notice"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 85,
+    "bucket": "department_operator",
+    "language": "hi",
+    "query": "ऑफलाइन निविदा को पोर्टल पर अपलोड और प्रकाशित कैसे करें?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_portal_steps",
+    "topic": "offline tender",
+    "expected_document_families": [
+      "department_tender_creation_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 86,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "In Chhattisgarh, what are the different ways of government procurement?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "procurement_methods_overview",
+    "topic": "procurement methods",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "current_procurement_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 87,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "What is GeM?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "gem_definition",
+    "topic": "GeM",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 88,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "What is the difference between GeM and the Chhattisgarh e-Procurement portal?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "gem_eproc_comparison",
+    "topic": "GeM",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 89,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "What is a limited tender?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "topic": "limited tender",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 90,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "What is a single tender and when is it exceptional?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "topic": "single tender",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 91,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "What does open tender mean?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "topic": "open tender",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 92,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "What is EMD or bid security?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "emd_definition",
+    "topic": "EMD",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 93,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "Can an MSE claim exemption from EMD?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "emd_exemption",
+    "topic": "EMD",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 94,
+    "bucket": "general_information",
+    "language": "en",
+    "query": "What do the Chhattisgarh Store Purchase Rules govern?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "procurement_methods_overview",
+    "topic": "Store Purchase Rules",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 95,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "CG me govt procurement ke alag tarike kya hain?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "procurement_methods_overview",
+    "topic": "procurement methods",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "current_procurement_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 96,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "GeM kya hota hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "gem_definition",
+    "topic": "GeM",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 97,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "GeM aur state e-procurement portal me fark batao.",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "gem_eproc_comparison",
+    "topic": "GeM",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 98,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "Limited tender ka simple meaning kya hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "topic": "limited tender",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 99,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "Single tender kab allowed hota hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "topic": "single tender",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 100,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "Open tender sab vendors ke liye hota hai kya?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "topic": "open tender",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 101,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "EMD kya hai aur kyu li jati hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "emd_definition",
+    "topic": "EMD",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 102,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "MSE ko EMD exemption milti hai kya?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "emd_exemption",
+    "topic": "EMD",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 103,
+    "bucket": "general_information",
+    "language": "hinglish",
+    "query": "Store Purchase Rules CG kis purchase par apply hote hain?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "procurement_methods_overview",
+    "topic": "Store Purchase Rules",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 104,
+    "bucket": "general_information",
+    "language": "hi",
+    "query": "छत्तीसगढ़ में सरकारी खरीद की अलग-अलग विधियाँ क्या हैं?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "procurement_methods_overview",
+    "topic": "procurement methods",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "current_procurement_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 105,
+    "bucket": "general_information",
+    "language": "hi",
+    "query": "जेम क्या है?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "gem_definition",
+    "topic": "GeM",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 106,
+    "bucket": "general_information",
+    "language": "hi",
+    "query": "जेम और छत्तीसगढ़ ई-प्रोक्योरमेंट पोर्टल में क्या अंतर है?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "gem_eproc_comparison",
+    "topic": "GeM",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 107,
+    "bucket": "general_information",
+    "language": "hi",
+    "query": "सीमित निविदा क्या होती है?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "topic": "limited tender",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 108,
+    "bucket": "general_information",
+    "language": "hi",
+    "query": "एकल निविदा क्या है और इसका उपयोग कब होता है?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "topic": "single tender",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "chhattisgarh_store_purchase_rules"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 109,
+    "bucket": "general_information",
+    "language": "hi",
+    "query": "ईएमडी या बोली सुरक्षा का अर्थ क्या है?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "emd_definition",
+    "topic": "EMD",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 110,
+    "bucket": "general_information",
+    "language": "hi",
+    "query": "शुद्धिपत्र का कानूनी उद्देश्य क्या है?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "corrigendum_policy",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 111,
+    "bucket": "ambiguous_mixed_role",
+    "language": "en",
+    "query": "Tell me the laptop purchase process.",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "laptop procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 112,
+    "bucket": "ambiguous_mixed_role",
+    "language": "en",
+    "query": "What is the EMD process?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "emd_definition",
+    "topic": "EMD",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 113,
+    "bucket": "ambiguous_mixed_role",
+    "language": "en",
+    "query": "Should I create a tender or submit a bid?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "mixed_role_clarification",
+    "topic": "mixed role",
+    "expected_document_families": [
+      "procurement_manual",
+      "bid_submission_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 114,
+    "bucket": "ambiguous_mixed_role",
+    "language": "en",
+    "query": "Corrigendum steps?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "corrigendum_policy",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 115,
+    "bucket": "ambiguous_mixed_role",
+    "language": "hinglish",
+    "query": "Mujhe laptop kharidne ka process batao.",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "laptop procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 116,
+    "bucket": "ambiguous_mixed_role",
+    "language": "hinglish",
+    "query": "Tender banana hai ya bid bharni hai, kya karu?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "mixed_role_clarification",
+    "topic": "mixed role",
+    "expected_document_families": [
+      "procurement_manual",
+      "bid_submission_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 117,
+    "bucket": "ambiguous_mixed_role",
+    "language": "hinglish",
+    "query": "EMD ka process short me batao.",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "emd_definition",
+    "topic": "EMD",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 118,
+    "bucket": "ambiguous_mixed_role",
+    "language": "hinglish",
+    "query": "Corrigendum kaise hota hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "corrigendum_policy",
+    "topic": "corrigendum",
+    "expected_document_families": [
+      "current_procurement_rules",
+      "procurement_manual"
+    ],
+    "procedural": false
+  },
+  {
+    "id": 119,
+    "bucket": "ambiguous_mixed_role",
+    "language": "hi",
+    "query": "मुझे प्रिंटर खरीदने की प्रक्रिया बताइए।",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "topic": "printer procurement",
+    "expected_document_families": [
+      "chhattisgarh_store_purchase_rules",
+      "procurement_manual"
+    ],
+    "procedural": true
+  },
+  {
+    "id": 120,
+    "bucket": "ambiguous_mixed_role",
+    "language": "hi",
+    "query": "निविदा बनानी है या बोली जमा करनी है?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "mixed_role_clarification",
+    "topic": "mixed role",
+    "expected_document_families": [
+      "procurement_manual",
+      "bid_submission_manual"
+    ],
+    "procedural": false
+  }
+]

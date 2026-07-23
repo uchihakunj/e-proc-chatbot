@@ -1,7 +1,7 @@
 {
-  "name": "chips-rag-ui",
+  "name": "eproc-chatbot-ui",
   "version": "1.0.0",
-  "description": "CHiPS-RAG – Express frontend + proxy server",
+  "description": "eproc-chatbot – Express frontend + proxy server",
   "main": "server.js",
   "scripts": {
     "start":    "node server.js",

@@ -52,7 +52,10 @@ from actor_policy import actor_generation_directive
 from actor_boundary import devanagari_to_roman
 from context_selection import pack_context
 from sarvam_streaming import configured_reasoning_effort, parse_sarvam_sse_line
-from streaming_utils import is_explicitly_out_of_scope
+from streaming_utils import (
+    is_explicitly_out_of_scope,
+    should_retry_with_fallback,
+)
 from fine_intent_policy import (
     build_fine_intent_fallback, classify_fine_intent,
     render_fine_intent_fallback, generation_directive, requires_deterministic_policy_answer,
@@ -2997,7 +3000,10 @@ def stream_query():
             # iGPU headroom. Fallback fires only if the primary failed BEFORE any
             # answer token was streamed — a mid-stream crash after partial output
             # can't be cleanly restarted.
-            FALLBACK_MODEL = os.getenv('OLLAMA_FALLBACK_MODEL', 'llama3:8b')
+            _fallback_model_env = os.getenv('OLLAMA_FALLBACK_MODEL', '').strip()
+            FALLBACK_MODEL = _fallback_model_env or (
+                OLLAMA_MODEL if ANSWER_PROVIDER == 'sarvam' else 'llama3:8b'
+            )
 
             # ── Deterministic lines injected after the answer heading (the LLM
             #    is too unreliable to format these): deadline urgency, numeric
@@ -3308,8 +3314,17 @@ def stream_query():
                     else:
                         yield f"data: {json.dumps({'type':'error','message':f'Ollama error: {e}'})}\n\n"
 
-            state = {'content_streamed': False, 'failed_before_output': False, 'answer_buf': []}
             _primary_model = SARVAM_MODEL if ANSWER_PROVIDER == 'sarvam' else OLLAMA_MODEL
+            state = {
+                'content_streamed': False,
+                'failed_before_output': False,
+                'answer_buf': [],
+                'primary_model': _primary_model,
+                'response_model': _primary_model,
+                'response_provider': ANSWER_PROVIDER,
+                'fallback_used': False,
+                'fallback_model': FALLBACK_MODEL,
+            }
             yield f"data: {json.dumps({'type': 'status', 'message': f'Generating with {_primary_model}…'})}\n\n"
             for sse in _stream_model(_primary_model, state):
                 yield sse
@@ -3319,10 +3334,14 @@ def stream_query():
             # (gemma4 occasionally emits nothing on mixed Hindi+Hinglish queries
             # where the language directive conflicts). Either way the user would
             # otherwise see nothing useful, so retry on llama3:8b before giving up.
-            if (MODEL_FALLBACK_ENABLED
-                    and (state['failed_before_output'] or not state['content_streamed'])
-                    and FALLBACK_MODEL and not state.get('sarvam_timeout')):
-                yield f"data: {json.dumps({'type':'status','message':'Switching to a lighter model...'})}\n\n"
+            _primary_state = dict(state)
+            if should_retry_with_fallback(state, MODEL_FALLBACK_ENABLED, FALLBACK_MODEL):
+                _fallback_status = (
+                    f'Sarvam timed out, switching to {FALLBACK_MODEL}...'
+                    if _primary_state.get('sarvam_timeout')
+                    else f'Switching to fallback model {FALLBACK_MODEL}...'
+                )
+                yield f"data: {json.dumps({'type':'status','message':_fallback_status})}\n\n"
                 # Free the iGPU BEFORE falling back. gemma4:12b (~8GB) and the
                 # fallback model both resident on the Arc iGPU exhaust its VRAM,
                 # so the fallback OOMs too and the user gets an empty answer.
@@ -3331,13 +3350,32 @@ def stream_query():
                 # Best-effort: if Ollama already dropped the crashed runner this
                 # is a no-op. The next query reloads gemma cold (acceptable on
                 # this rare path).
-                try:
-                    requests.post(f"{OLLAMA_URL}/api/generate",
-                                  json={'model': OLLAMA_MODEL, 'keep_alive': 0},
-                                  timeout=30)
-                except Exception:
-                    pass
-                state = {'content_streamed': False, 'failed_before_output': False}
+                if ANSWER_PROVIDER != 'sarvam':
+                    try:
+                        requests.post(
+                            f"{OLLAMA_URL}/api/generate",
+                            json={'model': _primary_model, 'keep_alive': 0},
+                            timeout=30,
+                        )
+                    except Exception:
+                        pass
+                state = {
+                    'content_streamed': False,
+                    'failed_before_output': False,
+                    'answer_buf': [],
+                    'primary_model': _primary_state.get('primary_model', _primary_model),
+                    'response_model': FALLBACK_MODEL,
+                    'response_provider': 'ollama',
+                    'fallback_used': True,
+                    'fallback_model': FALLBACK_MODEL,
+                    'fallback_reason_code': _primary_state.get('fallback_reason_code'),
+                    'sarvam_timeout': _primary_state.get('sarvam_timeout', False),
+                    'sarvam_total_timeout': _primary_state.get('sarvam_total_timeout', False),
+                    'sarvam_answer_token_timeout': _primary_state.get('sarvam_answer_token_timeout', False),
+                    'sarvam_first_token_elapsed': _primary_state.get('sarvam_first_token_elapsed'),
+                    'sarvam_first_activity_elapsed': _primary_state.get('sarvam_first_activity_elapsed'),
+                    'sarvam_reasoning_chunks': _primary_state.get('sarvam_reasoning_chunks', 0),
+                }
                 for sse in _stream_model(FALLBACK_MODEL, state):
                     yield sse
 
@@ -3443,9 +3481,14 @@ def stream_query():
 
             elapsed = f"{time.time()-t0:.2f}s"
             _generation_diagnostics = {
-                'provider': ANSWER_PROVIDER,
+                'provider': state.get('response_provider', ANSWER_PROVIDER),
+                'primary_provider': ANSWER_PROVIDER,
+                'primary_model': state.get('primary_model', _primary_model),
+                'response_model': state.get('response_model', _primary_model),
                 'retrieval_skipped': False,
                 'force_retrieval': force_retrieval,
+                'fallback_used': bool(state.get('fallback_used')),
+                'fallback_model': state.get('fallback_model'),
                 'sarvam_first_token_seconds': round(
                     state.get('sarvam_first_token_elapsed', 0.0), 3
                 ) if state.get('sarvam_first_token_elapsed') is not None else None,
@@ -3795,7 +3838,7 @@ def upload_document():
 
 if __name__ == '__main__':
     print("\n" + "="*70)
-    print("🚀 CHiPS-RAG Pipeline (Internal Backend)")
+    print("🚀 EProc RAG Pipeline (Internal Backend)")
     print("="*70)
     print(f"\nRAG Pipeline Status: {'✅ Available' if RAG_AVAILABLE else '❌ Unavailable'}")
     print(f"Environment: {os.getenv('ENVIRONMENT', 'development')}")

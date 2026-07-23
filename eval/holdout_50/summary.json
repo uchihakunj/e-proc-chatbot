@@ -1,0 +1,15 @@
+{
+  "total": 50,
+  "pass": 11,
+  "partial": 37,
+  "fail": 2,
+  "actor_accuracy_percent": 100.0,
+  "fine_intent_accuracy_percent": 88.0,
+  "top10_source_recall_percent": 70.0,
+  "final_context_source_recall_percent": 72.0,
+  "avg_required_concept_coverage_percent": 54.67,
+  "citation_pass_percent": 72.0,
+  "fallbacks": 0,
+  "avg_latency_seconds": 9.609,
+  "p95_latency_seconds": 20.441
+}

@@ -1,0 +1,23 @@
+{
+  "total_queries": 20,
+  "semantic_backend": "sentence_transformers:BAAI/bge-m3",
+  "actor_accuracy_percent": 100.0,
+  "fine_intent_accuracy_percent": 100.0,
+  "expected_source_recall_top10_percent": 90.0,
+  "expected_source_recall_final_context_percent": 85.0,
+  "expected_chunk_evidence_coverage_top10_percent": 95.0,
+  "literal_response_keyword_coverage_percent": 86.25,
+  "question_answer_cosine_mean": 0.6408,
+  "reference_answer_cosine_mean": 0.8106,
+  "llm_judge_without_reference_score_mean": 4.05,
+  "llm_judge_without_reference_pass_percent": 100.0,
+  "llm_judge_with_reference_score_mean": 4.0,
+  "llm_judge_with_reference_pass_percent": 100.0,
+  "fallback_count": 0,
+  "latency_seconds": {
+    "average": 2.429,
+    "median": 2.518,
+    "p95": 2.843,
+    "maximum": 2.925
+  }
+}

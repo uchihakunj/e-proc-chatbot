@@ -10,6 +10,7 @@ from streaming_utils import (
     new_stream_state,
     record_stream_content,
     sanitize_model_answer,
+    should_retry_with_fallback,
 )
 
 
@@ -38,6 +39,37 @@ class StreamingStateTests(unittest.TestCase):
 
         self.assertEqual(state["answer_buf"], ["fallback answer"])
         self.assertTrue(state["content_streamed"])
+
+    def test_sarvam_timeout_state_can_retry_on_fallback_model(self):
+        state = {
+            "content_streamed": False,
+            "failed_before_output": True,
+            "sarvam_timeout": True,
+        }
+
+        self.assertTrue(
+            should_retry_with_fallback(state, True, "gemma3:4b")
+        )
+
+    def test_fallback_is_skipped_when_disabled(self):
+        state = {
+            "content_streamed": False,
+            "failed_before_output": True,
+        }
+
+        self.assertFalse(
+            should_retry_with_fallback(state, False, "gemma3:4b")
+        )
+
+    def test_fallback_requires_a_configured_model(self):
+        state = {
+            "content_streamed": False,
+            "failed_before_output": True,
+        }
+
+        self.assertFalse(
+            should_retry_with_fallback(state, True, "")
+        )
 
     def test_cumulative_provider_snapshots_are_not_duplicated(self):
         state = new_stream_state()

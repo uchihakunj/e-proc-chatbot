@@ -39,7 +39,7 @@ RUN1       = PREPROC / 'run_stage1.py'
 RUN2       = PREPROC / 'run_stage2.py'
 
 
-def run_cmd(cmd, cwd=None, timeout=3600):
+def run_cmd(cmd, cwd=None, timeout=18000):
     log.info('  $ ' + ' '.join(str(c) for c in cmd))
     try:
         r = subprocess.run(cmd, text=True, timeout=timeout,
@@ -113,7 +113,7 @@ def fix_failed_docs(dry_run: bool) -> list[str]:
             continue
 
         # Stage 2
-        run_cmd([sys.executable, str(RUN2), str(stage1_dir)], cwd=PREPROC, timeout=7200)
+        run_cmd([sys.executable, str(RUN2), str(stage1_dir)], cwd=PREPROC, timeout=18000)
 
         if copied and work_pdf.exists():
             work_pdf.unlink(missing_ok=True)
@@ -132,7 +132,7 @@ def process_new_pdfs(dry_run: bool) -> list[str]:
 
     new_pdfs = [
         p for p in INPUT_PDFS.glob('*.pdf')
-        if not (STAGE2_OUT / p.stem).exists()
+        if not (STAGE2_OUT / p.stem / 'structured.md').exists()
     ]
 
     if not new_pdfs:
@@ -151,7 +151,7 @@ def process_new_pdfs(dry_run: bool) -> list[str]:
             log.error(f'  Stage 1 output missing for {pdf.name}'); continue
 
         # Stage 2
-        run_cmd([sys.executable, str(RUN2), str(stage1_dir)], cwd=PREPROC, timeout=7200)
+        run_cmd([sys.executable, str(RUN2), str(stage1_dir)], cwd=PREPROC, timeout=18000)
         processed.append(pdf.stem)
 
     log.info(f'  Processed: {len(processed)} new PDF(s)')
@@ -193,7 +193,7 @@ def run_embed(dry_run: bool):
         log.info('  [dry-run] would run embeddings_production.py'); return
     if not EMBED.exists():
         log.warning(f'  Embeddings script not found'); return
-    run_cmd([sys.executable, str(EMBED)], cwd=EMBED.parent, timeout=7200)
+    run_cmd([sys.executable, str(EMBED)], cwd=EMBED.parent, timeout=18000)
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────

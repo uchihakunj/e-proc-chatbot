@@ -1,0 +1,95 @@
+108: "top_k_retrieval": retrieval_cfg.get("top_k_retrieval", 50),
+109: "final_context": retrieval_cfg.get("final_context", 8),
+125: TOP_K_RETRIEVAL = CFG["top_k_retrieval"]
+126: FINAL_CONTEXT = CFG["final_context"]
+145: # queries skip most of it. See the inline reranker in retrieve_context().
+146: RERANK_TOPK      = int(os.getenv("RERANK_TOPK", str(TOP_K_RETRIEVAL)))           # always rerank the top hybrid hits (was 10)
+147: RERANK_MAX_CANDS = int(os.getenv("RERANK_MAX_CANDS", str(TOP_K_RETRIEVAL)))     # + diversity-injected sources (was 18)
+155: # ── Generation-context compression ─────────────────────────────────────────
+159: CONTEXT_TOKEN_BUDGET = int(os.getenv("CONTEXT_TOKEN_BUDGET", "750"))
+274: # Headings/list entries establish context for nearby factual statements.
+278: # Select relevance first, then restore document order for readable context.
+292: def _context_chunk_exclusion(payload):
+309: def build_adaptive_context(query, context_results, source_name_resolver=None,
+310: context_token_budget=CONTEXT_TOKEN_BUDGET,
+315: # Task 1: Adaptive Context Selection mapping
+327: usable, excluded_context = [], []
+328: for result in context_results or []:
+332: reason = _context_chunk_exclusion(payload)
+334: excluded_context.append({
+342: return {"context_text": "", "source_refs": [], "query_type": shape,
+343: "selected_chunk_count": 0, "estimated_context_tokens": 0,
+345: "excluded_context_chunks": excluded_context}
+351: def _context_rank(result):
+357: ranked = sorted(usable, key=_context_rank, reverse=True)
+360: context_parts, source_refs, selection_records = [], [], []
+365: if len(context_parts) >= target_count:
+370: # Task 3: Confidence-Based Context Reduction
+374: if len(context_parts) > 0:
+391: allowance = min(375, context_token_budget)
+394: allowance = min(200, context_token_budget)
+407: context_parts.append(f"{label}\n{excerpt}")
+421: context_text = "\n\n".join(context_parts)
+423: "context_text": context_text,
+426: "selected_chunk_count": len(context_parts),
+427: "estimated_context_tokens": estimate_tokens(context_text),
+431: "excluded_context_chunks": excluded_context,
+461: Highlighted excerpt with query words in context
+476: # Truncate if too long
+526: kg_retriever = None
+530: from kg_retriever import KnowledgeGraphRetriever
+538: kg_retriever = KnowledgeGraphRetriever(kg, model)
+596: - Query + context keywords (approval, implementation, decision, etc.)
+626: # Add context-specific variations for government documents
+627: context_keywords = ["approval", "decision", "implementation", "status", "progress"]
+630: for keyword in context_keywords:
+695: limit=TOP_K_RETRIEVAL
+970: # all bids" framing out of the context so it can't hijack the answer.
+998: # ── Helper: Retrieve context with optional KG enhancement ──────
+1083: def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None,
+1085: """Retrieve context documents with optional knowledge graph enhancement.
+1089: num_context: Number of context results to return
+1095: _mark_time("RETRIEVE_CONTEXT")
+1098: print("🔍 Retrieving context...")
+1199: if use_kg and kg_retriever and USE_KNOWLEDGE_GRAPH:
+1215: enhanced_results = kg_retriever.enhance_results(
+1279: # return reranked_results[:num_context]
+1324: print(f"  🔄 Reranked {len(cand)} candidates (truncated to {RERANK_TRUNCATION} chars)")
+1416: if len(results) >= FINAL_CONTEXT:
+1431: if len(results) < FINAL_CONTEXT:  # relax cap if corpus diversity is low
+1434: if len(results) >= FINAL_CONTEXT:
+1447: _mark_time("RETRIEVE_CONTEXT")
+1454: _mark_time("RETRIEVE_CONTEXT")
+1457: def generate_answer(query, context_results):
+1458: """Generate answer using Sarvam AI API with retrieved context.
+1462: - Uses entity relationships for better context
+1468: if not context_results:
+1469: return "No context found to generate an answer."
+1474: # Build context string from retrieved documents with source PDFs and highlights
+1475: context_parts = []
+1479: for i, r in enumerate(context_results, 1):
+1505: # Format context with source PDF and FULL CHUNK TEXT (not excerpt)
+1506: # Send complete chunk to ensure LLM has all available context
+1507: context_parts.append(
+1511: context_text = "\n\n".join(context_parts)
+1514: # Build prompt with entity context
+1515: entity_context = ""
+1517: entity_context = f"\n\nKey entities found: {', '.join(list(all_entities)[:10])}"
+1548: Available source documents: {sources_str}{entity_context}"""
+1550: user_message = f"""Context from documents:
+1551: {context_text}
+1578: #             "max_tokens": 2048,
+1609: """Full RAG pipeline: retrieve context → generate answer.
+1612: 1. Retrieve context using embeddings + optional KG enhancement
+1622: # Step 1: Retrieve context with optional KG enhancement
+1623: context_results = retrieve_context(query, num_context=5, use_kg=USE_KNOWLEDGE_GRAPH and kg_retriever is not None)
+1625: if context_results is None:
+1626: print("Failed to retrieve context.")
+1629: # Display retrieved context with KG information
+1630: print(f"\n📚 Retrieved {len(context_results)} context documents:\n")
+1631: for result in context_results:
+1652: answer = generate_answer(query, context_results)
+1668: retrieval_mode = "Hybrid (Embeddings + Knowledge Graph)" if (USE_KNOWLEDGE_GRAPH and kg_retriever) else "Embeddings Only"
+1694: if kg_retriever:
+1698: stats = kg_retriever.kg.get_graph_statistics()
+1715: print(f"  Knowledge Graph:       {USE_KNOWLEDGE_GRAPH and kg_retriever is not None}")

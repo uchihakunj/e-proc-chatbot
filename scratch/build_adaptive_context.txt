@@ -1,0 +1,127 @@
+309: def build_adaptive_context(query, context_results, source_name_resolver=None,
+310: context_token_budget=CONTEXT_TOKEN_BUDGET,
+311: routing_policy=None):
+312: """Select minimal, semantically complete generation evidence."""
+313: shape = classify_prompt_shape(query)
+314: 
+315: # Task 1: Adaptive Context Selection mapping
+316: if shape == "factual":
+317: target_count = 2
+318: elif shape == "procedural":
+319: target_count = 3
+320: elif shape == "comparison":
+321: target_count = 4
+322: elif shape == "complex":
+323: target_count = 5
+324: else:
+325: target_count = 3
+326: 
+327: usable, excluded_context = [], []
+328: for result in context_results or []:
+329: payload = getattr((result or {}).get("point"), "payload", None)
+330: if payload is None:
+331: continue
+332: reason = _context_chunk_exclusion(payload)
+333: if reason:
+334: excluded_context.append({
+335: "chunk_id": payload.get("chunk") or payload.get("file"),
+336: "document_title": payload.get("source"),
+337: "excluded_chunk_reason": reason,
+338: })
+339: continue
+340: usable.append(result)
+341: if not usable:
+342: return {"context_text": "", "source_refs": [], "query_type": shape,
+343: "selected_chunk_count": 0, "estimated_context_tokens": 0,
+344: "top_confidence": 0.0, "selection_records": [],
+345: "excluded_context_chunks": excluded_context}
+346: 
+347: policy = routing_policy or {}
+348: preferred_sources = set(policy.get("preferred_source_titles") or ())
+349: required_stage = policy.get("required_stage")
+350: 
+351: def _context_rank(result):
+352: payload = result["point"].payload
+353: source_bonus = 1 if payload.get("source") in preferred_sources else 0
+354: stage_bonus = 1 if required_stage and payload.get("procurement_stage") == required_stage else 0
+355: return (source_bonus, stage_bonus, float(result.get("score", 0.0)))
+356: 
+357: ranked = sorted(usable, key=_context_rank, reverse=True)
+358: top_score = max(0.0, float(ranked[0].get("score", 0.0)))
+359: 
+360: context_parts, source_refs, selection_records = [], [], []
+361: seen_units = set()
+362: last_score = None
+363: 
+364: for index, result in enumerate(ranked, 1):
+365: if len(context_parts) >= target_count:
+366: break
+367: 
+368: current_score = float(result.get("score", 0.0))
+369: 
+370: # Task 3: Confidence-Based Context Reduction
+371: # Always keep the first (highest-ranked) chunk regardless of absolute score.
+372: # For subsequent chunks, use a very permissive absolute threshold (0.15)
+373: # but primarily rely on relative score drops (> 0.30) to eliminate weak tail chunks.
+374: if len(context_parts) > 0:
+375: if current_score < 0.15:
+376: break
+377: if last_score is not None and (last_score - current_score > 0.30):
+378: break
+379: 
+380: last_score = current_score
+381: 
+382: point = result["point"]
+383: payload = point.payload
+384: raw_source = payload.get("source", "")
+385: source = source_name_resolver(raw_source) if source_name_resolver else raw_source
+386: label = f"[Source {index}: {source}]"
+387: 
+388: # Task 2: Adaptive Chunk Size
+389: if current_score >= 0.85:
+390: # 1500 chars ~ 375 tokens
+391: allowance = min(375, context_token_budget)
+392: else:
+393: # 800 chars ~ 200 tokens
+394: allowance = min(200, context_token_budget)
+395: 
+396: # Deduct label size from allowance
+397: allowance = max(120, allowance - estimate_tokens(label))
+398: 
+399: # Pass seen_units for Task 4 Deduplication
+400: excerpt = _semantic_excerpt(payload.get("text", ""), query, allowance, seen_units)
+401: if not excerpt:
+402: continue
+403: 
+404: if source not in source_refs:
+405: source_refs.append(source)
+406: 
+407: context_parts.append(f"{label}\n{excerpt}")
+408: selection_records.append({
+409: "chunk_id": payload.get("chunk") or payload.get("file"),
+410: "document_title": raw_source,
+411: "page": payload.get("page_number") or payload.get("page"),
+412: "section": payload.get("rule_or_section") or payload.get("headings"),
+413: "final_selection_reason": result.get("selection_reason", "semantic_relevance"),
+414: "dense_score": result.get("dense_score"),
+415: "sparse_score": result.get("sparse_score"),
+416: "hybrid_score": result.get("hybrid_score"),
+417: "reranker_score": result.get("reranker_score"),
+418: "final_score": result.get("score"),
+419: })
+420: 
+421: context_text = "\n\n".join(context_parts)
+422: return {
+423: "context_text": context_text,
+424: "source_refs": source_refs,
+425: "query_type": shape,
+426: "selected_chunk_count": len(context_parts),
+427: "estimated_context_tokens": estimate_tokens(context_text),
+428: "top_confidence": top_score,
+429: "target_chunk_count": target_count,
+430: "selection_records": selection_records,
+431: "excluded_context_chunks": excluded_context,
+432: }
+433: 
+434: # ── Helper: Get file number from chunk source ───────────────────
+435: def extract_file_number(chunk_source):

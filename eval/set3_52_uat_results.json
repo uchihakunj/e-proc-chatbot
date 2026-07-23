@@ -1,0 +1,2979 @@
+[
+  {
+    "id": "SET3-SIMPLE-1573192b197e4987a801d55d005a0a9c",
+    "question": "Mujhe government procurement ke different methods simple language mein samjhao.",
+    "expected_actor": "general_information_user",
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "expected_fine_intent": "procurement_methods_overview",
+    "detected_fine_intent": "procurement_methods_overview",
+    "fine_intent_confidence": 0.97,
+    "expected_answer_mode": "list_or_overview",
+    "detected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "tender",
+      "direct purchase",
+      "inter-departmental",
+      "emergency",
+      "channel vs method"
+    ],
+    "required_answer_concepts": [
+      "at least four procurement routes",
+      "channel vs method distinction",
+      "registration not a method"
+    ],
+    "prohibited_unsafe_claims": [
+      "registration as a procurement method",
+      "login as a procurement method"
+    ],
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_answer": "💡 Answer\nChhattisgarh procurement mein channels/platforms aur procurement methods alag cheezein hain. GeM aur State e-Procurement portal selected route ko execute karne ke channels hain; registration ya login procurement method nahi hai.\n\n📋 Major procurement routes\n1. GeM procurement — item aur applicable rules permit karein to relevant GeM method use hota hai.\n2. Tender procurement — Open, Limited ya Single Tender sirf applicable conditions mein.\n3. Permitted direct purchase — current rules, value conditions, delegated powers aur approvals allow karein tabhi.\n4. Inter-departmental/undertaking purchase — rules permit karein to doosre government department ya undertaking se purchase.\n5. Emergency/special procurement — exceptional route; recorded reasons aur competent approval chahiye, unrestricted direct purchase nahi.\n6. Foreign/global purchase — sirf jab applicable GFR/rules aur approvals is route ko support karein.\n\nPehle route choose karein, phir appropriate GeM ya e-Procurement channel use karein. Registration, vendor login aur DSC setup bidder/portal activities hain, procurement methods nahi.\n\n📘 Source: General Financial Rules; Chhattisgarh Store Purchase Rules",
+    "citation_correctness": "Pass",
+    "response_time_seconds": 1.133,
+    "result": "Pass",
+    "root_cause": null,
+    "diagnostics": null,
+    "error": null
+  },
+  {
+    "id": "SET3-EXACT-816ab54f95664bd6b487b0dc368d72e0",
+    "question": "In Chhattisgarh, what are different ways of government procurement?",
+    "expected_actor": "general_information_user",
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "expected_fine_intent": "procurement_methods_overview",
+    "detected_fine_intent": "procurement_methods_overview",
+    "fine_intent_confidence": 0.97,
+    "expected_answer_mode": "list_or_overview",
+    "detected_answer_mode": "overview_list",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "tender",
+      "direct purchase",
+      "inter-departmental",
+      "emergency",
+      "channel vs method"
+    ],
+    "required_answer_concepts": [
+      "at least four procurement routes",
+      "channel vs method distinction",
+      "registration not a method"
+    ],
+    "prohibited_unsafe_claims": [
+      "registration as a procurement method",
+      "login as a procurement method"
+    ],
+    "retrieved_top_10_sources": [],
+    "final_context_sources": [
+      "Chhattisgarh Store Purchase Rules",
+      "General Financial Rules",
+      "Manual for Procurement of Goods 2024"
+    ],
+    "final_answer": "In Chhattisgarh, government procurement can broadly happen through:\n\n- **GeM procurement** for goods or services available on GeM, using methods such as Direct Purchase, L1 purchase, bidding, or reverse auction as applicable.\n- **Tender procurement**, including **Open Tender, Limited Tender, and Single Tender** where the applicable rules permit.\n- **Permitted direct purchase** in cases allowed by the applicable rules.\n- **Inter-departmental procurement**, where one government department or undertaking purchases from another, if permitted.\n- **Emergency or special procurement** for exceptional situations such as urgent disaster or law-and-order needs.\n- **Foreign or global purchase** where the applicable rules and approvals allow it.\n\nGeM and the state e-Procurement portal are procurement channels, while Open, Limited, and Single Tender are procurement methods.\n\n📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules; Manual for Procurement of Goods 2024.",
+    "citation_correctness": "Pass",
+    "response_time_seconds": 0.019,
+    "result": "Pass",
+    "root_cause": null,
+    "diagnostics": null,
+    "error": null
+  },
+  {
+    "id": "H50-01",
+    "question": "Our office needs 30 laptops. How should we decide whether to use GeM or a tender?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "requirement",
+      "estimate",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "requirement",
+      "budget",
+      "method"
+    ],
+    "prohibited_unsafe_claims": [
+      "vendor registration",
+      "submit bid"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.98,
+    "detected_intent": "procurement_method_selection",
+    "intent_confidence": 0.98,
+    "detected_language": "en",
+    "detected_answer_mode": "method_decision",
+    "retrieved_top_10_sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_context_sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nGeM (Government e-Marketplace) is the online government marketplace through which government departments and other eligible public buyers procure goods and services. Under the Chhattisgarh Store Purchase Rules, when rates and technical specifications are available on GeM, the department follows the applicable GeM process. The department remains responsible for checking the technical specification, vendor credibility, L1 price, economy, and quality.\n\n📘 Source: Manual for Procurement of works 2019; Public Procurement Manual; General Financial Rules",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.375,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Fine-Intent Classification Failure"
+  },
+  {
+    "id": "H50-02",
+    "question": "Department ko ₹4 lakh ka furniture kharidna hai. Kaunsa procurement method use karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.98,
+    "detected_intent": "procurement_method_selection",
+    "intent_confidence": 0.9,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "method_decision",
+    "retrieved_top_10_sources": [
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_context_sources": [
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nOriginal question “Department ko ₹4 lakh ka furniture kharidna hai. Kaunsa procurement method use karna chahiye?” ko exact intent procurement_planning ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.333,
+    "required_concepts_hit": [
+      "method"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.359,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-03",
+    "question": "Can we buy an item directly if only one quotation is available on GeM?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "gem_direct_purchase_rule",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "gem_direct_purchase_rule",
+    "intent_confidence": 0.97,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_answer": "💡 Answer\nNo—not merely because only one quotation is available on GeM. A single quotation does not by itself establish that Direct Purchase is permitted.\n\n📋 Check before proceeding\n1. Confirm the consolidated requirement, specifications, value, available budget and approvals.\n2. Check the applicable current GeM/GFR and Chhattisgarh Store Purchase Rule conditions, including delegated powers, for the permitted method.\n3. Use Direct Purchase only if those conditions permit it; otherwise use the applicable GeM bidding or Tender route.\n4. Record the method justification and price reasonableness before placing an order.\n\n📘 Source: General Financial Rules; Chhattisgarh Store Purchase Rules; Public Procurement Manual",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.408,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-04",
+    "question": "Agar item GeM par available nahi hai, department ko next kya karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.98,
+    "detected_intent": "procurement_method_selection",
+    "intent_confidence": 0.98,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "method_decision",
+    "retrieved_top_10_sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "final_context_sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_answer": "💡 Answer\nGeM (Government e-Marketplace) government departments aur other eligible government buyers ke liye goods aur services procure karne ka online government marketplace hai. Chhattisgarh Store Purchase Rules ke mutabik, rate aur technical specification GeM par available hone par department applicable GeM process follow karta hai. Technical specification, vendor credibility, L1 price, economy aur quality verify karna department ki responsibility rehti hai.\n\n📘 Source: GFR2017 HINDI; General Financial Rules; Chhattisgarh Store Purchase Rules",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.206,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-05",
+    "question": "Can a department invite quotations from three local suppliers instead of issuing an open tender?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.85,
+    "detected_intent": "procurement_method_selection",
+    "intent_confidence": 0.98,
+    "detected_language": "en",
+    "detected_answer_mode": "method_decision",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_answer": "💡 Answer\nOpen Tender: An Open Tender is publicly advertised so all eligible bidders can compete, subject to the tender's qualification and submission conditions. It is the broadest competitive tender method.\n\n📘 Source: General Financial Rules; Chhattisgarh Store Purchase Rules; Public Procurement Manual\n\n📎 As written in the rulebook — Rule 161: [Rs. 50 lakhs (Rupees Fifty 200 crore or such limit as",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.333,
+    "required_concepts_hit": [
+      "method"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.251,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Fine-Intent Classification Failure"
+  },
+  {
+    "id": "H50-06",
+    "question": "Hamare office ko urgently printers chahiye, lekin emergency nahi hai. Fastest lawful option kya hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.98,
+    "detected_intent": "procurement_method_selection",
+    "intent_confidence": 0.98,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_context_sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nOriginal question “Hamare office ko urgently printers chahiye, lekin emergency nahi hai. Fastest lawful option kya hai?” ko exact intent procurement_planning ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.434,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-07",
+    "question": "What factors should be checked before choosing Limited Tender?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "unknown",
+    "intent_confidence": 0.0,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_answer": "💡 Answer\nYour original question “What factors should be checked before choosing Limited Tender?” was preserved as the exact intent unknown. A sufficiently reliable section for this specific workflow was unavailable, so steps from a related but different procedure were not substituted. Please check the relevant official section.",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.427,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Fine-Intent Classification Failure"
+  },
+  {
+    "id": "H50-08",
+    "question": "When should an Open Tender be preferred over Limited Tender?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "comparison",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "tender_method_definition",
+    "intent_confidence": 0.92,
+    "detected_language": "en",
+    "detected_answer_mode": "comparison",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "mannual procurement.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_answer": "💡 Answer\n| Method | Who may bid | Main use |\n|---|---|---|\n| Open Tender | All eligible bidders who meet the published conditions | Broad, publicly advertised competition |\n| Limited Tender | Only the capable/registered suppliers invited under the applicable rules | A restricted competition, not a convenience substitute for Open Tender |\n\nThe department must use the method permitted by the current Chhattisgarh rules, estimated value, delegated powers and approvals.\n\n📘 Source: General Financial Rules; Manual for Procurement of works 2019\n\n📎 As written in the rulebook — Rule 161: [Rs. 50 lakhs (Rupees Fifty 200 crore or such limit as",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.653,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-09",
+    "question": "Can Single Tender be used because the earlier supplier already knows our system?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "policy_conditions",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "exceptional",
+      "justification",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "single source",
+      "written justification",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "convenience alone",
+      "automatic permission"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "tender_method_definition",
+    "intent_confidence": 0.92,
+    "detected_language": "en",
+    "detected_answer_mode": "policy_conditions",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Précis  e-Procurement Project.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf"
+    ],
+    "final_answer": "💡 Answer\nSingle Tender is an exceptional route, not a convenience route. Use it only for circumstances permitted by the applicable rules—for example, where there is a justified single source/proprietary compatibility need or a properly recorded exceptional urgency—and only with written justification and competent-authority approval. Do not invent or rely on an unverified monetary threshold.\n\n📘 Source: General Financial Rules; Précis e-Procurement Project; Preferred System Configuration V 2; EDGE Browser Setup V1.0",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "single source",
+      "written justification",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.804,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-10",
+    "question": "Ek proprietary software sirf ek company provide karti hai. Kya Single Tender allowed hoga?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "policy_conditions",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "exceptional",
+      "justification",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "single source",
+      "written justification",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "convenience alone",
+      "automatic permission"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "tender_method_definition",
+    "intent_confidence": 0.92,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "policy_conditions",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_answer": "💡 Answer\nSingle Tender exceptional route hai, convenience route nahi. Isse sirf applicable rules mein permitted circumstances mein use karein—for example justified single source/proprietary compatibility need ya properly recorded exceptional urgency—aur written justification plus competent-authority approval ke saath. Unverified monetary threshold assume na karein.\n\n📘 Source: General Financial Rules; GFR2017 HINDI; Chhattisgarh Store Purchase Rules",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "single source",
+      "written justification",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.656,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-11",
+    "question": "Can the department purchase spare parts only from the original equipment manufacturer?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_method_definition",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "exceptional",
+      "justification",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "single source",
+      "written justification",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "convenience alone",
+      "automatic permission"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.98,
+    "detected_intent": "procurement_method_selection",
+    "intent_confidence": 0.97,
+    "detected_language": "en",
+    "detected_answer_mode": "oem_spares_policy",
+    "retrieved_top_10_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "store purchase rule cg.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_context_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "store purchase rule cg.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf"
+    ],
+    "final_answer": "💡 Answer\nYour original question “Can the department purchase spare parts only from the original equipment manufacturer?” was preserved as the exact intent procurement_planning. A sufficiently reliable section for this specific workflow was unavailable, so steps from a related but different procedure were not substituted. Please check the relevant official section.",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.624,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Fine-Intent Classification Failure"
+  },
+  {
+    "id": "H50-12",
+    "question": "Government department ko dusre government undertaking se goods purchase karne hain. Kya tender zaroori hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "procurement_methods_overview",
+    "expected_answer_mode": "yes_no_policy",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.98,
+    "detected_intent": "procurement_planning",
+    "intent_confidence": 0.86,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_context_sources": [
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nOriginal question “Government department ko dusre government undertaking se goods purchase karne hain. Kya tender zaroori hai?” ko exact intent procurement_planning ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.019,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-13",
+    "question": "Can we split a ₹10 lakh requirement into five smaller purchase orders?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_answer_mode": "restriction_or_prohibition",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "consolidated",
+      "split",
+      "requirement"
+    ],
+    "required_answer_concepts": [
+      "must not split",
+      "consolidated"
+    ],
+    "prohibited_unsafe_claims": [
+      "split to avoid",
+      "always direct purchase"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "purchase_order",
+    "intent_confidence": 0.9,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_context_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_answer": "💡 Answer\nIssue the Purchase Order only after evaluation, recommendation and competent approval are complete.\n\n📋 Process\n1. Finalise the responsive successful bidder and document rate reasonableness.\n2. Obtain approval of the award from the competent authority.\n3. Prepare Purchase Order terms covering item, quantity, specifications, price/taxes, delivery, warranty, inspection, acceptance and payment.\n4. Verify the Purchase Order against the approved bid and sanction, then issue it through the authorised channel.\n5. Record acknowledgement and monitor delivery/contract performance.\n\n📘 Source: Manual for Procurement of Goods 2024; General Financial Rules; Chhattisgarh Store Purchase Rules",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.302,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-14",
+    "question": "Same item alag-alag months mein chahiye. Kya har month direct purchase kar sakte hain?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "consolidated",
+      "split",
+      "requirement"
+    ],
+    "required_answer_concepts": [
+      "must not split",
+      "consolidated"
+    ],
+    "prohibited_unsafe_claims": [
+      "split to avoid",
+      "always direct purchase"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.82,
+    "detected_intent": "procurement_method_selection",
+    "intent_confidence": 0.96,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "GFR2017_HINDI.pdf",
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "final_context_sources": [
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "\nआपके सवाल के मुताबिक, एक ही item को अलग-अलग महीने में direct purchase करने के लिए कुछ rules हैं:\n\nपहले, आपको quality inspection complete करनी होगी। अगर आप quality inspection से satisfied हैं तो purchase की permission मिल सकती है, लेकिन अगर satisfied नहीं हैं तो committee की recommendations के हिसाब से decision लिया जाएगा।\n\nDirect purchase के लिए:\n- Payment 20 days के अंदर करनी होगी\n- Quality inspection 10 days के अंदर complete होनी चाहिए\n- अगर quality inspection time पर complete नहीं होती तो online portal पर activity complete मानकर next process के लिए forward कर दी जाएगी\n- Material receive होने के 48 hours के अंदर Provisional Receipt Certificate (PRC) issue करना होगा\n- Material का verification करने के बाद Consignee Receipt Acceptance Certificate (CRAC) issue करना होगा\n\nअगर आप direct purchase करना चाहते हैं तो:\n- Item के लिए price preference policy check करें\n- कुछ items reserved होते हैं (जैसे hand-spun और hand-woven textiles)\n- Purchase के लिए proper documentation और quality inspection mandatory है\n\nक्या आप किसी specific item के बारे में जानकारी चाहते हैं?",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.074,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Fine-Intent Classification Failure"
+  },
+  {
+    "id": "H50-15",
+    "question": "How should the department estimate the total procurement value before selecting the method?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_planning",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "requirement",
+      "estimate",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "requirement",
+      "budget",
+      "method"
+    ],
+    "prohibited_unsafe_claims": [
+      "vendor registration",
+      "submit bid"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.98,
+    "detected_intent": "procurement_planning",
+    "intent_confidence": 0.86,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_answer": "💡 Answer\nYour original question “How should the department estimate the total procurement value before selecting the method?” was preserved as the exact intent procurement_planning. A sufficiently reliable section for this specific workflow was unavailable, so steps from a related but different procedure were not substituted. Please check the relevant official section.",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.333,
+    "required_concepts_hit": [
+      "method"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.243,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-16",
+    "question": "Purchase start karne se pehle administrative approval aur financial sanction mein kya difference hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "comparison",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "approval_and_budget",
+    "intent_confidence": 0.96,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_context_sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_answer": "💡 Answer\nProcurement se pehle department ko need, realistic estimate, available budget aur delegated powers ke mutabik competent approvals establish karne chahiye.\n\n📋 Process\n1. Requirement aur estimated cost record karein.\n2. Correct budget head mein availability confirm karein.\n3. Requirement ke liye administrative approval lein.\n4. Competent authority se expenditure/financial sanction lein.\n5. GeM ya Tender action se pehle approvals ko purchase indent ke saath file karein.\n\n📘 Source: Public Procurement Manual; General Financial Rules; Manual for Procurement of works 2019",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.92,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-17",
+    "question": "Who should confirm budget availability before a tender is published?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "approval_and_budget",
+    "intent_confidence": 0.92,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_context_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "mannual procurement.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_answer": "💡 Answer\nBefore procurement, the department should establish the need, realistic estimate, available budget and the competent approvals applicable to its delegated powers.\n\n📋 Process\n1. Record the requirement and estimated cost.\n2. Confirm budget availability under the correct head.\n3. Obtain administrative approval for the requirement.\n4. Obtain expenditure/financial sanction from the competent authority.\n5. Place the approvals with the purchase indent before starting GeM or Tender action.\n\n📘 Source: Précis e-Procurement Project; Public Procurement Manual; GFR2017 HINDI; Store Purhase Rules 28.01.2021",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.985,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-18",
+    "question": "Can a tender be initiated before the budget is formally available?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "approval_and_budget",
+    "intent_confidence": 0.92,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_context_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_answer": "💡 Answer\nBefore procurement, the department should establish the need, realistic estimate, available budget and the competent approvals applicable to its delegated powers.\n\n📋 Process\n1. Record the requirement and estimated cost.\n2. Confirm budget availability under the correct head.\n3. Obtain administrative approval for the requirement.\n4. Obtain expenditure/financial sanction from the competent authority.\n5. Place the approvals with the purchase indent before starting GeM or Tender action.\n\n📘 Source: Précis e-Procurement Project; Public Procurement Manual; General Financial Rules; Store Purhase Rules 28.01.2021",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.732,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-19",
+    "question": "Department ke paas budget hai, lekin financial sanction pending hai. Kya GeM order place kar sakte hain?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.85,
+    "detected_intent": "approval_and_budget",
+    "intent_confidence": 0.98,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "sanction_gate",
+    "retrieved_top_10_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "GFR2017_HINDI.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_context_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_answer": "\nआपके सवाल का जवाब देने के लिए, मुझे दिए गए दस्तावेजों में GeM order के बारे में कोई खास जानकारी नहीं मिली।\n\nContext में जो जानकारी है, वह ये है:\n\n- Rule 25(3) के अनुसार, अगर किसी खर्च के लिए पहले sanction देना जरूरी हो और फंड्स अभी तक कम्युनिकेट न हुए हों, तो sanction में यह लिखा जाना चाहिए कि यह खर्च अगले साल के बजट में फंड्स कम्युनिकेट होने पर निर्भर है।\n\n- Rule 26 के अनुसार, कंट्रोलिंग ऑफिसर को यह सुनिश्चित करना चाहिए कि खर्च बजट आवंटन से ज्यादा न हो।\n\nलेकिन GeM order के बारे में कोई स्पष्ट जानकारी नहीं है। अगर आपको GeM के बारे में और जानकारी चाहिए, तो आप CHiPS मैनुअल देख सकते हैं।\n\nक्या आप और कुछ पूछना चाहते हैं?",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.589,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-20",
+    "question": "What records should be kept to prove that the selected procurement method was justified?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "approval_and_budget",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_context_sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nBefore procurement, the department should establish the need, realistic estimate, available budget and the competent approvals applicable to its delegated powers.\n\n📋 Process\n1. Record the requirement and estimated cost.\n2. Confirm budget availability under the correct head.\n3. Obtain administrative approval for the requirement.\n4. Obtain expenditure/financial sanction from the competent authority.\n5. Place the approvals with the purchase indent before starting GeM or Tender action.\n\n📘 Source: Manual for Procurement of works 2019; Public Procurement Manual; General Financial Rules",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.905,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-21",
+    "question": "Can the competent authority approve a purchase after the order has already been placed?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "approval_and_budget",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_context_sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nBefore procurement, the department should establish the need, realistic estimate, available budget and the competent approvals applicable to its delegated powers.\n\n📋 Process\n1. Record the requirement and estimated cost.\n2. Confirm budget availability under the correct head.\n3. Obtain administrative approval for the requirement.\n4. Obtain expenditure/financial sanction from the competent authority.\n5. Place the approvals with the purchase indent before starting GeM or Tender action.\n\n📘 Source: Public Procurement Manual; General Financial Rules",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.545,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-22",
+    "question": "What is delegated financial power, and how does it affect procurement method selection?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "approval_and_budget",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [],
+    "final_context_sources": [],
+    "final_answer": "",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 76.07,
+    "http_status": 200,
+    "error": "ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5000): Read timed out.",
+    "result": "Fail",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-23",
+    "question": "Agar purchase value officer ki delegated power se zyada hai, to next approval kis stage par lena chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "approval_and_budget",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "budget",
+      "approval",
+      "sanction"
+    ],
+    "required_answer_concepts": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "prohibited_unsafe_claims": [
+      "order before approval",
+      "skip sanction"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "approval_and_budget",
+    "intent_confidence": 0.96,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_context_sources": [
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_answer": "💡 Answer\nProcurement se pehle department ko need, realistic estimate, available budget aur delegated powers ke mutabik competent approvals establish karne chahiye.\n\n📋 Process\n1. Requirement aur estimated cost record karein.\n2. Correct budget head mein availability confirm karein.\n3. Requirement ke liye administrative approval lein.\n4. Competent authority se expenditure/financial sanction lein.\n5. GeM ya Tender action se pehle approvals ko purchase indent ke saath file karein.\n\n📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules; Store Purhase Rules 28.01.2021",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "approval",
+      "budget",
+      "competent"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.79,
+    "http_status": 200,
+    "error": null,
+    "result": "Pass",
+    "root_cause": null
+  },
+  {
+    "id": "H50-24",
+    "question": "Can the department use last year's approved rate without conducting a fresh procurement?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "procurement_method_selection",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "GeM",
+      "rules",
+      "approval"
+    ],
+    "required_answer_concepts": [
+      "method",
+      "value",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "invented threshold",
+      "unrestricted direct purchase"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "procurement_method_selection",
+    "intent_confidence": 0.9,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_answer": "💡 Answer\nYour original question “Can the department use last year's approved rate without conducting a fresh procurement?” was preserved as the exact intent procurement_planning. A sufficiently reliable section for this specific workflow was unavailable, so steps from a related but different procedure were not substituted. Please check the relevant official section.",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.127,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-25",
+    "question": "How should price reasonableness be established when only one valid bid is received?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "mannual procurement.pdf",
+      "GFR2017_HINDI.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_context_sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nEvaluate bids against the published Tender criteria: eligibility, technical responsiveness, required documents and compliance first; evaluate financial bids only as the Tender permits. The lowest quoted bidder does not automatically win—the proposed awardee must also be eligible, responsive and technically acceptable.\n\n📋 Process\n1. Record opening and verify bidder eligibility and required submissions.\n2. Check technical specifications, Tender conditions and compliance.\n3. Identify technically responsive bids under the published criteria.\n4. Open/evaluate financial bids only for the eligible, responsive bidders as applicable.\n5. Rank the evaluated bids, record reasons and obtain the competent approval before award.\n\n📘 Source: Manual for Procurement of works 2019; Manual for Procurement of Goods 2024; General Financial Rules",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "reasons",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.284,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-26",
+    "question": "Kya lowest quotation milne ka matlab price reasonable hai?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.96,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "final_context_sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_answer": "\nआपके सवाल का जवाब देने के लिए, मुझे दिए गए दस्तावेजों में \"lowest quotation\" और \"price reasonable\" के बीच कोई सीधा संबंध नहीं मिला है।\n\nGFR2017_HINDI.pdf में नियम 154 के बारे में जानकारी है, जो बिना निविदा के सामान खरीदने के बारे में बताती है, लेकिन इसमें \"lowest quotation\" की परिभाषा नहीं दी गई है।\n\nनियम 162 में सीमित निविदा पूछ-ताछ के बारे में जानकारी है, लेकिन फिर से \"lowest quotation\" का मतलब \"price reasonable\" क्या है, यह स्पष्ट नहीं है।\n\nनियम 154 में यह भी बताया गया है कि कुछ खास मंत्रालयों/विभागों के लिए 1,00,000 से 10,00,000 रुपये तक के सामान बिना निविदा के खरीदे जा सकते हैं, लेकिन यह भी \"lowest quotation\" की परिभाषा नहीं देता।\n\nचूंकि यह जानकारी दस्तावेजों में उपलब्ध नहीं है, इसलिए मैं सटीक रूप से नहीं कह सकता कि \"lowest quotation\" का मतलब \"price reasonable\" है या नहीं।\n\n📘 Source: GFR2017_HINDI.pdf, FInal_GFR_upto_31_07_2024.pdf, GFR2017_HINDI.pdf",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.434,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-27",
+    "question": "What should the department do if all received bids are much higher than the estimated cost?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "GFR2017_HINDI.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_context_sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_answer": "💡 Answer\nEvaluate bids against the published Tender criteria: eligibility, technical responsiveness, required documents and compliance first; evaluate financial bids only as the Tender permits. The lowest quoted bidder does not automatically win—the proposed awardee must also be eligible, responsive and technically acceptable.\n\n📋 Process\n1. Record opening and verify bidder eligibility and required submissions.\n2. Check technical specifications, Tender conditions and compliance.\n3. Identify technically responsive bids under the published criteria.\n4. Open/evaluate financial bids only for the eligible, responsive bidders as applicable.\n5. Rank the evaluated bids, record reasons and obtain the competent approval before award.\n\n📘 Source: General Financial Rules; Manual for Procurement of Goods 2024; Manual for Procurement of works 2019",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "reasons",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.435,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-28",
+    "question": "Can negotiations be conducted with the L1 bidder after opening financial bids?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.95,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_context_sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_answer": "💡 Answer\nEvaluate bids against the published Tender criteria: eligibility, technical responsiveness, required documents and compliance first; evaluate financial bids only as the Tender permits. The lowest quoted bidder does not automatically win—the proposed awardee must also be eligible, responsive and technically acceptable.\n\n📋 Process\n1. Record opening and verify bidder eligibility and required submissions.\n2. Check technical specifications, Tender conditions and compliance.\n3. Identify technically responsive bids under the published criteria.\n4. Open/evaluate financial bids only for the eligible, responsive bidders as applicable.\n5. Rank the evaluated bids, record reasons and obtain the competent approval before award.\n\n📘 Source: Manual for Procurement of works 2019; Public Procurement Manual; Manual for Procurement of Goods 2024",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "reasons",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.892,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-29",
+    "question": "Tender cancel karne ke liye kya reasons record karne chahiye?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "tender_creation_policy",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_operator",
+    "actor_confidence": 0.9,
+    "detected_intent": "tender_creation_policy",
+    "intent_confidence": 0.98,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_context_sources": [
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_answer": "💡 Answer\nOriginal question “Tender cancel karne ke liye kya reasons record karne chahiye?” ko exact intent tender_creation_policy ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.333,
+    "required_concepts_hit": [
+      "reasons"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.839,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-30",
+    "question": "Can the department reject all bids without giving any reason?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_context_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "final_answer": "💡 Answer\nEvaluate bids against the published Tender criteria: eligibility, technical responsiveness, required documents and compliance first; evaluate financial bids only as the Tender permits. The lowest quoted bidder does not automatically win—the proposed awardee must also be eligible, responsive and technically acceptable.\n\n📋 Process\n1. Record opening and verify bidder eligibility and required submissions.\n2. Check technical specifications, Tender conditions and compliance.\n3. Identify technically responsive bids under the published criteria.\n4. Open/evaluate financial bids only for the eligible, responsive bidders as applicable.\n5. Rank the evaluated bids, record reasons and obtain the competent approval before award.\n\n📘 Source: Manual for Procurement of Goods 2024; Manual for Procurement of works 2019; General Financial Rules; Compilation of CVC Circulars and Guidelines",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "reasons",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.363,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-31",
+    "question": "Can we mention a preferred brand and write ‘or equivalent’ in the technical specifications?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "generic",
+      "measurable",
+      "competition"
+    ],
+    "required_answer_concepts": [
+      "generic",
+      "technical justification",
+      "equivalent"
+    ],
+    "prohibited_unsafe_claims": [
+      "brand automatically allowed",
+      "restrict competition"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "specification_preparation",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [],
+    "final_context_sources": [],
+    "final_answer": "The answer to this question was not found in the available documents.",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 1.044,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-32",
+    "question": "Laptop specification banate waqt processor brand mention karna allowed hai kya?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "generic",
+      "measurable",
+      "competition"
+    ],
+    "required_answer_concepts": [
+      "generic",
+      "technical justification",
+      "equivalent"
+    ],
+    "prohibited_unsafe_claims": [
+      "brand automatically allowed",
+      "restrict competition"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.8,
+    "detected_intent": "specification_preparation",
+    "intent_confidence": 0.96,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf"
+    ],
+    "final_context_sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "final_answer": "\nLaptop specification banate waqt processor brand mention karne ke baare mein yeh information available documents mein nahi hai. Context mein Corrigendum issuance, bid submission, aur e-procurement portal ke baare mein details hain, lekin processor brand mention karne ke rules ke baare mein koi specific information nahi hai.\n\nAgar aapko processor brand mention karne ke rules chahiye, toh aapko official CHiPS manual ya guidelines se check karna padega.",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.133,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-33",
+    "question": "How can specifications be written so that they do not favour one vendor?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "specification_preparation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "generic",
+      "measurable",
+      "competition"
+    ],
+    "required_answer_concepts": [
+      "generic",
+      "technical justification",
+      "equivalent"
+    ],
+    "prohibited_unsafe_claims": [
+      "brand automatically allowed",
+      "restrict competition"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "specification_preparation",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "Précis  e-Procurement Project.pdf"
+    ],
+    "final_context_sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "final_answer": "\nBased on the provided documents, here is how specifications can be written to avoid favouring one vendor:\n\nThe documents state that in the e-Procurement module, the current standardized process for a two-part tender is designed to be vendor-neutral. The first part of the tender consists of pre-qualification and techno-commercial evaluation, while the second part is for the submission of the price bid.\n\nTo ensure specifications do not favour one vendor, you should structure the tender as follows:\n\n1. **Separate Evaluation Stages:** Clearly separate the technical/qualitative evaluation from the financial evaluation. The first part should focus on the vendor's capabilities, experience, and technical solution, without any price-related criteria.\n2. **Use Objective Criteria:** For the techno-commercial evaluation, use objective and measurable criteria. The documents mention that the first part of the tender is for pre-qualification and techno-commercial evaluation, which implies that these stages should be based on merit, not cost.\n3. **Standardize the Process:** The documents mention that the two-part tender has been standardized. Adhering to this standardized workflow ensures that all vendors are evaluated on the same set of criteria in the first part, before the price bid is opened in the second part.\n4. **Avoid Price in Pre-qualification:** Do not include any price-related information or criteria in the pre-qualification and techno-commercial sections of the tender. The price bid is only considered in the second part of the process.\n\nIn summary, by separating the technical evaluation from the financial evaluation and using objective criteria for the first part, you ensure that the selection is based on merit and capability, not on price, thus avoiding favouring any single vendor.\n\n📘 Source: CHiPS_Vendor_Registration_Manual_English.pdf and CHiPS_Bid_Submission_Manual_English.pdf",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 3.332,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-34",
+    "question": "Can experience and turnover requirements be higher than the estimated tender value?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "tender_eligibility",
+    "intent_confidence": 0.98,
+    "detected_language": "en",
+    "detected_answer_mode": "specific_portal_step",
+    "retrieved_top_10_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_context_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nOpen the tender/NIT and read its eligibility clause, tender category, required documents, technical experience, turnover or capacity criteria, EMD/exemption terms, dates, attachments and every corrigendum. A bidder may participate only if it satisfies the tender-specific conditions; for a restricted/limited tender, confirm that the bidder is in the permitted category or invitation list.\n\n📘 Source: Manual for Procurement of Goods 2024; Manual for Procurement of works 2019; Public Procurement Manual; General Financial Rules",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.5,
+    "required_concepts_hit": [
+      "tender-specific"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.611,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-35",
+    "question": "Tender mein three-year experience mandatory rakhna kab justified hota hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "tender_eligibility",
+    "intent_confidence": 0.98,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "specific_portal_step",
+    "retrieved_top_10_sources": [
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_context_sources": [
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "\nआपके सवाल का जवाब देने के लिए, मैंने सभी दिए गए दस्तावेजों को ध्यान से देखा है, लेकिन किसी भी दस्तावेज़ में यह नहीं लिखा है कि टेंडर में तीन साल का अनुभव कब तक अनिवार्य होता है।\n\nदस्तावेजों में टेंडर की प्रक्रिया, समय सीमा, निविदा पद्धति और पंजीकरण की जानकारी तो है, लेकिन तीन साल के अनुभव की कोई खास शर्त नहीं बताई गई है।\n\nअगर आपको तीन साल के अनुभव की जानकारी चाहिए, तो आपको CHiPS मैनुअल या आधिकारिक वेबसाइट पर जाना होगा।\n\nक्या आप किसी और जानकारी के बारे में पूछना चाहते हैं जो इन दस्तावेजों में दी गई है?",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.267,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-36",
+    "question": "Can a startup be exempted from prior experience and turnover requirements?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_answer_mode": "specific_portal_step",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ],
+    "detected_actor": "vendor_bidder",
+    "actor_confidence": 0.88,
+    "detected_intent": "tender_eligibility",
+    "intent_confidence": 0.98,
+    "detected_language": "en",
+    "detected_answer_mode": "specific_portal_step",
+    "retrieved_top_10_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_context_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nYes, a startup may participate if it meets the tender conditions. A recognised startup may receive any relaxation or procurement preference expressly available under the applicable rules and tender, but startup status does not automatically waive technical compliance, every eligibility condition, EMD, or submission requirements. Check the tender clause and submit the required recognition/evidence before claiming a benefit.\n\n📘 Source: Manual for Procurement of Goods 2024; GFR2017 HINDI; General Financial Rules",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.5,
+    "required_concepts_hit": [
+      "evidence"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 5.18,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-37",
+    "question": "Does MSME registration automatically make a bidder eligible for every tender?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "tender_eligibility",
+    "expected_answer_mode": "specific_portal_step",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ],
+    "detected_actor": "vendor_bidder",
+    "actor_confidence": 0.88,
+    "detected_intent": "tender_eligibility",
+    "intent_confidence": 0.98,
+    "detected_language": "en",
+    "detected_answer_mode": "specific_portal_step",
+    "retrieved_top_10_sources": [
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_context_sources": [
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_answer": "💡 Answer\nYes. A startup may participate in a Tender if it meets that Tender's eligibility and submission conditions. Startup status does not automatically waive a criterion.\n\n📋 Check\n1. Review the Tender notice for eligibility, experience/turnover and required documents.\n2. Verify the evidence required for any startup/MSME or other benefit stated in that Tender.\n3. Submit a Bid only on the conditions expressly applicable in the Tender.\n\n📘 Source: FAQ of Chhattisgarh Infotech Promotion Society(CHIPS); Vendor Registration Manual (CHiPS); Public Procurement Manual; Manual for Procurement of Goods 2024",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.5,
+    "required_concepts_hit": [
+      "evidence"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.885,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-38",
+    "question": "Can EMD exemption be claimed without uploading the required registration certificate?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_exemption",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "Guidelines_To_Bidders_EPS_v1.6.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "tender conditions",
+      "documents",
+      "eligibility"
+    ],
+    "required_answer_concepts": [
+      "tender-specific",
+      "evidence"
+    ],
+    "prohibited_unsafe_claims": [
+      "automatic eligibility",
+      "automatic exemption"
+    ],
+    "detected_actor": "vendor_bidder",
+    "actor_confidence": 0.88,
+    "detected_intent": "emd_exemption",
+    "intent_confidence": 0.95,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "GFR2017_HINDI.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_context_sources": [
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf"
+    ],
+    "final_answer": "💡 Answer\nYes. Under the applicable GFR provision, Micro and Small Enterprises (MSEs) covered by the MSE Procurement Policy, or registered with the Central Purchase Organisation or the concerned Ministry/Department, are excepted from Bid Security/EMD. Confirm the tender notice's eligibility and required evidence before claiming the exemption.\n\n📘 Source: Public Procurement Manual; General Financial Rules; GFR2017 HINDI",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.5,
+    "required_concepts_hit": [
+      "evidence"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.859,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-39",
+    "question": "What should happen if a bidder meets the technical specification but misses one mandatory document?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_operator",
+    "actor_confidence": 0.9,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.98,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Précis  e-Procurement Project.pdf"
+    ],
+    "final_context_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf"
+    ],
+    "final_answer": "💡 Answer\nEvaluate bids against the published Tender criteria: eligibility, technical responsiveness, required documents and compliance first; evaluate financial bids only as the Tender permits. The lowest quoted bidder does not automatically win—the proposed awardee must also be eligible, responsive and technically acceptable.\n\n📋 Process\n1. Record opening and verify bidder eligibility and required submissions.\n2. Check technical specifications, Tender conditions and compliance.\n3. Identify technically responsive bids under the published criteria.\n4. Open/evaluate financial bids only for the eligible, responsive bidders as applicable.\n5. Rank the evaluated bids, record reasons and obtain the competent approval before award.\n\n📘 Source: Précis e-Procurement Project; Preferred System Configuration V 2; EDGE Browser Setup V1.0",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "reasons",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 8.557,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-40",
+    "question": "A bidder uploaded an expired certificate. Should the bid be rejected or can clarification be requested?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_operator",
+    "actor_confidence": 0.9,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "final_context_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf"
+    ],
+    "final_answer": "💡 Answer\nEvaluate bids against the published Tender criteria: eligibility, technical responsiveness, required documents and compliance first; evaluate financial bids only as the Tender permits. The lowest quoted bidder does not automatically win—the proposed awardee must also be eligible, responsive and technically acceptable.\n\n📋 Process\n1. Record opening and verify bidder eligibility and required submissions.\n2. Check technical specifications, Tender conditions and compliance.\n3. Identify technically responsive bids under the published criteria.\n4. Open/evaluate financial bids only for the eligible, responsive bidders as applicable.\n5. Rank the evaluated bids, record reasons and obtain the competent approval before award.\n\n📘 Source: Manual for Procurement of Goods 2024; Manual for Procurement of works 2019; Public Procurement Manual",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "reasons",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 9.747,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-41",
+    "question": "Technical evaluation ke baad financial bids kin bidders ki open honi chahiye?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_opening_portal_steps",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "bid",
+      "deadline",
+      "DSC"
+    ],
+    "required_answer_concepts": [
+      "portal",
+      "bid",
+      "deadline"
+    ],
+    "prohibited_unsafe_claims": [
+      "department approval",
+      "buyer workflow"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.96,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Précis  e-Procurement Project.pdf"
+    ],
+    "final_context_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf"
+    ],
+    "final_answer": "💡 Answer\nBids ko published Tender criteria ke against evaluate karein: pehle eligibility, technical responsiveness, required documents aur compliance; financial bids ko Tender conditions ke mutabik evaluate karein. Sirf lowest quoted bidder automatically winner nahi hota—proposed awardee eligible, responsive aur technically acceptable bhi hona chahiye.\n\n📋 Process\n1. Bid opening record karke eligibility aur required submissions verify karein.\n2. Technical specifications, Tender conditions aur compliance check karein.\n3. Published criteria ke mutabik technically responsive bids identify karein.\n4. Applicable case mein sirf eligible/responsive bidders ki financial bids evaluate karein.\n5. Evaluated bids rank karke reasons record karein aur award se pehle competent approval lein.\n\n📘 Source: Précis e-Procurement Project; Preferred System Configuration V 2; EDGE Browser Setup V1.0",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.333,
+    "required_concepts_hit": [
+      "bid"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.56,
+    "http_status": 200,
+    "error": null,
+    "result": "Fail",
+    "root_cause": "Actor Classification Failure"
+  },
+  {
+    "id": "H50-42",
+    "question": "Can a technically non-responsive bidder be selected because its price is the lowest?",
+    "expected_actor": "general_information_user",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "general_information_user",
+    "actor_confidence": 0.55,
+    "detected_intent": "unknown",
+    "intent_confidence": 0.0,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "Précis  e-Procurement Project.pdf"
+    ],
+    "final_context_sources": [
+      "Précis  e-Procurement Project.pdf",
+      "Preferred_System_Configuration_V_2.pdf",
+      "EDGE_Browser_Setup_V1.0.pdf"
+    ],
+    "final_answer": "\nBased on the provided documents, the answer is no. The project overview from the Précis e-Procurement Project document details the selection process for the Integrated e-Procurement Project. It shows that the Empowered Committee (EC) approved the RFP, evaluated bids, and issued a Letter of Intent (L1) to Mls Mjunction Services Limited. The process involved multiple EC meetings to approve the RFP, evaluate technical and commercial bids, and make the final selection. This indicates that the selection was based on a comprehensive evaluation, not solely on the lowest price. The documents do not mention any scenario where a technically non-responsive bidder could be selected.\n\nThe way forward and action plan in the second source also focuses on standard procurement steps like obtaining EC approval, floating the RFP, and evaluating bids, which are consistent with a merit-based selection process.\n\nTherefore, the provided documents do not support the selection of a technically non-responsive bidder, even if its price is the lowest.\n\n📘 Source: Précis e-Procurement Project.pdf (both Type: project_overview)",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "evaluation",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 2.825,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Fine-Intent Classification Failure"
+  },
+  {
+    "id": "H50-43",
+    "question": "L1 bidder ki rate estimate se 25% zyada hai. Department ko kya karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.98,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.95,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_context_sources": [
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_answer": "💡 Answer\nOriginal question “L1 bidder ki rate estimate se 25% zyada hai. Department ko kya karna chahiye?” ko exact intent procurement_planning ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.0,
+    "required_concepts_hit": [],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.693,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-44",
+    "question": "How should the evaluation committee record reasons for rejecting a bidder?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "bid_evaluation",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_operator",
+    "actor_confidence": 0.9,
+    "detected_intent": "bid_evaluation",
+    "intent_confidence": 0.96,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf"
+    ],
+    "final_context_sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_answer": "💡 Answer\nEvaluate bids against the published Tender criteria: eligibility, technical responsiveness, required documents and compliance first; evaluate financial bids only as the Tender permits. The lowest quoted bidder does not automatically win—the proposed awardee must also be eligible, responsive and technically acceptable.\n\n📋 Process\n1. Record opening and verify bidder eligibility and required submissions.\n2. Check technical specifications, Tender conditions and compliance.\n3. Identify technically responsive bids under the published criteria.\n4. Open/evaluate financial bids only for the eligible, responsive bidders as applicable.\n5. Rank the evaluated bids, record reasons and obtain the competent approval before award.\n\n📘 Source: Manual for Procurement of Goods 2024; Public Procurement Manual; Manual for Procurement of works 2019",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "reasons",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 10.148,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-45",
+    "question": "Can tender conditions be changed after bids have already been opened?",
+    "expected_actor": "department_operator",
+    "expected_fine_intent": "corrigendum_policy",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "corrigendum",
+      "bid",
+      "tender"
+    ],
+    "required_answer_concepts": [
+      "corrigendum",
+      "check",
+      "submit"
+    ],
+    "prohibited_unsafe_claims": [
+      "department workflow for bidder"
+    ],
+    "detected_actor": "department_operator",
+    "actor_confidence": 0.9,
+    "detected_intent": "corrigendum_policy",
+    "intent_confidence": 0.98,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "final_context_sources": [
+      "mannual procurement.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "final_answer": "💡 Answer\nA Corrigendum is the procuring entity's formal legal amendment or clarification to an issued Tender. It preserves equal information and transparency by publishing changed dates, specifications, conditions or attachments through the authorised channel. The Corrigendum becomes part of the Tender; if a material change affects Bid preparation, bidders should receive reasonable time and the deadline should be extended where required. It must not be used to alter the fundamental nature of the procurement.\n\n📘 Source: Public Procurement Manual; Manual for Procurement of works 2019",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 0.333,
+    "required_concepts_hit": [
+      "corrigendum"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.478,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-46",
+    "question": "Purchase Order issue hone ke baad vendor delivery delay kare to department kya action le sakta hai?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "purchase_order",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "eligibility",
+      "responsive",
+      "price"
+    ],
+    "required_answer_concepts": [
+      "evaluation",
+      "reasons",
+      "approval"
+    ],
+    "prohibited_unsafe_claims": [
+      "lowest automatically wins",
+      "ignore tender conditions"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.9,
+    "detected_intent": "purchase_order",
+    "intent_confidence": 0.96,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "AuctionManual_FA.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf"
+    ],
+    "final_context_sources": [
+      "AuctionManual_FA.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Précis  e-Procurement Project.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "final_answer": "💡 Answer\nPurchase Order evaluation, recommendation aur competent approval complete hone ke baad hi issue karein.\n\n📋 Process\n1. Responsive successful bidder finalise karke rate reasonableness record karein.\n2. Competent authority se award approval lein.\n3. PO terms mein item, quantity, specifications, price/taxes, delivery, warranty, inspection, acceptance aur payment likhein.\n4. Approved Bid aur sanction se PO verify karke authorised channel se issue karein.\n5. Acknowledgement record karke delivery/contract performance monitor karein.\n\n📘 Source: AuctionManual FA; Corrigendum Issuance Manual (CHiPS); Bid Submission Manual (CHiPS); Précis e-Procurement Project; Vendor Registration Manual (CHiPS)",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "evaluation",
+      "approval"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 4.938,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-47",
+    "question": "Goods receive ho gaye, but specification match nahi kar rahi. Payment release karna chahiye kya?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "inspection_and_acceptance",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "inspection",
+      "acceptance",
+      "payment"
+    ],
+    "required_answer_concepts": [
+      "inspection",
+      "acceptance"
+    ],
+    "prohibited_unsafe_claims": [
+      "release payment without acceptance"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.82,
+    "detected_intent": "inspection_and_acceptance",
+    "intent_confidence": 0.98,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "final_context_sources": [
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "final_answer": "💡 Answer\nPurchase Order issue hone ke baad department delivery ko PO aur contract conditions ke against inspect karke formal acceptance record kare.\n\n📋 Process\n1. Delivered quantity, specifications, warranty aur condition ko PO se match karein.\n2. Shortage, damage ya deviation ko inspection record mein note karein.\n3. Non-compliant supply ke liye supplier se rectification ya replacement karayein.\n4. Compliant supply ki receipt aur formal acceptance record banayein.\n5. Acceptance aur required invoice/supporting documents ke baad payment process karke item ko stock/asset register mein enter karein.\n\n📘 Source: GFR2017 HINDI; Chhattisgarh Store Purchase Rules; Store Purhase Rules 28.01.2021",
+    "citation_correctness": "Partial",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "inspection",
+      "acceptance"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 8.537,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-48",
+    "question": "What documents should be completed before processing payment to the supplier?",
+    "expected_actor": "department_buyer",
+    "expected_fine_intent": "payment_and_asset_entry",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "inspection",
+      "acceptance",
+      "payment"
+    ],
+    "required_answer_concepts": [
+      "inspection",
+      "acceptance"
+    ],
+    "prohibited_unsafe_claims": [
+      "release payment without acceptance"
+    ],
+    "detected_actor": "department_buyer",
+    "actor_confidence": 0.84,
+    "detected_intent": "payment_and_asset_entry",
+    "intent_confidence": 0.92,
+    "detected_language": "en",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "final_context_sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "final_answer": "💡 Answer\nPayment should follow verified delivery and formal acceptance; the asset/stock record should reflect the accepted item before the case is closed.\n\n📋 Process\n1. Match delivery with the Purchase Order and inspect quantity/specifications.\n2. Record receipt and acceptance, or any shortage/rejection.\n3. Verify the supplier invoice/bill, taxes, deductions and acceptance documents.\n4. Obtain the required payment approval and process payment under the contract terms.\n5. Enter the item in the asset or stock register with identification, value, location and custodian details; cross-reference the invoice and Purchase Order.\n\n📘 Source: Corrigendum Issuance Manual (CHiPS); EMD CHALLAN PAYMENT V1.0; Vendor Registration Manual (CHiPS)",
+    "citation_correctness": "Fail",
+    "required_concept_coverage": 0.5,
+    "required_concepts_hit": [
+      "acceptance"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 8.889,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Final Context/Citation Selection Failure"
+  },
+  {
+    "id": "H50-49",
+    "question": "Bid submit karne ke baad corrigendum se specifications change ho gayi. Kya mujhe bid dobara submit karni hogi?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "bidder_corrigendum_tracking",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "corrigendum",
+      "bid",
+      "tender"
+    ],
+    "required_answer_concepts": [
+      "corrigendum",
+      "check",
+      "submit"
+    ],
+    "prohibited_unsafe_claims": [
+      "department workflow for bidder"
+    ],
+    "detected_actor": "vendor_bidder",
+    "actor_confidence": 0.9,
+    "detected_intent": "bidder_corrigendum_tracking",
+    "intent_confidence": 0.96,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "AuctionManual_FA.pdf"
+    ],
+    "final_context_sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "final_answer": "\nCorrigendum ke baad agar specifications change ho gayi hai to aapko bid dobara submit karni pad sakti hai. CHiPS manual ke according:\n\n1. Agar bid delete ho gayi hai to aapko revised tender ke according fresh bid submit karni hogi revised deadline se pehle.\n\n2. Agar Required Attachment Corrigendum publish hua hai aur bid deletion set to No hai to aapko fresh attachments ke saath bid resubmit karni hogi.\n\n3. Aapko har Corrigendum ke baad portal par tender aur bid status verify karna chahiye, yeh assume mat kijiye ki pehli bid valid rahegi.\n\nIsliye, agar aapki bid delete ho gayi hai ya fresh attachments chahiye, to aapko dobara submit karna zaroori hai.\n\n📘 Source: CHiPS_Corrigendum_Issuance_Manual.pdf",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 0.667,
+    "required_concepts_hit": [
+      "corrigendum",
+      "submit"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 8.446,
+    "http_status": 200,
+    "error": null,
+    "result": "Partial",
+    "root_cause": "Answer Synthesis / Grounding Failure"
+  },
+  {
+    "id": "H50-50",
+    "question": "EMD payment successful hai but portal par status pending dikh raha hai, aur deadline close hai. Main kya karun?",
+    "expected_actor": "vendor_bidder",
+    "expected_fine_intent": "emd_payment_failure",
+    "expected_answer_mode": "direct_answer",
+    "expected_source_documents": [
+      "Online_EMD_Refund_Notice.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "expected_evidence_concepts": [
+      "EMD",
+      "status",
+      "receipt"
+    ],
+    "required_answer_concepts": [
+      "EMD",
+      "status",
+      "support"
+    ],
+    "prohibited_unsafe_claims": [
+      "assume payment successful",
+      "ignore deadline"
+    ],
+    "detected_actor": "vendor_bidder",
+    "actor_confidence": 0.9,
+    "detected_intent": "emd_payment_failure",
+    "intent_confidence": 0.98,
+    "detected_language": "hinglish",
+    "detected_answer_mode": "direct_answer",
+    "retrieved_top_10_sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "Online_EMD_Refund_Notice.pdf",
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "final_context_sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf"
+    ],
+    "final_answer": "💡 Answer\nAgar EMD/Bid Security eChallan payment fail hone ke baad amount debit ho gaya aur Tender ki Bid Due Date tak beneficiary account mein credit nahi hota, payment source account mein return ho sakta hai aur Bid unpaid ya reject treat ho sakti hai. Screenshot ki amount/date use na karein; specific Tender control karta hai.\n\n📋 Process\n1. Relevant Tender mein transaction aur EMD/Bid Security payment status check karein.\n2. Credited amount aur time ko us Tender ki current Bid Due Date se compare karein.\n3. Same challan ko kisi doosre Tender ke liye re-use na karein.\n4. Status Successful na ho ya credit beneficiary tak na pahunche to receipt/reference preserve karke Bid submit karne se pehle Tender ke official payment-support route ka use karein.\n\n📘 Source: Bid Submission Manual (CHiPS); Offline Tender Upload Manual (CHiPS); EMD CHALLAN PAYMENT V1.0; Corrigendum Issuance Manual (CHiPS)",
+    "citation_correctness": "Pass",
+    "required_concept_coverage": 1.0,
+    "required_concepts_hit": [
+      "EMD",
+      "status",
+      "support"
+    ],
+    "unsafe_claims_found": [],
+    "response_time_seconds": 6.377,
+    "http_status": 200,
+    "error": null,
+    "result": "Pass",
+    "root_cause": null
+  }
+]
