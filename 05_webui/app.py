@@ -2780,11 +2780,14 @@ def stream_query():
             # ── Step 2: Ollama (llama3.2 on Intel Arc GPU) ───────────────────
             OLLAMA_MODEL = os.getenv('OLLAMA_MODEL', 'llama3.2')
             OLLAMA_URL   = os.getenv('OLLAMA_URL', 'http://localhost:11434')
-            ANSWER_PROVIDER = os.getenv('ANSWER_PROVIDER', 'ollama').strip().lower()
+            ANSWER_PROVIDER = os.getenv('ANSWER_PROVIDER', 'sarvam').strip().lower()
             MODEL_FALLBACK_ENABLED = os.getenv(
                 'ENABLE_MODEL_FALLBACK', 'true'
             ).strip().lower() in ('1', 'true', 'yes', 'on')
             SARVAM_MODEL = os.getenv('SARVAM_MODEL', 'sarvam-30b')
+            SARVAM_ONLY_MODE = ANSWER_PROVIDER == 'sarvam'
+            if SARVAM_ONLY_MODE:
+                MODEL_FALLBACK_ENABLED = False
             # Sarvam is a remote 30B model: its prompt prefill and tail latency
             # are materially higher than the local Ollama path.  Keep the full
             # retrieved context for the UI and diagnostics, but send a bounded
@@ -3004,6 +3007,8 @@ def stream_query():
             FALLBACK_MODEL = _fallback_model_env or (
                 OLLAMA_MODEL if ANSWER_PROVIDER == 'sarvam' else 'llama3:8b'
             )
+            if SARVAM_ONLY_MODE:
+                FALLBACK_MODEL = ''
 
             # ── Deterministic lines injected after the answer heading (the LLM
             #    is too unreliable to format these): deadline urgency, numeric
@@ -3385,7 +3390,7 @@ def stream_query():
             # latency budget must not keep the browser waiting for the provider
             # read timeout.  Reuse the already-grounded deterministic responder
             # so actor/language/intent-safe content is returned immediately.
-            if state.get('sarvam_timeout') and not content_streamed:
+            if state.get('sarvam_timeout') and not content_streamed and not SARVAM_ONLY_MODE:
                 try:
                     _timeout_lang = detect_query_language(query_text)
                     _timeout_answer = render_fine_intent_fallback(
@@ -3407,10 +3412,21 @@ def stream_query():
                 except Exception as _fallback_error:
                     print(f'[SARVAM FALLBACK] {_fallback_error}', flush=True)
 
+            if not content_streamed and SARVAM_ONLY_MODE:
+                _sarvam_only_message = {
+                    'hi': 'à¤•à¥à¤·à¤®à¤¾ à¤•à¤°à¥‡à¤‚, Sarvam API à¤¸à¥‡ à¤‰à¤¤à¥à¤¤à¤° à¤®à¤¿à¤² à¤¨à¤¹à¥€à¤‚ à¤ªà¤¾à¤¯à¤¾à¥¤ à¤•à¥ƒà¤ªà¤¯à¤¾ à¤¥à¥‹à¤¡à¤¼à¥€ à¤¦à¥‡à¤° à¤¬à¤¾à¤¦ à¤«à¤¿à¤° à¤¸à¥‡ à¤ªà¥à¤°à¤¯à¤¾à¤¸ à¤•à¤°à¥‡à¤‚à¥¤',
+                    'hinglish': 'Sorry, Sarvam API se answer nahi mil paya. Please thodi der baad dobara try karein.',
+                    'en': 'Sorry, no answer was received from the Sarvam API. Please try again shortly.',
+                }
+                yield f"data: {json.dumps({'type':'token','content':_sarvam_only_message.get(_lang, _sarvam_only_message['en'])})}\n\n"
+                content_streamed = True
+                state['content_streamed'] = True
+                state['answer_buf'] = [_sarvam_only_message.get(_lang, _sarvam_only_message['en'])]
+
             # Empty-answer guard: the model occasionally streams zero content
             # tokens (observed with llama3:8b on Hinglish queries), leaving a
             # blank bubble in the UI. Emit a graceful fallback instead.
-            if not content_streamed:
+            if not content_streamed and not SARVAM_ONLY_MODE:
                 _fallbacks = {
                     'hi':       'क्षमा करें, उत्तर तैयार नहीं हो सका। कृपया प्रश्न को थोड़ा बदलकर दोबारा पूछें।',
                     'hinglish': 'Sorry, answer generate nahi ho paya. Please question thoda badal kar dobara poochhein.',
