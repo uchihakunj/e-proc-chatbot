@@ -4,6 +4,13 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENV_PYTHON="${ROOT_DIR}/.venv/bin/python"
 
+ENABLE_VOICE="${ENABLE_VOICE:-false}"
+for arg in "$@"; do
+  if [[ "$arg" == "--voice" ]]; then
+    ENABLE_VOICE="true"
+  fi
+done
+
 echo "========================================================"
 echo "  CHiPS e-Procurement Chatbot - CPU ONLY (Rocky Linux)"
 echo "========================================================"
@@ -39,6 +46,13 @@ echo "Frontend URL: http://0.0.0.0:${PORT}"
 echo "Backend URL: ${FLASK_URL}"
 echo "Embedder: ${EMBEDDER_BACKEND} on ${EMBEDDER_DEVICE}"
 echo "Reranker: ${RERANKER_BACKEND} on ${RERANKER_DEVICE}"
+
+if [[ "${ENABLE_VOICE}" == "true" ]]; then
+  mkdir -p "${ROOT_DIR}/logs"
+  echo "Starting Voice Server on port 5050..."
+  "${PYTHON}" "${ROOT_DIR}/06_voice/voice_server.py" > "${ROOT_DIR}/logs/voice_server.log" 2>&1 &
+  echo "Voice Server launched in background (Log: logs/voice_server.log)"
+fi
 
 cd "${ROOT_DIR}/05_webui/nodejs"
 exec node server.js
