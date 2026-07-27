@@ -28,7 +28,7 @@ function parseBackendTarget(urlString) {
       port: Number(target.port || (target.protocol === 'https:' ? 443 : 80)),
     };
   } catch (_err) {
-    return { hostname: '127.0.0.1', port: 5000 };
+    return { hostname: '127.0.0.1', port: 6000 };
   }
 }
 

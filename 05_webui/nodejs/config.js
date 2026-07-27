@@ -15,6 +15,6 @@ try {
 // Login/auth removed — no JWT_SECRET or user store required anymore.
 module.exports = {
   PORT:      parseInt(process.env.PORT || '3000', 10),
-  FLASK_URL: process.env.FLASK_URL     || 'http://localhost:5000',
+  FLASK_URL: process.env.FLASK_URL     || 'http://127.0.0.1:6000',
   IS_PROD:   process.env.NODE_ENV      === 'production',
 };

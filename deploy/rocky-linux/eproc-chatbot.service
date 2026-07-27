@@ -9,7 +9,8 @@ User=chips
 Group=chips
 WorkingDirectory=/opt/eproc-chatbot
 Environment=PORT=3000
-Environment=FLASK_URL=http://127.0.0.1:5000
+Environment=FLASK_PORT=6000
+Environment=FLASK_URL=http://127.0.0.1:6000
 Environment=NODE_ENV=production
 Environment=USE_WAITRESS=true
 Environment=CUDA_VISIBLE_DEVICES=-1

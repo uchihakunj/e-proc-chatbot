@@ -4103,8 +4103,21 @@ if __name__ == '__main__':
     print("\nℹ️  This Flask server is INTERNAL ONLY.")
     print("   Authentication is handled by Express.js at :3000")
     
-    flask_host = '0.0.0.0'
-    flask_port = 5000
+    flask_host = os.getenv('FLASK_HOST', '0.0.0.0')
+    flask_port = 6000
+    if os.getenv('FLASK_PORT'):
+        try:
+            flask_port = int(os.getenv('FLASK_PORT'))
+        except ValueError:
+            pass
+    elif os.getenv('FLASK_URL'):
+        try:
+            from urllib.parse import urlparse
+            parsed = urlparse(os.getenv('FLASK_URL'))
+            if parsed.port:
+                flask_port = parsed.port
+        except Exception:
+            pass
     flask_debug = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
 
     # Production: serve via waitress (a real WSGI server) instead of Flask's
