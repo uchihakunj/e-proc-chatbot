@@ -1,0 +1,184 @@
+{"kind":"deck","id":"pr/2ozqy2","name":"Deck"}
+{"kind":"layout","layoutId":"acfe7e76-722d-4601-b4f8-0eaae4aca050","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"862dfeb8-937d-4363-9655-31fdb50ab269","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/x6zlq3","slide":1,"title":"MONTHLY PROGRESS PRESENTATION","textShapes":6}
+{"kind":"textbox","id":"sh/al43adgv","slide":1,"text":"MONTHLY PROGRESS PRESENTATION","textPreview":"MONTHLY PROGRESS PRESENTATION","textChars":29,"textLines":1,"bbox":[72,72,280,26]}
+{"kind":"textbox","id":"sh/xof2lsfm","slide":1,"text":"CHiPS e-Procurement AI Chatbot","textPreview":"CHiPS e-Procurement AI Chatbot","textChars":30,"textLines":1,"bbox":[72,138,760,170]}
+{"kind":"textbox","id":"sh/wnmlcny1","slide":1,"text":"Department / Organization assigned: CHiPS, Government of Chhattisgarh\nReporting period: July 2026\nPresentation duration: 15 minutes + 5 minutes discussion","textPreview":"Department / Organization assigned: CHiPS, Government of Chhattisgarh | Reporting period: July 2026 | Presentation duration: 15 minutes +...","textChars":154,"textLines":3,"bbox":[72,320,660,120]}
+{"kind":"shape","id":"sh/nidkfyxk","slide":1,"name":"cover-panel","bbox":[870,108,310,470]}
+{"kind":"textbox","id":"sh/mh4j6tgz","slide":1,"text":"Focus this month\n\n• Improve answer quality\n• Strengthen routing and validation\n• Refine UI and voice support\n• Prepare demo-ready documentation","textPreview":"Focus this month |  | • Improve answer quality | • Strengthen routing and validation | • Refine UI and voice support | • Prepare demo-rea...","textChars":143,"textLines":6,"bbox":[900,160,250,350]}
+{"kind":"shape","id":"sh/9kv2h8fa","slide":1,"name":"footer-line-1","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/ojm183yp","slide":1,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/7exkr2xo","slide":1,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/x6zlq3","slide":1,"text":""}
+{"kind":"slide","id":"sl/6uyx39","slide":2,"title":"MONTHLY REVIEW","textShapes":10}
+{"kind":"textbox","id":"sh/i1wze90j","slide":2,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/54nipoja","slide":2,"text":"The chatbot addresses a real procurement guidance gap","textPreview":"The chatbot addresses a real procurement guidance gap","textChars":53,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"shape","id":"sh/k3e1gjip","slide":2,"bbox":[72,164,520,210]}
+{"kind":"shape","id":"sh/vyl0ju18","slide":2,"name":"Problem statement-bar","bbox":[72,164,8,210]}
+{"kind":"textbox","id":"sh/axczap0n","slide":2,"text":"Problem statement","textPreview":"Problem statement","textChars":17,"textLines":1,"bbox":[96,182,480,28]}
+{"kind":"textbox","id":"sh/x0nil4jy","slide":2,"text":"• Procurement manuals and rules are lengthy and difficult to search quickly.\n• Users need role-specific help for tenders, bids, vendor registration, EMD, and rules.\n• Queries arrive in English, Hindi, and Hinglish, making manual support slower.","textPreview":"• Procurement manuals and rules are lengthy and difficult to search quickly. | • Users need role-specific help for tenders, bids, vendor ...","textChars":244,"textLines":3,"bbox":[96,222,484,138]}
+{"kind":"shape","id":"sh/wzehczid","slide":2,"bbox":[616,164,592,210]}
+{"kind":"shape","id":"sh/fup0vy1c","slide":2,"name":"Project objectives-bar","bbox":[616,164,8,210]}
+{"kind":"textbox","id":"sh/utgjmt0r","slide":2,"text":"Project objectives","textPreview":"Project objectives","textChars":18,"textLines":1,"bbox":[640,182,552,28]}
+{"kind":"textbox","id":"sh/o7udgjml","slide":2,"text":"• Provide source-grounded conversational answers for CHiPS e-Procurement workflows.\n• Support multilingual interactions with clear, context-aware responses.\n• Reduce answer drift by improving routing, retrieval, and deterministic responders.","textPreview":"• Provide source-grounded conversational answers for CHiPS e-Procurement workflows. | • Support multilingual interactions with clear, con...","textChars":241,"textLines":3,"bbox":[640,222,556,138]}
+{"kind":"shape","id":"sh/983u9o3q","slide":2,"bbox":[72,404,1136,210]}
+{"kind":"shape","id":"sh/m5svet4f","slide":2,"name":"Key features-bar","bbox":[72,404,8,210]}
+{"kind":"textbox","id":"sh/n6lc7el0","slide":2,"text":"Key features","textPreview":"Key features","textChars":12,"textLines":1,"bbox":[96,422,1096,28]}
+{"kind":"textbox","id":"sh/03adcjm9","slide":2,"text":"• Multilingual chatbot widget, source-linked answers, quick prompt chips, PDF/source viewing, and voice support.\n• Coverage across tender methods, bid submission, evaluation, registration, EMD, auctions, and procurement rules.","textPreview":"• Multilingual chatbot widget, source-linked answers, quick prompt chips, PDF/source viewing, and voice support. | • Coverage across tend...","textChars":226,"textLines":2,"bbox":[96,462,1100,138]}
+{"kind":"shape","id":"sh/14ju5o3u","slide":2,"name":"footer-line-2","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/e1sva943","slide":2,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/z21c3elo","slide":2,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/6uyx39","slide":2,"text":""}
+{"kind":"slide","id":"sl/2zd9zq","slide":3,"title":"MONTHLY REVIEW","textShapes":19}
+{"kind":"textbox","id":"sh/o36xkf2x","slide":3,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/n2xwba1s","slide":3,"text":"Methodology combined document processing, retrieval, and answer controls","textPreview":"Methodology combined document processing, retrieval, and answer controls","textChars":72,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"textbox","id":"sh/m1ofi5k7","slide":3,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[88,160,44,44]}
+{"kind":"textbox","id":"sh/x8zehkju","slide":3,"text":"Document pipeline","textPreview":"Document pipeline","textChars":17,"textLines":1,"bbox":[156,158,240,28]}
+{"kind":"textbox","id":"sh/w7qxof29","slide":3,"text":"Preprocess PDFs, clean OCR, and prepare chunkable text from procurement manuals and rules.","textPreview":"Preprocess PDFs, clean OCR, and prepare chunkable text from procurement manuals and rules.","textChars":90,"textLines":1,"bbox":[156,188,930,46]}
+{"kind":"textbox","id":"sh/b6xwfa1o","slide":3,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[88,248,44,44]}
+{"kind":"textbox","id":"sh/a5ofm5k3","slide":3,"text":"Knowledge indexing","textPreview":"Knowledge indexing","textChars":18,"textLines":1,"bbox":[156,246,240,28]}
+{"kind":"textbox","id":"sh/5wzelkjq","slide":3,"text":"Create embeddings, store searchable vectors, and attach metadata for better retrieval.","textPreview":"Create embeddings, store searchable vectors, and attach metadata for better retrieval.","textChars":86,"textLines":1,"bbox":[156,276,930,46]}
+{"kind":"textbox","id":"sh/kvqxsz25","slide":3,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[88,336,44,44]}
+{"kind":"textbox","id":"sh/q9c7qx4z","slide":3,"text":"Query routing","textPreview":"Query routing","textChars":13,"textLines":1,"bbox":[156,334,240,28]}
+{"kind":"textbox","id":"sh/raloz2lk","slide":3,"text":"Classify actor, intent, and language before selecting response strategy.","textPreview":"Classify actor, intent, and language before selecting response strategy.","textChars":72,"textLines":1,"bbox":[156,364,930,46]}
+{"kind":"textbox","id":"sh/cbups7m5","slide":3,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[88,424,44,44]}
+{"kind":"textbox","id":"sh/dc361c3q","slide":3,"text":"Grounded response","textPreview":"Grounded response","textChars":17,"textLines":1,"bbox":[156,422,240,28]}
+{"kind":"textbox","id":"sh/edc7uh4b","slide":3,"text":"Retrieve top evidence, rerank context, and generate or serve deterministic answers.","textPreview":"Retrieve top evidence, rerank context, and generate or serve deterministic answers.","textChars":83,"textLines":1,"bbox":[156,452,930,46]}
+{"kind":"textbox","id":"sh/zelo32lw","slide":3,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[88,512,44,44]}
+{"kind":"textbox","id":"sh/0fepw7mh","slide":3,"text":"Validation loop","textPreview":"Validation loop","textChars":15,"textLines":1,"bbox":[156,510,240,28]}
+{"kind":"textbox","id":"sh/10n65c3m","slide":3,"text":"Run regression tests, live API checks, and benchmark/UAT reviews to refine quality.","textPreview":"Run regression tests, live API checks, and benchmark/UAT reviews to refine quality.","textChars":83,"textLines":1,"bbox":[156,540,930,46]}
+{"kind":"shape","id":"sh/uhsnid47","slide":3,"name":"footer-line-3","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/fi1orilc","slide":3,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/jmx4ze14","slide":3,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/2zd9zq","slide":3,"text":""}
+{"kind":"slide","id":"sl/nud0z4","slide":4,"title":"MONTHLY REVIEW","textShapes":13}
+{"kind":"textbox","id":"sh/3qt4zqxs","slide":4,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/4r258ved","slide":4,"text":"System architecture separates UI, API, retrieval, and model layers","textPreview":"System architecture separates UI, API, retrieval, and model layers","textChars":66,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"shape","id":"sh/5svm10fy","slide":4,"bbox":[84,210,240,120]}
+{"kind":"textbox","id":"sh/qt4na5wj","slide":4,"text":"Web UI","textPreview":"Web UI","textChars":6,"textLines":1,"bbox":[102,226,204,30]}
+{"kind":"textbox","id":"sh/red43ad4","slide":4,"text":"Portal page + chatbot widget\nQuick prompts, source drawer, voice controls","textPreview":"Portal page + chatbot widget | Quick prompts, source drawer, voice controls","textChars":73,"textLines":2,"bbox":[102,264,204,52]}
+{"kind":"shape","id":"sh/sfm5cfep","slide":4,"bbox":[380,210,240,120]}
+{"kind":"textbox","id":"sh/dgvm5kva","slide":4,"text":"Flask API","textPreview":"Flask API","textChars":9,"textLines":1,"bbox":[398,226,204,30]}
+{"kind":"textbox","id":"sh/eh4nepwf","slide":4,"text":"Streaming answers\nRouting, diagnostics, language control","textPreview":"Streaming answers | Routing, diagnostics, language control","textChars":56,"textLines":2,"bbox":[398,264,204,52]}
+{"kind":"shape","id":"sh/fid47ud0","slide":4,"bbox":[676,210,240,120]}
+{"kind":"textbox","id":"sh/ji1c7e10","slide":4,"text":"Retrieval Layer","textPreview":"Retrieval Layer","textChars":15,"textLines":1,"bbox":[694,226,204,30]}
+{"kind":"textbox","id":"sh/yhsby90f","slide":4,"text":"Qdrant vector store\nEmbedding + reranking context selection","textPreview":"Qdrant vector store | Embedding + reranking context selection","textChars":59,"textLines":2,"bbox":[694,264,204,52]}
+{"kind":"shape","id":"sh/lkju9ojq","slide":4,"bbox":[972,210,224,120]}
+{"kind":"textbox","id":"sh/kjat0ji5","slide":4,"text":"LLM Layer","textPreview":"LLM Layer","textChars":9,"textLines":1,"bbox":[990,226,188,30]}
+{"kind":"textbox","id":"sh/be1c3u1o","slide":4,"text":"Local Ollama-hosted models\nFinal answer generation","textPreview":"Local Ollama-hosted models | Final answer generation","textChars":50,"textLines":2,"bbox":[990,264,188,52]}
+{"kind":"textbox","id":"sh/ad8bup03","slide":4,"text":"Technology stack: Python 3.11, Flask, Node.js / Express, Qdrant, BGE-M3 embeddings, bge-reranker-v2-m3, local Ollama models, HTML/CSS/JavaScript, and browser-based speech support.","textPreview":"Technology stack: Python 3.11, Flask, Node.js / Express, Qdrant, BGE-M3 embeddings, bge-reranker-v2-m3, local Ollama models, HTML/CSS/Jav...","textChars":179,"textLines":1,"bbox":[92,408,1110,160]}
+{"kind":"shape","id":"sh/xgju54ju","slide":4,"name":"footer-line-4","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/wfatwzi9","slide":4,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/valcfyhs","slide":4,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/nud0z4","slide":4,"text":""}
+{"kind":"slide","id":"sl/nvj1hb","slide":5,"title":"MONTHLY REVIEW","textShapes":10}
+{"kind":"textbox","id":"sh/7qhgze5o","slide":5,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/8rqx8z69","slide":5,"text":"This month focused on UI polish, answer quality, and validation","textPreview":"This month focused on UI polish, answer quality, and validation","textChars":63,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"shape","id":"sh/9szy14ne","slide":5,"bbox":[72,164,352,210]}
+{"kind":"shape","id":"sh/ylof2por","slide":5,"name":"Activities completed-bar","bbox":[72,164,8,210]}
+{"kind":"textbox","id":"sh/zmxgbupc","slide":5,"text":"Activities completed","textPreview":"Activities completed","textChars":20,"textLines":1,"bbox":[96,182,312,28]}
+{"kind":"textbox","id":"sh/kn6x4z6x","slide":5,"text":"• Prepared monthly and project reports.\n• Captured chatbot screenshots and demo assets.\n• Reorganized project documentation and support files.","textPreview":"• Prepared monthly and project reports. | • Captured chatbot screenshots and demo assets. | • Reorganized project documentation and suppo...","textChars":142,"textLines":3,"bbox":[96,222,316,138]}
+{"kind":"shape","id":"sh/lozyd4ni","slide":5,"bbox":[464,164,352,210]}
+{"kind":"shape","id":"sh/ihsfetob","slide":5,"name":"Technical work-bar","bbox":[464,164,8,210]}
+{"kind":"textbox","id":"sh/ji1g7y5w","slide":5,"text":"Technical work","textPreview":"Technical work","textChars":14,"textLines":1,"bbox":[488,182,312,28]}
+{"kind":"textbox","id":"sh/je9czq1g","slide":5,"text":"• Added routing, context diagnostics, and language enforcement.\n• Improved voice latency with browser STT fallback.\n• Refined UI interactions and answer presentation flow.","textPreview":"• Added routing, context diagnostics, and language enforcement. | • Improved voice latency with browser STT fallback. | • Refined UI inte...","textChars":171,"textLines":3,"bbox":[488,222,316,138]}
+{"kind":"shape","id":"sh/yd0bqlkv","slide":5,"bbox":[856,164,352,210]}
+{"kind":"shape","id":"sh/lgbulgj6","slide":5,"name":"Quality work-bar","bbox":[856,164,8,210]}
+{"kind":"textbox","id":"sh/kfitsv2l","slide":5,"text":"Quality work","textPreview":"Quality work","textChars":12,"textLines":1,"bbox":[880,182,312,28]}
+{"kind":"textbox","id":"sh/7itcnq1c","slide":5,"text":"• Ran exact-answer validation and UAT quality audit.\n• Added high-risk deterministic responders and regression cases.\n• Documented benchmark outcomes and remaining defects.","textPreview":"• Ran exact-answer validation and UAT quality audit. | • Added high-risk deterministic responders and regression cases. | • Documented be...","textChars":172,"textLines":3,"bbox":[880,222,316,138]}
+{"kind":"shape","id":"sh/6hkvulkr","slide":5,"name":"footer-line-5","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/tkbup0ji","slide":5,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/8j2dwv2x","slide":5,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/nvj1hb","slide":5,"text":""}
+{"kind":"slide","id":"sl/6xcce6","slide":6,"title":"MONTHLY REVIEW","textShapes":8}
+{"kind":"textbox","id":"sh/vid4fetc","slide":6,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/wjml8jax","slide":6,"text":"Technical contributions improved correctness on sensitive procurement queries","textPreview":"Technical contributions improved correctness on sensitive procurement queries","textChars":77,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"shape","id":"sh/hkvmhobi","slide":6,"bbox":[72,176,540,210]}
+{"kind":"shape","id":"sh/il43ats3","slide":6,"name":"Backend / answer engine-bar","bbox":[72,176,8,210]}
+{"kind":"textbox","id":"sh/jmd4jyto","slide":6,"text":"Backend / answer engine","textPreview":"Backend / answer engine","textChars":23,"textLines":1,"bbox":[96,194,500,28]}
+{"kind":"textbox","id":"sh/4nmlc3a9","slide":6,"text":"• Introduced direct anti-splitting guidance for purchase-splitting questions.\n• Added explicit intent for vendor registration approval time.\n• Added deterministic responses for DSC, eligibility, bid opening, and evaluation-report cases.","textPreview":"• Introduced direct anti-splitting guidance for purchase-splitting questions. | • Added explicit intent for vendor registration approval ...","textChars":236,"textLines":3,"bbox":[96,234,504,138]}
+{"kind":"shape","id":"sh/5ovmlobu","slide":6,"bbox":[668,176,540,210]}
+{"kind":"shape","id":"sh/qpo3etsz","slide":6,"name":"Validation / UX-bar","bbox":[668,176,8,210]}
+{"kind":"textbox","id":"sh/rqx4nytk","slide":6,"text":"Validation / UX","textPreview":"Validation / UX","textChars":15,"textLines":1,"bbox":[692,194,500,28]}
+{"kind":"textbox","id":"sh/fm1wja5w","slide":6,"text":"• Extended regression coverage for routing and procurement workflows.\n• Added exact-question answering metric to the benchmark runner.\n• Improved UI support for Auto-Voice and browser-friendly interaction.","textPreview":"• Extended regression coverage for routing and procurement workflows. | • Added exact-question answering metric to the benchmark runner. ...","textChars":205,"textLines":3,"bbox":[692,234,504,138]}
+{"kind":"shape","id":"sh/elsvq5ob","slide":6,"name":"footer-line-6","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/1ojel0n2","slide":6,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/0nadsv6h","slide":6,"text":"6","textPreview":"6","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/6xcce6","slide":6,"text":""}
+{"kind":"slide","id":"sl/drfezz","slide":7,"title":"MONTHLY REVIEW","textShapes":5}
+{"kind":"textbox","id":"sh/j6dsfmdk","slide":7,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/k7m98re5","slide":7,"text":"AI and data-science components power multilingual retrieval and grounded generation","textPreview":"AI and data-science components power multilingual retrieval and grounded generation","textChars":83,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"textbox","id":"sh/ahkrihw3","slide":7,"text":"Tools and technologies used\n\n• BGE-M3 for multilingual embeddings\n• bge-reranker-v2-m3 for reranking\n• Qdrant as vector database\n• Local LLMs through Ollama\n• Flask and Node.js for application delivery\n• Automated benchmark and regression scripts for evaluation","textPreview":"Tools and technologies used |  | • BGE-M3 for multilingual embeddings | • bge-reranker-v2-m3 for reranking | • Qdrant as vector database ...","textChars":261,"textLines":8,"bbox":[590,190,600,330]}
+{"kind":"shape","id":"sh/bitsbmdo","slide":7,"name":"footer-line-7","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/w3294ret","slide":7,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/x4badwve","slide":7,"text":"7","textPreview":"7","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"chart","id":"ch/9kzqtsvm","slide":7,"name":"","chartType":"bar","bbox":[88,202,450,290]}
+{"kind":"notes","id":"nt/drfezz","slide":7,"text":""}
+{"kind":"slide","id":"sl/4abrc3","slide":8,"title":"MONTHLY REVIEW","textShapes":17}
+{"kind":"textbox","id":"sh/xs3e1oza","slide":8,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/a5cf69gz","slide":8,"text":"Progress is visible in targeted validation even as broad benchmark gaps remain","textPreview":"Progress is visible in targeted validation even as broad benchmark gaps remain","textChars":78,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"shape","id":"sh/v6lwzehk","slide":8,"name":"Regression tests passed","bbox":[80,170,250,150]}
+{"kind":"textbox","id":"sh/kvexcjy1","slide":8,"text":"49","textPreview":"49","textChars":2,"textLines":1,"bbox":[100,188,210,48]}
+{"kind":"textbox","id":"sh/5wny5ozm","slide":8,"text":"Regression tests passed","textPreview":"Regression tests passed","textChars":23,"textLines":1,"bbox":[100,238,210,32]}
+{"kind":"textbox","id":"sh/itcfatgv","slide":8,"text":"Fine-intent, actor boundary, workflow checks","textPreview":"Fine-intent, actor boundary, workflow checks","textChars":44,"textLines":1,"bbox":[100,272,210,30]}
+{"kind":"shape","id":"sh/julw3yhg","slide":8,"name":"Focused live checks passed","bbox":[360,170,250,150]}
+{"kind":"textbox","id":"sh/szexg3yx","slide":8,"text":"12 / 12","textPreview":"12 / 12","textChars":7,"textLines":1,"bbox":[380,188,210,48]}
+{"kind":"textbox","id":"sh/t0ny98zi","slide":8,"text":"Focused live checks passed","textPreview":"Focused live checks passed","textChars":26,"textLines":1,"bbox":[380,238,210,32]}
+{"kind":"textbox","id":"sh/hkb658rm","slide":8,"text":"Mean latency 1.51 seconds","textPreview":"Mean latency 1.51 seconds","textChars":25,"textLines":1,"bbox":[380,272,210,30]}
+{"kind":"shape","id":"sh/gj2pw3q1","slide":8,"name":"UAT remediation tests passed","bbox":[640,170,250,150]}
+{"kind":"textbox","id":"sh/vito3y9g","slide":8,"text":"37","textPreview":"37","textChars":2,"textLines":1,"bbox":[660,188,210,48]}
+{"kind":"textbox","id":"sh/uhknud8v","slide":8,"text":"UAT remediation tests passed","textPreview":"UAT remediation tests passed","textChars":28,"textLines":1,"bbox":[660,238,210,32]}
+{"kind":"textbox","id":"sh/5ov69sri","slide":8,"text":"High-risk cases validated","textPreview":"High-risk cases validated","textChars":25,"textLines":1,"bbox":[660,272,210,30]}
+{"kind":"shape","id":"sh/4nmp0nqd","slide":8,"name":"Production benchmark queries","bbox":[920,170,250,150]}
+{"kind":"textbox","id":"sh/3mto7i9s","slide":8,"text":"120","textPreview":"120","textChars":3,"textLines":1,"bbox":[940,188,210,48]}
+{"kind":"textbox","id":"sh/ilk7yd87","slide":8,"text":"Production benchmark queries","textPreview":"Production benchmark queries","textChars":28,"textLines":1,"bbox":[940,238,210,32]}
+{"kind":"textbox","id":"sh/lsr6xore","slide":8,"text":"Used for gap discovery","textPreview":"Used for gap discovery","textChars":22,"textLines":1,"bbox":[940,272,210,30]}
+{"kind":"shape","id":"sh/kri5ojqt","slide":8,"name":"milestone-note","bbox":[80,380,1090,160]}
+{"kind":"textbox","id":"sh/cvmpk3yp","slide":8,"text":"Progress against planned milestones\n\nThe planned milestone for this month was to move from broad prototype behavior toward more reliable, demo-ready procurement assistance. That milestone was partially achieved: focused validation improved significantly, but the full 120-query benchmark still shows major gaps in fallback reduction, actor classification, and procedural completeness.","textPreview":"Progress against planned milestones |  | The planned milestone for this month was to move from broad prototype behavior toward more relia...","textChars":384,"textLines":3,"bbox":[106,408,1040,108]}
+{"kind":"shape","id":"sh/xwv6doza","slide":8,"name":"footer-line-8","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/at47it0j","slide":8,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/budobyh4","slide":8,"text":"8","textPreview":"8","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/4abrc3","slide":8,"text":""}
+{"kind":"slide","id":"sl/zr0tup","slide":9,"title":"MONTHLY REVIEW","textShapes":6}
+{"kind":"textbox","id":"sh/hwradkn6","slide":9,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/ut0b25ov","slide":9,"text":"Demonstration: the chatbot now presents a cleaner and more usable interface","textPreview":"Demonstration: the chatbot now presents a cleaner and more usable interface","textChars":75,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"textbox","id":"sh/5kbahkni","slide":9,"text":"Widget view: quick prompts, Auto-Voice, and multilingual entry","textPreview":"Widget view: quick prompts, Auto-Voice, and multilingual entry","textChars":62,"textLines":1,"bbox":[84,552,510,24]}
+{"kind":"textbox","id":"sh/ix0b6por","slide":9,"text":"Answer view: concise response + source visibility","textPreview":"Answer view: concise response + source visibility","textChars":49,"textLines":1,"bbox":[640,552,510,24]}
+{"kind":"shape","id":"sh/3ytsfa5c","slide":9,"name":"footer-line-9","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/sn2tcz6t","slide":9,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/dobul4ne","slide":9,"text":"9","textPreview":"9","textChars":1,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"image","id":"im/mh07m5c3","slide":9,"name":"","geometry":"roundRect","alt":"Opened chatbot widget on portal page","bbox":[84,176,510,360]}
+{"kind":"image","id":"im/h8bqlkbq","slide":9,"name":"","geometry":"roundRect","alt":"Chatbot sample answer view","bbox":[640,176,510,360]}
+{"kind":"notes","id":"nt/zr0tup","slide":9,"text":""}
+{"kind":"slide","id":"sl/q462fo","slide":10,"title":"MONTHLY REVIEW","textShapes":8}
+{"kind":"textbox","id":"sh/gn2hwve1","slide":10,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/fmt0nqdg","slide":10,"text":"The main challenges are accuracy gaps at scale and environment constraints","textPreview":"The main challenges are accuracy gaps at scale and environment constraints","textChars":74,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"shape","id":"sh/ulkzulwv","slide":10,"bbox":[72,176,540,210]}
+{"kind":"shape","id":"sh/pcvit0vi","slide":10,"name":"Challenges encountered-bar","bbox":[72,176,8,210]}
+{"kind":"textbox","id":"sh/orm10vux","slide":10,"text":"Challenges encountered","textPreview":"Challenges encountered","textChars":22,"textLines":1,"bbox":[96,194,500,28]}
+{"kind":"textbox","id":"sh/3qd0rqds","slide":10,"text":"• Broad benchmark still shows low pass rate and high fallback behavior.\n• Actor and fine-intent errors affect retrieval and answer quality.\n• Some UI/browser validation is blocked by local environment issues.","textPreview":"• Broad benchmark still shows low pass rate and high fallback behavior. | • Actor and fine-intent errors affect retrieval and answer qual...","textChars":208,"textLines":3,"bbox":[96,234,504,138]}
+{"kind":"shape","id":"sh/2pkjylc7","slide":10,"bbox":[668,176,540,210]}
+{"kind":"shape","id":"sh/dgvixkvu","slide":10,"name":"Implications-bar","bbox":[668,176,8,210]}
+{"kind":"textbox","id":"sh/cfm14fu9","slide":10,"text":"Implications","textPreview":"Implications","textChars":12,"textLines":1,"bbox":[692,194,500,28]}
+{"kind":"textbox","id":"sh/qtg3ut0b","slide":10,"text":"• Need tighter evidence contracts for sensitive procurement answers.\n• Need stronger semantic UAT acceptance criteria, not only routing checks.\n• Need continued live verification before wider deployment.","textPreview":"• Need tighter evidence contracts for sensitive procurement answers. | • Need stronger semantic UAT acceptance criteria, not only routing...","textChars":203,"textLines":3,"bbox":[692,234,504,138]}
+{"kind":"shape","id":"sh/rup43y1w","slide":10,"name":"footer-line-10","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/cvylw3ih","slide":10,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/dw7m58j2","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/q462fo","slide":10,"text":""}
+{"kind":"slide","id":"sl/m5edn4","slide":11,"title":"MONTHLY REVIEW","textShapes":9}
+{"kind":"textbox","id":"sh/5wz6x0jy","slide":11,"text":"MONTHLY REVIEW","textPreview":"MONTHLY REVIEW","textChars":14,"textLines":1,"bbox":[72,40,280,24]}
+{"kind":"textbox","id":"sh/it87ml0n","slide":11,"text":"Next month’s plan focuses on targeted quality improvement and review support","textPreview":"Next month’s plan focuses on targeted quality improvement and review support","textChars":76,"textLines":1,"bbox":[72,84,900,56]}
+{"kind":"shape","id":"sh/juhovq18","slide":11,"bbox":[72,176,540,210]}
+{"kind":"shape","id":"sh/szapsvip","slide":11,"name":"Work plan for next month-bar","bbox":[72,176,8,210]}
+{"kind":"textbox","id":"sh/t0j610ja","slide":11,"text":"Work plan for next month","textPreview":"Work plan for next month","textChars":24,"textLines":1,"bbox":[96,194,500,28]}
+{"kind":"textbox","id":"sh/6xs7ql0j","slide":11,"text":"• Reduce fallback-heavy cases and improve procedural completeness.\n• Re-run multilingual UAT with stricter semantic assertions.\n• Continue UI verification and live demo readiness improvements.","textPreview":"• Reduce fallback-heavy cases and improve procedural completeness. | • Re-run multilingual UAT with stricter semantic assertions. | • Con...","textChars":192,"textLines":3,"bbox":[96,234,504,138]}
+{"kind":"shape","id":"sh/7y1ozq14","slide":11,"bbox":[668,176,540,210]}
+{"kind":"shape","id":"sh/836pgb2l","slide":11,"name":"Support required-bar","bbox":[668,176,8,210]}
+{"kind":"textbox","id":"sh/94f6pgj6","slide":11,"text":"Support required","textPreview":"Support required","textChars":16,"textLines":1,"bbox":[692,194,500,28]}
+{"kind":"textbox","id":"sh/p07y10ni","slide":11,"text":"• Feedback from IIIT-NR on evaluation focus and expected output quality.\n• Department-side confirmation of priority use cases for the next validation cycle.\n• Access/support for broader demo testing and deployment-readiness review.","textPreview":"• Feedback from IIIT-NR on evaluation focus and expected output quality. | • Department-side confirmation of priority use cases for the n...","textChars":231,"textLines":3,"bbox":[692,234,504,138]}
+{"kind":"textbox","id":"sh/ozyxsv6x","slide":11,"text":"Central takeaway: the chatbot is now more structured, more grounded, and more demo-ready, but it still needs another cycle of focused quality work before it can be treated as broadly reliable.","textPreview":"Central takeaway: the chatbot is now more structured, more grounded, and more demo-ready, but it still needs another cycle of focused qua...","textChars":192,"textLines":1,"bbox":[72,440,1136,70]}
+{"kind":"shape","id":"sh/3ypwzq5c","slide":11,"name":"footer-line-11","bbox":[72,674,1136,2]}
+{"kind":"textbox","id":"sh/2xgfqlor","slide":11,"text":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textPreview":"CHiPS e-Procurement AI Chatbot | Monthly Progress Presentation","textChars":62,"textLines":1,"bbox":[72,682,420,22]}
+{"kind":"textbox","id":"sh/xory50ne","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1100,682,108,22]}
+{"kind":"notes","id":"nt/m5edn4","slide":11,"text":""}

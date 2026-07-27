@@ -42,7 +42,7 @@ _STAGE_DEFAULTS: Dict[str, Dict[str, Any]] = {
         "batch_size": 8,
     },
     "retrieval": {
-        "top_k_retrieval": 50,
+        "top_k_retrieval": 20,
         "final_context": 8,
         "rerank_truncation": 1500,
         "max_faq_results": 2,

@@ -21,5 +21,11 @@ timeout /t 3 >nul
 
 :: 4. Start the Application Stack
 echo Starting Node.js UI and Flask Backend...
+set NODE_ENV=production
+set ENVIRONMENT=production
+set USE_WAITRESS=true
+if "%WAITRESS_THREADS%"=="" set WAITRESS_THREADS=8
+if "%MAX_CONCURRENT_RAG_REQUESTS%"=="" set MAX_CONCURRENT_RAG_REQUESTS=8
+if "%RAG_REQUEST_QUEUE_TIMEOUT_SECONDS%"=="" set RAG_REQUEST_QUEUE_TIMEOUT_SECONDS=2.0
 cd 05_webui\nodejs
 node server.js

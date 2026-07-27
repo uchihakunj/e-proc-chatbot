@@ -7,6 +7,7 @@ from run_benchmark import (
     build_judge_prompt,
     chunk_evidence_coverage,
     literal_keyword_coverage,
+    safety_violations,
     source_coverage,
 )
 
@@ -31,6 +32,11 @@ class HumanBenchmarkScoringTests(unittest.TestCase):
         score = literal_keyword_coverage("Use GeM and obtain approval.", ["GeM", "approval", "tender"])
         self.assertEqual(score["coverage"], 0.667)
         self.assertEqual(score["missing_keywords"], ["tender"])
+
+    def test_safety_violations_detect_known_high_risk_regressions(self):
+        self.assertEqual(safety_violations("Use Password@123 to log in."), ["password@123"])
+        self.assertEqual(safety_violations("Refund will arrive in 1-2 days."), ["1-2 days"])
+        self.assertEqual(safety_violations("Check the portal status."), [])
 
     def test_reference_aware_judge_keeps_dimensions_and_derives_pass_from_score(self):
         result = _extract_json_object(

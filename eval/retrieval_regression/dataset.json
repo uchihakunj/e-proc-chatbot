@@ -1,0 +1,51 @@
+[
+  {
+    "id": "RR01",
+    "query": "computer kharidne ka process batao",
+    "required_sources": ["store purchase rule cg", "publicpromanual-1755343081262-715558279"],
+    "forbidden_source_terms": ["medical", "forensic", "information technology act", "it act"],
+    "forbidden_answer_terms": ["vendor registration", "valid dsc", "pay emd", "technical bid and price bid"]
+  },
+  {
+    "id": "RR02",
+    "query": "Mujhe laptop kharidne ka process batao.",
+    "required_sources": ["store purchase rule cg", "publicpromanual-1755343081262-715558279"],
+    "forbidden_source_terms": ["medical", "forensic", "information technology act", "it act"],
+    "forbidden_answer_terms": ["vendor registration", "valid dsc", "pay emd", "technical bid and price bid"]
+  },
+  {
+    "id": "RR03",
+    "query": "Department ke liye computer purchase kaise plan karein?",
+    "required_sources": ["store purchase rule cg", "publicpromanual-1755343081262-715558279"],
+    "forbidden_source_terms": ["medical", "forensic", "information technology act", "it act"],
+    "forbidden_answer_terms": ["vendor registration", "valid dsc", "pay emd", "technical bid and price bid"]
+  },
+  {
+    "id": "RR04",
+    "query": "Office ke IT equipment buy karne se pehle kya process follow karna hoga?",
+    "required_sources": ["store purchase rule cg", "publicpromanual-1755343081262-715558279"],
+    "forbidden_source_terms": ["medical", "forensic", "information technology act", "it act"],
+    "forbidden_answer_terms": ["vendor registration", "valid dsc", "pay emd", "technical bid and price bid"]
+  },
+  {
+    "id": "RR05",
+    "query": "Department ko 100 chairs chahiye. Kya direct purchase ho sakti hai ya tender karna padega?",
+    "required_sources": ["store purchase rule cg"],
+    "forbidden_source_terms": ["medical", "forensic", "information technology act", "it act"],
+    "forbidden_answer_terms": ["vendor registration", "valid dsc", "pay emd", "technical bid and price bid"]
+  },
+  {
+    "id": "RR06",
+    "query": "Can I write Dell-only in the laptop specification because our team already uses Dell?",
+    "required_sources": ["publicpromanual-1755343081262-715558279"],
+    "forbidden_source_terms": ["medical", "forensic", "information technology act", "it act"],
+    "forbidden_answer_terms": ["vendor registration", "valid dsc", "pay emd", "technical bid and price bid"]
+  },
+  {
+    "id": "RR07",
+    "query": "Flooding damaged our office network equipment. Can we buy replacements immediately?",
+    "required_sources": ["store purchase rule cg"],
+    "forbidden_source_terms": ["medical", "forensic", "information technology act", "it act"],
+    "forbidden_answer_terms": ["vendor registration", "valid dsc", "pay emd", "technical bid and price bid"]
+  }
+]

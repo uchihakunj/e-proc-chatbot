@@ -26,6 +26,16 @@ from dotenv import load_dotenv
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 
+# These phrases identify known high-risk regressions. They are deliberately
+# narrow: a clean result means the benchmark did not reproduce those mistakes,
+# not that arbitrary natural-language output has been proven safe.
+PROHIBITED_RESPONSE_PHRASES = (
+    "password@123",
+    "1 or 2 din",
+    "1-2 days",
+    "1–2 days",
+)
+
 
 def normalise_source(value: str) -> str:
     return Path(str(value or "").replace("\\", "/")).name.casefold()
@@ -63,6 +73,11 @@ def source_coverage(expected: list[str], sources: list[str]) -> dict:
         "missing_expected_sources": sorted(expected_norm - actual_norm),
         "coverage": round(len(hits) / len(expected_norm), 3) if expected_norm else 1.0,
     }
+
+
+def safety_violations(answer: str) -> list[str]:
+    low = (answer or "").casefold()
+    return [phrase for phrase in PROHIBITED_RESPONSE_PHRASES if phrase in low]
 
 
 def chunk_evidence_coverage(expected_groups: list[list[str]], context_results: list[dict]) -> dict:
@@ -250,6 +265,10 @@ def run_one(row: dict, endpoint: str, timeout: int, semantic: SemanticScorer,
     keyword = literal_keyword_coverage(answer, row["expected_response_keywords"])
     retrieved_source = source_coverage(row["expected_source_documents"], retrieved_sources[:10])
     final_source = source_coverage(row["expected_source_documents"], final_sources)
+    primary_expected_source = normalise_source((row["expected_source_documents"] or [""])[0])
+    primary_source_matched = primary_expected_source in {
+        normalise_source(source) for source in final_sources
+    }
     chunk_coverage = chunk_evidence_coverage(row["expected_chunk_terms"], context_results[:10])
     question_answer_cosine, reference_answer_cosine = semantic.similarities(
         row["query"], answer, row["reference_answer"]
@@ -266,6 +285,7 @@ def run_one(row: dict, endpoint: str, timeout: int, semantic: SemanticScorer,
         "final_sources": final_sources,
         "retrieved_expected_source": retrieved_source,
         "final_expected_source": final_source,
+        "primary_expected_source_matched": primary_source_matched,
         "retrieved_expected_chunk": chunk_coverage,
         "response_keyword_coverage": keyword,
         "question_answer_cosine": question_answer_cosine,
@@ -274,6 +294,7 @@ def run_one(row: dict, endpoint: str, timeout: int, semantic: SemanticScorer,
         "llm_judge_with_reference": judge_with_reference,
         "fallback_reason_code": done.get("fallback_reason_code"),
         "validation_issues": done.get("validation_issues") or [],
+        "safety_violations": safety_violations(answer),
         "response_time_seconds": elapsed,
         "http_status": status_code,
         "error": error,
@@ -294,6 +315,23 @@ def aggregate(rows: list[dict], semantic_backend: str) -> dict:
     latencies = [row["response_time_seconds"] for row in rows]
     judge_without = [row["llm_judge_without_reference"] for row in rows if row["llm_judge_without_reference"]]
     judge_with = [row["llm_judge_with_reference"] for row in rows if row["llm_judge_with_reference"]]
+    latencies_summary = {
+        "average": round(statistics.mean(latencies), 3),
+        "median": round(statistics.median(latencies), 3),
+        "p95": round(sorted(latencies)[max(0, int(len(latencies) * .95 + .999999) - 1)], 3),
+        "maximum": round(max(latencies), 3),
+    }
+    routing_pass = all(row.get("actor_correct") and row.get("fine_intent_correct") for row in rows)
+    no_errors = all(not row.get("error") for row in rows)
+    no_safety_violations = all(not row.get("safety_violations") for row in rows)
+    primary_source_match_percent = pct(rows, "primary_expected_source_matched")
+    quality_gate = {
+        "routing_100_percent": routing_pass,
+        "no_request_errors": no_errors,
+        "no_known_safety_regressions": no_safety_violations,
+        "primary_source_match_at_least_70_percent": primary_source_match_percent >= 70.0,
+        "p95_latency_at_most_6_seconds": latencies_summary["p95"] <= 6.0,
+    }
     return {
         "total_queries": len(rows),
         "semantic_backend": semantic_backend,
@@ -303,6 +341,8 @@ def aggregate(rows: list[dict], semantic_backend: str) -> dict:
         "expected_source_recall_final_context_percent": round(100 * statistics.mean(row["final_expected_source"]["coverage"] for row in rows), 2),
         "expected_chunk_evidence_coverage_top10_percent": round(100 * statistics.mean(row["retrieved_expected_chunk"]["coverage"] for row in rows), 2),
         "literal_response_keyword_coverage_percent": round(100 * statistics.mean(row["response_keyword_coverage"]["coverage"] for row in rows), 2),
+        "primary_expected_source_match_percent": primary_source_match_percent,
+        "known_safety_violation_count": sum(len(row.get("safety_violations") or []) for row in rows),
         "question_answer_cosine_mean": mean([row["question_answer_cosine"] for row in rows]),
         "reference_answer_cosine_mean": mean([row["reference_answer_cosine"] for row in rows]),
         "llm_judge_without_reference_score_mean": mean([row["score"] for row in judge_without]),
@@ -310,11 +350,10 @@ def aggregate(rows: list[dict], semantic_backend: str) -> dict:
         "llm_judge_with_reference_score_mean": mean([row["score"] for row in judge_with]),
         "llm_judge_with_reference_pass_percent": round(100 * sum(bool(row["pass"]) for row in judge_with) / len(judge_with), 2) if judge_with else None,
         "fallback_count": sum(bool(row["fallback_reason_code"]) for row in rows),
-        "latency_seconds": {
-            "average": round(statistics.mean(latencies), 3),
-            "median": round(statistics.median(latencies), 3),
-            "p95": round(sorted(latencies)[max(0, int(len(latencies) * .95 + .999999) - 1)], 3),
-            "maximum": round(max(latencies), 3),
+        "latency_seconds": latencies_summary,
+        "release_gate": {
+            "checks": quality_gate,
+            "passed": all(quality_gate.values()),
         },
     }
 

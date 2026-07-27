@@ -20,6 +20,8 @@ from datetime import datetime
 from typing import Dict, List, Set
 import atexit
 
+from index_metadata import derive_retrieval_metadata
+
 os.environ["HF_HUB_OFFLINE"] = "1"
 os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
 
@@ -301,7 +303,8 @@ def index_new_chunks():
                 "source": doc_name,
                 "chunk": chunk_id,
                 "document_type": doc_type,
-                "authority": authority
+                "authority": authority,
+                "retrieval_metadata": derive_retrieval_metadata(doc_name, text),
             })
         except Exception as e:
             logger.warning(f"Could not read {chunk_file.name}: {e}")
@@ -347,7 +350,8 @@ def index_new_chunks():
             "chunk": chunk_data["chunk"],
             "file": chunk_data["file"],
             "document_type": chunk_data.get("document_type", "general"),
-            "authority": chunk_data.get("authority", 5)
+            "authority": chunk_data.get("authority", 5),
+            **chunk_data.get("retrieval_metadata", {}),
         }
         
         if i == 0:
@@ -556,6 +560,29 @@ def run_query_loop():
 # Status & Management
 # ════════════════════════════════════════════════════════════════
 
+def metadata_migration_status():
+    """Report whether existing points need the no-reembedding metadata backfill."""
+    if not client.collection_exists(COLLECTION_NAME):
+        return
+    offset, total, missing = None, 0, 0
+    while True:
+        points, offset = client.scroll(
+            collection_name=COLLECTION_NAME, offset=offset, limit=256,
+            with_payload=["metadata_version"], with_vectors=False,
+        )
+        total += len(points)
+        missing += sum((point.payload or {}).get("metadata_version") != 1 for point in points)
+        if offset is None:
+            break
+    if missing:
+        logger.warning(
+            "Retrieval metadata missing on %s/%s points. Run: "
+            "python backfill_retrieval_metadata.py --apply", missing, total
+        )
+    else:
+        logger.info("  Retrieval metadata: current (%s/%s points, version 1)", total, total)
+
+
 def show_status():
     """Show indexing status."""
     logger.info("\n" + "="*70)
@@ -573,6 +600,7 @@ def show_status():
         logger.info(f"\n🗄️  Qdrant Collection: {COLLECTION_NAME}")
         logger.info(f"  Points stored: {collection_info.points_count}")
         logger.info(f"  Vector size: 1024 dimensions")
+        metadata_migration_status()
     else:
         logger.info(f"\n🗄️  Qdrant Collection: {COLLECTION_NAME} (not yet created)")
     

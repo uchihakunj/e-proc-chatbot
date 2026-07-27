@@ -21,6 +21,7 @@ import importlib.util
 import time
 import json
 import threading
+from contextlib import contextmanager
 import subprocess
 import requests
 import fitz  # PyMuPDF – detect scanned PDFs
@@ -48,9 +49,9 @@ from nlp_features import (
     suggest_followups, AnswerCache, detect_flow_trigger,
     is_language_switch_only, classify_actor, detect_commodity,
 )
-from actor_policy import actor_generation_directive
+from actor_policy import actor_generation_directive, actor_answer_violations
 from actor_boundary import devanagari_to_roman
-from context_selection import pack_context
+from context_selection import pack_context, select_context_results
 from sarvam_streaming import configured_reasoning_effort, parse_sarvam_sse_line
 from streaming_utils import (
     is_explicitly_out_of_scope,
@@ -188,6 +189,54 @@ except Exception as e:
 
 # Initialize Flask app
 app = Flask(__name__)
+
+
+def _env_int(name: str, default: int) -> int:
+    value = os.getenv(name, str(default)).strip()
+    try:
+        return max(1, int(value))
+    except Exception:
+        return default
+
+
+def _env_float(name: str, default: float) -> float:
+    value = os.getenv(name, str(default)).strip()
+    try:
+        return max(0.0, float(value))
+    except Exception:
+        return default
+
+
+MAX_CONCURRENT_RAG_REQUESTS = _env_int('MAX_CONCURRENT_RAG_REQUESTS', 8)
+RAG_REQUEST_QUEUE_TIMEOUT_SECONDS = _env_float('RAG_REQUEST_QUEUE_TIMEOUT_SECONDS', 2.0)
+RAG_CONCURRENCY_SEMAPHORE = threading.BoundedSemaphore(MAX_CONCURRENT_RAG_REQUESTS)
+_RAG_ACTIVE_REQUESTS = 0
+_RAG_ACTIVE_REQUESTS_LOCK = threading.Lock()
+
+
+@contextmanager
+def rag_request_slot():
+    global _RAG_ACTIVE_REQUESTS
+    acquired = RAG_CONCURRENCY_SEMAPHORE.acquire(
+        timeout=RAG_REQUEST_QUEUE_TIMEOUT_SECONDS
+    )
+    if not acquired:
+        raise TimeoutError(
+            f"RAG concurrency limit reached ({MAX_CONCURRENT_RAG_REQUESTS})"
+        )
+    with _RAG_ACTIVE_REQUESTS_LOCK:
+        _RAG_ACTIVE_REQUESTS += 1
+    try:
+        yield
+    finally:
+        with _RAG_ACTIVE_REQUESTS_LOCK:
+            _RAG_ACTIVE_REQUESTS = max(0, _RAG_ACTIVE_REQUESTS - 1)
+        RAG_CONCURRENCY_SEMAPHORE.release()
+
+
+def current_rag_active_requests() -> int:
+    with _RAG_ACTIVE_REQUESTS_LOCK:
+        return _RAG_ACTIVE_REQUESTS
 app.config['JSON_SORT_KEYS'] = False
 
 PROCUREMENT_SYSTEM_PROMPT = """
@@ -380,19 +429,52 @@ def normalize_vendor_registration_portal_name(text, query):
 
 
 def direct_department_laptop_planning_answer(query):
-    """Return the source-grounded first-step workflow for department laptop buys."""
+    """Return the source-grounded workflow for department laptop purchases.
+
+    A generic Hinglish question such as ``laptop kharidne ka process batao``
+    normally means the department/procuring-entity lifecycle in this chatbot's
+    procurement context.  Do not let generation reinterpret it as the vendor
+    registration or bid-submission workflow.
+    """
     q = (query or '').casefold()
     has_department = any(term in q for term in (
         'department', 'office', 'government buyer', 'government department',
         'विभाग', 'कार्यालय',
     ))
     has_laptop = any(term in q for term in ('laptop', 'laptops', 'computer', 'computers'))
-    asks_first = any(term in q for term in (
+    asks_workflow = any(term in q for term in (
         'what should we do first', 'what should we do', 'what first',
         'first step', 'where do we start', 'how should we start',
+        'process', 'procedure', 'kaise', 'batao', 'bataye',
     ))
-    if not (has_department and has_laptop and asks_first):
+    has_purchase = any(term in q for term in (
+        'purchase', 'buy', 'buying', 'procurement', 'kharid', 'khareed', 'खरीद',
+    ))
+    has_explicit_vendor_role = any(term in q for term in (
+        'vendor', 'bidder', 'supplier', 'seller', 'विक्रेता', 'बोलीदाता',
+    ))
+    # An explicit department/office still has priority.  For a generic laptop
+    # purchase-process wording, use the same buyer workflow; a vendor is not
+    # buying the laptops through this portal and must not be sent to vendor
+    # registration just because the word "process" is present.
+    if not (has_laptop and asks_workflow and (has_department or has_purchase)) or has_explicit_vendor_role:
         return None
+    if any(term in q for term in ('mujhe', 'kharid', 'khareed', 'kaise', 'batao', 'bataye')):
+        return (
+            "💡 Answer\n"
+            "Laptop/computer ki department purchase mein pehle consolidated requirement, quantity, users, purpose, delivery timeline, estimated value aur budget head record karein. "
+            "Phir generic, measurable specifications banayein, budget aur approvals confirm karein, aur GeM ya applicable approved channel par availability check karein. Uske baad hi permitted procurement method choose karke GeM Bid ya Tender start karein.\n\n"
+            "📋 Process\n"
+            "1. Requirement aur quantity record karein.\n"
+            "2. Neutral technical specifications banayein.\n"
+            "3. Total cost estimate aur budget availability confirm karein.\n"
+            "4. Administrative aur financial approval lein.\n"
+            "5. Purchase indent/procurement request banayein.\n"
+            "6. GeM aur approved channels par availability check karein.\n"
+            "7. Store Purchase Rules aur delegated powers ke hisaab se method choose karein.\n"
+            "8. Phir GeM Bid ya Tender process proceed karein.\n\n"
+            "📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024."
+        )
     return (
         "💡 Answer\n"
         "First, the department should consolidate and record the requirement for the laptops, "
@@ -1830,6 +1912,11 @@ def health():
         'status': 'ok',
         'rag_pipeline': 'available' if RAG_AVAILABLE else 'unavailable',
         'pipeline_initialized': pipeline_initialized,
+        'capacity': {
+            'active_rag_requests': current_rag_active_requests(),
+            'max_concurrent_rag_requests': MAX_CONCURRENT_RAG_REQUESTS,
+            'queue_timeout_seconds': RAG_REQUEST_QUEUE_TIMEOUT_SECONDS,
+        },
         'timestamp': datetime.now().isoformat()
     })
 
@@ -2315,6 +2402,26 @@ def stream_query():
             yield f"data: {json.dumps({'type':'error','message':'Query cannot be empty'})}\n\n"
         return Response(stream_with_context(err_gen()), mimetype='text/event-stream')
 
+    try:
+        _slot = rag_request_slot()
+        _slot.__enter__()
+    except TimeoutError:
+        overload_diagnostics = {
+            'provider': 'capacity_guard',
+            'retrieval_skipped': True,
+            'overloaded': True,
+            'force_retrieval': force_retrieval,
+            'max_concurrent_rag_requests': MAX_CONCURRENT_RAG_REQUESTS,
+            'active_rag_requests': current_rag_active_requests(),
+            'queue_timeout_seconds': RAG_REQUEST_QUEUE_TIMEOUT_SECONDS,
+        }
+
+        def err_gen():
+            yield f"data: {json.dumps({'type':'error','message':'Server is busy right now. Please retry in a few seconds.','diagnostics':overload_diagnostics})}\n\n"
+            yield f"data: {json.dumps({'type':'done','elapsed':'0.00s','sources':[],'diagnostics':overload_diagnostics})}\n\n"
+
+        return Response(stream_with_context(err_gen()), mimetype='text/event-stream')
+
     def generate():
         import time
         t0 = time.time()
@@ -2549,6 +2656,7 @@ def stream_query():
             # Use the coreference-resolved query so follow-ups find the right docs.
             yield f"data: {json.dumps({'type':'status','message':'🔍 Searching the procurement manuals…'})}\n\n"
             _retrieval_route = route_for_query(fine_intent, effective_query)
+            _primary_retrieval_started = time.perf_counter()
             context_results = retrieve_context(
                 expand_query_for_retrieval(effective_query),
                 num_context=num_context,
@@ -2556,6 +2664,7 @@ def stream_query():
                 structured_intent=fine_intent,
                 retrieval_policy=_retrieval_route.to_retrieval_policy(),
             )
+            _primary_retrieval_seconds = time.perf_counter() - _primary_retrieval_started
             # Exact Rule/Section lookups beat dense retrieval's blind spot for numbers.
             context_results = prepend_lexical_rule_hits(effective_query, context_results)
 
@@ -2661,10 +2770,18 @@ def stream_query():
                     # but at least filter out non-procurement noise (leave context_results as-is)
                     pass
 
+            # Use the same source-diverse ordering for the UI drawer and the
+            # generation prompt.  Otherwise diagnostics can misleadingly show
+            # four copies of one manual even though the packed prompt is diverse.
+            _context_route = route_for_query(fine_intent, effective_query)
+            _display_context_results = select_context_results(
+                context_results, _context_route, effective_query, max_chunks_per_source=2
+            )
+
             # Send context cards immediately
             formatted = []
             query_words = [w for w in effective_query.lower().split() if len(w) > 3]
-            for r in context_results:
+            for r in _display_context_results:
                 point = r.get('point', {})
                 source = point.payload.get('source', '') if hasattr(point, 'payload') else ''
                 text   = point.payload.get('text', '')   if hasattr(point, 'payload') else ''
@@ -2724,7 +2841,6 @@ def stream_query():
             # Keep broad retrieval unchanged for the source drawer, then pack a
             # diverse, route-authoritative subset for generation.  The citation
             # list is derived from this exact subset, never from un-sent chunks.
-            _context_route = route_for_query(fine_intent, effective_query)
             _packing_budget = CTX_CHAR_BUDGET
             if os.getenv('ANSWER_PROVIDER', 'ollama').strip().lower() == 'sarvam':
                 # Pack to Sarvam's actual context allowance now, rather than
@@ -2737,12 +2853,14 @@ def stream_query():
                     )
                 except (TypeError, ValueError):
                     pass
+            _context_packing_started = time.perf_counter()
             context_text, source_refs, _selected_context_results = pack_context(
                 context_results, _context_route, effective_query, strip_chunk_header,
                 lambda src: _rag_module.get_actual_filename(src)
                 if '_rag_module' in globals() else src,
                 char_budget=_packing_budget, per_chunk_cap=PER_CHUNK_CAP,
             )
+            _context_packing_seconds = time.perf_counter() - _context_packing_started
             if (fine_intent == 'purchase_order'
                     and requires_deterministic_policy_answer(effective_query, fine_intent)):
                 # The direct answer is grounded in procurement/contract evidence;
@@ -2752,7 +2870,41 @@ def stream_query():
                     source for source in source_refs
                     if 'bid_submission' not in (source or '').lower()
                 ]
+            if requires_deterministic_policy_answer(effective_query, fine_intent):
+                # Direct policy answers should cite their most authoritative
+                # selected manual, not incidental supporting retrieval hits.
+                _preferred_titles = route_for_intent(fine_intent).preferred_source_titles
+                _normalise_source = lambda value: ''.join(
+                    char for char in str(value or '').lower() if char.isalnum()
+                )
+                _preferred_tokens = tuple(_normalise_source(title) for title in _preferred_titles)
+                _preferred_source_refs = [
+                    source for source in source_refs
+                    if any(token and token in _normalise_source(source) for token in _preferred_tokens)
+                ]
+                if _preferred_source_refs:
+                    source_refs = _preferred_source_refs
             sources_str  = ", ".join(source_refs)
+
+            # ``force_retrieval`` must exercise and expose retrieval, but it
+            # must not discard the department-buyer guard for a generic laptop
+            # purchase-process question.  Sarvam can otherwise invent the
+            # adjacent vendor-registration workflow despite receiving only
+            # buyer-policy sources.  Return the verified buyer workflow after
+            # retrieval has completed, preserving the actual retrieved sources.
+            _retrieved_laptop_workflow = direct_department_laptop_planning_answer(
+                effective_query
+            )
+            if force_retrieval and _retrieved_laptop_workflow:
+                _retrieved_laptop_workflow = enforce_response_language(
+                    _retrieved_laptop_workflow, detect_query_language(query_text)
+                )
+                yield f"data: {json.dumps({'type':'token','content':_retrieved_laptop_workflow})}\n\n"
+                CONV_MEMORY.record_turn(
+                    session_id, query_text, intent, topic, _retrieved_laptop_workflow[:300]
+                )
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':source_refs,'answer':_retrieved_laptop_workflow,'diagnostics':{'provider':'deterministic','retrieval_skipped':False,'force_retrieval':True,'primary_retrieval_seconds':round(_primary_retrieval_seconds, 3),'deterministic_fallback':True,'fallback_reason_code':'department_laptop_workflow'}, **_routing_diagnostics})}\n\n"
+                return
 
             # Keep narrow, high-risk policy answers grounded and decision-first.
             # This runs only after normal retrieval selected the source context;
@@ -3331,8 +3483,13 @@ def stream_query():
                 'fallback_model': FALLBACK_MODEL,
             }
             yield f"data: {json.dumps({'type': 'status', 'message': f'Generating with {_primary_model}…'})}\n\n"
+            # Buffer buyer answers until their actor boundary is checked.  A
+            # streamed bad token cannot be recalled from the browser.
+            _buffer_for_actor_guard = actor == 'department_buyer'
+            _actor_guard_violations = ()
             for sse in _stream_model(_primary_model, state):
-                yield sse
+                if not _buffer_for_actor_guard:
+                    yield sse
 
             # Transparent fallback to the lighter model when the primary either
             # crashed before output (iGPU OOM → 500) OR streamed zero content
@@ -3382,9 +3539,31 @@ def stream_query():
                     'sarvam_reasoning_chunks': _primary_state.get('sarvam_reasoning_chunks', 0),
                 }
                 for sse in _stream_model(FALLBACK_MODEL, state):
-                    yield sse
+                    if not _buffer_for_actor_guard:
+                        yield sse
 
             content_streamed = state['content_streamed']
+
+            if _buffer_for_actor_guard and content_streamed:
+                _buffered_answer = ''.join(state.get('answer_buf', []))
+                _actor_guard_violations = actor_answer_violations(actor, _buffered_answer)
+                if _actor_guard_violations:
+                    _safe_answer = direct_department_laptop_planning_answer(effective_query)
+                    if not _safe_answer:
+                        _safe_answer = render_fine_intent_fallback(
+                            build_fine_intent_fallback(
+                                effective_query, actor, fine_intent, _lang, commodity,
+                                'Chhattisgarh', 'actor_boundary_violation', tuple(source_refs),
+                            )
+                        )
+                    _safe_answer = enforce_response_language(_safe_answer, _lang)
+                    state['answer_buf'] = [_safe_answer]
+                    state['deterministic_fallback'] = True
+                    state['fallback_reason_code'] = 'actor_boundary_violation:' + ','.join(_actor_guard_violations)
+                    state['response_provider'] = 'deterministic'
+                    yield f"data: {json.dumps({'type':'token','content':_safe_answer})}\n\n"
+                else:
+                    yield f"data: {json.dumps({'type':'token','content':_buffered_answer})}\n\n"
 
             # A remote Sarvam request that has produced no token within the
             # latency budget must not keep the browser waiting for the provider
@@ -3493,6 +3672,10 @@ def stream_query():
                 'confidence': _conf_label, 'cache_hit': False,
                 'corrected': bool(corrections),
                 'elapsed': round(time.time()-t0, 2),
+                'sources': source_refs,
+                'primary_retrieval_seconds': round(_primary_retrieval_seconds, 3),
+                'context_packing_seconds': round(_context_packing_seconds, 3),
+                'actor_guard_violations': list(_actor_guard_violations),
             })
 
             elapsed = f"{time.time()-t0:.2f}s"
@@ -3505,6 +3688,11 @@ def stream_query():
                 'force_retrieval': force_retrieval,
                 'fallback_used': bool(state.get('fallback_used')),
                 'fallback_model': state.get('fallback_model'),
+                'primary_retrieval_seconds': round(_primary_retrieval_seconds, 3),
+                'context_packing_seconds': round(_context_packing_seconds, 3),
+                'generation_seconds': round(
+                    max(0.0, (time.time() - t0) - _primary_retrieval_seconds - _context_packing_seconds), 3
+                ),
                 'sarvam_first_token_seconds': round(
                     state.get('sarvam_first_token_elapsed', 0.0), 3
                 ) if state.get('sarvam_first_token_elapsed') is not None else None,
@@ -3528,6 +3716,8 @@ def stream_query():
             import traceback
             traceback.print_exc()
             yield f"data: {json.dumps({'type':'error','message':str(e)})}\n\n"
+        finally:
+            _slot.__exit__(None, None, None)
 
     return Response(
         stream_with_context(generate()),

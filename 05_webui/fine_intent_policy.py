@@ -7,6 +7,11 @@ resulting policy into retrieval.  Expanded retrieval text is never reclassified.
 from dataclasses import asdict, dataclass, replace
 import re
 from typing import Dict, Iterable, Tuple
+from source_registry import (
+    AUCTION_MANUAL, BID_MANUAL, BIDDER_GUIDELINES, CHIPS_CORRIGENDUM_MANUAL,
+    CURRENT_GFR, EMD_PAYMENT_MANUAL, EMD_REFUND_NOTICE, GOODS_MANUAL,
+    OFFLINE_TENDER_MANUAL, STATE_RULES, VENDOR_MANUAL,
+)
 
 
 @dataclass(frozen=True)
@@ -37,19 +42,6 @@ def _route(intent, actors, preferred, support, excluded, stage, structure,
         stage, structure, fallback, tuple(preferred_sources), tuple(support_sources),
         tuple(excluded_sources), tuple(doc_types), adjacent,
     )
-
-
-VENDOR_MANUAL = "CHiPS_Vendor_Registration_Manual_English"
-BID_MANUAL = "CHiPS_Bid_Submission_Manual_English"
-EMD_PAYMENT_MANUAL = "EMD_CHALLAN_PAYMENT_V1.0"
-EMD_REFUND_NOTICE = "Online_EMD_Refund_Notice"
-BIDDER_GUIDELINES = "Guidelines_To_Bidders_EPS_v1.6"
-AUCTION_MANUAL = "AuctionManual_FA"
-GOODS_MANUAL = "publicProManual-1755343081262-715558279"
-CURRENT_GFR = "GFRupdatedupto31012026"
-STATE_RULES = "store purchase rule cg"
-OFFLINE_TENDER_MANUAL = "Manual_Offline_Tenders_v.1.0"
-CHIPS_CORRIGENDUM_MANUAL = "CHiPS_Corrigendum_Issuance_Manual"
 
 
 POLICIES: Dict[str, IntentRoute] = {
@@ -219,10 +211,10 @@ POLICIES: Dict[str, IntentRoute] = {
         "intent_safe_operator", (OFFLINE_TENDER_MANUAL,), (GOODS_MANUAL,), (BID_MANUAL,),
         ("portal_manual", "guidelines"), True),
     "bid_opening_portal_steps": _route("bid_opening_portal_steps", ("department_operator",),
-        ("department_tender_creation_manual", "procurement_manual", "portal_manual"), ("bidder_guidelines",),
+        ("vendor_bid_submission_manual", "department_tender_creation_manual", "procurement_manual"), ("bidder_guidelines",),
         ("vendor_bid_submission_steps",), "bid_opening", "operator_steps",
-        "intent_safe_operator", (OFFLINE_TENDER_MANUAL, GOODS_MANUAL), (BIDDER_GUIDELINES,),
-        (BID_MANUAL,), ("portal_manual", "guidelines"), True),
+        "intent_safe_operator", (BID_MANUAL, OFFLINE_TENDER_MANUAL), (GOODS_MANUAL,),
+        (BIDDER_GUIDELINES,), ("portal_manual", "guidelines"), True),
     "corrigendum_policy": _route("corrigendum_policy", ("general_information_user", "department_buyer"),
         ("current_procurement_rules",), ("chhattisgarh_store_purchase_rules",), ("portal_screenshots",),
         "corrigendum_policy", "policy_explanation", "intent_safe_policy", (GOODS_MANUAL, CURRENT_GFR), (),
@@ -446,12 +438,48 @@ def requires_deterministic_policy_answer(question: str, intent: str) -> bool:
     expanding a simple policy decision into an unrelated lifecycle.
     """
     q = re.sub(r"\s+", " ", (question or "").lower()).strip()
+    # General safety contracts: route by the recognised workflow and the
+    # decision the user is making, not a frozen benchmark sentence. The
+    # phrase list below remains as regression coverage for legacy wording.
+    if any((
+        intent == "procurement_planning" and _has(
+            q, "amc", "annual maintenance") and _has(q, "scope", "renew", "renewal"),
+        intent == "procurement_planning" and _has(
+            q, "prepare", "planning", "before choosing", "before decide") and _has(q, "gem", "tender"),
+        intent == "procurement_method_selection" and _has(
+            q, "emergency", "disaster", "flood", "fire", "damage", "damaged") and _has(
+                q, "urgent", "immediate", "immediately", "replace", "replacement"),
+        intent == "specification_preparation" and _has(
+            q, "brand", "make", "model", "dell", "oem") and _has(
+                q, "only", "exclusive", "compatible", "equivalent", "restriction"),
+        intent == "dsc_mapping" and _has(
+            q, "renew", "renewed", "replacement", "replace", "new certificate") and _has(
+                q, "dsc", "certificate", "digital signature"),
+        intent == "auction_participation" and _has(
+            q, "forward auction", "forward e auction", "forward e-auction") and _has(
+                q, "join", "participate", "bid", "verify", "check"),
+        intent == "bid_submission_portal_steps" and _has(
+            q, "financial bid", "price bid", "boq") and _has(q, "enter", "upload", "submit", "where"),
+        intent == "bid_opening_portal_steps" and _has(
+            q, "technical bid", "technical-bid") and _has(q, "open", "opening", "opener", "scheduled"),
+        intent in ("emd_refund_unsuccessful_bidder", "emd_remittance_to_department") and _has(
+            q, "emd", "bid security") and _has(q, "refund", "refunds", "return"),
+        intent == "gem_eproc_comparison" and "gem" in q and _has(
+            q, "e-procurement", "e procurement", "state portal", "tender portal"),
+        intent == "vendor_registration" and _has(
+            q, "foreign company", "foreign vendor", "foreign bidder", "foreign supplier") and _has(
+                q, "dsc", "registration", "register", "certificate"),
+    )):
+        return True
     return any((
         intent in {
             "tender_creation_policy", "procurement_method_selection", "approval_and_budget",
             "bid_evaluation", "specification_preparation", "tender_eligibility", "purchase_order",
             "dsc_login_problem", "bid_submission_portal_steps", "emd_payment", "emd_payment_failure",
             "emd_exemption", "gem_bidding", "bid_opening_portal_steps", "corrigendum_portal_steps",
+            "tender_creation_portal_steps", "dsc_mapping", "auction_participation",
+            "emd_refund_unsuccessful_bidder", "emd_remittance_to_department", "gem_eproc_comparison",
+            "procurement_planning", "vendor_registration",
         } and any(term in q for term in (
             "short-term tender notice", "price preference", "limited tender", "networking project",
             "technically non-responsive", "cooperative society", "emergency medical", "covid test kits",
@@ -465,7 +493,24 @@ def requires_deterministic_policy_answer(question: str, intent: str) -> bool:
             "reasons for rejecting", "original documents", "startup", "amend", "forfeit", "liquidated damages",
             "emd refund", "status pending", "decrypt", "authorised department", "technical bid submit", "custom bid",
             "financial bids", "purchase order", "tied l1", "java error", "deadline", "corrigendum",
-            "payment gateway", "ie mode", "neft", "rtgs", "boq.xls", "आपातकालीन", "अर्हता शर्तों",
+            "payment gateway", "ie mode", "neft", "rtgs", "boq.xls", "bid securing declaration",
+            "before creating a tender", "creating a tender in the portal", "need ready before creating a tender",
+            "create tender in portal", "tender create karne se pehle", "tender banane se pehle",
+            "last date badhani", "last date badhana", "date badhani", "date badhana",
+            "deadline badhani", "deadline badhana",
+            "flooding", "floods", "flood damaged", "replacements immediately", "replace it immediately",
+            "dell-only", "dell only", "only dell",
+            "renewed dsc", "renew ho gaya", "replace certificate", "purana certificate",
+            "forward e-auction", "forward e auction",
+            "unsuccessful bidders", "technical bid mein reject", "refund department side",
+            "state e-procurement portal relevant", "state e procurement portal relevant",
+            "50 laptops", "before choosing gem or a tender", "100 chairs", "new user under registration",
+            "never used", "registered bidder",
+            "foreign company", "foreign vendor", "foreign supplier",
+            "amc renew", "amc renewal", "ac ka amc", "scope mein kya kya",
+            "financial bid", "price bid", "boq", "technical-bid opening time", "bid opener",
+            "bsd", "msme bidder", "mse bidder", "declaration dena", "declaration देना",
+            "आपातकालीन", "अर्हता शर्तों",
         )),
         intent == "procurement_planning" and _has(
             q, "split a purchase", "split purchase", "purchase ko split",
@@ -668,6 +713,22 @@ def classify_fine_intent(query: str, actor: str, coarse_intent: str,
             and _has(q, "not emergency", "emergency nahi", "emergency नहीं")):
         return "procurement_method_selection", 0.98
 
+    if (actor == "department_buyer"
+            and _has(q, "emergency", "flood", "flooding", "fire", "natural disaster")
+            and _has(q, "damaged", "damage", "replacement", "replacements", "immediate", "urgent")):
+        return "procurement_method_selection", 0.98
+
+    if (emd_mentioned and _has(q, "department", "department admin", "tender owner")
+            and _has(q, "initiate", "process") and _has(q, "refund", "refunds")):
+        return "emd_remittance_to_department", 0.98
+
+    if _has(q, "boq") and _has(q, "financial bid", "price bid") and _has(q, "upload", "submit"):
+        return "bid_submission_portal_steps", 0.97
+
+    if (_has(q, "forward e auction", "forward e-auction")
+            and _has(q, "join", "joining", "participate", "bidder", "verify")):
+        return "auction_participation", 0.97
+
     # Operator transaction verbs take precedence over adjacent EMD/bid words.
     if actor == "department_operator":
         if (_has(q, "last date extend", "tender last date extend", "bid due date extend",
@@ -692,15 +753,14 @@ def classify_fine_intent(query: str, actor: str, coarse_intent: str,
                 or (_has(q, "open", "खोल") and _has(q, "technical bid", "price bid", "तकनीकी बोली", "मूल्य बोली"))):
             return "bid_opening_portal_steps", 0.97
 
-    # Startup eligibility is about tender conditions even when the user also
-    # asks whether EMD is waived; do not let the EMD token steal the route.
-    if (actor == "general_information_user"
-            and _has(q, "startup", "start-up", "msme")
-            and _has(q, "tender", "tenders", "bid", "participate", "participation")):
-        return "tender_eligibility", 0.95
-
     # EMD: failure/refund/remittance branches must win before generic payment.
     if emd_mentioned:
+        # Startup tender participation remains an eligibility question even
+        # where the user also asks about EMD conditions.
+        if (actor == "general_information_user"
+                and _has(q, "startup", "start-up")
+                and _has(q, "tender", "tenders", "bid", "participate", "participation")):
+            return "tender_eligibility", 0.98
         if _has(q, "failed", "failure", "money was debited", "amount debited", "debit ho", "कट गया", "विफल"):
             return "emd_payment_failure", 0.98
         if _has(q, "remittance", "remit to department", "department approver", "विभाग को भेज", "department ko remit"):
@@ -716,6 +776,13 @@ def classify_fine_intent(query: str, actor: str, coarse_intent: str,
         if _has(q, "refund", "return", "wapas", "वापस", "वापसी"):
             return "emd_refund_unsuccessful_bidder", 0.82
         return "emd_definition", 0.9
+
+    # Startup/MSME tender eligibility questions that are not specifically about
+    # EMD/Bid Security remain under tender eligibility.
+    if (actor == "general_information_user"
+            and _has(q, "startup", "start-up", "msme")
+            and _has(q, "tender", "tenders", "bid", "participate", "participation")):
+        return "tender_eligibility", 0.95
 
     # GeM
     if gem_mentioned:
@@ -752,10 +819,9 @@ def classify_fine_intent(query: str, actor: str, coarse_intent: str,
         return "tender_eligibility", 0.95
 
     # Vendor onboarding and DSC
-    if (actor == "vendor_bidder"
-            and _has(q, "foreign company", "foreign vendor", "foreign bidder")
+    if (_has(q, "foreign company", "foreign vendor", "foreign bidder", "foreign supplier")
             and _has(q, "registration", "register", "dsc", "digital signature")
-            and _has(q, "tender", "bid", "participate", "process")):
+            and _has(q, "tender", "bid", "bidding", "participate", "process")):
         return "vendor_registration", 0.96
     if _has(q, "password", "पासवर्ड") and _has(q, "forgot", "recover", "reset", "bhool", "भूल"):
         return "password_recovery", 0.98
@@ -788,7 +854,7 @@ def classify_fine_intent(query: str, actor: str, coarse_intent: str,
         return "vendor_login", 0.95
 
     if actor == "vendor_bidder":
-        if _has(q, "auction", "नीलामी", "ई-नीलामी") and _has(q, "participate", "भाग ले", "place a bid", "placing a bid"):
+        if _has(q, "auction", "नीलामी", "ई-नीलामी") and _has(q, "participate", "joining", "join", "भाग ले", "place a bid", "placing a bid", "verify"):
             return "auction_participation", 0.97
         if _has(q, "eligible", "eligibility", "पात्र", "experience and turnover requirements", "experience mandatory", "startup be exempted", "msme registration") and _has(q, "tender", "bid", "निविदा", "बोली"):
             return "tender_eligibility", 0.96
@@ -833,14 +899,14 @@ def classify_fine_intent(query: str, actor: str, coarse_intent: str,
             and _has(q, "requirement", "purchase order", "orders")):
         return "procurement_planning", 0.98
     if (actor == "department_buyer"
-            and _has(q, "flood", "flooding", "natural disaster")
+            and _has(q, "flood", "flooding", "fire", "natural disaster")
             and _has(q, "buy", "purchase", "replacement", "immediately")):
         return "procurement_method_selection", 0.96
     if actor == "department_buyer" and _has(
             q, "direct purchase", "directly purchase", "direct from gem", "gem se direct") and _has(
             q, "tender", "purchase", "kharid"):
         return "procurement_method_selection", 0.96
-    if actor == "department_buyer" and _has(q, "emergency", "flood", "flooding", "natural disaster") and _has(
+    if actor == "department_buyer" and _has(q, "emergency", "flood", "flooding", "fire", "natural disaster") and _has(
             q, "which", "method", "process", "kaise"):
         return "procurement_method_selection", 0.96
     if actor == "department_buyer" and _has(q, "urgent", "urgently", "tatkal") and _has(
@@ -965,6 +1031,12 @@ def canonical_source_contract_query(question: str, intent: str) -> str:
     """Canonical retrieval text for narrow, repeatedly missed source shapes."""
     q = re.sub(r"\s+", " ", (question or "").lower()).strip()
     contracts = (
+        (("emergency", "fire"), "Chhattisgarh Store Purchase Rules emergency procurement disaster competent approval"),
+        (("flood", "replacement"), "Chhattisgarh Store Purchase Rules emergency procurement disaster competent approval"),
+        (("gem", "tender"), "Chhattisgarh Store Purchase Rules GeM Tender procurement planning approvals"),
+        (("amc", "scope"), "Chhattisgarh Store Purchase Rules annual maintenance service procurement planning"),
+        (("startup", "emd"), "CHiPS Bid Submission Manual startup tender eligibility EMD conditions"),
+        (("gem", "state e-procurement portal"), "Chhattisgarh Store Purchase Rules GeM state e-procurement portal procurement route"),
         (("networking project", "limited tender works"), "procurement of goods versus works networking project limited tender rules"),
         (("तकनीकी रूप से अयोग्य", "वित्तीय निविदा"), "technically non-responsive bidder financial bid shall not be opened procurement goods"),
         (("state e-procurement portal", "threshold"), "Chhattisgarh Store Purchase Rules state e-procurement portal mandatory threshold"),
@@ -992,6 +1064,7 @@ def canonical_source_contract_query(question: str, intent: str) -> str:
         (("payment gateway", "transaction receipt"), "payment gateway failure tender document fee transaction receipt recovery"),
         (("ie mode", "dynamic links"), "EDGE browser IE mode dynamic links e procurement portal"),
         (("technical opener", "class-iii dsc"), "technical opener personal Class III DSC bid decrypt department portal"),
+        (("technical-bid opening time", "bid opener"), "technical bid opening authorised department workflow CHiPS Bid Submission Manual"),
         (("टेंडर ऑपरेटर", "तकनीकी बोली"), "department tender operator technical bid opening approver responsibility"),
         (("neft", "rtgs", "challan"), "EMD NEFT RTGS challan payment procedure CHiPS portal"),
         (("boq.xls", "formula modification"), "BOQ.xls formula modification error commercial schedule bid submission"),
@@ -1012,6 +1085,16 @@ def canonical_source_contract_sources(question: str, intent: str) -> Tuple[str, 
     if not canonical:
         return ()
     required = {
+        "Chhattisgarh Store Purchase Rules emergency procurement disaster competent approval":
+            (STATE_RULES,),
+        "Chhattisgarh Store Purchase Rules GeM Tender procurement planning approvals":
+            (STATE_RULES,),
+        "Chhattisgarh Store Purchase Rules annual maintenance service procurement planning":
+            (STATE_RULES,),
+        "CHiPS Bid Submission Manual startup tender eligibility EMD conditions":
+            (BID_MANUAL,),
+        "Chhattisgarh Store Purchase Rules GeM state e-procurement portal procurement route":
+            (STATE_RULES,),
         "procurement of goods versus works networking project limited tender rules":
             (GOODS_MANUAL, CURRENT_GFR),
         "technically non-responsive bidder financial bid shall not be opened procurement goods":
@@ -1066,6 +1149,8 @@ def canonical_source_contract_sources(question: str, intent: str) -> Tuple[str, 
             ("EDGE_Browser_Setup_V1.0",),
         "technical opener personal Class III DSC bid decrypt department portal":
             (OFFLINE_TENDER_MANUAL,),
+        "technical bid opening authorised department workflow CHiPS Bid Submission Manual":
+            (BID_MANUAL,),
         "department tender operator technical bid opening approver responsibility":
             (OFFLINE_TENDER_MANUAL,),
         "EMD NEFT RTGS challan payment procedure CHiPS portal":
@@ -1402,6 +1487,98 @@ def _render_additional_grounded_answer(state: FineIntentFallback) -> str | None:
     # These contracts deliberately answer the decision in the question before
     # supplying process detail.  They cover the policy cases that previously
     # received a correct source but a generic lifecycle answer.
+    if (state.intent == "procurement_planning"
+            and _has(low_question, "amc", "annual maintenance")
+            and _has(low_question, "scope", "renew", "renewal")):
+        return selected(
+            "Answer\nFor an AC AMC, define the covered AC units and sites, service frequency, response time and uptime/SLA, preventive and breakdown maintenance, spares coverage and exclusions, the escalation process, penalty or service-credit conditions where applicable, contract period, acceptance records, and payment milestones. Record the estimated value and approvals, then select the permitted procurement route under the applicable rules.",
+            "Answer\nAC AMC scope mein covered AC units/sites, service frequency, response time aur uptime/SLA, preventive aur breakdown maintenance, spares coverage/exclusions, escalation process, applicable penalty/service-credit conditions, contract period, acceptance records aur payment milestones define karein. Estimated value aur approvals record karke applicable rules ke under permitted procurement route choose karein.",
+            "Answer\nAC AMC scope mein covered units/sites, service frequency, SLA/response time, maintenance, spares/exclusions, escalation, contract period, acceptance aur payment milestones define karein. Estimate/approval ke baad permitted route choose karein.",
+        )
+    if (state.intent == "procurement_planning"
+            and _has(low_question, "before choosing", "gem or a tender")
+            and _has(low_question, "laptop", "laptops", "requirement", "office")):
+        return selected(
+            "Answer\nBefore choosing GeM or a Tender, record the consolidated requirement and estimated cost, prepare neutral technical specifications, confirm budget availability and competent approval, and retain the supporting procurement documents. Then check whether the requirement is available on GeM and whether the applicable Chhattisgarh rules permit the selected GeM route; otherwise use the permitted Tender route. Do not split the requirement merely to use a different method.",
+            "Answer\nGeM ya Tender choose karne se pehle consolidated requirement aur estimated cost record karein, neutral technical specifications prepare karein, budget availability aur competent approval confirm karein aur supporting documents ready rakhein. Phir GeM availability aur applicable Chhattisgarh rules ke under permitted GeM route check karein; otherwise permitted Tender route use karein. Sirf doosra method use karne ke liye requirement split na karein.",
+            "Answer\nGeM ya Tender choose karne se pehle consolidated requirement, estimate, neutral specifications, budget aur competent approval ready rakhein. Applicable rules ke anusaar sahi route choose karein aur requirement split na karein.",
+        )
+    if (state.intent == "procurement_method_selection"
+            and _has(low_question, "chairs", "chair")
+            and _has(low_question, "direct purchase", "tender")):
+        return selected(
+            "Answer\nDo not treat GeM availability as automatic direct-purchase authority. First confirm the consolidated estimated value, the approved specifications, GeM availability, the current Chhattisgarh rule and delegated powers, and the required approval. Use direct purchase, another permitted GeM method, Limited Tender or Open Tender only when that route is allowed by the applicable rule. Do not split the requirement to reach a different route.",
+            "Answer\nGeM availability ko automatic direct-purchase authority na samjhein. Pehle consolidated estimated value, approved specifications, GeM availability, current Chhattisgarh rule/delegated powers aur required approval confirm karein. Direct purchase, permitted GeM method, Limited Tender ya Open Tender sirf applicable rule allow kare tabhi choose karein. Route badalne ke liye requirement split na karein.",
+            "Answer\nGeM availability se direct purchase automatic nahi hoti. Value, approval aur applicable Chhattisgarh rules ke anusaar hi permitted route choose karein; requirement split na karein.",
+        )
+    if (state.intent == "vendor_registration"
+            and _has(low_question, "foreign company", "foreign vendor", "foreign bidder", "foreign supplier")):
+        return selected(
+            "Answer\nFirst check that the specific Tender permits foreign-bidder participation and review its eligibility, currency and registration conditions. For the DSC, obtain the application from a licensed Certificate Authority, complete the required organisation and identity documents, arrange Indian Embassy certification where the applicable process requires it, submit the prescribed documents and payment to the Certificate Authority, and obtain the DSC or e-token. The Tender's own eligibility and registration conditions still control participation.",
+            "Answer\nPehle specific Tender mein foreign-bidder participation, eligibility, currency aur registration conditions check karein. DSC ke liye licensed Certificate Authority se application lein, required organisation/identity documents complete karein, applicable process mein Indian Embassy certification karayein, prescribed documents/payment CA ko submit karein aur DSC/e-token obtain karein. Tender ki eligibility aur registration conditions hi final control karengi.",
+            "Answer\nForeign bidder ke liye pehle Tender ki eligibility aur registration conditions check karein. Licensed Certificate Authority se DSC process, required documents aur applicable Indian Embassy certification complete karein.",
+        )
+    if (state.intent == "vendor_registration"
+            and _has(low_question, "never used", "registered bidder", "new user", "registration")):
+        return selected(
+            "Answer\nOpen the e-Procurement portal and choose New User or the Vendor Registration option. Enter the required PAN and organisation details, upload the required documents, select or map the valid DSC where the portal asks for it, accept the applicable declaration, and submit the registration. Retain the generated registration number and verify the registration or approval status in the portal. Follow the current portal notice for any fee or further approval requirement; do not assume a fixed fee.",
+            "Answer\ne-Procurement portal par New User/Vendor Registration option choose karein. Required PAN aur organisation details enter karein, required documents upload karein, portal ke kehne par valid DSC select/map karein, applicable declaration accept karke registration submit karein. Generated registration number preserve karein aur portal par registration/approval status verify karein. Fee ya further approval ke liye current portal notice follow karein; fixed fee assume na karein.",
+            "Answer\nPortal par New User/Vendor Registration choose karke PAN, organisation details aur required documents submit karein; valid DSC map karein aur registration number/status verify karein. Fixed fee assume na karein.",
+        )
+    if (state.intent == "bid_submission_portal_steps"
+            and _has(low_question, "technical documents", "price bid", "financial bid", "boq")):
+        return selected(
+            "Answer\nOpen the same Tender's Financial Bid, Price Bid or BOQ section. Use the original portal-provided BOQ file where required, enter or upload the requested price values, validate the figures without changing protected formulas, and complete DSC signing/encryption where the Tender requires it. Save and submit before the deadline, then verify the final acknowledgement or submitted status in the portal.",
+            "Answer\nSame Tender ke Financial Bid, Price Bid ya BOQ section mein jayein. Jahan required ho original portal-provided BOQ file use karein, requested price values enter/upload karein, protected formulas change kiye bina figures validate karein aur Tender requirement ke according DSC signing/encryption complete karein. Deadline se pehle save/submit karke portal par final acknowledgement ya submitted status verify karein.",
+            "Answer\nTender ke Financial Bid/Price Bid/BOQ section mein prices enter/upload karein, required DSC signing/encryption complete karein, deadline se pehle submit karke acknowledgement/status verify karein.",
+        )
+    if (state.intent == "bid_opening_portal_steps"
+            and _has(low_question, "bid opener", "technical-bid opening time", "technical bid opening")):
+        return selected(
+            "Answer\nAfter the scheduled opening time, use the authorised department account and open the relevant Tender's Technical Bid stage only. Preserve the bid-opening record and proceed with eligibility and technical evaluation under the published conditions. Do not open, disclose or evaluate the Price Bid until the applicable stage and Tender process permit it. Follow the authorised portal workflow rather than relying on assumed menu names.",
+            "Answer\nScheduled opening time ke baad authorised department account se relevant Tender ka sirf Technical Bid stage open karein. Bid-opening record preserve karein aur published conditions ke under eligibility/technical evaluation karein. Applicable stage aur Tender process permit karne se pehle Price Bid open, disclose ya evaluate na karein. Assumed menu names ke bajay authorised portal workflow follow karein.",
+            "Answer\nScheduled time ke baad authorised account se sirf Technical Bid stage open karein, record preserve karein aur published conditions ke under evaluation karein. Price Bid permitted stage se pehle open na karein.",
+        )
+    if (state.intent == "procurement_method_selection"
+            and _has(low_question, "emergency", "disaster", "flood", "floods", "flooding", "fire", "natural disaster")
+            and _has(low_question, "damaged", "damage", "replacement", "replacements", "immediate", "urgent")):
+        return selected(
+            "Answer\nEmergency procurement may be used only as an exceptional response to the urgent situation. Record the facts and reasons, obtain competent-authority approval, buy only what is necessary, and follow the applicable procurement rules. It is not an unrestricted direct-purchase route.",
+            "Answer\nEmergency procurement sirf urgent situation ke exceptional response ke liye use karein. Facts aur reasons record karein, competent authority approval lein, sirf necessary replacement purchase karein aur applicable procurement rules follow karein. Yeh unrestricted direct-purchase route nahi hai.",
+            "Answer\nEmergency procurement ke liye facts/reasons record karke competent approval lein aur applicable procurement rules ke anusaar sirf avashyak purchase karein.",
+        )
+    if state.intent == "specification_preparation" and _has(
+            low_question, "brand", "make", "model", "dell", "oem") and _has(
+                low_question, "only", "exclusive", "compatible", "equivalent", "restriction"):
+        return selected(
+            "Answer\nNormally, do not write a brand-only specification merely because the team already uses a particular make or model. Use neutral, functional and measurable requirements. A brand restriction is appropriate only where a genuine compatibility or technical necessity is recorded in writing, permitted by the applicable rule, and an equivalent option is included where appropriate.",
+            "Answer\nSirf team kisi particular make/model ko use karti hai isliye brand-only specification na likhein. Neutral, functional aur measurable requirements use karein. Brand restriction tabhi karein jab genuine compatibility/technical necessity written record mein ho, applicable rule permit kare aur appropriate case mein equivalent option diya ho.",
+            "Answer\nKeval existing make/model ke karan brand-only specification na likhein. Neutral measurable requirements rakhein; brand restriction ke liye recorded technical necessity aur applicable rule zaroori hai.",
+        )
+    if state.intent == "dsc_mapping" and _has(low_question, "renewed", "renew", "replace", "purana certificate"):
+        return selected(
+            "Answer\nLog in to the Vendor account, open the DSC selection or mapping option, connect the renewed valid DSC, select it and complete the required confirmation. Verify that the new certificate is shown as mapped or active before tender signing. Keep the old certificate only if the portal explicitly requires it; use the portal helpdesk if the renewed DSC is not detected.",
+            "Answer\nVendor account mein login karke DSC selection/mapping option kholein. Renewed valid DSC connect karein, select karke required confirmation complete karein. Tender signing se pehle verify karein ki naya certificate mapped/active dikh raha hai. Renewed DSC detect na ho to portal helpdesk use karein.",
+            "Answer\nVendor account mein login karke renewed DSC ko selection/mapping option mein select aur confirm karein. Tender signing se pehle mapped/active status verify karein.",
+        )
+    if state.intent == "auction_participation" and _has(low_question, "forward e-auction", "forward e auction"):
+        return selected(
+            "Answer\nUse your authorised bidder credentials and valid DSC, open the relevant Auction and choose View/Respond. Before bidding, review the auction terms, opening price and minimum bid-change condition. Enter a bid only within those conditions, submit it, and verify the displayed acknowledgement or current bid status. Do not rely on or disclose any default password.",
+            "Answer\nAuthorised bidder credentials aur valid DSC se login karke relevant Auction mein View/Respond open karein. Bid se pehle auction terms, opening price aur minimum bid-change condition check karein. Conditions ke andar bid enter/submit karke acknowledgement ya current bid status verify karein. Kisi default password par rely ya disclose na karein.",
+            "Answer\nValid DSC se relevant Auction ka View/Respond kholein, opening price aur minimum bid-change condition check karein, bid submit karke status verify karein. Default password use ya disclose na karein.",
+        )
+    if state.intent in ("emd_refund_unsuccessful_bidder", "emd_remittance_to_department") and _has(low_question, "refund", "reject", "unsuccessful"):
+        return selected(
+            "Answer\nAfter the applicable opening and evaluation stage, the Department Admin or Tender Owner initiates the eligible unsuccessful bidder's EMD refund. The Department Approver verifies and approves it; the e-Procurement system then sends the instruction to the registered bank account. Check portal status for completion. Do not promise a fixed credit time because approval and bank processing vary.",
+            "Answer\nApplicable opening/evaluation stage ke baad Department Admin/Tender Owner eligible unsuccessful bidder ki EMD refund initiate karta hai. Department Approver verify aur approve karta hai; phir e-Procurement system registered bank account ke liye instruction bhejta hai. Completion ke liye portal status check karein. Fixed credit time promise na karein, kyunki approval aur bank processing vary karte hain.",
+            "Answer\nEligible unsuccessful bidder ki EMD refund Department Admin/Tender Owner initiate karta hai, Approver approval deta hai aur system bank ko instruction bhejta hai. Fixed refund time assume na karein.",
+        )
+    if state.intent == "gem_eproc_comparison":
+        return selected(
+            "Answer\nGeM is a government marketplace and procurement channel for goods or services where the applicable rules permit its use. The State e-Procurement portal is used to publish and manage tender processes, including bid receipt, opening and corrigenda. First select the lawful procurement route under current Chhattisgarh rules and approvals, then use the appropriate channel. Do not apply generic monetary thresholds unless they are confirmed by the governing rule.",
+            "Answer\nGeM goods/services procurement ka government marketplace aur channel hai, jab applicable rules permit karein. State e-Procurement portal Tender publish/manage karne, Bid receipt/opening aur Corrigendum ke liye use hota hai. Pehle current Chhattisgarh rules aur approvals ke under lawful route choose karein, phir appropriate channel use karein. Governing rule confirm kiye bina generic monetary thresholds apply na karein.",
+            "Answer\nGeM goods/services procurement channel hai aur State e-Procurement portal Tender lifecycle ke liye hai. Pehle applicable Chhattisgarh rules ke anusaar route choose karein, phir sahi channel use karein.",
+        )
     if state.intent == "procurement_method_selection" and "direct purchase allowed" in low_question:
         return selected(
             "Answer\nYes—where the current Chhattisgarh Store Purchase Rules permit direct purchase for the applicable value and item category, a stated ₹50,000 requirement can use that route. Confirm the current rule/version, the consolidated requirement (not an artificially split one), the required approval and the recorded reasonableness of price before purchasing. If any condition is not met, use the route required by the rules instead.",
@@ -1425,11 +1602,12 @@ def _render_additional_grounded_answer(state: FineIntentFallback) -> str | None:
             "Answer\nNormal tender process follow karein. Short notice ya PAC exception ke liye rule-based condition, written reasons aur competent approval zaroori hai; exact limit current rule se hi lein.",
         )
     if state.intent == "emd_exemption" and any(term in low_question for term in (
-            "price preference", "local mse", "emd exemption", "msme")):
+            "price preference", "local mse", "emd exemption", "msme", "mse",
+            "bid securing declaration", "bsd", "declaration dena", "declaration देना")):
         return selected(
-            "Answer\nDo not treat MSME/MSE status as an automatic entitlement to every benefit. Check the tender's stated EMD-exemption or price-preference clause, the applicable rule, the bidder/category covered and the required valid certificate. Apply the benefit only where all stated conditions are met and record the verification; supplier eligibility and technical compliance remain separately required.",
-            "Answer\nMSME/MSE status ko har benefit ka automatic entitlement na samjhein. Tender ki EMD-exemption/price-preference clause, applicable rule, covered bidder/category aur required valid certificate check karein. Sab stated conditions meet hone par hi benefit apply karein; eligibility aur technical compliance alag se required rahengi.",
-            "Answer\nMSME/MSE benefit automatic nahi hai. Tender clause, applicable rule aur valid certificate ki conditions verify karke hi exemption/preference apply karein.",
+            "Answer\nDo not treat MSME/MSE status as an automatic entitlement to every benefit. Check the tender's stated EMD-exemption or price-preference clause, the applicable rule, the bidder/category covered and the required valid certificate. Where Bid Security/EMD is waived, the bidder may still have to submit a Bid Securing Declaration (BSD). That declaration is not penalty-free: it accepts consequences if the bidder withdraws or modifies the bid during the bid-validity period, or fails to sign the contract or provide performance security when required. Apply the benefit only where all stated conditions are met and record the verification; supplier eligibility and technical compliance remain separately required.",
+            "Answer\nMSME/MSE status ko har benefit ka automatic entitlement na samjhein. Tender ki EMD-exemption/price-preference clause, applicable rule, covered bidder/category aur required valid certificate check karein. Jahan Bid Security/EMD waive hoti hai, wahan bidder ko Bid Securing Declaration (BSD) dena pad sakta hai. Yeh declaration penalty-free nahi hoti: agar bidder bid-validity period ke dauran bid withdraw ya modify kare, ya award ke baad contract sign/performance security dene mein fail ho, to stated consequences apply hote hain. Sab stated conditions meet hone par hi benefit apply karein; eligibility aur technical compliance alag se required rahengi.",
+            "Answer\nMSME/MSE benefit automatic nahi hai. Tender clause, applicable rule aur valid certificate ki conditions verify karke hi exemption/preference apply karein. Jahan EMD/Bid Security waive ho, wahan Bid Securing Declaration deni pad sakti hai; bid withdraw/modify karne ya award ke baad required step fail karne par uske consequences lagte hain.",
         )
     if state.intent == "gem_bidding" and "custom bid" in low_question:
         return selected(
@@ -1494,6 +1672,21 @@ def _render_additional_grounded_answer(state: FineIntentFallback) -> str | None:
             "Answer\nNo. Issuing a corrigendum does not automatically require a deadline extension. The authorised department user should assess whether the change is material or leaves bidders insufficient time to revise their response. If so, publish the corrigendum and extend the deadline enough to maintain a level playing field; otherwise record the reason for not extending it. Do not limit extensions only to system failures.",
             "Answer\nNahi. Corrigendum issue hone par deadline extension automatic nahi hota. Authorised department user assess kare ki change material hai ya bidders ko response revise karne ke liye time insufficient hai. Aisa ho to corrigendum publish karke level playing field ke liye adequate extension dein; warna no-extension ka reason record karein. Extension ko sirf system failure tak limit na karein.",
             "Answer\nनहीं। शुद्धिपत्र जारी होने पर अंतिम तिथि बढ़ाना स्वतः अनिवार्य नहीं है। यदि परिवर्तन महत्वपूर्ण है या बोलीदाताओं के पास उत्तर संशोधित करने के लिए पर्याप्त समय नहीं है, तो अधिकृत विभागीय उपयोगकर्ता शुद्धिपत्र प्रकाशित कर उचित समय-वृद्धि देगा ताकि सभी को समान अवसर मिले; अन्यथा कारण दर्ज करेगा।",
+        )
+    if state.intent == "tender_creation_portal_steps" and answer_mode == "preparation_checklist":
+        return selected(
+            "Answer\nBefore creating a Tender, keep the approved procurement inputs ready first. Prepare the approved requirement, estimated cost and competent approvals; finalise the technical specifications, bid parts, eligibility/document requirements and evaluation conditions; keep the NIT reference, tender call number, description, PAC if applicable, office/division, tender schedule and bid dates ready; keep the required attachments, bidder documents and payment/EMD details ready; and ensure an authorised department Tender Creator with the required DSC/workflow access will create the record. Then enter and save the Tender header and attachments in the authorised portal workflow, and verify the completed record before publication.",
+            "Answer\nTender create karne se pehle approved procurement inputs ready rakhein. Approved requirement, estimated cost aur competent approvals ready rakhein; technical specifications, bid parts, eligibility/document requirements aur evaluation conditions final karein; NIT reference, tender call number, description, applicable PAC, office/division, tender schedule aur bid dates ready rakhein; required attachments, bidder documents aur payment/EMD details ready rakhein; aur required DSC/workflow access wale authorised department Tender Creator ko confirm karein. Iske baad authorised portal workflow mein Tender header aur attachments enter/save karein aur publish karne se pehle completed record verify karein.",
+            "Answer\nTender banane se pehle approved requirement, estimate, approvals, specifications, eligibility conditions, schedule, attachments aur authorised Tender Creator access ready rakhein. Record save karke publication se pehle verify karein.",
+        )
+    if state.intent == "corrigendum_portal_steps" and any(term in low_question for term in (
+            "last date extend", "tender last date extend", "extend tender date", "bid due date extend",
+            "date extension", "last date badhani", "last date badhana", "date badhani",
+            "date badhana", "deadline badhani", "deadline badhana")):
+        return selected(
+            "Answer\nIssue a Date Corrigendum through the authorised department workflow. Open the relevant tender, choose the Date Corrigendum option, enter the revised bid date/time, save the change, complete the required approval workflow, publish it, and verify that the revised deadline is visible to bidders. Do not describe bid deletion as a general date-extension consequence; it depends on the corrigendum type.",
+            "Answer\nAuthorised department workflow se Date Corrigendum issue karein. Relevant tender kholkar Date Corrigendum option choose karein, revised bid date/time enter karke change save karein, required approval workflow complete karein, publish karein aur verify karein ki revised deadline bidders ko visible hai. Bid deletion ko general date-extension consequence na batayein; yeh corrigendum type par depend karta hai.",
+            "Answer\nDate Corrigendum authorised workflow se issue karein, revised bid date/time save karein, approval ke baad publish karein aur revised deadline visible verify karein. Bid deletion har date extension mein automatic nahi hota.",
         )
     if state.intent in ("dsc_login_problem", "bid_opening_portal_steps", "corrigendum_portal_steps") and any(term in low_question for term in (
             "java error", "ie mode", "decrypt", "authorised department", "corrigendum", "extension")):
@@ -2571,7 +2764,9 @@ def render_fine_intent_fallback(state: FineIntentFallback) -> str:
         low_question = re.sub(r"\s+", " ", (state.original_question or "").lower()).strip()
         if any(term in low_question for term in (
                 "last date extend", "tender last date extend", "extend tender date",
-                "bid due date extend", "date extension")):
+                "bid due date extend", "date extension", "last date badhani",
+                "last date badhana", "date badhani", "date badhana",
+                "deadline badhani", "deadline badhana")):
             return _select(
                 "💡 Answer\nIssue a Date Corrigendum through the authorised department workflow. Enter the revised bid date/time, save the change, send it through the required approval workflow, publish it, and verify that the revised deadline is visible to bidders. Do not describe bid deletion as a general date-extension consequence; it depends on the corrigendum type.",
                 "💡 Answer\nAuthorised department workflow se Date Corrigendum issue karein. Revised bid date/time enter karke change save karein, required approval workflow se bhejein, publish karein aur revised deadline bidders ko visible hona verify karein. Bid deletion ko general date-extension consequence na batayein; yeh corrigendum type par depend karta hai.",

@@ -461,3 +461,22 @@ def actor_generation_directive(actor: str) -> str:
         f"- Do not route this actor into: {forbidden}.\n"
         "- If retrieved context belongs to a forbidden workflow, ignore that context.\n"
     )
+
+
+def actor_answer_violations(actor: str, answer: str) -> Tuple[str, ...]:
+    """Detect workflow leakage that must not be shown to the user.
+
+    This is deliberately limited to imperative vendor-side actions in a
+    department-buyer answer.  Mentioning a word such as ``vendor`` alone is
+    legitimate when explaining that vendors submit bids.
+    """
+    low = (answer or "").casefold()
+    if actor != DEPARTMENT_BUYER:
+        return ()
+    forbidden = (
+        "register as a vendor", "vendor registration", "register on gem",
+        "valid dsc", "register your dsc", "submit your bid",
+        "technical bid and price bid", "pay emd", "emd refund",
+        "performance security deni", "performance security provide",
+    )
+    return tuple(term for term in forbidden if term in low)

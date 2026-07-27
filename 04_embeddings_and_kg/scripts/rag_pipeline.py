@@ -147,8 +147,8 @@ RERANK_TOPK      = int(os.getenv("RERANK_TOPK", str(TOP_K_RETRIEVAL)))          
 RERANK_MAX_CANDS = int(os.getenv("RERANK_MAX_CANDS", str(TOP_K_RETRIEVAL)))     # + diversity-injected sources (was 18)
 RERANK_FAST_K    = int(os.getenv("RERANK_FAST_K", "4"))         # confidence-gate: score these first
 RERANK_CONF_SKIP = float(os.getenv("RERANK_CONF_SKIP", "0.92")) # if best fast score ≥ this, skip the rest (0=off)
-USE_MULTI_QUERY = True       # Enable multi-query retrieval for better coverage
-USE_KNOWLEDGE_GRAPH = True   # Enable knowledge graph enhancement
+USE_MULTI_QUERY = False      # Disable multi-query by default for lower request latency on CPU deployments
+USE_KNOWLEDGE_GRAPH = False  # Disable KG expansion by default for lower request latency on CPU deployments
 KG_WEIGHT = 0.3              # Weight of KG in combined score (0-1)
 KG_EXPANSION_DEPTH = 2       # Entity graph traversal depth
 
@@ -997,28 +997,101 @@ def classify_intent(query):
 
 # ── Helper: Retrieve context with optional KG enhancement ──────
 def _policy_qdrant_filter(retrieval_policy):
-    """Build filters only from fields that exist in the current Qdrant payload."""
+    """Build the primary, source-scoped retrieval filter for an intent route.
+
+    A route's source contract is deliberately stricter than its document-type
+    contract.  ``document_type=procurement_rules`` is shared by many unrelated
+    manuals, so OR-ing it with a preferred source lets those manuals bypass the
+    route before reranking has a chance to reject them.  The caller uses the
+    document-type filter only as a clearly logged fallback when the named
+    sources are absent from the index.
+    """
     policy = retrieval_policy or {}
     preferred = list(policy.get("preferred_source_titles") or ())
     supporting = list(policy.get("supporting_source_titles") or ())
     doc_types = list(policy.get("qdrant_document_types") or ())
     excluded = list(policy.get("excluded_source_titles") or ())
+    source_scope = preferred + supporting
     should = [FieldCondition(key="source", match=MatchValue(value=value))
-              for value in preferred + supporting]
-    should.extend(FieldCondition(key="document_type", match=MatchValue(value=value))
-                  for value in doc_types)
+              for value in source_scope]
     must_not = [FieldCondition(key="source", match=MatchValue(value=value))
                 for value in excluded]
     details = {
-        "available_payload_fields": ["source", "document_type"],
+        "available_payload_fields": ["source", "document_type", "document_family",
+                                     "jurisdiction", "audience", "procurement_stage",
+                                     "commodity"],
         "preferred_sources": preferred, "supporting_sources": supporting,
         "document_types": doc_types, "excluded_sources": excluded,
-        "unavailable_filter_fields": ["audience", "jurisdiction", "procurement_stage",
-                                      "effective_date", "document_version"],
+        "strategy": "source_scope" if source_scope else "document_type_scope",
+        "unavailable_filter_fields": ["effective_date", "document_version"],
     }
+    # Routes without named sources retain their original document-type scope.
+    if not should and doc_types:
+        should = [FieldCondition(key="document_type", match=MatchValue(value=value))
+                  for value in doc_types]
     if not should and not must_not:
         return None, details
     return Filter(should=should or None, must_not=must_not or None), details
+
+
+def _intent_metadata_scope(retrieval_policy):
+    """Return safe metadata constraints for a structured procurement intent."""
+    intent = str((retrieval_policy or {}).get("intent") or "")
+    buyer_intents = {
+        "procurement_planning", "specification_preparation", "approval_and_budget",
+        "procurement_method_selection", "bid_evaluation", "purchase_order",
+        "inspection_and_acceptance", "payment_and_asset_entry",
+    }
+    if intent in buyer_intents:
+        stage = {
+            "procurement_planning": "procurement_planning",
+            "specification_preparation": "procurement_planning",
+            "approval_and_budget": "procurement_planning",
+            "procurement_method_selection": "procurement_planning",
+            "bid_evaluation": "bid_evaluation",
+            "purchase_order": "purchase_order",
+            "inspection_and_acceptance": "inspection_acceptance",
+            "payment_and_asset_entry": "inspection_acceptance",
+        }[intent]
+        return {
+            "stage": stage,
+            "audiences": ("department_buyer", "general"),
+            "excluded_families": (
+                "vendor_portal_manual", "department_portal_manual",
+                "specialized_medical_guidance", "specialized_technical_guidance",
+            ),
+        }
+    return {"stage": None, "audiences": (), "excluded_families": ()}
+
+
+def _policy_metadata_fallback_filter(retrieval_policy):
+    """Filter by indexed workflow metadata when source titles are unavailable."""
+    scope = _intent_metadata_scope(retrieval_policy)
+    if not scope["stage"]:
+        return None
+    return Filter(
+        must=[FieldCondition(key="procurement_stage",
+                             match=MatchValue(value=scope["stage"]))],
+        should=[FieldCondition(key="audience", match=MatchValue(value=value))
+                for value in scope["audiences"]] or None,
+        must_not=[FieldCondition(key="document_family", match=MatchValue(value=value))
+                  for value in scope["excluded_families"]] or None,
+    )
+
+
+def _policy_document_type_fallback_filter(retrieval_policy):
+    """Return the narrower fallback used when a route's sources are missing."""
+    policy = retrieval_policy or {}
+    doc_types = list(policy.get("qdrant_document_types") or ())
+    excluded = list(policy.get("excluded_source_titles") or ())
+    if not doc_types:
+        return None
+    return Filter(
+        should=[FieldCondition(key="document_type", match=MatchValue(value=value))
+                for value in doc_types],
+        must_not=[FieldCondition(key="source", match=MatchValue(value=value))
+                  for value in excluded] or None,
+    )
 
 
 def _policy_score_adjust(source, score, retrieval_policy):
@@ -1131,10 +1204,41 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None,
         # Multi-query retrieval (or single-query fallback)
         dense_results, aggregated_scores, query_sparse = multi_query_retrieval(query, query_filter=query_filter)
         
-        # If strict filtering returned nothing, retry without filter (fallback for older DBs or missing metadata)
+        # A route's named sources are authoritative.  When an older index uses
+        # different source names, retry its indexed workflow metadata before
+        # falling back to generic document types.
+        metadata_fallback_filter = None
+        type_fallback_filter = None
+        if structured_intent:
+            metadata_fallback_filter = _policy_metadata_fallback_filter(retrieval_policy)
+            type_fallback_filter = _policy_document_type_fallback_filter(retrieval_policy)
+
+        # Metadata is the second retrieval tier.  For a planning route this
+        # requires planning-stage evidence and excludes unrelated domains.
+        if query_filter is not None and (dense_results is None or not dense_results.points):
+            if metadata_fallback_filter is not None:
+                _rag_trace("qdrant_filter_fallback", structured_intent=structured_intent,
+                           fallback_reason="source_scope_returned_no_results_using_metadata_scope",
+                           qdrant_filters_used=filter_details)
+                dense_results, aggregated_scores, query_sparse = multi_query_retrieval(
+                    query, query_filter=metadata_fallback_filter
+                )
+
+        # The type scope supports older indexes that have not yet been
+        # metadata-backfilled.  It remains narrower than the full corpus.
+        if query_filter is not None and (dense_results is None or not dense_results.points):
+            if type_fallback_filter is not None:
+                _rag_trace("qdrant_filter_fallback", structured_intent=structured_intent,
+                           fallback_reason="metadata_scope_returned_no_results_using_document_types",
+                           qdrant_filters_used=filter_details)
+                dense_results, aggregated_scores, query_sparse = multi_query_retrieval(
+                    query, query_filter=type_fallback_filter
+                )
+
+        # Full-corpus retrieval is a last-resort availability fallback only.
         if query_filter is not None and (dense_results is None or not dense_results.points):
             _rag_trace("qdrant_filter_fallback", structured_intent=structured_intent,
-                       fallback_reason="strict_filter_returned_no_results",
+                       fallback_reason="document_type_scope_returned_no_results",
                        qdrant_filters_used=filter_details)
             print("  ⚠ Strict filter returned no results. Retrying without filter.")
             dense_results, aggregated_scores, query_sparse = multi_query_retrieval(query, query_filter=None)
@@ -1188,10 +1292,10 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None,
                                     if intent == 'procurement_rules' else intent),
                    results=_pre_rows)
         
-        # Collect candidate points for reranking (from top 20 hybrid results)
+        # Collect candidate points for diagnostics from the top hybrid results.
         candidate_points = [
             next((p for p in dense_results.points if p.id == point_id), None)
-            for point_id, _ in hybrid_scores[:20]
+            for point_id, _ in hybrid_scores[:TOP_K_RETRIEVAL]
         ]
         candidate_points = [p for p in candidate_points if p is not None]
         
@@ -1294,12 +1398,13 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None,
                 seen_texts.add(txt)
                 dedup_ordered.append(p)
                 
-        for p in dedup_ordered[:RERANK_TOPK]:
+        initial_cap = min(RERANK_TOPK, RERANK_MAX_CANDS)
+        for p in dedup_ordered[:initial_cap]:
             cand.append(p)
             seen_src.add(p.payload.get("source", ""))
             
         # Diversity injection
-        for p in dedup_ordered[RERANK_TOPK:]:
+        for p in dedup_ordered[initial_cap:]:
             if len(cand) >= RERANK_MAX_CANDS:
                 break
             s = p.payload.get("source", "")
@@ -1319,7 +1424,22 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None,
         score_details = {}
         try:
             rq = rerank_query or query
-            rr_scores = _rr_score(cand)
+            fast_k = max(1, min(RERANK_FAST_K, len(cand)))
+            fast_points = cand[:fast_k]
+            rr_scores = []
+            if fast_points:
+                fast_scores = _rr_score(fast_points)
+                rr_scores.extend(fast_scores)
+                if (RERANK_CONF_SKIP > 0
+                        and fast_scores
+                        and max(float(score) for score in fast_scores) >= RERANK_CONF_SKIP):
+                    print(
+                        f"  ⚡ Skipped full rerank after fast gate "
+                        f"({fast_k}/{len(cand)} candidates, threshold {RERANK_CONF_SKIP})"
+                    )
+                    cand = fast_points
+                elif len(cand) > fast_k:
+                    rr_scores.extend(_rr_score(cand[fast_k:]))
             reranker_score_map = {p.id: float(rr_scores[i]) for i, p in enumerate(cand)}
             print(f"  🔄 Reranked {len(cand)} candidates (truncated to {RERANK_TRUNCATION} chars)")
             
@@ -1428,18 +1548,26 @@ def retrieve_context(query, num_context=5, use_kg=True, rerank_query=None,
             per_source[src] = per_source.get(src, 0) + 1
             _emit(point, score)
             
-        if len(results) < FINAL_CONTEXT:  # relax cap if corpus diversity is low
+        if len(results) < FINAL_CONTEXT:
+            # Do not undo the source cap merely to fill the context drawer.
+            # A shorter, diverse context is more useful than four near-duplicate
+            # chunks from one manual, and the prompt packer can still use the
+            # leading evidence from each selected source.
             have = {id(r["point"]) for r in results}
             for point, score in ranked:
                 if len(results) >= FINAL_CONTEXT:
                     break
+                src = point.payload.get("source", "")
                 doc_type = point.payload.get("document_type", "general")
                 if doc_type == "faq" and faq_count >= MAX_FAQ_RESULTS:
+                    continue
+                if per_source.get(src, 0) >= MAX_PER_SOURCE:
                     continue
                 
                 if id(point) not in have:
                     _emit(point, score)
                     have.add(id(point))
+                    per_source[src] = per_source.get(src, 0) + 1
                     if doc_type == "faq":
                         faq_count += 1
 

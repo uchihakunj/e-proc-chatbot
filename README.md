@@ -26,6 +26,14 @@ dedicated folders.
 - Health check: `python scripts/maintenance/health_check.py`
 - Manifest rebuild: `python scripts/maintenance/rebuild_manifest.py`
 
+## Production Notes
+
+- Windows bootstrap now starts the backend in production mode with `waitress` by default via `start_cpu.bat`.
+- Request concurrency is intentionally capped by `MAX_CONCURRENT_RAG_REQUESTS` so the app sheds load cleanly instead of hanging under burst traffic.
+- Health endpoint `GET /api/health` now reports active request count and configured concurrency limit.
+- Concurrent force-retrieval load testing: `python eval/retrieval_regression/run_concurrent_benchmark.py --workers 10`
+- Try `--workers 10`, `--workers 25`, and `--workers 50` separately before production sign-off.
+
 ## Pipeline
 
 ### Stage 01 - Preprocessing
