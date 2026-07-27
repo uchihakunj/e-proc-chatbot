@@ -2410,6 +2410,11 @@ def highlighted_pdf():
     return _make_resp(out, page_1based, total_hits)
 
 
+@app.route('/')
+def home():
+    return "backend is working"
+
+
 @app.route('/api/stream', methods=['POST'])
 def stream_query():
     """Stream query response using SSE."""
