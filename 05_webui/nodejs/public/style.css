@@ -210,6 +210,7 @@ html, body {
 
 /* ── Chat popup ──────────────────────────────────────────────────── */
 #chat-popup {
+  position: relative;
   width: var(--widget-w);
   height: var(--widget-h);
   /* Never overflow the top of the viewport */
@@ -227,6 +228,86 @@ html, body {
 @keyframes popup-open {
   from { opacity: 0; transform: scale(.87) translateY(12px); }
   to   { opacity: 1; transform: none; }
+}
+
+/* ══ Edge Resize Handles ═══════════════════════════════════════════ */
+body.resizing-active {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+#chat-popup.resizing {
+  box-shadow: 0 0 0 2px var(--accent), var(--shadow-lg) !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+.resize-handle {
+  position: absolute;
+  z-index: 50;
+  touch-action: none;
+  background: transparent;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Edges */
+.resize-handle.resize-n {
+  top: 0; left: 14px; right: 14px; height: 8px;
+  cursor: ns-resize;
+}
+.resize-handle.resize-s {
+  bottom: 0; left: 14px; right: 14px; height: 8px;
+  cursor: ns-resize;
+}
+.resize-handle.resize-e {
+  right: 0; top: 14px; bottom: 14px; width: 8px;
+  cursor: ew-resize;
+}
+.resize-handle.resize-w {
+  left: 0; top: 14px; bottom: 14px; width: 8px;
+  cursor: ew-resize;
+}
+
+/* Corners */
+.resize-handle.resize-nw {
+  top: 0; left: 0; width: 16px; height: 16px;
+  cursor: nwse-resize; z-index: 51;
+}
+.resize-handle.resize-ne {
+  top: 0; right: 0; width: 16px; height: 16px;
+  cursor: nesw-resize; z-index: 51;
+}
+.resize-handle.resize-sw {
+  bottom: 0; left: 0; width: 16px; height: 16px;
+  cursor: nesw-resize; z-index: 51;
+}
+.resize-handle.resize-se {
+  bottom: 0; right: 0; width: 16px; height: 16px;
+  cursor: nwse-resize; z-index: 51;
+}
+
+/* Visual glow affordance when hovering or holding an edge */
+.resize-handle:hover,
+#chat-popup.resizing .resize-handle {
+  background: rgba(30, 99, 184, 0.15);
+}
+
+.resize-handle.resize-n:hover,
+.resize-handle.resize-s:hover {
+  background: linear-gradient(90deg, transparent 0%, rgba(30, 99, 184, 0.4) 50%, transparent 100%);
+}
+
+.resize-handle.resize-e:hover,
+.resize-handle.resize-w:hover {
+  background: linear-gradient(180deg, transparent 0%, rgba(30, 99, 184, 0.4) 50%, transparent 100%);
+}
+
+.resize-handle.resize-nw:hover,
+.resize-handle.resize-ne:hover,
+.resize-handle.resize-sw:hover,
+.resize-handle.resize-se:hover {
+  background: rgba(30, 99, 184, 0.45);
+  border-radius: 4px;
 }
 
 /* ── Popup header ────────────────────────────────────────────────── */

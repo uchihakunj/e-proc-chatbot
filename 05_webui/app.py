@@ -806,6 +806,17 @@ def language_directive(lang):
             "The user's question is in ENGLISH. You MUST write the ENTIRE response in English.")
 
 
+def link_guidance_directive():
+    """Instruct model to include relevant official web links when answering questions about portals/setup/DSC."""
+    return ("\n\n=== RELEVANT LINKS DIRECTIVE ===\n"
+            "When answering questions about portal access, vendor registration, DSC, GeM, or system setup, "
+            "provide relevant official web links in clean Markdown or URL format when applicable:\n"
+            "- CG e-Procurement Portal: https://eproc.cgstate.gov.in\n"
+            "- Certifying Authorities / DSC: https://cca.gov.in\n"
+            "- Government e-Marketplace: https://gem.gov.in\n"
+            "- MSME Udyam Registration: https://udyamregistration.gov.in\n")
+
+
 def enforce_response_language(text, language):
     """Keep Roman-script Hinglish responses free of model-generated Devanagari."""
     if language == 'hinglish':
@@ -1824,6 +1835,32 @@ CURATED_FACTS = [
 ]
 
 
+def direct_official_link_answer(query):
+    """Return a fast, authoritative URL only when the user explicitly asks for it.
+
+    Policy/process answers should not be cluttered with generic links.  This
+    deliberate gate makes the link useful ("portal ka link", "website kya hai")
+    while avoiding a fragile model-generated URL in normal answers.
+    """
+    if not query:
+        return None
+    low = query.casefold()
+    if not (any(term in low for term in _URL_INTENT)
+            and any(term in low for term in _PORTAL_WORD)):
+        return None
+
+    lang = detect_query_language(query)
+    url = "https://eproc.cgstate.gov.in"
+    if lang == 'hi':
+        return ("आधिकारिक Chhattisgarh e-Procurement portal का लिंक: "
+                f"{url}\n\nइसी पोर्टल पर Tender, Bid और संबंधित सेवाएँ उपलब्ध हैं।")
+    if lang == 'hinglish':
+        return ("Official Chhattisgarh e-Procurement portal link: "
+                f"{url}\n\nYahin se Tender, Bid aur related services access kar sakte hain.")
+    return ("Official Chhattisgarh e-Procurement portal link: "
+            f"{url}\n\nYou can use this portal for tenders, bids, and related services.")
+
+
 def lexical_curated_facts(query):
     """Inject hand-verified authoritative facts (e.g. the live portal URL) at the
     front of the context so a demo/stray value in a retrieved chunk can't win.
@@ -2556,6 +2593,20 @@ def stream_query():
                 yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[],'diagnostics':bypass_diagnostics('clarification_required'), **_routing_diagnostics})}\n\n"
                 return
 
+            # Explicit link requests are served from a small, audited registry.
+            # This makes the official portal URL reliable and avoids the retrieval
+            # + LLM round trip for a simple navigation question.
+            _official_link_answer = direct_official_link_answer(effective_query)
+            if _official_link_answer and not force_retrieval:
+                _official_link_sources = ['CHiPS e-Procurement Portal (official)']
+                yield f"data: {json.dumps({'type':'status','message':'Opening the official portal link'})}\n\n"
+                yield bypass_context_event('direct_official_portal_link', _official_link_sources)
+                yield f"data: {json.dumps({'type':'token','content':_official_link_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _official_link_answer[:300])
+                ANSWER_CACHE.put(effective_query, _official_link_answer, _official_link_sources)
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_official_link_sources,'answer':_official_link_answer,'diagnostics':bypass_diagnostics('direct_official_portal_link'), **_routing_diagnostics})}\n\n"
+                return
+
             _previous_vendor_answer = direct_previous_tender_vendor_answer(effective_query)
             if _previous_vendor_answer and not force_retrieval:
                 _previous_vendor_sources = [
@@ -2974,6 +3025,7 @@ def stream_query():
             ollama_system = (
                 PROCUREMENT_SYSTEM_PROMPT.strip()
                 + language_directive(_lang)
+                + link_guidance_directive()
                 + actor_generation_directive(actor)
                 + generation_directive(route_for_intent(fine_intent))
             )

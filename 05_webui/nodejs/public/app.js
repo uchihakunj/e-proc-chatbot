@@ -277,6 +277,17 @@ function renderMarkdown(text) {
   out = out.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   out = out.replace(/\*(.+?)\*/g,     '<em>$1</em>');
   out = out.replace(/`([^`]+)`/g,     '<code>$1</code>');
+  // 1) Handle explicit Markdown links: [Link Title](https://url.com)
+  out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (match, label, url) => {
+    const href = encodeURI(url);
+    return `<a href="${href}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+  });
+
+  // 2) Turn plain http(s) addresses (not already inside an <a> tag) into safe, clickable links.
+  out = out.replace(/(^|[^"'>])(https?:\/\/[^\s<]+[^\s<.,;:!?\)\]\}])/g, (match, prefix, url) => {
+    const href = encodeURI(url);
+    return `${prefix}<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+  });
 
   const lines = out.split('\n');
   const processed = [];
@@ -717,19 +728,23 @@ function toggleMaximize() {
 // Show the reset button only when the widget is no longer at its default state.
 function updateResetBtnVisibility() {
   if (!ui.resetBtn) return;
-  const altered = state.widgetMoved || ui.chatPopup.classList.contains('maximized');
+  const p = ui.chatPopup;
+  const resized = p && (p.style.width || p.style.height);
+  const altered = state.widgetMoved || ui.chatPopup.classList.contains('maximized') || resized;
   ui.resetBtn.classList.toggle('hidden', !altered);
 }
 
 // Restore the widget to its default bottom-right corner and default size.
 function resetWidgetPosition() {
   const w = ui.chatWidget;
+  const p = ui.chatPopup;
   if (w) { w.style.left = ''; w.style.top = ''; w.style.right = ''; w.style.bottom = ''; }
+  if (p) { p.style.width = ''; p.style.height = ''; p.style.maxHeight = ''; }
   state.widgetMoved = false;
   ui.chatPopup.classList.remove('maximized');
   if (ui.maximizeBtn) ui.maximizeBtn.title = 'Maximize';
   updateResetBtnVisibility();
-  toast('Chat position reset', 'info');
+  toast('Chat position & size reset', 'info');
 }
 
 // Keep a dragged widget fully inside the viewport (no-op until it's been moved).
@@ -782,6 +797,110 @@ function initDragMove() {
   };
   header.addEventListener('pointerup', end);
   header.addEventListener('pointercancel', end);
+}
+
+// ── Hold-and-drag edge resizing for the chatbot window ────────────────────────
+function initEdgeResize() {
+  const popup = ui.chatPopup;
+  const widget = ui.chatWidget;
+  if (!popup || !widget) return;
+
+  const handles = popup.querySelectorAll('.resize-handle');
+  let resizing = false;
+  let activeDir = null;
+  let startX = 0, startY = 0;
+  let startWidth = 0, startHeight = 0;
+  let startLeft = 0, startTop = 0;
+
+  handles.forEach(handle => {
+    handle.addEventListener('pointerdown', e => {
+      if (e.button !== 0 || popup.classList.contains('maximized')) return;
+      e.stopPropagation();
+      e.preventDefault();
+
+      activeDir = handle.dataset.dir;
+      resizing = true;
+
+      const widgetRect = widget.getBoundingClientRect();
+      const popupRect = popup.getBoundingClientRect();
+
+      startWidth = popupRect.width;
+      startHeight = popupRect.height;
+      startX = e.clientX;
+      startY = e.clientY;
+      startLeft = widgetRect.left;
+      startTop = widgetRect.top;
+
+      widget.style.left = `${startLeft}px`;
+      widget.style.top = `${startTop}px`;
+      widget.style.right = 'auto';
+      widget.style.bottom = 'auto';
+
+      state.widgetMoved = true;
+      updateResetBtnVisibility();
+
+      popup.classList.add('resizing');
+      document.body.classList.add('resizing-active');
+
+      try { handle.setPointerCapture(e.pointerId); } catch (_) {}
+    });
+
+    handle.addEventListener('pointermove', e => {
+      if (!resizing || !activeDir) return;
+      e.preventDefault();
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      let newW = startWidth;
+      let newH = startHeight;
+      let newL = startLeft;
+      let newT = startTop;
+
+      const minW = 320;
+      const maxW = Math.min(1200, window.innerWidth - 32);
+      const minH = 350;
+      const maxH = Math.min(1000, window.innerHeight - 32);
+
+      if (activeDir.includes('e')) {
+        newW = Math.max(minW, Math.min(maxW, startWidth + dx));
+      } else if (activeDir.includes('w')) {
+        const targetW = startWidth - dx;
+        newW = Math.max(minW, Math.min(maxW, targetW));
+        newL = startLeft + (startWidth - newW);
+      }
+
+      if (activeDir.includes('s')) {
+        newH = Math.max(minH, Math.min(maxH, startHeight + dy));
+      } else if (activeDir.includes('n')) {
+        const targetH = startHeight - dy;
+        newH = Math.max(minH, Math.min(maxH, targetH));
+        newT = startTop + (startHeight - newH);
+      }
+
+      newL = Math.max(8, Math.min(newL, window.innerWidth - newW - 8));
+      newT = Math.max(8, Math.min(newT, window.innerHeight - newH - 8));
+
+      popup.style.width = `${newW}px`;
+      popup.style.height = `${newH}px`;
+      popup.style.maxHeight = `${newH}px`;
+
+      widget.style.left = `${newL}px`;
+      widget.style.top = `${newT}px`;
+    });
+
+    const endResize = e => {
+      if (!resizing) return;
+      resizing = false;
+      activeDir = null;
+      popup.classList.remove('resizing');
+      document.body.classList.remove('resizing-active');
+      try { handle.releasePointerCapture(e.pointerId); } catch (_) {}
+    };
+
+    handle.addEventListener('pointerup', endResize);
+    handle.addEventListener('pointercancel', endResize);
+  });
 }
 
 // ── Login removed (open access) ─────────────────────────────────────────────
@@ -2035,7 +2154,8 @@ async function bootRagUI() {
 // ── Main boot ─────────────────────────────────────────────────────────────
 function boot() {
   // Widget toggle
-  ui.widgetToggle.addEventListener('click', () => {
+  ui.widgetToggle.addEventListener('click', e => {
+    e.stopPropagation();
     if (state.widgetOpen) closeWidget(); else openWidget();
   });
 
@@ -2061,11 +2181,12 @@ function boot() {
 
   // Login removed — no logout button or login form to bind.
 
-  // Clear chat history / maximize / drag-to-move
+  // Clear chat history / maximize / drag-to-move / edge-resize
   if (ui.clearBtn)    ui.clearBtn.addEventListener('click', clearChat);
   if (ui.maximizeBtn) ui.maximizeBtn.addEventListener('click', toggleMaximize);
   if (ui.resetBtn)    ui.resetBtn.addEventListener('click', resetWidgetPosition);
   initDragMove();
+  initEdgeResize();
   window.addEventListener('resize', clampWidget);
 
   // Options (⋮) menu: Clear Chat / Minimize / Save Chat / Exit Chat
@@ -2077,6 +2198,16 @@ function boot() {
   document.addEventListener('click', e => {
     if (ui.popupMenu && !ui.popupMenu.classList.contains('hidden') &&
         !e.target.closest('#popup-menu') && !e.target.closest('#popup-menu-btn')) closeMenu();
+
+    // Collapse chatbot popup immediately when clicking outside of it
+    if (state.widgetOpen &&
+        !e.target.closest('#chat-widget') &&
+        !e.target.closest('#pdf-panel') &&
+        !e.target.closest('#pdf-overlay') &&
+        !e.target.closest('#source-drawer') &&
+        !e.target.closest('#drawer-overlay')) {
+      closeWidget();
+    }
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
