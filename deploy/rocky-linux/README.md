@@ -41,8 +41,11 @@ Notes:
 cd /opt/eproc-chatbot
 python3.11 -m venv .venv
 source .venv/bin/activate
+# Avoid a host-level pip configuration redirecting installs to ~/.local.
+unset PIP_USER PIP_TARGET PIP_PREFIX PYTHONUSERBASE
 python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+python -m pip install --no-user -r requirements.txt
+python -c 'import requests; print("Python dependencies are installed in", __import__("sys").prefix)'
 ```
 
 ## 3. Install Node dependencies
@@ -84,6 +87,10 @@ cd /opt/eproc-chatbot
 chmod +x start_cpu.sh
 ./start_cpu.sh
 ```
+
+If startup reports `No module named requests`, the packages were installed into
+the wrong Python environment. Recreate the environment and install with the
+commands in step 2; use `python -m pip`, not `pip`.
 
 Expected startup lines include:
 
