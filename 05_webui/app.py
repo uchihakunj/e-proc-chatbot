@@ -63,6 +63,7 @@ from fine_intent_policy import (
     route_for_intent, route_for_query, canonical_source_contract_query,
     canonical_source_contract_sources,
 )
+from cg_store_rule_answers import direct_cg_store_rule_answer
 
 # Dynamically find RAG pipeline module - works for both local and Docker
 def _find_rag_module():
@@ -264,6 +265,12 @@ CORE RULES:
   figure, and never change a range's bound or direction ("up to X" must NOT become
   "above X"; "3 to 5 per cent" must NOT become "1 to 3 per cent"). If the Context
   gives no figure, state the provision without one.
+- THRESHOLD AND METHOD QUESTIONS: When the user gives an estimated value or asks
+  which procurement/tender method applies, answer the decision explicitly. State
+  whether GeM, direct purchase, Purchase Committee, Limited Tender, Open Tender,
+  or another method applies; give the applicable threshold, conditions, exceptions,
+  approval/documentation steps, and the exact rule/section or manual provision
+  supporting each material claim. Do not give a generic list of tender types.
 - CITATIONS: Do NOT write "[Source 1]", "Source 2", "[Source N: file]", or refer
   to the context sources by number/bracket anywhere in your answer prose. State
   the facts directly; the cited documents are listed separately under 📘 Source.
@@ -525,6 +532,109 @@ def direct_procurement_methods_overview_answer(query):
         "Limited, and Single Tender are procurement methods.\n\n"
         "📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules; "
         "Manual for Procurement of Goods 2024."
+    )
+
+
+def direct_small_value_procurement_answer(query):
+    """Answer small-value goods procurement threshold questions deterministically."""
+    import re
+
+    q = (query or '').casefold()
+    if not any(term in q for term in (
+        'tender', 'procurement', 'purchase', 'kharid', 'khareed',
+        'kharidna', 'khareedna', 'निविदा', 'खरीद', 'प्रोक्योरमेंट',
+    )):
+        return None
+    if not any(term in q for term in (
+        'lakh', 'lac', 'lakhs', 'lacs', 'रुपये', 'रु', 'rs', '₹',
+        'amount', 'value', 'कीमत', 'राशि',
+    )):
+        return None
+
+    amount_match = re.search(
+        r'(?:₹|rs\.?|rupees?|रु\.?|रुपये)?\s*'
+        # Indian-formatted values such as 3,00,001 must be consumed as one
+        # number.  The older pattern stopped at "3,00", turning this value into
+        # Rs. 300 and activating an unrelated small-value answer.
+        r'(\d[\d,]*(?:\.\d+)?)\s*(lakh|lakhs|lac|lacs|करोड़|crore|crores)?',
+        q,
+        flags=re.I,
+    )
+    if not amount_match:
+        return None
+    try:
+        amount = float(amount_match.group(1).replace(',', ''))
+        unit = (amount_match.group(2) or '').lower()
+        if unit in ('lakh', 'lakhs', 'lac', 'lacs'):
+            amount *= 100000
+        elif unit in ('crore', 'crores', 'करोड़'):
+            amount *= 10000000
+    except (TypeError, ValueError):
+        return None
+
+    # This route is specifically for small-value goods/store-purchase questions;
+    # larger values continue through normal retrieval.
+    if amount > 500000:
+        return None
+    value_label = (
+        f"₹{amount / 100000:g} lakh" if amount >= 100000
+        else f"₹{amount:,.0f}"
+    )
+    is_hinglish = any(term in q for term in (
+        'agar', 'se kam', 'tak', 'toh', 'to', 'kya', 'kaise', 'ke liye',
+        'kharid', 'khareed', 'निविदा', 'खरीद', 'क्या', 'कैसे',
+    ))
+
+    if is_hinglish:
+        return (
+            f"Agar aap **goods/store purchase** ki baat kar rahe hain aur estimated "
+            f"value {value_label} se kam hai, to sirf amount ke basis par **Open Tender "
+            "mandatory nahi hota**. Pehle GeM availability check karein.\n\n"
+            "- **GeM par item available ho:** GeM se procurement mandatory hai. "
+            "₹50,000 se upar aur ₹10 lakh tak GeM par kam-se-kam teen different "
+            "manufacturers ke available sellers mein lowest-price seller ka route "
+            "follow hota hai. Yeh **GFR Rule 149** ke under hai.\n"
+            "- **GeM par item available na ho:** GeMAR&PTS generate karke record karein. "
+            "₹50,000 se upar aur ₹5 lakh tak goods ko duly constituted Local Purchase "
+            "Committee ki recommendation par procure kiya ja sakta hai. Yeh "
+            "**Manual for Procurement of Goods 2024 ke GeM/non-availability provisions "
+            "aur GFR Rule 155** ke under hai.\n"
+            "- **₹50,000 tak, GeM par item unavailable ho:** competent authority ka "
+            "certificate record karke quotation ke bina purchase ka provision "
+            "**GFR Rule 154** mein diya gaya hai.\n"
+            "- **Agar tender route specifically required ho:** Limited Tender Enquiry "
+            f"₹50 lakh tak adopt ki ja sakti hai under **GFR Rule 162**, lekin {value_label} "
+            "ke goods purchase ke liye Goods Manual mein Local Purchase Committee "
+            "small-value route diya gaya hai; Open Tender normally ₹50 lakh and above "
+            "ke liye hai under **GFR Rule 161**.\n\n"
+            "Local Purchase Committee ko market survey karke rate, quality aur "
+            "specification ki reasonableness record karni hoti hai. Ek hi requirement "
+            "ko threshold avoid karne ke liye chhote orders mein split nahi karna chahiye. "
+            "Chhattisgarh Store Purchase Rules, applicable SoPP/delegated powers, "
+            "item category, aur latest amendments bhi verify karein.\n\n"
+            "📘 Source: General Financial Rules (GFR); Manual for Procurement of Goods 2024; Chhattisgarh Store Purchase Rules."
+        )
+
+    return (
+        "For goods/store procurement with an estimated value below ₹5 lakh, Open "
+        "Tender is not automatically mandatory. First check GeM availability.\n\n"
+        "- If the item is available on GeM, procurement must use GeM under **GFR Rule "
+        "149**. For purchases above ₹50,000 and up to ₹10 lakh, use the applicable "
+        "lowest-price GeM seller route among at least three manufacturers.\n"
+        "- If the item is unavailable on GeM, generate a GeMAR&PTS record. For goods "
+        "above ₹50,000 and up to ₹5 lakh, procurement may be made on the recommendation "
+        "of a duly constituted Local Purchase Committee under **GFR Rule 155** and "
+        "the Manual for Procurement of Goods 2024.\n"
+        "- For goods up to ₹50,000 unavailable on GeM, purchase without quotation may "
+        "be used with the competent authority's certificate under **GFR Rule 154**.\n"
+        "- If a tender is specifically required, Limited Tender Enquiry is available "
+        "up to ₹50 lakh under **GFR Rule 162**. Open/Advertised Tender is normally "
+        "for ₹50 lakh and above under **GFR Rule 161**, subject to the stated exceptions.\n\n"
+        "The Local Purchase Committee must conduct a market survey and record the "
+        "reasonableness of rate, quality, and specifications. Do not split one demand "
+        "into smaller orders to avoid thresholds or approvals. Apply the applicable "
+        "Chhattisgarh Store Purchase Rules, SoPP, delegated powers, and amendments.\n\n"
+        "📘 Source: General Financial Rules (GFR); Manual for Procurement of Goods 2024; Chhattisgarh Store Purchase Rules."
     )
 
 
@@ -1236,13 +1346,16 @@ def lexical_rule_lookup(query, max_hits=3, window=14, cap=700):
     import re
     if not query:
         return []
-    raw = re.findall(r'\b(?:rule|section|regulation|article)\s*(\d+\s*[A-Za-z]?)\b', query, flags=re.I)
+    # Preserve dotted sub-rule identifiers (for example ``Rule 4.3.2``).  The
+    # old expression silently reduced them to ``4``, which injected the broad
+    # Rule 4 passage instead of the applicable tender clause.
+    raw = re.findall(r'\b(?:rule|section|regulation|article)\s*(\d+(?:\.\d+)*(?:\s*[A-Za-z])?)\b', query, flags=re.I)
     # Hindi RULE keywords (नियम / विनियम) — so "GFR नियम 144" triggers the exact-
     # passage lookup. We deliberately EXCLUDE धारा / अनुच्छेद ("Section"/"Article"):
     # the Act PDFs number sections as "43." (not "Section 43"), so a section lookup
     # never matches their headings and would only inject an unrelated GFR "Rule 43".
     # Devanagari \b is unreliable around matras, so match without word boundaries.
-    raw += re.findall(r'(?:नियम|विनियम)\s*(\d+\s*[A-Za-z]?)', query)
+    raw += re.findall(r'(?:नियम|विनियम)\s*(\d+(?:\.\d+)*(?:\s*[A-Za-z])?)', query)
     nums = []
     for n in raw:
         n = re.sub(r'\s+', '', n).upper()
@@ -2280,6 +2393,16 @@ def _highlight_phrases(text, max_phrases=60):
             continue
         seen.add(u)
         phrases.append(u)
+        # Add shorter leading windows as fallbacks for PDF line wrapping and
+        # OCR/punctuation drift. They still identify the cited passage while
+        # being easier for PyMuPDF to match than a full retrieved sentence.
+        words = u.split()
+        for width in (12, 8):
+            if len(words) > width:
+                short = ' '.join(words[:width])
+                if len(short) >= 18 and short not in seen:
+                    seen.add(short)
+                    phrases.append(short)
         if len(phrases) >= max_phrases:
             break
     return phrases
@@ -2347,6 +2470,16 @@ def highlighted_pdf():
     phrases = _highlight_phrases(snippet)
     if not phrases:
         return _serve_plain()
+    # Last-resort terms for OCR/paraphrased chunks where no complete phrase is
+    # present verbatim in the PDF. These are used only if phrase matching finds
+    # nothing at all, avoiding noisy highlights during normal matching.
+    import re as _re
+    fallback_terms = []
+    for term in _re.findall(r"[\w\u0900-\u097F]{5,}", strip_chunk_header(snippet or '')):
+        if term.casefold() not in {x.casefold() for x in fallback_terms}:
+            fallback_terms.append(term)
+        if len(fallback_terms) >= 18:
+            break
 
     # Cache lookup (mtime in the key invalidates if the source PDF is replaced).
     try:
@@ -2368,6 +2501,7 @@ def highlighted_pdf():
         return _serve_plain()
 
     first_hit_page, last_hit_page, total_hits = None, None, 0
+    context_page_done = False
     try:
         for page in doc:
             page_hit = False
@@ -2382,6 +2516,27 @@ def highlighted_pdf():
                     annot.update()
                     total_hits += len(quads)
                     page_hit = True
+            # Also mark the source context immediately following the matched
+            # phrase. This helps short cached questions where the heading
+            # matches but the explanatory paragraph is the cited context.
+            if page_hit and not context_page_done:
+                try:
+                    all_hit_quads = [q for phrase in phrases
+                                     for q in (page.search_for(phrase, quads=True) or [])]
+                    anchor_y = min(q.rect.y1 for q in all_hit_quads)
+                    context_quads = []
+                    for word in page.get_text('words'):
+                        x0, y0, x1, y1 = word[:4]
+                        if anchor_y - 1 <= y0 <= anchor_y + 150:
+                            context_quads.append(fitz.Rect(x0, y0, x1, y1))
+                    if context_quads:
+                        context_annot = page.add_highlight_annot(context_quads)
+                        context_annot.set_colors(stroke=(1, 0.84, 0.2))
+                        context_annot.update()
+                        total_hits += len(context_quads)
+                    context_page_done = True
+                except Exception:
+                    pass
             if page_hit:
                 if first_hit_page is None:
                     first_hit_page = page.number
@@ -2390,6 +2545,24 @@ def highlighted_pdf():
             # moved a couple of pages beyond the last match.
             elif last_hit_page is not None and page.number - last_hit_page > _HL_TAIL_PAGES:
                 break
+        if total_hits == 0 and fallback_terms:
+            # Search distinctive individual terms as a final OCR/paraphrase
+            # fallback. Highlighting a handful of matching terms is preferable
+            # to silently showing an unannotated PDF.
+            for page in doc:
+                term_quads = []
+                for term in fallback_terms:
+                    try:
+                        term_quads.extend(page.search_for(term, quads=True) or [])
+                    except Exception:
+                        continue
+                if term_quads:
+                    annot = page.add_highlight_annot(term_quads[:40])
+                    annot.set_colors(stroke=(1, 0.84, 0.2))
+                    annot.update()
+                    total_hits = len(term_quads[:40])
+                    first_hit_page = page.number
+                    break
         if total_hits == 0:
             return _serve_plain()
         out = doc.tobytes(garbage=3, deflate=True)
@@ -2646,6 +2819,49 @@ def stream_query():
                                            'direct_two_bid_cancellation': True,
                                            'elapsed': round(time.time()-t0, 2)})
                 yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_two_bid_sources,'answer':_two_bid_answer,'diagnostics':bypass_diagnostics('direct_two_bid_cancellation'), **_routing_diagnostics})}\n\n"
+                return
+
+            # Exact CG Store Rules clauses (thresholds, certificates, timelines
+            # and tender actions) are source-backed deterministic answers.  This
+            # protects a statutory answer from a transient generation-provider
+            # failure after the verified State Rules corpus has been retrieved.
+            _cg_store_rule_answer = direct_cg_store_rule_answer(effective_query)
+            if _cg_store_rule_answer and not force_retrieval:
+                _cg_store_rule_sources = ['store purchase rule cg.pdf']
+                yield f"data: {json.dumps({'type':'status','message':'Using the verified Chhattisgarh Store Purchase Rules clause'})}\n\n"
+                yield bypass_context_event('direct_cg_store_rule_clause', _cg_store_rule_sources)
+                yield f"data: {json.dumps({'type':'token','content':_cg_store_rule_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _cg_store_rule_answer[:300])
+                ANSWER_CACHE.put(effective_query, _cg_store_rule_answer, _cg_store_rule_sources)
+                _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
+                                           'direct_cg_store_rule_clause': True,
+                                           'elapsed': round(time.time()-t0, 2)})
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_cg_store_rule_sources,'answer':_cg_store_rule_answer,'diagnostics':bypass_diagnostics('direct_cg_store_rule_clause'), **_routing_diagnostics})}\n\n"
+                return
+
+            _small_value_answer = direct_small_value_procurement_answer(effective_query)
+            # This is an audited GFR/GeMAR&PTS helper, not a substitute for the
+            # Chhattisgarh Store Purchase Rules.  Never let it bypass retrieval
+            # for a State-rule, rule-number, PAC, tender-publicity, timeline or
+            # other rule-specific question.
+            _central_rule_query = any(term in effective_query.casefold() for term in (
+                'gfr', 'gemar&pts', 'gemarpts', 'general financial rules',
+            ))
+            if _small_value_answer and _central_rule_query and not force_retrieval:
+                _small_value_sources = [
+                    'General Financial Rules',
+                    'Manual for Procurement of Goods 2024',
+                    'Chhattisgarh Store Purchase Rules',
+                ]
+                yield f"data: {json.dumps({'type':'status','message':'Using the applicable small-value procurement rules'})}\n\n"
+                yield bypass_context_event('direct_small_value_procurement', _small_value_sources)
+                yield f"data: {json.dumps({'type':'token','content':_small_value_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _small_value_answer[:300])
+                ANSWER_CACHE.put(effective_query, _small_value_answer, _small_value_sources)
+                _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
+                                           'direct_small_value_procurement': True,
+                                           'elapsed': round(time.time()-t0, 2)})
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_small_value_sources,'answer':_small_value_answer,'diagnostics':bypass_diagnostics('direct_small_value_procurement'), **_routing_diagnostics})}\n\n"
                 return
 
             _methods_answer = direct_procurement_methods_overview_answer(effective_query)

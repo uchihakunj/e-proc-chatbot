@@ -976,10 +976,44 @@ def route_for_intent(intent: str) -> IntentRoute:
     )
 
 
+def is_state_store_rule_query(query: str) -> bool:
+    """Whether a question names or clearly targets the CG Store Purchase Rules."""
+    low = (query or "").lower()
+    markers = (
+        "chhattisgarh", "cg store", "store purchase rule", "store purchase rules",
+        "proprietary article certificate", "pac", "e-standard", "csidc",
+        "crac", "carc", "provisional receipt certificate", "repeat supply order",
+    )
+    # The word boundary after the number prevents Rule 162 (a GFR rule) from
+    # being mistaken for State Rule 16.
+    return any(marker in low for marker in markers) or bool(re.search(
+        r"\brule\s+(?:[3-9]|1[0-6])(?:\.\d+)*\b", low
+    ))
+
+
 def route_for_query(intent: str, query: str) -> IntentRoute:
     """Apply section-level modifiers without changing the structured intent."""
     route = route_for_intent(intent)
     low = (query or "").lower()
+    # A State-rule question must never be answered by an adjacent GFR/manual
+    # provision merely because it has a higher semantic score.  This covers an
+    # explicit source reference, State rule/sub-rule references, and distinctive
+    # State-rule concepts that users commonly ask without naming the document.
+    if is_state_store_rule_query(query):
+        return replace(
+            route,
+            preferred_families=("chhattisgarh_store_purchase_rules",),
+            supporting_families=tuple(dict.fromkeys(
+                route.supporting_families + route.preferred_families +
+                ("current_procurement_rules", "procurement_manual")
+            )),
+            preferred_source_titles=(STATE_RULES,),
+            supporting_source_titles=tuple(dict.fromkeys(
+                route.supporting_source_titles + route.preferred_source_titles +
+                (CURRENT_GFR, GOODS_MANUAL)
+            )),
+            include_adjacent_chunks=True,
+        )
     if intent == "vendor_registration" and "foreign" in low:
         return replace(
             route,
@@ -1030,6 +1064,11 @@ def retrieval_terms_for_intent(intent: str, query: str = "") -> Tuple[str, ...]:
 def canonical_source_contract_query(question: str, intent: str) -> str:
     """Canonical retrieval text for narrow, repeatedly missed source shapes."""
     q = re.sub(r"\s+", " ", (question or "").lower()).strip()
+    # The State rules are the controlling authority for these provisions.  A
+    # source-targeted second retrieval keeps their evidence in the generation
+    # context even when a broad GFR/manual query scores higher.
+    if is_state_store_rule_query(q):
+        return f"Chhattisgarh Store Purchase Rules {q}"
     contracts = (
         (("emergency", "fire"), "Chhattisgarh Store Purchase Rules emergency procurement disaster competent approval"),
         (("flood", "replacement"), "Chhattisgarh Store Purchase Rules emergency procurement disaster competent approval"),
@@ -1084,6 +1123,8 @@ def canonical_source_contract_sources(question: str, intent: str) -> Tuple[str, 
     canonical = canonical_source_contract_query(question, intent)
     if not canonical:
         return ()
+    if canonical.startswith("Chhattisgarh Store Purchase Rules "):
+        return (STATE_RULES,)
     required = {
         "Chhattisgarh Store Purchase Rules emergency procurement disaster competent approval":
             (STATE_RULES,),

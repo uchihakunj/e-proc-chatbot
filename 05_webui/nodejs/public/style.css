@@ -237,7 +237,9 @@ body.resizing-active {
 }
 
 #chat-popup.resizing {
-  box-shadow: 0 0 0 2px var(--accent), var(--shadow-lg) !important;
+  /* Keep the normal shadow during resizing; the accent ring looked like a
+     temporary outline rectangle around the entire chatbot. */
+  box-shadow: var(--shadow-lg) !important;
   animation: none !important;
   transition: none !important;
 }
@@ -287,10 +289,7 @@ body.resizing-active {
 }
 
 /* Visual glow affordance when hovering or holding an edge */
-.resize-handle:hover,
-#chat-popup.resizing .resize-handle {
-  background: rgba(30, 99, 184, 0.15);
-}
+.resize-handle:hover { background: rgba(30, 99, 184, 0.15); }
 
 .resize-handle.resize-n:hover,
 .resize-handle.resize-s:hover {
@@ -488,6 +487,9 @@ select.subheader-icon-btn {
 #popup-header button { cursor: pointer; }
 /* No open-animation while dragging so the popup tracks the pointer cleanly. */
 #chat-widget.dragging #chat-popup { animation: none; }
+/* Drag release must not restart popup-open; that restart is perceived as a
+   small wobble after the pointer is released. */
+#chat-popup.has-been-positioned { animation: none !important; }
 
 /* ── Options (⋮) dropdown menu ──────────────────────────────────── */
 .popup-menu {
