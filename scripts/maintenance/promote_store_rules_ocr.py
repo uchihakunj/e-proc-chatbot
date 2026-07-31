@@ -5,6 +5,7 @@ malformed chunks are retained under ``tmp/`` for audit.
 """
 from __future__ import annotations
 
+import argparse
 import re
 import shutil
 from datetime import datetime
@@ -98,7 +99,14 @@ def write_chunks(text: str) -> int:
 
 
 def main() -> None:
-    pages = validate()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--verified-index-only", action="store_true",
+        help=("Build the audited English retrieval index without local OCR staging. "
+              "Use this on Rocky Linux after pulling the code."),
+    )
+    args = parser.parse_args()
+    pages = [] if args.verified_index_only else validate()
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     archive = ROOT / "tmp" / "store_rules_legacy_source" / timestamp
     archive.mkdir(parents=True, exist_ok=True)
@@ -110,8 +118,18 @@ def main() -> None:
     if STAGE2.exists():
         shutil.move(str(STAGE2), str(archive / "stage2_store_purchase_rule_cg"))
 
-    raw_pages = "\n\n".join(f"<!-- Official OCR page {number} -->\n{page.read_text(encoding='utf-8').strip()}" for number, page in enumerate(pages, 1))
-    structured = f"{VERIFIED_INDEX}\n\n# Official Hindi OCR text\n\n{raw_pages}\n"
+    raw_pages = "\n\n".join(
+        f"<!-- Official OCR page {number} -->\n{page.read_text(encoding='utf-8').strip()}"
+        for number, page in enumerate(pages, 1)
+    )
+    ocr_section = (
+        f"# Official Hindi OCR text\n\n{raw_pages}\n"
+        if raw_pages else
+        "# OCR source note\n\n"
+        "This deployment was built from the audited English retrieval index. "
+        "The temporary local OCR staging files are intentionally not required at runtime.\n"
+    )
+    structured = f"{VERIFIED_INDEX}\n\n{ocr_section}"
     STAGE2.mkdir(parents=True, exist_ok=True)
     (STAGE2 / "structured.md").write_text(structured, encoding="utf-8")
     count = write_chunks(VERIFIED_INDEX)

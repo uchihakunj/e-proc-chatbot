@@ -2720,7 +2720,10 @@ def stream_query():
                 yield f"data: {json.dumps({'type':'status','message':f'Showing results for: {corrected_query}'})}\n\n"
             # 3) Resolve coreference ("tell me more about it" -> "...about EMD refund").
             sess = CONV_MEMORY.get_session(session_id)
-            effective_query, coref_applied = resolve_coreference(corrected_query, sess.last_topic)
+            previous_question = sess.turns[-1].query if sess.turns else ''
+            effective_query, coref_applied = resolve_coreference(
+                corrected_query, sess.last_topic, previous_question
+            )
             # 3b) Language-switch follow-up ("hindi me batao"): no new subject —
             #     re-answer the PREVIOUS question in the requested language instead
             #     of retrieving on the bare language word (which fetches junk).
@@ -2831,6 +2834,9 @@ def stream_query():
                 yield f"data: {json.dumps({'type':'status','message':'Using the verified Chhattisgarh Store Purchase Rules clause'})}\n\n"
                 yield bypass_context_event('direct_cg_store_rule_clause', _cg_store_rule_sources)
                 yield f"data: {json.dumps({'type':'token','content':_cg_store_rule_answer})}\n\n"
+                _cg_followups = suggest_followups(intent, query=effective_query)
+                if _cg_followups:
+                    yield f"data: {json.dumps({'type':'followups','items':_cg_followups})}\n\n"
                 CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _cg_store_rule_answer[:300])
                 ANSWER_CACHE.put(effective_query, _cg_store_rule_answer, _cg_store_rule_sources)
                 _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
@@ -2898,7 +2904,7 @@ def stream_query():
                     yield f"data: {json.dumps({'type':'status','message':'Instant answer (cached)'})}\n\n"
                     yield bypass_context_event('answer_cache', _cached['sources'])
                     yield f"data: {json.dumps({'type':'token','content':_cached_answer})}\n\n"
-                    _fu = suggest_followups(intent)
+                    _fu = suggest_followups(intent, query=effective_query)
                     if _fu:
                         yield f"data: {json.dumps({'type':'followups','items':_fu})}\n\n"
                     CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _cached_answer[:300])
@@ -3403,7 +3409,7 @@ def stream_query():
                         )
                         for _k in range(0, len(_merged), 60):
                             yield f"data: {json.dumps({'type':'token','content':_merged[_k:_k+60]})}\n\n"
-                        _fu = suggest_followups(intent)
+                        _fu = suggest_followups(intent, query=effective_query)
                         if _fu:
                             yield f"data: {json.dumps({'type':'followups','items':_fu})}\n\n"
                         try:
@@ -3933,7 +3939,7 @@ def stream_query():
 
             # Suggested follow-up questions (clickable chips in the UI).
             try:
-                _fu = suggest_followups(intent)
+                _fu = suggest_followups(intent, query=effective_query)
                 if _fu and content_streamed:
                     yield f"data: {json.dumps({'type':'followups','items':_fu})}\n\n"
             except Exception:
