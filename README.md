@@ -309,22 +309,5 @@ E-PROC-CHATBOT_ANTI_GRAVITY/
 
 ---
 
-# 📄 License
-
-This project is intended for research, development, and demonstration purposes related to the CHiPS e-Procurement RAG Chatbot.
-
----
-
-# 🤝 Support
-
-Before reporting an issue, verify that:
-
-- Python is installed correctly.
-- Node.js is installed.
-- Ollama is installed and running.
-- The **Gemma 3 (4B)** model has been downloaded.
-- The `.env` file is configured.
-- Python dependencies are installed successfully.
-- No required ports are blocked.
 
 If all prerequisites are satisfied, restart the application using the recommended startup script.
