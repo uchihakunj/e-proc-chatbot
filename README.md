@@ -1,6 +1,6 @@
 # 🤖 CHiPS e-Procurement RAG Chatbot
 
-An AI-powered e-Procurement assistant designed to answer queries based on Chhattisgarh e-Procurement Store Rules and procurement guidelines using Retrieval-Augmented Generation (RAG).
+An AI-powered e-Procurement assistant designed to answer queries based on Chhattisgarh e-Procurement Store Rules and procurement guidelines using Retrieval-Augmented Generation (RAG) powered by **Gemma 3 (4B)**.
 
 ---
 
@@ -12,7 +12,7 @@ An AI-powered e-Procurement assistant designed to answer queries based on Chhatt
    - [Step 2: Create Configuration File](#step-2-create-configuration-file)
    - [Step 3: Set Up Python Virtual Environment](#step-3-set-up-python-virtual-environment)
    - [Step 4: Install Node.js UI Dependencies](#step-4-install-nodejs-ui-dependencies)
-   - [Step 5: Setup & Start Ollama (AI Engine)](#step-5-setup--start-ollama-ai-engine)
+   - [Step 5: Setup & Download Gemma 3 (4B)](#step-5-setup--download-gemma-3-4b)
 3. [Launching the Application](#-launching-the-application)
 4. [Accessing the Web UI](#-accessing-the-web-ui)
 5. [How to Stop the Application](#-how-to-stop-the-application)
@@ -22,7 +22,7 @@ An AI-powered e-Procurement assistant designed to answer queries based on Chhatt
 
 # 💻 Prerequisites
 
-Before running the application, ensure the following software is installed:
+Before running the application, make sure the following software is installed on your system.
 
 | Software | Required Version | Download |
 | :--- | :--- | :--- |
@@ -33,7 +33,7 @@ Before running the application, ensure the following software is installed:
 
 > **Important (Windows Users):**
 >
-> During Python installation, ensure that **"Add Python to PATH"** is checked.
+> During Python installation, make sure you enable **"Add Python to PATH"**.
 
 ---
 
@@ -52,7 +52,7 @@ cd E-PROC-CHATBOT_ANTI_GRAVITY
 
 ## Step 2: Create Configuration File
 
-Create your active `.env` file from the provided template.
+Create the active configuration file from the template.
 
 ### Windows (PowerShell)
 
@@ -76,7 +76,7 @@ cp .env.template .env
 
 ## Step 3: Set Up Python Virtual Environment
 
-### Create a Virtual Environment
+### Create the Virtual Environment
 
 ```bash
 python -m venv .venv
@@ -113,7 +113,7 @@ pip install -r requirements.txt
 
 ## Step 4: Install Node.js UI Dependencies
 
-Navigate to the frontend directory and install the required packages.
+Navigate to the frontend directory and install all required packages.
 
 ```bash
 cd 05_webui/nodejs
@@ -123,21 +123,23 @@ cd ../..
 
 ---
 
-## Step 5: Setup & Start Ollama (AI Engine)
+## Step 5: Setup & Download Gemma 3 (4B)
 
-Ensure the Ollama service is running.
+Ensure Ollama is installed and running.
 
-If not, start it:
+If Ollama is not already running, start it:
 
 ```bash
 ollama serve
 ```
 
-Download the required model:
+Download the required AI model:
 
 ```bash
-ollama pull llama3.2
+ollama pull gemma3:4b
 ```
+
+> **Note:** The first download may take several minutes depending on your internet connection.
 
 ---
 
@@ -145,7 +147,7 @@ ollama pull llama3.2
 
 ## Option A: Automated Startup (Recommended)
 
-Run the startup script from the project root.
+Run the startup script from the project root directory.
 
 ### Windows
 
@@ -164,20 +166,24 @@ chmod +x start_cpu.sh
 
 ## Option B: Manual Startup
 
-1. Open a terminal inside the project folder.
-2. Activate the virtual environment.
-3. Start the application.
+If you prefer starting the application manually:
+
+1. Open a terminal in the project root.
+2. Activate the Python virtual environment.
+3. Start the Node.js server.
 
 ```bash
 cd 05_webui/nodejs
 npm start
 ```
 
+The backend service will start automatically.
+
 ---
 
 # 🌐 Accessing the Web UI
 
-Once the application has started successfully, open your browser and visit:
+Once the application has started successfully, open your preferred web browser and navigate to:
 
 ```
 http://localhost:3000
@@ -229,13 +235,13 @@ pkill -f "node|python|ollama"
 
 - Reinstall Python.
 - During installation, enable **"Add Python to PATH"**.
-- Restart your terminal (or computer).
+- Restart your terminal or computer.
 
 ---
 
-## 2. PowerShell Execution Policy Error
+## 2. PowerShell Script Execution Policy Error
 
-If you receive:
+If you receive an error similar to:
 
 ```
 ... cannot be loaded because running scripts is disabled ...
@@ -253,38 +259,33 @@ Then activate the virtual environment again.
 
 ## 3. "RAG backend is unreachable"
 
-Possible causes:
+Verify the following:
 
-- Ollama is not running.
-- Required model is missing.
-- Python dependencies are not installed.
-- Backend service failed to start.
-
-Verify:
+- Ollama is running.
 
 ```bash
 ollama serve
 ```
 
-Ensure the model exists:
+- The Gemma 3 (4B) model has been downloaded.
 
 ```bash
-ollama pull llama3.2
+ollama pull gemma3:4b
 ```
 
-Reinstall dependencies if needed:
+- Python dependencies are installed.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Also ensure that ports such as **3000**, **5000**, or **8080** are not blocked by your firewall.
+Also ensure that ports **3000**, **5000**, or **8080** are not blocked by your firewall or another application.
 
 ---
 
 ## 4. Port 3000 Is Already in Use
 
-Stop all existing Node.js processes using the commands shown in **How to Stop the Application**, then restart the application.
+Terminate all existing Node.js processes using the commands listed in **How to Stop the Application**, then restart the application.
 
 ---
 
@@ -310,20 +311,20 @@ E-PROC-CHATBOT_ANTI_GRAVITY/
 
 # 📄 License
 
-This project is intended for research and development purposes related to the CHiPS e-Procurement chatbot.
+This project is intended for research, development, and demonstration purposes related to the CHiPS e-Procurement RAG Chatbot.
 
 ---
 
 # 🤝 Support
 
-If you encounter any issues during setup or execution, please verify:
+Before reporting an issue, verify that:
 
-- Python installation
-- Node.js installation
-- Ollama installation
-- Environment configuration (`.env`)
-- Installed Python dependencies
-- Running Ollama service
-- Required AI model availability
+- Python is installed correctly.
+- Node.js is installed.
+- Ollama is installed and running.
+- The **Gemma 3 (4B)** model has been downloaded.
+- The `.env` file is configured.
+- Python dependencies are installed successfully.
+- No required ports are blocked.
 
-Once all prerequisites are met, launch the application again using the recommended startup script.
+If all prerequisites are satisfied, restart the application using the recommended startup script.
