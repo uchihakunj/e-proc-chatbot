@@ -1,6 +1,6 @@
 # 🤖 CHiPS e-Procurement RAG Chatbot
 
-An AI-powered e-Procurement assistant designed to answer queries based on Chhattisgarh e-Procurement store rules and procurement guidelines using Retrieval-Augmented Generation (RAG) powered by **Gemma 3 (4B)**.
+An AI-powered e-Procurement assistant designed to answer queries based on Chhattisgarh e-Procurement Store Rules and procurement guidelines using Retrieval-Augmented Generation (RAG) powered by **Gemma 3 (4B)**.
 
 ---
 
@@ -35,8 +35,8 @@ If you prefer to set up manually or are running on Linux/macOS, follow the steps
 | **Ollama** | Latest | [ollama.com](https://ollama.com/) |
 | **Git** | Latest | [git-scm.com](https://git-scm.com/) |
 
-> 💡 **Important for Windows Users during installation:**  
-> When installing Python, make sure to check the box **"Add Python to PATH"**.
+> 💡 **Important (Windows Users):**  
+> During Python installation, make sure you enable **"Add Python to PATH"**.
 
 ---
 
@@ -44,10 +44,10 @@ If you prefer to set up manually or are running on Linux/macOS, follow the steps
 
 ### Step 1: Clone the Repository
 
-Open your terminal and run:
+Open PowerShell, Command Prompt, Git Bash, or Terminal and run:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/E-PROC-CHATBOT_ANTI_GRAVITY.git
+git clone https://github.com/CMITF/eProcurement-Project.git
 cd E-PROC-CHATBOT_ANTI_GRAVITY
 ```
 
@@ -55,7 +55,7 @@ cd E-PROC-CHATBOT_ANTI_GRAVITY
 
 ### Step 2: Create Configuration File
 
-Copy `.env.template` to create your configuration file `.env`:
+Create the active configuration file from the template:
 
 * **Windows (PowerShell):** `Copy-Item .env.template .env`
 * **Windows (CMD):** `copy .env.template .env`
@@ -86,6 +86,8 @@ pip install -r requirements.txt
 
 ### Step 4: Install Node.js UI Dependencies
 
+Navigate to the frontend directory and install all required packages:
+
 ```bash
 cd 05_webui/nodejs
 npm install
@@ -96,11 +98,13 @@ cd ../..
 
 ### Step 5: Setup & Download Gemma 3 (4B)
 
+Ensure Ollama is installed and running:
+
 ```bash
 # Start Ollama service (if not running)
 ollama serve
 
-# Pull Gemma 3 4B model
+# Download Gemma 3 (4B) model
 ollama pull gemma3:4b
 ```
 
@@ -108,7 +112,7 @@ ollama pull gemma3:4b
 
 ## 🚀 Launching the Application
 
-* **Windows (Automated):** `.\setup_and_run.ps1` or `start_cpu.bat`
+* **Windows (Automated 1-Click):** `.\setup_and_run.ps1` or `start_cpu.bat`
 * **Linux / macOS:** 
   ```bash
   chmod +x start_cpu.sh
@@ -124,31 +128,51 @@ ollama pull gemma3:4b
 
 ## 🌐 Accessing the Web UI
 
-Open your browser and navigate to:  
+Once the application has started successfully, open your web browser and go to:
+
 👉 **[http://localhost:3000](http://localhost:3000)**
 
 ---
 
 ## 🛑 How to Stop the Application
 
-- **In Terminal:** Press `Ctrl + C`
-- **Force Stop via Command:**
-  * **Windows (PowerShell):** `Stop-Process -Name "node","python","ollama*" -Force -ErrorAction SilentlyContinue`
-  * **Windows (CMD):** `taskkill /F /IM node.exe /IM python.exe /IM ollama.exe`
-  * **Linux / macOS:** `pkill -f "node|python|ollama"`
+### Method 1: Stop from Terminal
+Press `Ctrl + C` in the running terminal.
+
+---
+
+### Method 2: Force Stop All Services
+* **Windows (PowerShell):**  
+  ```powershell
+  Stop-Process -Name "node","python","ollama*" -Force -ErrorAction SilentlyContinue
+  ```
+* **Windows (CMD):**  
+  ```cmd
+  taskkill /F /IM node.exe /IM python.exe /IM ollama.exe
+  ```
+* **Linux / macOS:**  
+  ```bash
+  pkill -f "node|python|ollama"
+  ```
 
 ---
 
 ## ❓ Troubleshooting
 
 ### 1. 'python' or 'pip' is not recognized
-Ensure Python was added to system PATH during installation, then restart your terminal.
+- Reinstall Python and make sure **"Add Python to PATH"** is enabled.
+- Restart your terminal.
 
-### 2. PowerShell execution policy error (.ps1 script blocked)
-Open PowerShell as Administrator and run:
+### 2. PowerShell Script Execution Policy Error
+Run PowerShell as Administrator and execute:
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 ### 3. "RAG backend is unreachable"
-Ensure `ollama pull gemma3:4b` has completed and `ollama serve` is active.
+- Verify Ollama is active (`ollama serve`) and model is pulled (`ollama pull gemma3:4b`).
+- Check that `pip install -r requirements.txt` completed without errors.
+- Ensure ports **3000**, **5000**, or **8080** are not blocked by a firewall.
+
+### 4. Port 3000 Is Already in Use
+Terminate existing Node processes using the Stop command above, then restart the app.
