@@ -1,70 +1,46 @@
-# eProcurement-Chatbot
+# 🤖 CHiPS e-Procurement RAG Chatbot
 
-This repository is now organized so that runtime code stays near the top level,
-while reports, diagnostics, ad-hoc scripts, and request documents live in
-dedicated folders.
+An AI-powered e-Procurement assistant designed to answer queries based on Chhattisgarh e-Procurement store rules and procurement guidelines using Retrieval-Augmented Generation (RAG).
 
-## Top-Level Layout
+---
 
-- `01_preprocessing` to `06_voice`: primary pipeline and application modules
-- `docs/reports`: evaluation reports, benchmarks, and sample-answer documents
-- `docs/requests`: Word documents and request artifacts
-- `diagnostics`: JSON and text outputs from audits, traces, and debugging runs
-- `scripts/dev`: one-off debugging and patch helper scripts
-- `scripts/maintenance`: repository maintenance utilities
-- `scripts/pipeline`: non-primary pipeline helper runners
-- `tests/manual`: root-level manual and exploratory test scripts
-- `utils`: shared utility modules, including configuration helpers
-- `eval`, `reports`, `scratch`, `tmp`, `output`, `outputs`: existing analysis and experiment areas
+## 📋 Table of Contents
+1. [Prerequisites](#-prerequisites)
+2. [Quick Start Guide](#-quick-start-guide)
+   - [Step 1: Clone the Repository](#step-1-clone-the-repository)
+   - [Step 2: Create Configuration File](#step-2-create-configuration-file)
+   - [Step 3: Set Up Python Virtual Environment](#step-3-set-up-python-virtual-environment)
+   - [Step 4: Install Node.js UI Dependencies](#step-4-install-nodejs-ui-dependencies)
+   - [Step 5: Setup & Start Ollama (AI Engine)](#step-5-setup--start-ollama-ai-engine)
+3. [🚀 Launching the Application](#-launching-the-application)
+4. [🌐 Accessing the Web UI](#-accessing-the-web-ui)
+5. [🛑 How to Stop the Application](#-how-to-stop-the-application)
+6. [❓ Troubleshooting](#-troubleshooting)
 
-## Main Runtime Entry Points
+---
 
-- Flask RAG backend: `python 05_webui/app.py`
-- Node UI proxy: `cd 05_webui/nodejs && npm install && npm start`
-- Voice server: `python 06_voice/voice_server.py`
-- CPU stack bootstrap: `./start_cpu.bat` on Windows or `./start_cpu.sh` on Unix-like shells
-- Health check: `python scripts/maintenance/health_check.py`
-- Manifest rebuild: `python scripts/maintenance/rebuild_manifest.py`
+## 💻 Prerequisites
 
-## Production Notes
+Before running the application, make sure you have installed the following software on your system:
 
-- Windows bootstrap now starts the backend in production mode with `waitress` by default via `start_cpu.bat`.
-- Request concurrency is intentionally capped by `MAX_CONCURRENT_RAG_REQUESTS` so the app sheds load cleanly instead of hanging under burst traffic.
-- Health endpoint `GET /api/health` now reports active request count and configured concurrency limit.
-- Concurrent force-retrieval load testing: `python eval/retrieval_regression/run_concurrent_benchmark.py --workers 10`
-- Try `--workers 10`, `--workers 25`, and `--workers 50` separately before production sign-off.
+| Software | Required Version | Download Link |
+| :--- | :--- | :--- |
+| **Python** | 3.10 or higher | [python.org/downloads](https://www.python.org/downloads/) |
+| **Node.js** | v18 or higher | [nodejs.org](https://nodejs.org/) |
+| **Ollama** | Latest | [ollama.com](https://ollama.com/) |
+| **Git** | Latest | [git-scm.com](https://git-scm.com/) |
 
-## Pipeline
+> 💡 **Important for Windows Users during installation:**  
+> When installing Python, make sure to check the box **"Add Python to PATH"**.
 
-### Stage 01 - Preprocessing
+---
 
-- Run `python 01_preprocessing/run_stage1.py`
-  - default input: `01_preprocessing/input_pdfs`
-  - default output: `01_preprocessing/stage1_output`
-- Run `python 01_preprocessing/run_stage2.py`
-  - default input: `01_preprocessing/stage1_output`
-  - default output: `01_preprocessing/stage2_output`
+## 🚀 Quick Start Guide
 
-### Stage 02 - Optimization
+### Step 1: Clone the Repository
 
-- Run `python 02_optimization/optimize.py`
+Open your terminal (PowerShell, Command Prompt, or Git Bash) and run:
 
-### Stage 03 - Chunking
-
-- Run `python 03_chunking/docling_chunker.py`
-
-### Stage 04 - Embeddings and Vector DB
-
-- Run `python 04_embeddings_and_kg/scripts/embeddings_production.py`
-
-### Stage 05 - Web UI and Flask Backend
-
-- Start Flask: `python 05_webui/app.py`
-- Start UI: `cd 05_webui/nodejs && npm install && npm start`
-- Open `http://localhost:3000`
-
-## Notes
-
-- `HF_HUB_OFFLINE=1` and `TRANSFORMERS_OFFLINE=1` are still useful when running fully local model flows.
-- Voice STT and TTS live in `06_voice`.
-- Sarvam and Ollama startup choices depend on environment variables set before starting the UI/backend processes.
+```bash
+git clone https://github.com/YOUR_USERNAME/E-PROC-CHATBOT_ANTI_GRAVITY.git
+cd E-PROC-CHATBOT_ANTI_GRAVITY
