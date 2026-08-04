@@ -1,4 +1,4 @@
-# 🤖 CHiPS e-Procurement RAG Chatbot
+#  e-Procurement RAG Chatbot
 
 An AI-powered e-Procurement assistant designed to answer queries based on Chhattisgarh e-Procurement Store Rules and procurement guidelines using Retrieval-Augmented Generation (RAG) powered by **Gemma 3 (4B)**.
 
