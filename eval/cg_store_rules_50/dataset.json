@@ -1,0 +1,1186 @@
+[
+  {
+    "id": "CGSPR-01",
+    "bucket": "scope",
+    "language": "en",
+    "query": "Which public bodies are covered by the CG Store Purchase Rules?",
+    "expected_rule": "Rule 2 and 2.1",
+    "reference_answer": "They cover government departments and also the State Electricity Board, public undertakings, boards, district/janpad panchayats and urban bodies.",
+    "required_all": [
+      "government"
+    ],
+    "required_any_groups": [
+      [
+        "public undertaking",
+        "public sector"
+      ],
+      [
+        "panchayat",
+        "urban body",
+        "electricity"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-02",
+    "bucket": "gem-route",
+    "language": "en",
+    "query": "If an item and its specifications are available on GeM, what purchase route should a Chhattisgarh department normally use?",
+    "expected_rule": "Rule 3.1.1",
+    "reference_answer": "Purchase through GeM using its prescribed procedure; the buyer remains responsible for checking technical specifications, seller credibility, L1 price, economy and quality.",
+    "required_all": [
+      "gem"
+    ],
+    "required_any_groups": [
+      [
+        "procedure",
+        "process"
+      ],
+      [
+        "specification",
+        "technical"
+      ],
+      [
+        "quality",
+        "economy",
+        "l1"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-03",
+    "bucket": "gem-route",
+    "language": "hinglish",
+    "query": "GeM par laptop listed hai. Buyer ko order se pehle kya-kya verify karna hota hai?",
+    "expected_rule": "Rule 3.1.1",
+    "reference_answer": "The buyer must examine technical specifications, seller credibility and L1 price, and ensure economy and quality; availability alone is not enough.",
+    "required_all": [
+      "gem"
+    ],
+    "required_any_groups": [
+      [
+        "technical",
+        "specification"
+      ],
+      [
+        "seller",
+        "vendor",
+        "credibility"
+      ],
+      [
+        "quality",
+        "economy",
+        "l1"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-04",
+    "bucket": "gem-route",
+    "language": "en",
+    "query": "Can a department choose tendering even when the relevant goods are available on GeM? What approval is needed first?",
+    "expected_rule": "Rule 3.1.1",
+    "reference_answer": "It may use the tender route, but before doing so it must obtain written concurrence of the Finance Department through the concerned administrative department.",
+    "required_all": [
+      "tender"
+    ],
+    "required_any_groups": [
+      [
+        "written",
+        "in writing"
+      ],
+      [
+        "finance department",
+        "finance"
+      ],
+      [
+        "concurrence",
+        "consent",
+        "approval"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-05",
+    "bucket": "special-sources",
+    "language": "en",
+    "query": "A Schedule 1 item is not available on GeM but its rate is listed on CSIDC's e-Standard portal. May the office buy through that portal?",
+    "expected_rule": "Rule 3.1.2",
+    "reference_answer": "Yes. Schedule 1 items unavailable on GeM may be purchased through the CSIDC e-Standard portal when their rate and specifications are available there.",
+    "required_all": [
+      "csidc"
+    ],
+    "required_any_groups": [
+      [
+        "schedule 1",
+        "appendix 1",
+        "annexure 1"
+      ],
+      [
+        "e-standard",
+        "portal"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-06",
+    "bucket": "special-sources",
+    "language": "hinglish",
+    "query": "GeM, CSIDC e-Standard aur Schedule 2 rate source mein item nahi mil raha. Department ko kaunsi process follow karni chahiye?",
+    "expected_rule": "Rules 3.1.3 and 3.4",
+    "reference_answer": "Where the item is not available through the specified sources, the department should procure it through the tender procedure in Rule 4.",
+    "required_all": [
+      "tender"
+    ],
+    "required_any_groups": [
+      [
+        "rule 4",
+        "tender procedure",
+        "tender process"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-07",
+    "bucket": "tender-basics",
+    "language": "en",
+    "query": "What is the normal procurement method under Rule 4 of the CG Store Purchase Rules?",
+    "expected_rule": "Rule 4",
+    "reference_answer": "Government procurement is normally through the tender system, subject to the stated exceptions and routes.",
+    "required_all": [
+      "tender"
+    ],
+    "required_any_groups": [
+      [
+        "normally",
+        "general",
+        "generally"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-08",
+    "bucket": "startup",
+    "language": "en",
+    "query": "A valid Chhattisgarh-recognised startup is bidding. Can the tender require prior experience and prior turnover?",
+    "expected_rule": "Rule 4.2",
+    "reference_answer": "A qualifying valid startup receives exemption from prior-experience and prior-turnover conditions under this rule.",
+    "required_all": [
+      "startup"
+    ],
+    "required_any_groups": [
+      [
+        "prior experience",
+        "experience exemption",
+        "experience"
+      ],
+      [
+        "turnover",
+        "turn-over"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-09",
+    "bucket": "specifications",
+    "language": "hinglish",
+    "query": "Tender issue karne se pehle technical specification kis tarah decide honi chahiye?",
+    "expected_rule": "Rule 4.1",
+    "reference_answer": "Before inviting a tender, standards/specifications for the goods should be determined by experts with technical knowledge.",
+    "required_all": [
+      "specification"
+    ],
+    "required_any_groups": [
+      [
+        "expert",
+        "technical knowledge",
+        "technical expert"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-10",
+    "bucket": "single-tender",
+    "language": "en",
+    "query": "Can a proprietary item with an annual requirement of Rs. 45,000 be procured through a single tender?",
+    "expected_rule": "Rule 4.3.1(a)",
+    "reference_answer": "Yes, a proprietary single item may be procured by single tender from one firm when competition is not needed and the annual requirement does not exceed Rs. 50,000.",
+    "required_all": [
+      "single tender"
+    ],
+    "required_any_groups": [
+      [
+        "proprietary",
+        "proprietary character"
+      ],
+      [
+        "50,000",
+        "fifty thousand"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-11",
+    "bucket": "single-tender",
+    "language": "en",
+    "query": "For a proprietary item above Rs. 50,000, is merely calling it proprietary enough to use one supplier?",
+    "expected_rule": "Rule 4.3.1(b)",
+    "reference_answer": "No. The buyer must establish that only one manufacturer makes the required item, and the prescribed proprietary and approval process applies.",
+    "required_all": [
+      "proprietary"
+    ],
+    "required_any_groups": [
+      [
+        "one manufacturer",
+        "only one manufacturer",
+        "single manufacturer"
+      ],
+      [
+        "approval",
+        "procedure",
+        "certificate"
+      ]
+    ],
+    "prohibited_claims": [
+      "automatically allowed"
+    ],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-12",
+    "bucket": "single-tender",
+    "language": "hinglish",
+    "query": "Emergency mein ek supplier se purchase karne ke liye department ko kya record aur approval chahiye?",
+    "expected_rule": "Rule 4.3.1(b)(2)",
+    "reference_answer": "In an emergency, the decision to purchase from one supplier must record the reasons and obtain approval of the competent authority.",
+    "required_all": [
+      "emergency"
+    ],
+    "required_any_groups": [
+      [
+        "reasons",
+        "justification",
+        "record"
+      ],
+      [
+        "competent authority",
+        "competent approval",
+        "approval"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-13",
+    "bucket": "single-tender",
+    "language": "en",
+    "query": "Can compatible spare parts for existing equipment be bought from one selected firm?",
+    "expected_rule": "Rule 4.3.1(b)(3)",
+    "reference_answer": "It may be possible for standardisation or compatibility of spare parts, but it needs advice of a competent technical expert and approval of the competent authority.",
+    "required_all": [
+      "spare"
+    ],
+    "required_any_groups": [
+      [
+        "technical expert",
+        "technical"
+      ],
+      [
+        "competent authority",
+        "approval"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-14",
+    "bucket": "single-tender",
+    "language": "en",
+    "query": "Before purchasing a proprietary article through tender from a sole manufacturer or authorised seller, which certificate is required?",
+    "expected_rule": "Rule 4.3.1(b)(3), Appendix 4",
+    "reference_answer": "A Proprietary Article Certificate in the prescribed Appendix 4 form is required before the purchase process.",
+    "required_all": [
+      "proprietary article certificate"
+    ],
+    "required_any_groups": [
+      [
+        "appendix 4",
+        "annexure 4",
+        "prescribed form"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-15",
+    "bucket": "single-tender",
+    "language": "hinglish",
+    "query": "PAC milne ke baad objection/claim notice kahan aur kitne minimum din ke liye publish karna chahiye?",
+    "expected_rule": "Rule 4.3.1(b)(3)",
+    "reference_answer": "Publish a brief claim/objection notice in newspapers and detailed notice on the government/department website, allowing at least 30 days.",
+    "required_all": [
+      "30"
+    ],
+    "required_any_groups": [
+      [
+        "newspaper",
+        "news paper"
+      ],
+      [
+        "website",
+        "web site"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-16",
+    "bucket": "single-tender",
+    "language": "en",
+    "query": "After objections to a proprietary-article purchase are resolved, what should happen before award?",
+    "expected_rule": "Rule 4.3.1(b)(3)",
+    "reference_answer": "Obtain the proposed supplier's rates and justification; the purchase committee recommends acceptance, rejection or negotiation, followed by competent approval before further action/rate contract.",
+    "required_all": [
+      "purchase committee"
+    ],
+    "required_any_groups": [
+      [
+        "rate",
+        "price"
+      ],
+      [
+        "justification",
+        "reasons"
+      ],
+      [
+        "competent approval",
+        "approval"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-17",
+    "bucket": "limited-tender",
+    "language": "en",
+    "query": "What estimated annual purchase-value band is normally meant for Limited Tender under these rules?",
+    "expected_rule": "Rule 4.3.2",
+    "reference_answer": "Limited Tender is normally used for estimated annual purchases from Rs. 50,001 to Rs. 3,00,000.",
+    "required_all": [
+      "50,001"
+    ],
+    "required_any_groups": [
+      [
+        "3,00,000",
+        "300,000",
+        "three lakh"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-18",
+    "bucket": "limited-tender",
+    "language": "hinglish",
+    "query": "Limited Tender mein minimum kitne manufacturers, authorised representatives ya registered manufacturers ko invite karna chahiye?",
+    "expected_rule": "Rule 4.3.2",
+    "reference_answer": "At least three manufacturers, authorised representatives, or registered manufacturers should be approached for Limited Tender.",
+    "required_all": [
+      "three"
+    ],
+    "required_any_groups": [
+      [
+        "manufacturer",
+        "authorised",
+        "registered"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-19",
+    "bucket": "open-tender",
+    "language": "en",
+    "query": "From what estimated value does the Open Tender procedure start under Rule 4.3.3?",
+    "expected_rule": "Rule 4.3.3",
+    "reference_answer": "Open Tender applies from an estimated value of Rs. 3,00,001 upward.",
+    "required_all": [
+      "3,00,001"
+    ],
+    "required_any_groups": [
+      [
+        "open tender",
+        "open"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-20",
+    "bucket": "open-tender",
+    "language": "en",
+    "query": "For an Open Tender valued above Rs. 3 lakh and up to Rs. 5 lakh, what newspaper publicity is prescribed?",
+    "expected_rule": "Rule 4.3.3(a)(1)",
+    "reference_answer": "Publish it in one widely circulated local-level newspaper.",
+    "required_all": [
+      "one"
+    ],
+    "required_any_groups": [
+      [
+        "local",
+        "local-level"
+      ],
+      [
+        "newspaper",
+        "news paper"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-21",
+    "bucket": "open-tender",
+    "language": "hinglish",
+    "query": "Rs. 5 lakh se zyada aur Rs. 10 lakh tak ke Open Tender ko kitne state-level newspapers mein advertise karna hai?",
+    "expected_rule": "Rule 4.3.3(a)(2)",
+    "reference_answer": "It must be advertised in two widely circulated state-level newspapers.",
+    "required_all": [
+      "two"
+    ],
+    "required_any_groups": [
+      [
+        "state",
+        "state-level"
+      ],
+      [
+        "newspaper",
+        "news paper"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-22",
+    "bucket": "open-tender",
+    "language": "en",
+    "query": "What publicity is required for an Open Tender above Rs. 10 lakh and up to Rs. 20 lakh?",
+    "expected_rule": "Rule 4.3.3(a)(3)",
+    "reference_answer": "Use two widely circulated state-level newspapers and one national-level newspaper.",
+    "required_all": [
+      "two"
+    ],
+    "required_any_groups": [
+      [
+        "state",
+        "state-level"
+      ],
+      [
+        "one national",
+        "national-level"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-23",
+    "bucket": "open-tender",
+    "language": "en",
+    "query": "What publicity is required for an Open Tender above Rs. 20 lakh?",
+    "expected_rule": "Rule 4.3.3(a)(4)",
+    "reference_answer": "Use two widely circulated state-level newspapers and two national-level newspapers.",
+    "required_all": [
+      "two"
+    ],
+    "required_any_groups": [
+      [
+        "state",
+        "state-level"
+      ],
+      [
+        "national",
+        "national-level"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-24",
+    "bucket": "gem-methods",
+    "language": "hinglish",
+    "query": "GeM par available goods ko purchase karne ke liye Rule 4.3.3 kaun-kaun se GeM methods mention karta hai?",
+    "expected_rule": "Rule 4.3.3(c)",
+    "reference_answer": "The rule mentions Direct Purchase, L1, e-bidding and Reverse Auction on GeM, as required.",
+    "required_all": [
+      "gem"
+    ],
+    "required_any_groups": [
+      [
+        "direct purchase",
+        "direct"
+      ],
+      [
+        "l1",
+        "l-1"
+      ],
+      [
+        "e-bidding",
+        "e bidding"
+      ],
+      [
+        "reverse auction",
+        "reverse"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-25",
+    "bucket": "receipts-payment",
+    "language": "en",
+    "query": "After GeM goods are received, by when must the buyer issue the Provisional Receipt Certificate (PRC)?",
+    "expected_rule": "Rule 4.3.3(c)",
+    "reference_answer": "The buyer must issue the PRC within 48 hours of receiving the goods.",
+    "required_all": [
+      "48"
+    ],
+    "required_any_groups": [
+      [
+        "prc",
+        "provisional receipt"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-26",
+    "bucket": "receipts-payment",
+    "language": "en",
+    "query": "After verifying GeM goods, what certificate follows the PRC and what is its deadline?",
+    "expected_rule": "Rule 4.3.3(c)",
+    "reference_answer": "After verification, issue the Consignee Receipt and Acceptance Certificate (CRAC/CARC) within 10 days from PRC issuance.",
+    "required_all": [
+      "10 days"
+    ],
+    "required_any_groups": [
+      [
+        "crac",
+        "carc",
+        "acceptance certificate"
+      ],
+      [
+        "prc",
+        "provisional receipt"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-27",
+    "bucket": "receipts-payment",
+    "language": "hinglish",
+    "query": "GeM mein CRAC/CARC issue hone ke baad payment kab tak karna chahiye?",
+    "expected_rule": "Rule 4.3.3(c)",
+    "reference_answer": "Payment should be made within 10 days from issuance of the acceptance certificate, subject to effective GeM directions.",
+    "required_all": [
+      "10 days"
+    ],
+    "required_any_groups": [
+      [
+        "payment",
+        "pay"
+      ],
+      [
+        "crac",
+        "carc",
+        "acceptance"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-28",
+    "bucket": "open-tender",
+    "language": "en",
+    "query": "For a first Open Tender, how many eligible tenderers must normally be ensured for adequate competition?",
+    "expected_rule": "Rule 4.3.3(d)",
+    "reference_answer": "The first invitation should ensure participation of at least three eligible tenderers, through manufacturers or authorised supplier representatives.",
+    "required_all": [
+      "three"
+    ],
+    "required_any_groups": [
+      [
+        "eligible",
+        "qualified"
+      ],
+      [
+        "open tender",
+        "first tender"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-29",
+    "bucket": "open-tender",
+    "language": "hinglish",
+    "query": "Agar tender notice publish karne ke baad sufficient bids nahi aayi, department ko kya karna chahiye?",
+    "expected_rule": "Rule 4.12",
+    "reference_answer": "Call the tender again and make efforts to ensure that the notice reaches all potential tenderers.",
+    "required_all": [
+      "tender"
+    ],
+    "required_any_groups": [
+      [
+        "again",
+        "re-tender",
+        "retender",
+        "fresh"
+      ],
+      [
+        "potential",
+        "all bidders",
+        "widely"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-30",
+    "bucket": "tender-notice",
+    "language": "en",
+    "query": "What essential information should a short tender notice include?",
+    "expected_rule": "Rules 4.4 and 4.4.1",
+    "reference_answer": "It should briefly state the main goods/purpose and essential conditions such as the last date and time for accepting tenders; detailed terms may be made available with the tender form.",
+    "required_all": [
+      "last date"
+    ],
+    "required_any_groups": [
+      [
+        "goods",
+        "item",
+        "purpose"
+      ],
+      [
+        "time",
+        "deadline"
+      ],
+      [
+        "detailed",
+        "tender form"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-31",
+    "bucket": "tender-notice",
+    "language": "en",
+    "query": "Must a competent officer state reasons before cancelling an invited tender under Rule 4.4.3?",
+    "expected_rule": "Rule 4.4.3",
+    "reference_answer": "No. The competent officer may cancel an invited tender at any time without stating reasons.",
+    "required_all": [
+      "without"
+    ],
+    "required_any_groups": [
+      [
+        "reason",
+        "reasons"
+      ],
+      [
+        "competent officer",
+        "competent authority"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-32",
+    "bucket": "tender-timelines",
+    "language": "hinglish",
+    "query": "Limited Tender ke first, second aur third invitation ke minimum timelines kya hain?",
+    "expected_rule": "Rule 4.5",
+    "reference_answer": "Limited Tender timelines are 15 days for first invitation, 10 days for second, and 5 days for third.",
+    "required_all": [
+      "15"
+    ],
+    "required_any_groups": [
+      [
+        "10"
+      ],
+      [
+        "5"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-33",
+    "bucket": "tender-timelines",
+    "language": "en",
+    "query": "State the first/second/third invitation timelines for an Open Tender above Rs. 3,00,001 and up to Rs. 10 lakh.",
+    "expected_rule": "Rule 4.5",
+    "reference_answer": "The timelines are 21, 14 and 7 days respectively.",
+    "required_all": [
+      "21"
+    ],
+    "required_any_groups": [
+      [
+        "14"
+      ],
+      [
+        "7"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-34",
+    "bucket": "tender-timelines",
+    "language": "en",
+    "query": "State the first/second/third invitation timelines for an Open Tender above Rs. 10 lakh.",
+    "expected_rule": "Rule 4.5",
+    "reference_answer": "The timelines are 30, 20 and 10 days respectively.",
+    "required_all": [
+      "30"
+    ],
+    "required_any_groups": [
+      [
+        "20"
+      ],
+      [
+        "10"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-35",
+    "bucket": "tender-timelines",
+    "language": "hinglish",
+    "query": "Global Tender ke first, second aur third invitation ke liye kitne din hain?",
+    "expected_rule": "Rule 4.5",
+    "reference_answer": "Global Tender timelines are 45, 30 and 20 days respectively.",
+    "required_all": [
+      "45"
+    ],
+    "required_any_groups": [
+      [
+        "30"
+      ],
+      [
+        "20"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-36",
+    "bucket": "bid-opening",
+    "language": "en",
+    "query": "For an offline tender, when should tenders be opened in relation to the submission deadline?",
+    "expected_rule": "Rule 4.6.3",
+    "reference_answer": "Open them one hour after the stipulated closing time on the same day; online tenders follow the published schedule.",
+    "required_all": [
+      "one hour"
+    ],
+    "required_any_groups": [
+      [
+        "same day",
+        "same date"
+      ],
+      [
+        "online",
+        "schedule"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-37",
+    "bucket": "emd",
+    "language": "en",
+    "query": "In a two-envelope tender, which envelope is opened first and when is the tender-form envelope opened?",
+    "expected_rule": "Rule 4.6.4",
+    "reference_answer": "Open the EMD/exemption-certificate envelope first. Open the tender-form envelope only if sufficient EMD or a valid exemption certificate is present; otherwise reject the bid.",
+    "required_all": [
+      "emd"
+    ],
+    "required_any_groups": [
+      [
+        "first"
+      ],
+      [
+        "exemption",
+        "certificate"
+      ],
+      [
+        "reject",
+        "rejected"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-38",
+    "bucket": "bid-opening",
+    "language": "hinglish",
+    "query": "Deadline ke baad receive hui offline tender ko department ko open karna chahiye ya return?",
+    "expected_rule": "Rule 4.6.5",
+    "reference_answer": "A tender received after the prescribed final date and time must not be opened; it should be returned, noting the return date and time on the sealed envelope.",
+    "required_all": [
+      "not be opened"
+    ],
+    "required_any_groups": [
+      [
+        "return",
+        "returned"
+      ],
+      [
+        "date",
+        "time"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-39",
+    "bucket": "emd",
+    "language": "en",
+    "query": "What EMD percentage must normally accompany each tender under Rule 4.7?",
+    "expected_rule": "Rule 4.7(a)",
+    "reference_answer": "EMD of 1% of the estimated purchase value is normally required with each tender.",
+    "required_all": [
+      "1%"
+    ],
+    "required_any_groups": [
+      [
+        "estimated",
+        "estimate"
+      ],
+      [
+        "emd",
+        "earnest money"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-40",
+    "bucket": "emd",
+    "language": "en",
+    "query": "What happens to EMD after tender finalisation for the successful bidder and the other bidders?",
+    "expected_rule": "Rule 4.7(a)",
+    "reference_answer": "Retain the successful bidder's EMD and refund the remaining bidders' EMD within 15 days.",
+    "required_all": [
+      "successful"
+    ],
+    "required_any_groups": [
+      [
+        "retain",
+        "retained",
+        "keep"
+      ],
+      [
+        "15 days",
+        "fifteen days"
+      ],
+      [
+        "refund",
+        "return"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-41",
+    "bucket": "emd",
+    "language": "hinglish",
+    "query": "Registered small/cottage unit ya valid startup ko EMD exemption kab milegi?",
+    "expected_rule": "Rules 4.7(b)-(c)",
+    "reference_answer": "A qualifying registered small/cottage unit or valid recognised startup can receive EMD exemption only after submitting the required proof/certificate with the tender.",
+    "required_all": [
+      "emd"
+    ],
+    "required_any_groups": [
+      [
+        "startup",
+        "small",
+        "cottage"
+      ],
+      [
+        "certificate",
+        "proof",
+        "document"
+      ],
+      [
+        "with the tender",
+        "submit"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-42",
+    "bucket": "security-deposit",
+    "language": "en",
+    "query": "Before issuing a purchase order to the eligible successful bidder, what minimum security deposit is required?",
+    "expected_rule": "Rule 4.7.1",
+    "reference_answer": "Obtain security deposit of at least 3% of the actual purchase value before issuing the purchase order.",
+    "required_all": [
+      "3%"
+    ],
+    "required_any_groups": [
+      [
+        "actual purchase value",
+        "actual value"
+      ],
+      [
+        "before",
+        "prior"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-43",
+    "bucket": "security-deposit",
+    "language": "en",
+    "query": "Can the prescribed security deposit or EMD be accepted in cash?",
+    "expected_rule": "Rule 4.8(a)",
+    "reference_answer": "No. The prescribed security deposit/EMD must not be accepted in cash.",
+    "required_all": [
+      "cash"
+    ],
+    "required_any_groups": [
+      [
+        "no",
+        "not"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-44",
+    "bucket": "tender-conditions",
+    "language": "hinglish",
+    "query": "Tender conditions aur GST/tax details ke baare mein Rule 4.9 kya kehta hai?",
+    "expected_rule": "Rule 4.9",
+    "reference_answer": "Conditions must be clear and unambiguous; the bidder must be GST-registered for the tendered goods, and quoted rates must separately state taxes.",
+    "required_all": [
+      "clear"
+    ],
+    "required_any_groups": [
+      [
+        "gst",
+        "registration"
+      ],
+      [
+        "tax",
+        "taxes"
+      ],
+      [
+        "separately",
+        "separate"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-45",
+    "bucket": "quality",
+    "language": "en",
+    "query": "If a sample cannot be obtained before purchase, how can the buyer protect quality under Rule 4.10?",
+    "expected_rule": "Rule 4.10",
+    "reference_answer": "The supplier may demonstrate the item; if that is also not possible, the contract should reserve the buyer's right to inspect at the manufacturing site.",
+    "required_all": [
+      "inspection"
+    ],
+    "required_any_groups": [
+      [
+        "demonstration",
+        "demonstrate",
+        "demo"
+      ],
+      [
+        "manufacturing site",
+        "manufacturing",
+        "factory"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-46",
+    "bucket": "purchase-committee",
+    "language": "en",
+    "query": "When is a purchase committee compulsory, and who must be included?",
+    "expected_rule": "Rule 4.12",
+    "reference_answer": "Every office purchasing Rs. 50,000 or more per year must form a purchase committee including the departmental accounts officer/accounts in-charge and officers with technical knowledge of the goods.",
+    "required_all": [
+      "50,000"
+    ],
+    "required_any_groups": [
+      [
+        "accounts",
+        "account"
+      ],
+      [
+        "technical",
+        "expert"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-47",
+    "bucket": "purchase-committee",
+    "language": "hinglish",
+    "query": "Agar L1/lowest tender accept nahi ki ja rahi, to committee ko kya karna hoga?",
+    "expected_rule": "Rule 4.12",
+    "reference_answer": "When the lowest tender is not accepted, the reasons for not accepting it must be recorded in writing.",
+    "required_all": [
+      "lowest"
+    ],
+    "required_any_groups": [
+      [
+        "reasons",
+        "reason"
+      ],
+      [
+        "writing",
+        "written",
+        "record"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-48",
+    "bucket": "purchase-order",
+    "language": "en",
+    "query": "May a purchase order be issued before a contract is executed with the supplier?",
+    "expected_rule": "Rule 4.13",
+    "reference_answer": "No. Execute the contract before issuing the purchase order; it should bind supply within the fixed time and to the sample/specification.",
+    "required_all": [
+      "before"
+    ],
+    "required_any_groups": [
+      [
+        "contract",
+        "agreement"
+      ],
+      [
+        "purchase order",
+        "po"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-49",
+    "bucket": "repeat-order",
+    "language": "en",
+    "query": "Can a repeat supply order be issued seven months after the original order, and what is the maximum repeat quantity?",
+    "expected_rule": "Rule 4.14",
+    "reference_answer": "No repeat order may be issued after six months from the original order. A repeat order cannot exceed 25% of the original order quantity.",
+    "required_all": [
+      "six months"
+    ],
+    "required_any_groups": [
+      [
+        "25%",
+        "25 percent"
+      ],
+      [
+        "repeat order",
+        "repeat"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  },
+  {
+    "id": "CGSPR-50",
+    "bucket": "inspection-payment",
+    "language": "hinglish",
+    "query": "Delivered goods ki quality inspection aur supplier payment ke liye Rule 11 kya timelines deta hai?",
+    "expected_rule": "Rule 11",
+    "reference_answer": "Arrange quality inspection at the delivery site within a maximum of 10 days; departments must pay the bill according to rules within 20 days of receiving goods and the bill.",
+    "required_all": [
+      "10 days"
+    ],
+    "required_any_groups": [
+      [
+        "inspection",
+        "quality"
+      ],
+      [
+        "20 days",
+        "twenty days"
+      ],
+      [
+        "payment",
+        "pay"
+      ]
+    ],
+    "prohibited_claims": [],
+    "expected_source_document": "store purchase rule cg.pdf"
+  }
+]

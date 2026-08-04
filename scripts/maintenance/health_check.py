@@ -13,7 +13,7 @@ from pathlib import Path
 from collections import Counter
 from qdrant_client import QdrantClient
 
-ROOT        = Path(__file__).resolve().parent
+ROOT        = Path(__file__).resolve().parents[2]
 STAGE2_OUT  = ROOT / '01_preprocessing' / 'stage2_output'
 CHUNK_OUT   = ROOT / '03_chunking' / 'output'
 QDRANT_PATH = ROOT / '04_embeddings_and_kg' / 'db' / 'qdrant_local'

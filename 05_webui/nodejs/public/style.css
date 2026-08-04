@@ -237,7 +237,9 @@ body.resizing-active {
 }
 
 #chat-popup.resizing {
-  box-shadow: 0 0 0 2px var(--accent), var(--shadow-lg) !important;
+  /* Keep the normal shadow during resizing; the accent ring looked like a
+     temporary outline rectangle around the entire chatbot. */
+  box-shadow: var(--shadow-lg) !important;
   animation: none !important;
   transition: none !important;
 }
@@ -287,10 +289,7 @@ body.resizing-active {
 }
 
 /* Visual glow affordance when hovering or holding an edge */
-.resize-handle:hover,
-#chat-popup.resizing .resize-handle {
-  background: rgba(30, 99, 184, 0.15);
-}
+.resize-handle:hover { background: rgba(30, 99, 184, 0.15); }
 
 .resize-handle.resize-n:hover,
 .resize-handle.resize-s:hover {
@@ -488,6 +487,9 @@ select.subheader-icon-btn {
 #popup-header button { cursor: pointer; }
 /* No open-animation while dragging so the popup tracks the pointer cleanly. */
 #chat-widget.dragging #chat-popup { animation: none; }
+/* Drag release must not restart popup-open; that restart is perceived as a
+   small wobble after the pointer is released. */
+#chat-popup.has-been-positioned { animation: none !important; }
 
 /* ── Options (⋮) dropdown menu ──────────────────────────────────── */
 .popup-menu {
@@ -758,6 +760,24 @@ input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer;
 .welcome-title { font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -.2px; }
 .chat-empty p.welcome-intro { font-size: 12.5px; line-height: 1.6; color: var(--text-muted); max-width: 322px; margin: 0; }
 .welcome-intro strong { color: var(--accent); font-weight: 600; }
+.role-starts {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;
+  width: 100%; max-width: 340px; margin-top: 5px;
+}
+.role-start-card {
+  display: flex; align-items: center; gap: 8px; min-height: 58px; padding: 9px 10px;
+  text-align: left; border: 1px solid var(--border); border-radius: var(--radius-lg);
+  background: #fff; color: var(--text); cursor: pointer;
+  transition: border-color .15s, box-shadow .15s, transform .15s, background .15s;
+}
+.role-start-card:hover, .role-start-card:focus-visible {
+  border-color: var(--accent); background: var(--accent-light); box-shadow: var(--shadow-sm);
+  transform: translateY(-1px); outline: none;
+}
+.role-start-icon { font-size: 20px; line-height: 1; }
+.role-start-card strong { display: block; font-size: 11px; line-height: 1.25; }
+.role-start-card small { display: block; margin-top: 2px; color: var(--text-muted); font-size: 10px; }
+.role-example-label { width: 100%; max-width: 340px; margin-top: 3px; text-align: left; color: var(--accent); font-size: 10px; font-weight: 600; }
 .welcome-caps {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;
   max-width: 332px; margin-top: 3px;
@@ -807,6 +827,10 @@ input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer;
   box-shadow: var(--shadow-sm);
 }
 .example-quick-item:hover::after { color: var(--accent); transform: translate(2px,-50%); }
+@media (max-width: 420px) {
+  .role-starts { grid-template-columns: 1fr; }
+  .role-start-card { min-height: 48px; }
+}
 
 /* ── Message bubbles ─────────────────────────────────────────────── */
 #chat-messages { display: flex; flex-direction: column; gap: 16px; }

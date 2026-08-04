@@ -421,6 +421,7 @@ const FRIENDLY_DOCS = {
   'vigilance manual 2021 (hindi)':                'Vigilance Manual 2021 (Hindi)',
   'gfrupdatedupto31_07_2024':                    'General Financial Rules (GFR)',
   'fInal_gfr_upto_31_07_2024':                   'General Financial Rules (GFR)',
+  'faq of chhattisgarh infotech promotion society(chips)': 'CHiPS FAQ',
 };
 
 // Map a raw filename (or already-friendly string) to a clean display name.
@@ -437,6 +438,25 @@ function friendlyDocName(raw) {
   if (!/\.(pdf|docx?|txt)$/i.test(t) && /[A-Za-zऀ-ॿ]/.test(base)) return base;
   // Fallback: strip hash digits, underscores → spaces
   return base.replace(/-\d{6,}/g, '').replace(/_+/g, ' ').trim();
+}
+
+// Cached/direct answers carry friendly source labels instead of Qdrant result
+// objects. Map those labels to real files so source chips remain clickable.
+function sourcePdfFilename(raw) {
+  const t = String(raw || '').trim();
+  const key = t.replace(/\.(pdf|docx?|txt)$/i, '').replace(/\s+/g, ' ').toLowerCase();
+  if (key === 'chhattisgarh store purchase rules' || key === 'store purchase rule cg') return 'store purchase rule cg.pdf';
+  if (key === 'general financial rules' || key === 'general financial rules (gfr)') return 'FInal_GFR_upto_31_07_2024.pdf';
+  if (key === 'manual for procurement of goods 2024') return 'publicProManual-1755343081262-715558279.pdf';
+  if (key === 'chips faq' || key === 'faq of chhattisgarh infotech promotion society(chips)') return 'FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf';
+  return t;
+}
+
+function syntheticSourceResults(names, snippet = '') {
+  return (names || []).filter(Boolean).map((name, index) => ({
+    rank: index + 1, source: name, actual_pdf: sourcePdfFilename(name),
+    display_name: friendlyDocName(name), score: 0, text: snippet, excerpt: snippet, parent_id: '',
+  }));
 }
 
 // Drop sections the model filled with an "empty / none" placeholder instead of
@@ -595,14 +615,16 @@ function bindSourceChips(container, results) {
   if (!container || !results || !results.length) return;
   container.querySelectorAll('.src-name').forEach(chip => {
     const label = chip.dataset.doc || chip.textContent.trim();
-    const match = results.find(r => friendlyDocName(r.actual_pdf || r.source) === label);
-    if (!match) return;
-    const fname = match.actual_pdf || match.source;
+    const match = results.find(r => friendlyDocName(r.display_name || r.actual_pdf || r.source) === label);
+    // Keep a final label-based fallback so a source chip remains usable even
+    // if a cache entry was created before its synthetic metadata was added.
+    const fname = match ? (match.actual_pdf || match.source) : sourcePdfFilename(label);
+    if (!fname) return;
     chip.classList.add('src-name-clickable');
     chip.setAttribute('role', 'button');
     chip.setAttribute('tabindex', '0');
     chip.title = `Open ${fname}`;
-    const open = () => openPdfPanel(fname, match.text || match.excerpt || '', results);
+    const open = () => openPdfPanel(fname, match ? (match.text || match.excerpt || '') : '', results);
     chip.addEventListener('click', open);
     chip.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
   });
@@ -735,7 +757,7 @@ function updateResetBtnVisibility() {
 }
 
 // Restore the widget to its default bottom-right corner and default size.
-function resetWidgetPosition() {
+function resetWidgetPosition(showNotice = true) {
   const w = ui.chatWidget;
   const p = ui.chatPopup;
   if (w) { w.style.left = ''; w.style.top = ''; w.style.right = ''; w.style.bottom = ''; }
@@ -744,7 +766,7 @@ function resetWidgetPosition() {
   ui.chatPopup.classList.remove('maximized');
   if (ui.maximizeBtn) ui.maximizeBtn.title = 'Maximize';
   updateResetBtnVisibility();
-  toast('Chat position & size reset', 'info');
+  if (showNotice) toast('Chat position & size reset', 'info');
 }
 
 // Keep a dragged widget fully inside the viewport (no-op until it's been moved).
@@ -776,6 +798,9 @@ function initDragMove() {
     widget.style.bottom = 'auto';
     dragging = true;
     state.widgetMoved = true;
+    // Once the popup has been manually positioned, never replay its opening
+    // scale/bounce animation when the temporary dragging class is removed.
+    ui.chatPopup.classList.add('has-been-positioned');
     updateResetBtnVisibility();
     widget.classList.add('dragging');
     try { header.setPointerCapture(e.pointerId); } catch (_) {}
@@ -837,6 +862,7 @@ function initEdgeResize() {
       widget.style.bottom = 'auto';
 
       state.widgetMoved = true;
+      ui.chatPopup.classList.add('has-been-positioned');
       updateResetBtnVisibility();
 
       popup.classList.add('resizing');
@@ -956,11 +982,11 @@ async function handleLogout() {
 
 // ── Toast ─────────────────────────────────────────────────────────────────
 function toast(message, type = 'info', duration = 3500) {
-  const el = document.createElement('div');
-  el.className = `toast ${type}`;
-  el.textContent = message;
-  ui.toastContainer.appendChild(el);
-  setTimeout(() => el.remove(), duration);
+  // Keep transient notifications out of the page: status text, inline errors,
+  // and the answer area already provide feedback without covering the portal.
+  // Retain this function as a no-op so existing error/success call sites stay
+  // safe and do not create popup messages.
+  return;
 }
 
 // ── Status helpers ────────────────────────────────────────────────────────
@@ -1107,7 +1133,7 @@ function appendMessage(role, text, meta = {}) {
 }
 
 // ═══ Voice (optional) — uses the local voice_server.py on :5050 ════════════
-//   Mic  -> /stt -> fills the input -> runs the normal RAG /api/stream answer.
+//   Mic  -> /stt -> fills the input -> runs the normal RAG /e-proc/api/stream answer.
 //   /tts -> speaks an answer (per-message 🔊 Listen, and auto-speak for voice Qs).
 const VOICE_SERVER = 'http://localhost:5050';
 const BrowserSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
@@ -1586,7 +1612,11 @@ async function sendQuery() {
     ui.queryInput.value = '';
     autoResize();
     state.queryCount++;
-    const { body } = appendMessage('assistant', faqAnswer, { timing: 'instant' });
+    // The user question is an exact searchable heading in the FAQ PDF for the
+    // common instant-answer path, so preserve it as the highlight snippet.
+    const faqSources = syntheticSourceResults(['CHiPS FAQ'], `${text}\n${faqAnswer}`);
+    const { body } = appendMessage('assistant', faqAnswer, { timing: 'instant', results: faqSources });
+    bindSourceChips(body, faqSources);
     appendDisclaimer(body);
     ui.queryStatus.textContent = 'Ready';
     if (speakReply) {                       // voice question -> speak the canned answer
@@ -1693,6 +1723,11 @@ async function sendQuery() {
 
         } else if (evt.type === 'context') {
           contextResults = evt.results || [];
+          // Cache/direct paths skip retrieval and send declared labels only.
+          // Turn them into PDF-backed records for the normal source renderer.
+          if (!contextResults.length && evt.declared_sources && evt.declared_sources.length) {
+            contextResults = syntheticSourceResults(evt.declared_sources);
+          }
           if (statusSpan) statusSpan.textContent = `Retrieved ${contextResults.length} source(s)`;
 
         } else if (evt.type === 'token') {
@@ -1745,6 +1780,11 @@ async function sendQuery() {
         } else if (evt.type === 'done') {
           const elapsed = evt.elapsed || `${((Date.now()-t0)/1000).toFixed(2)}s`;
           if (answerBody) {
+            // Some cached/direct responses expose sources only on the final
+            // event. Build clickable records here as a second safeguard.
+            if (!contextResults.length && evt.sources && evt.sources.length) {
+              contextResults = syntheticSourceResults(evt.sources, streamText);
+            }
             answerBody.classList.remove('stream-cursor');
             // The server reconstructs and sanitizes the provider stream (for
             // example, removing an echoed refusal or empty optional section).
@@ -1752,6 +1792,12 @@ async function sendQuery() {
             if (typeof evt.answer === 'string' && evt.answer.trim()) {
               streamText = evt.answer;
             }
+            // Declared/cached sources do not always carry a retrieved chunk.
+            // Use the final answer as a searchable fallback so every PDF-open
+            // action still attempts native highlighting.
+            contextResults.forEach(r => {
+              if (!r.text && !r.excerpt) { r.text = streamText; r.excerpt = streamText; }
+            });
             // Strip any ungrounded rule/section numbers before finalising (also
             // keeps them out of the Listen/Export paths that read streamText).
             streamText = stripUngroundedRuleNumbers(streamText, contextResults);
@@ -1865,6 +1911,8 @@ async function sendQuery() {
 // can be slow, so without it an EARLIER request could resolve AFTER a later one
 // and swap the document you're reading. Only the latest request updates the UI.
 async function openPdfPanel(fname, snippet, related) {
+  // Never leave the source-chunk overlay visible behind/on top of the PDF.
+  closeDrawer();
   const reqId = ++state.pdfReqSeq;
   const cacheKey = `${fname}|${snippet || ''}`;
   state.pdfActiveKey = cacheKey;
@@ -1979,7 +2027,12 @@ function openDrawer(results) {
     pdfBtn.innerHTML = '&#11043; View PDF (highlighted)';
     // Pass the retrieved chunk text so the viewer highlights exactly where this
     // context was taken from. Fall back to the excerpt if full text is absent.
-    pdfBtn.addEventListener('click', () => openPdfPanel(fname, r.text || r.excerpt || '', results));
+    pdfBtn.addEventListener('click', () => {
+      // The source-chunk drawer is only a selector. Close it before opening the
+      // document so it cannot remain stacked over the PDF viewer.
+      closeDrawer();
+      openPdfPanel(fname, r.text || r.excerpt || '', results);
+    });
     card.appendChild(pdfBtn);
     ui.drawerBody.appendChild(card);
   });
@@ -2009,6 +2062,31 @@ function loadExamples() {
       // Send immediately when the pipeline is ready; otherwise just fill + focus.
       if (ui.btnSend && !ui.btnSend.disabled) sendQuery();
       else ui.queryInput.focus();
+    });
+    ui.exampleList.appendChild(btn);
+  });
+}
+
+const ROLE_STARTER_QUESTIONS = {
+  buyer: ['Our office needs laptops. What should we do first?', 'Can we purchase through GeM?', "Budget approved. What's next?"],
+  vendor: ['How do I register as a vendor?', 'How do I pay EMD?', 'How do I submit a bid?'],
+  operator: ['How do I create a tender on the portal?', 'How do I publish a tender?', 'How do I issue a corrigendum?'],
+  general: ['What are the different procurement methods?', 'What is the difference between GeM and e-Procurement?', 'What is Limited Tender?'],
+};
+
+function showRoleStarters(role) {
+  const questions = ROLE_STARTER_QUESTIONS[role];
+  if (!questions || !ui.exampleList) return;
+  ui.exampleList.innerHTML = '';
+  const label = document.getElementById('role-example-label');
+  const names = { buyer: 'Department Buyer', vendor: 'Vendor/Bidder', operator: 'Department Operator', general: 'General Information' };
+  if (label) label.textContent = `${names[role]} starter questions`;
+  questions.forEach(question => {
+    const btn = document.createElement('button');
+    btn.className = 'example-quick-item'; btn.type = 'button'; btn.textContent = question;
+    btn.addEventListener('click', () => {
+      ui.queryInput.value = question; autoResize();
+      if (ui.btnSend && !ui.btnSend.disabled) sendQuery(); else ui.queryInput.focus();
     });
     ui.exampleList.appendChild(btn);
   });
@@ -2053,6 +2131,9 @@ async function bootRagUI() {
   }, 1000);
 
   loadExamples();
+  document.querySelectorAll('.role-start-card').forEach(card => {
+    card.addEventListener('click', () => showRoleStarters(card.dataset.role));
+  });
 
   try {
     const { ok, data } = await api.health();
@@ -2196,6 +2277,13 @@ function boot() {
     if (item) runMenuAction(item.dataset.action);
   });
   document.addEventListener('click', e => {
+    // A manual drag is temporary: clicking anywhere outside the chatbot
+    // returns the widget (including its icon) to the default bottom-right
+    // anchor. Clicks inside #chat-widget keep the dragged position intact.
+    if (state.widgetMoved && !e.target.closest('#chat-widget')) {
+      resetWidgetPosition(false);
+    }
+
     if (ui.popupMenu && !ui.popupMenu.classList.contains('hidden') &&
         !e.target.closest('#popup-menu') && !e.target.closest('#popup-menu-btn')) closeMenu();
 

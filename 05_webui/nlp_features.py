@@ -231,10 +231,14 @@ def detect_commodity(query: str) -> str:
         return "laptops_computers_it_equipment"
     if any(s in q for s in ("server", "router", "network equipment", "it equipment")):
         return "it_equipment"
+    if "projector" in q:
+        return "projector"
     if any(s in q for s in ("printer", "scanner", "multifunction printer", "mfp")):
         return "printers_office_equipment"
     if any(s in q for s in ("furniture", "chair", "chairs", "desk", "table", "kursi", "kursiyan", "फर्नीचर", "कुर्सी")):
         return "furniture"
+    if any(s in q for s in ("stationery", "stationary", "office supplies", "office supply")):
+        return "stationery_office_supplies"
     if any(s in q for s in ("vehicle", "car", "jeep", "वाहन")):
         return "vehicle"
     if any(s in q for s in ("software", "licence", "license", "सॉफ्टवेयर")):
@@ -650,13 +654,15 @@ _COREF_RE = re.compile("|".join(_COREF_PRONOUNS), re.I)
 _FOLLOWUP_MARKERS = (
     "more", "explain", "elaborate", "details", "detail", "continue", "go on",
     "why", "how", "what about", "and", "also", "aur batao", "aur bataye",
+    "below", "under", "less than", "above", "over", "more than",
+    "se kam", "se zyada", "upar", "neeche", "agar",
     "vistar", "detail me", "kyun", "kyu", "kaise", "iske baare", "uske baare",
     "और बताओ", "विस्तार", "क्यों", "कैसे",
 )
 
 # A query is only treated as a follow-up if it is short (few words) — long
 # queries are self-contained and must not be rewritten.
-_COREF_MAX_WORDS = 7
+_COREF_MAX_WORDS = 12
 
 
 def needs_coreference(query: str) -> bool:
@@ -672,23 +678,33 @@ def needs_coreference(query: str) -> bool:
     return any(m in q for m in _FOLLOWUP_MARKERS)
 
 
-def resolve_coreference(query: str, last_topic: str) -> Tuple[str, bool]:
-    """Rewrite a follow-up query into a self-contained one using `last_topic`.
+def resolve_coreference(query: str, last_topic: str, last_query: str = "") -> Tuple[str, bool]:
+    """Rewrite a follow-up query into a self-contained retrieval question.
 
     Returns (resolved_query, was_resolved). If the query is not a follow-up, or
-    there is no remembered topic, the original query is returned unchanged.
+    there is no remembered context, the original query is returned unchanged.
+    The prior question is deliberately retained when available: a topic such as
+    ``procurement rules`` is too broad to resolve ``what about below 3 lakh?``
+    accurately, while the previous question preserves the missing tender/method.
     """
-    if not query or not last_topic:
+    if not query or not (last_topic or last_query):
         return (query, False)
     if not needs_coreference(query):
         return (query, False)
 
+    topic = last_topic or "the previous procurement question"
+    prior = " ".join((last_query or "").split())[:240]
+
     # Replace a standalone pronoun with the topic, else append the topic as
-    # context so retrieval has the missing subject.
+    # context so retrieval has the missing subject. The original previous
+    # question is appended as retrieval-only context so amount/rule details
+    # survive across turns.
     if _COREF_RE.search(query):
-        resolved = _COREF_RE.sub(last_topic, query, count=1)
+        resolved = _COREF_RE.sub(topic, query, count=1)
     else:
-        resolved = f"{query.rstrip(' ?.!')} (regarding {last_topic})"
+        resolved = f"{query.rstrip(' ?.!')} (regarding {topic})"
+    if prior and prior.casefold() not in resolved.casefold():
+        resolved = f"{resolved} [previous question: {prior}]"
     return (resolved, True)
 
 
@@ -1048,8 +1064,21 @@ INTENT_FOLLOWUPS = {
 }
 
 
-def suggest_followups(intent: str, max_n: int = 3):
-    """Return up to max_n related questions for the detected intent (or [])."""
+def suggest_followups(intent: str, max_n: int = 3, query: str = ""):
+    """Return grounded next questions for the current answer's subject.
+
+    Rules questions benefit from threshold/approval/GeM follow-ups far more than
+    a static generic list, especially after an amount or tender-method query.
+    """
+    q = (query or "").casefold()
+    if intent in {"RULES_GFR", "PROCUREMENT_METHODS"} or any(
+        term in q for term in ("tender", "gem", "lakh", "purchase rule", "procurement")
+    ):
+        return [
+            "What changes if the estimated value is below ₹3 lakh?",
+            "Does GeM have to be checked before inviting a tender?",
+            "What approval, publication, and timeline apply?",
+        ][:max_n]
     return list(INTENT_FOLLOWUPS.get(intent, []))[:max_n]
 
 

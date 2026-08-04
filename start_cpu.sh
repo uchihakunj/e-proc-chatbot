@@ -36,6 +36,14 @@ if [[ ! -x "${PYTHON}" ]]; then
   exit 1
 fi
 
+if ! "${PYTHON}" -c 'import requests' >/dev/null 2>&1; then
+  echo "ERROR: The configured Python environment is missing the requests package."
+  echo "Install dependencies into this exact environment with:"
+  echo "  ${PYTHON} -m pip install -r requirements.txt"
+  echo "Do not use a bare 'pip' command; it may install into ~/.local instead."
+  exit 1
+fi
+
 if ! command -v node >/dev/null 2>&1; then
   echo "ERROR: node is not installed or not on PATH"
   exit 1

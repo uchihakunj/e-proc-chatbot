@@ -1,0 +1,31 @@
+{
+  "total_questions": 50,
+  "pass": 50,
+  "review": 0,
+  "source_coverage_percent": 100.0,
+  "followup_coverage_percent": 48.0,
+  "median_latency_seconds": 9.063,
+  "p95_latency_seconds": 15.647,
+  "by_role": {
+    "Department Buyer": {
+      "total": 15,
+      "pass": 15,
+      "review": 0
+    },
+    "Department Operator": {
+      "total": 10,
+      "pass": 10,
+      "review": 0
+    },
+    "General User": {
+      "total": 10,
+      "pass": 10,
+      "review": 0
+    },
+    "Vendor / Bidder": {
+      "total": 15,
+      "pass": 15,
+      "review": 0
+    }
+  }
+}

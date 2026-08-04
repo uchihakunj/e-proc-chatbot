@@ -63,6 +63,11 @@ from fine_intent_policy import (
     route_for_intent, route_for_query, canonical_source_contract_query,
     canonical_source_contract_sources,
 )
+from cg_store_rule_answers import direct_cg_store_rule_answer
+from answer_synthesis import build_answer_synthesis_directive
+from answer_evidence_guard import assess_final_context, render_evidence_gap_answer
+from answer_claim_guard import requires_buffered_claim_validation, answer_claim_violations
+from purchase_workflow import render_department_purchase_answer
 
 # Dynamically find RAG pipeline module - works for both local and Docker
 def _find_rag_module():
@@ -264,6 +269,12 @@ CORE RULES:
   figure, and never change a range's bound or direction ("up to X" must NOT become
   "above X"; "3 to 5 per cent" must NOT become "1 to 3 per cent"). If the Context
   gives no figure, state the provision without one.
+- THRESHOLD AND METHOD QUESTIONS: When the user gives an estimated value or asks
+  which procurement/tender method applies, answer the decision explicitly. State
+  whether GeM, direct purchase, Purchase Committee, Limited Tender, Open Tender,
+  or another method applies; give the applicable threshold, conditions, exceptions,
+  approval/documentation steps, and the exact rule/section or manual provision
+  supporting each material claim. Do not give a generic list of tender types.
 - CITATIONS: Do NOT write "[Source 1]", "Source 2", "[Source N: file]", or refer
   to the context sources by number/bracket anywhere in your answer prose. State
   the facts directly; the cited documents are listed separately under 📘 Source.
@@ -359,13 +370,13 @@ DOCUMENT NAMES — NEVER show raw filenames. Always use these friendly names:
 For any other file, create a clean readable title (no extension, no hash digits).
 
 RESPONSE STRUCTURE:
-Write a direct, conversational, and natural response as a helpful AI assistant. Do NOT use rigid headers like "💡 Answer", "📋 Process", "Rule/Provision:", or "Explanation:".
-Instead, structure the answer fluidly:
-1. Start with a direct, friendly answer to the user's question.
-2. If there are steps or a process, list them naturally using bullet points or numbers.
-3. If quoting a rule or provision, integrate it naturally into your explanation.
-4. If a comparison or list is requested, use a Markdown table seamlessly within your text.
-5. AT THE VERY END, you must always provide the source citation on a new line formatted exactly as:
+Write a direct, conversational, and natural response as a helpful AI assistant.
+Use a lightweight structure: start with "💡 Answer"; use "📋 Process" or
+"📋 Decision checklist" only when actionable steps are useful; use
+"⚠ Important points" only for source-supported conditions or exceptions.
+If a comparison is requested, begin with a filled Markdown table before the
+short conclusion. Do not repeat the same content across sections.
+AT THE VERY END, you must always provide the source citation on a new line formatted exactly as:
    "📘 Source: [Friendly Document Name]"
    (or "📘 स्रोत: [Friendly Document Name]" if responding in Hindi).
 
@@ -459,7 +470,10 @@ def direct_department_laptop_planning_answer(query):
     # registration just because the word "process" is present.
     if not (has_laptop and asks_workflow and (has_department or has_purchase)) or has_explicit_vendor_role:
         return None
-    if any(term in q for term in ('mujhe', 'kharid', 'khareed', 'kaise', 'batao', 'bataye')):
+    # Use the shared language detector rather than a small set of workflow
+    # keywords.  For example, "Hamare office ko naye laptops chahiye" is
+    # Hinglish but contains neither "kharid" nor "batao".
+    if detect_query_language(query) == 'hinglish':
         return (
             "💡 Answer\n"
             "Laptop/computer ki department purchase mein pehle consolidated requirement, quantity, users, purpose, delivery timeline, estimated value aur budget head record karein. "
@@ -525,6 +539,109 @@ def direct_procurement_methods_overview_answer(query):
         "Limited, and Single Tender are procurement methods.\n\n"
         "📘 Source: Chhattisgarh Store Purchase Rules; General Financial Rules; "
         "Manual for Procurement of Goods 2024."
+    )
+
+
+def direct_small_value_procurement_answer(query):
+    """Answer small-value goods procurement threshold questions deterministically."""
+    import re
+
+    q = (query or '').casefold()
+    if not any(term in q for term in (
+        'tender', 'procurement', 'purchase', 'kharid', 'khareed',
+        'kharidna', 'khareedna', 'निविदा', 'खरीद', 'प्रोक्योरमेंट',
+    )):
+        return None
+    if not any(term in q for term in (
+        'lakh', 'lac', 'lakhs', 'lacs', 'रुपये', 'रु', 'rs', '₹',
+        'amount', 'value', 'कीमत', 'राशि',
+    )):
+        return None
+
+    amount_match = re.search(
+        r'(?:₹|rs\.?|rupees?|रु\.?|रुपये)?\s*'
+        # Indian-formatted values such as 3,00,001 must be consumed as one
+        # number.  The older pattern stopped at "3,00", turning this value into
+        # Rs. 300 and activating an unrelated small-value answer.
+        r'(\d[\d,]*(?:\.\d+)?)\s*(lakh|lakhs|lac|lacs|करोड़|crore|crores)?',
+        q,
+        flags=re.I,
+    )
+    if not amount_match:
+        return None
+    try:
+        amount = float(amount_match.group(1).replace(',', ''))
+        unit = (amount_match.group(2) or '').lower()
+        if unit in ('lakh', 'lakhs', 'lac', 'lacs'):
+            amount *= 100000
+        elif unit in ('crore', 'crores', 'करोड़'):
+            amount *= 10000000
+    except (TypeError, ValueError):
+        return None
+
+    # This route is specifically for small-value goods/store-purchase questions;
+    # larger values continue through normal retrieval.
+    if amount > 500000:
+        return None
+    value_label = (
+        f"₹{amount / 100000:g} lakh" if amount >= 100000
+        else f"₹{amount:,.0f}"
+    )
+    is_hinglish = any(term in q for term in (
+        'agar', 'se kam', 'tak', 'toh', 'to', 'kya', 'kaise', 'ke liye',
+        'kharid', 'khareed', 'निविदा', 'खरीद', 'क्या', 'कैसे',
+    ))
+
+    if is_hinglish:
+        return (
+            f"Agar aap **goods/store purchase** ki baat kar rahe hain aur estimated "
+            f"value {value_label} se kam hai, to sirf amount ke basis par **Open Tender "
+            "mandatory nahi hota**. Pehle GeM availability check karein.\n\n"
+            "- **GeM par item available ho:** GeM se procurement mandatory hai. "
+            "₹50,000 se upar aur ₹10 lakh tak GeM par kam-se-kam teen different "
+            "manufacturers ke available sellers mein lowest-price seller ka route "
+            "follow hota hai. Yeh **GFR Rule 149** ke under hai.\n"
+            "- **GeM par item available na ho:** GeMAR&PTS generate karke record karein. "
+            "₹50,000 se upar aur ₹5 lakh tak goods ko duly constituted Local Purchase "
+            "Committee ki recommendation par procure kiya ja sakta hai. Yeh "
+            "**Manual for Procurement of Goods 2024 ke GeM/non-availability provisions "
+            "aur GFR Rule 155** ke under hai.\n"
+            "- **₹50,000 tak, GeM par item unavailable ho:** competent authority ka "
+            "certificate record karke quotation ke bina purchase ka provision "
+            "**GFR Rule 154** mein diya gaya hai.\n"
+            "- **Agar tender route specifically required ho:** Limited Tender Enquiry "
+            f"₹50 lakh tak adopt ki ja sakti hai under **GFR Rule 162**, lekin {value_label} "
+            "ke goods purchase ke liye Goods Manual mein Local Purchase Committee "
+            "small-value route diya gaya hai; Open Tender normally ₹50 lakh and above "
+            "ke liye hai under **GFR Rule 161**.\n\n"
+            "Local Purchase Committee ko market survey karke rate, quality aur "
+            "specification ki reasonableness record karni hoti hai. Ek hi requirement "
+            "ko threshold avoid karne ke liye chhote orders mein split nahi karna chahiye. "
+            "Chhattisgarh Store Purchase Rules, applicable SoPP/delegated powers, "
+            "item category, aur latest amendments bhi verify karein.\n\n"
+            "📘 Source: General Financial Rules (GFR); Manual for Procurement of Goods 2024; Chhattisgarh Store Purchase Rules."
+        )
+
+    return (
+        "For goods/store procurement with an estimated value below ₹5 lakh, Open "
+        "Tender is not automatically mandatory. First check GeM availability.\n\n"
+        "- If the item is available on GeM, procurement must use GeM under **GFR Rule "
+        "149**. For purchases above ₹50,000 and up to ₹10 lakh, use the applicable "
+        "lowest-price GeM seller route among at least three manufacturers.\n"
+        "- If the item is unavailable on GeM, generate a GeMAR&PTS record. For goods "
+        "above ₹50,000 and up to ₹5 lakh, procurement may be made on the recommendation "
+        "of a duly constituted Local Purchase Committee under **GFR Rule 155** and "
+        "the Manual for Procurement of Goods 2024.\n"
+        "- For goods up to ₹50,000 unavailable on GeM, purchase without quotation may "
+        "be used with the competent authority's certificate under **GFR Rule 154**.\n"
+        "- If a tender is specifically required, Limited Tender Enquiry is available "
+        "up to ₹50 lakh under **GFR Rule 162**. Open/Advertised Tender is normally "
+        "for ₹50 lakh and above under **GFR Rule 161**, subject to the stated exceptions.\n\n"
+        "The Local Purchase Committee must conduct a market survey and record the "
+        "reasonableness of rate, quality, and specifications. Do not split one demand "
+        "into smaller orders to avoid thresholds or approvals. Apply the applicable "
+        "Chhattisgarh Store Purchase Rules, SoPP, delegated powers, and amendments.\n\n"
+        "📘 Source: General Financial Rules (GFR); Manual for Procurement of Goods 2024; Chhattisgarh Store Purchase Rules."
     )
 
 
@@ -1236,13 +1353,16 @@ def lexical_rule_lookup(query, max_hits=3, window=14, cap=700):
     import re
     if not query:
         return []
-    raw = re.findall(r'\b(?:rule|section|regulation|article)\s*(\d+\s*[A-Za-z]?)\b', query, flags=re.I)
+    # Preserve dotted sub-rule identifiers (for example ``Rule 4.3.2``).  The
+    # old expression silently reduced them to ``4``, which injected the broad
+    # Rule 4 passage instead of the applicable tender clause.
+    raw = re.findall(r'\b(?:rule|section|regulation|article)\s*(\d+(?:\.\d+)*(?:\s*[A-Za-z])?)\b', query, flags=re.I)
     # Hindi RULE keywords (नियम / विनियम) — so "GFR नियम 144" triggers the exact-
     # passage lookup. We deliberately EXCLUDE धारा / अनुच्छेद ("Section"/"Article"):
     # the Act PDFs number sections as "43." (not "Section 43"), so a section lookup
     # never matches their headings and would only inject an unrelated GFR "Rule 43".
     # Devanagari \b is unreliable around matras, so match without word boundaries.
-    raw += re.findall(r'(?:नियम|विनियम)\s*(\d+\s*[A-Za-z]?)', query)
+    raw += re.findall(r'(?:नियम|विनियम)\s*(\d+(?:\.\d+)*(?:\s*[A-Za-z])?)', query)
     nums = []
     for n in raw:
         n = re.sub(r'\s+', '', n).upper()
@@ -2055,13 +2175,6 @@ def query():
     """Process a query"""
     query_start_time = time.time()
     
-    if not RAG_AVAILABLE:
-        return jsonify({
-            'success': False,
-            'error': 'RAG pipeline not available. Check imports and configuration.',
-            'query': ''
-        }), 503
-    
     data = request.get_json()
     query_text = data.get('query', '').strip()
     num_context = data.get('num_results', num_results)
@@ -2072,6 +2185,13 @@ def query():
             'error': 'Query cannot be empty',
             'query': ''
         }), 400
+
+    if not RAG_AVAILABLE:
+        return jsonify({
+            'success': False,
+            'error': 'RAG pipeline not available. Check imports and configuration.',
+            'query': ''
+        }), 503
 
     # Profanity / abuse filter — refuse outright, no retrieval or sources.
     if contains_profanity(query_text):
@@ -2280,6 +2400,16 @@ def _highlight_phrases(text, max_phrases=60):
             continue
         seen.add(u)
         phrases.append(u)
+        # Add shorter leading windows as fallbacks for PDF line wrapping and
+        # OCR/punctuation drift. They still identify the cited passage while
+        # being easier for PyMuPDF to match than a full retrieved sentence.
+        words = u.split()
+        for width in (12, 8):
+            if len(words) > width:
+                short = ' '.join(words[:width])
+                if len(short) >= 18 and short not in seen:
+                    seen.add(short)
+                    phrases.append(short)
         if len(phrases) >= max_phrases:
             break
     return phrases
@@ -2347,6 +2477,16 @@ def highlighted_pdf():
     phrases = _highlight_phrases(snippet)
     if not phrases:
         return _serve_plain()
+    # Last-resort terms for OCR/paraphrased chunks where no complete phrase is
+    # present verbatim in the PDF. These are used only if phrase matching finds
+    # nothing at all, avoiding noisy highlights during normal matching.
+    import re as _re
+    fallback_terms = []
+    for term in _re.findall(r"[\w\u0900-\u097F]{5,}", strip_chunk_header(snippet or '')):
+        if term.casefold() not in {x.casefold() for x in fallback_terms}:
+            fallback_terms.append(term)
+        if len(fallback_terms) >= 18:
+            break
 
     # Cache lookup (mtime in the key invalidates if the source PDF is replaced).
     try:
@@ -2368,6 +2508,7 @@ def highlighted_pdf():
         return _serve_plain()
 
     first_hit_page, last_hit_page, total_hits = None, None, 0
+    context_page_done = False
     try:
         for page in doc:
             page_hit = False
@@ -2382,6 +2523,27 @@ def highlighted_pdf():
                     annot.update()
                     total_hits += len(quads)
                     page_hit = True
+            # Also mark the source context immediately following the matched
+            # phrase. This helps short cached questions where the heading
+            # matches but the explanatory paragraph is the cited context.
+            if page_hit and not context_page_done:
+                try:
+                    all_hit_quads = [q for phrase in phrases
+                                     for q in (page.search_for(phrase, quads=True) or [])]
+                    anchor_y = min(q.rect.y1 for q in all_hit_quads)
+                    context_quads = []
+                    for word in page.get_text('words'):
+                        x0, y0, x1, y1 = word[:4]
+                        if anchor_y - 1 <= y0 <= anchor_y + 150:
+                            context_quads.append(fitz.Rect(x0, y0, x1, y1))
+                    if context_quads:
+                        context_annot = page.add_highlight_annot(context_quads)
+                        context_annot.set_colors(stroke=(1, 0.84, 0.2))
+                        context_annot.update()
+                        total_hits += len(context_quads)
+                    context_page_done = True
+                except Exception:
+                    pass
             if page_hit:
                 if first_hit_page is None:
                     first_hit_page = page.number
@@ -2390,6 +2552,24 @@ def highlighted_pdf():
             # moved a couple of pages beyond the last match.
             elif last_hit_page is not None and page.number - last_hit_page > _HL_TAIL_PAGES:
                 break
+        if total_hits == 0 and fallback_terms:
+            # Search distinctive individual terms as a final OCR/paraphrase
+            # fallback. Highlighting a handful of matching terms is preferable
+            # to silently showing an unannotated PDF.
+            for page in doc:
+                term_quads = []
+                for term in fallback_terms:
+                    try:
+                        term_quads.extend(page.search_for(term, quads=True) or [])
+                    except Exception:
+                        continue
+                if term_quads:
+                    annot = page.add_highlight_annot(term_quads[:40])
+                    annot.set_colors(stroke=(1, 0.84, 0.2))
+                    annot.update()
+                    total_hits = len(term_quads[:40])
+                    first_hit_page = page.number
+                    break
         if total_hits == 0:
             return _serve_plain()
         out = doc.tobytes(garbage=3, deflate=True)
@@ -2418,12 +2598,7 @@ def home():
 @app.route('/api/stream', methods=['POST'])
 def stream_query():
     """Stream query response using SSE."""
-    if not RAG_AVAILABLE:
-        def err_gen():
-            yield f"data: {json.dumps({'type':'error','message':'RAG pipeline not available'})}\n\n"
-        return Response(stream_with_context(err_gen()), mimetype='text/event-stream')
-
-    data = request.get_json()
+    data = request.get_json() or {}
     query_text = data.get('query', '').strip()
     num_context = data.get('num_results', num_results)
     # Evaluation clients can opt out of shortcuts to measure retrieval quality.
@@ -2442,6 +2617,11 @@ def stream_query():
     if not query_text:
         def err_gen():
             yield f"data: {json.dumps({'type':'error','message':'Query cannot be empty'})}\n\n"
+        return Response(stream_with_context(err_gen()), mimetype='text/event-stream')
+
+    if not RAG_AVAILABLE:
+        def err_gen():
+            yield f"data: {json.dumps({'type':'error','message':'RAG pipeline not available'})}\n\n"
         return Response(stream_with_context(err_gen()), mimetype='text/event-stream')
 
     try:
@@ -2547,7 +2727,10 @@ def stream_query():
                 yield f"data: {json.dumps({'type':'status','message':f'Showing results for: {corrected_query}'})}\n\n"
             # 3) Resolve coreference ("tell me more about it" -> "...about EMD refund").
             sess = CONV_MEMORY.get_session(session_id)
-            effective_query, coref_applied = resolve_coreference(corrected_query, sess.last_topic)
+            previous_question = sess.turns[-1].query if sess.turns else ''
+            effective_query, coref_applied = resolve_coreference(
+                corrected_query, sess.last_topic, previous_question
+            )
             # 3b) Language-switch follow-up ("hindi me batao"): no new subject —
             #     re-answer the PREVIOUS question in the requested language instead
             #     of retrieving on the bare language word (which fetches junk).
@@ -2648,6 +2831,52 @@ def stream_query():
                 yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_two_bid_sources,'answer':_two_bid_answer,'diagnostics':bypass_diagnostics('direct_two_bid_cancellation'), **_routing_diagnostics})}\n\n"
                 return
 
+            # Exact CG Store Rules clauses (thresholds, certificates, timelines
+            # and tender actions) are source-backed deterministic answers.  This
+            # protects a statutory answer from a transient generation-provider
+            # failure after the verified State Rules corpus has been retrieved.
+            _cg_store_rule_answer = direct_cg_store_rule_answer(effective_query)
+            if _cg_store_rule_answer and not force_retrieval:
+                _cg_store_rule_sources = ['store purchase rule cg.pdf']
+                yield f"data: {json.dumps({'type':'status','message':'Using the verified Chhattisgarh Store Purchase Rules clause'})}\n\n"
+                yield bypass_context_event('direct_cg_store_rule_clause', _cg_store_rule_sources)
+                yield f"data: {json.dumps({'type':'token','content':_cg_store_rule_answer})}\n\n"
+                _cg_followups = suggest_followups(intent, query=effective_query)
+                if _cg_followups:
+                    yield f"data: {json.dumps({'type':'followups','items':_cg_followups})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _cg_store_rule_answer[:300])
+                ANSWER_CACHE.put(effective_query, _cg_store_rule_answer, _cg_store_rule_sources)
+                _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
+                                           'direct_cg_store_rule_clause': True,
+                                           'elapsed': round(time.time()-t0, 2)})
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_cg_store_rule_sources,'answer':_cg_store_rule_answer,'diagnostics':bypass_diagnostics('direct_cg_store_rule_clause'), **_routing_diagnostics})}\n\n"
+                return
+
+            _small_value_answer = direct_small_value_procurement_answer(effective_query)
+            # This is an audited GFR/GeMAR&PTS helper, not a substitute for the
+            # Chhattisgarh Store Purchase Rules.  Never let it bypass retrieval
+            # for a State-rule, rule-number, PAC, tender-publicity, timeline or
+            # other rule-specific question.
+            _central_rule_query = any(term in effective_query.casefold() for term in (
+                'gfr', 'gemar&pts', 'gemarpts', 'general financial rules',
+            ))
+            if _small_value_answer and _central_rule_query and not force_retrieval:
+                _small_value_sources = [
+                    'General Financial Rules',
+                    'Manual for Procurement of Goods 2024',
+                    'Chhattisgarh Store Purchase Rules',
+                ]
+                yield f"data: {json.dumps({'type':'status','message':'Using the applicable small-value procurement rules'})}\n\n"
+                yield bypass_context_event('direct_small_value_procurement', _small_value_sources)
+                yield f"data: {json.dumps({'type':'token','content':_small_value_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _small_value_answer[:300])
+                ANSWER_CACHE.put(effective_query, _small_value_answer, _small_value_sources)
+                _log_event(ANALYTICS_LOG, {'q': query_text, 'intent': intent,
+                                           'direct_small_value_procurement': True,
+                                           'elapsed': round(time.time()-t0, 2)})
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_small_value_sources,'answer':_small_value_answer,'diagnostics':bypass_diagnostics('direct_small_value_procurement'), **_routing_diagnostics})}\n\n"
+                return
+
             _methods_answer = direct_procurement_methods_overview_answer(effective_query)
             if _methods_answer and not force_retrieval:
                 _methods_sources = [
@@ -2669,9 +2898,20 @@ def stream_query():
             # 6) Answer cache: serve near-duplicate questions instantly. Skip when
             #    the query is personalised (has a name) or is a context-dependent
             #    follow-up, since those need a fresh, tailored answer.
+            # A verified laptop-workflow answer is language-specific.  Prefer
+            # its current rendering over an older cache entry, which may have
+            # been saved before language selection was corrected.
+            _laptop_answer = direct_department_laptop_planning_answer(effective_query)
             if (not force_retrieval and not evaluation_diagnostics
-                    and not coref_applied and not entities.get('persons')):
-                _cached = ANSWER_CACHE.get(effective_query)
+                    and not coref_applied and not entities.get('persons')
+                    and not _laptop_answer):
+                # Policy contracts are deliberately versioned by code.  Never
+                # replay an older cached response for one: it can preserve a
+                # refusal or an unsafe answer after a contract repair.
+                _cached = None if (
+                    fine_intent == 'procurement_methods_overview'
+                    or requires_deterministic_policy_answer(effective_query, fine_intent)
+                ) else ANSWER_CACHE.get(effective_query)
                 if _cached:
                     _cached_answer = normalize_vendor_registration_portal_name(
                         _cached['answer'], effective_query
@@ -2682,7 +2922,7 @@ def stream_query():
                     yield f"data: {json.dumps({'type':'status','message':'Instant answer (cached)'})}\n\n"
                     yield bypass_context_event('answer_cache', _cached['sources'])
                     yield f"data: {json.dumps({'type':'token','content':_cached_answer})}\n\n"
-                    _fu = suggest_followups(intent)
+                    _fu = suggest_followups(intent, query=effective_query)
                     if _fu:
                         yield f"data: {json.dumps({'type':'followups','items':_fu})}\n\n"
                     CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _cached_answer[:300])
@@ -2691,7 +2931,6 @@ def stream_query():
                     yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_cached['sources'],'answer':_cached_answer,'diagnostics':bypass_diagnostics('answer_cache', 'cache'), **_routing_diagnostics})}\n\n"
                     return
 
-            _laptop_answer = direct_department_laptop_planning_answer(effective_query)
             if _laptop_answer and not force_retrieval:
                 _laptop_sources = [
                     'Chhattisgarh Store Purchase Rules',
@@ -2917,6 +3156,31 @@ def stream_query():
                 char_budget=_packing_budget, per_chunk_cap=PER_CHUNK_CAP,
             )
             _context_packing_seconds = time.perf_counter() - _context_packing_started
+            _evidence_assessment = assess_final_context(
+                effective_query, fine_intent, _selected_context_results
+            )
+            if (tuple(_selected_context_results) != _evidence_assessment.usable_results
+                    and _evidence_assessment.usable_results):
+                context_text, source_refs, _selected_context_results = pack_context(
+                    list(_evidence_assessment.usable_results), _context_route, effective_query,
+                    strip_chunk_header,
+                    lambda src: _rag_module.get_actual_filename(src)
+                    if '_rag_module' in globals() else src,
+                    char_budget=_packing_budget, per_chunk_cap=PER_CHUNK_CAP,
+                )
+            _routing_diagnostics['evidence_gate'] = {
+                'evidence_present': _evidence_assessment.evidence_present,
+                'reason_code': _evidence_assessment.reason_code,
+                'excluded_sources': list(_evidence_assessment.excluded_sources),
+            }
+            if not _evidence_assessment.evidence_present:
+                _gap_answer = render_evidence_gap_answer(
+                    detect_query_language(query_text), query_text
+                )
+                yield f"data: {json.dumps({'type':'token','content':_gap_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _gap_answer[:300])
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':source_refs,'answer':_gap_answer,'diagnostics':{'provider':'evidence_gate','retrieval_skipped':False,'force_retrieval':force_retrieval,'fallback_reason_code':_evidence_assessment.reason_code}, **_routing_diagnostics})}\n\n"
+                return
             if (fine_intent == 'purchase_order'
                     and requires_deterministic_policy_answer(effective_query, fine_intent)):
                 # The direct answer is grounded in procurement/contract evidence;
@@ -2993,9 +3257,7 @@ def stream_query():
                 'ENABLE_MODEL_FALLBACK', 'true'
             ).strip().lower() in ('1', 'true', 'yes', 'on')
             SARVAM_MODEL = os.getenv('SARVAM_MODEL', 'sarvam-30b')
-            SARVAM_ONLY_MODE = ANSWER_PROVIDER == 'sarvam'
-            if SARVAM_ONLY_MODE:
-                MODEL_FALLBACK_ENABLED = False
+            SARVAM_ONLY_MODE = ANSWER_PROVIDER == 'sarvam' and not MODEL_FALLBACK_ENABLED
             # Sarvam is a remote 30B model: its prompt prefill and tail latency
             # are materially higher than the local Ollama path.  Keep the full
             # retrieved context for the UI and diagnostics, but send a bounded
@@ -3060,6 +3322,13 @@ def stream_query():
             # When a follow-up was coreference-resolved, give the LLM the resolved
             # (self-contained) question so it answers the right subject.
             _llm_question = effective_query if coref_applied else query_text
+            ollama_system += build_answer_synthesis_directive(
+                _llm_question,
+                actor,
+                fine_intent,
+                commodity,
+                route_for_intent(fine_intent).answer_structure,
+            ).directive
             _parts = _decompose_question(_llm_question)
             _hardness, _hardness_reasons = estimate_prompt_hardness(
                 _llm_question,
@@ -3187,7 +3456,7 @@ def stream_query():
                         )
                         for _k in range(0, len(_merged), 60):
                             yield f"data: {json.dumps({'type':'token','content':_merged[_k:_k+60]})}\n\n"
-                        _fu = suggest_followups(intent)
+                        _fu = suggest_followups(intent, query=effective_query)
                         if _fu:
                             yield f"data: {json.dumps({'type':'followups','items':_fu})}\n\n"
                         try:
@@ -3216,8 +3485,6 @@ def stream_query():
             FALLBACK_MODEL = _fallback_model_env or (
                 OLLAMA_MODEL if ANSWER_PROVIDER == 'sarvam' else 'llama3:8b'
             )
-            if SARVAM_ONLY_MODE:
-                FALLBACK_MODEL = ''
 
             # ── Deterministic lines injected after the answer heading (the LLM
             #    is too unreliable to format these): deadline urgency, numeric
@@ -3373,7 +3640,7 @@ def stream_query():
                                 state['sarvam_first_activity_elapsed'] = time.perf_counter() - _sarvam_started
                             if not state.get('sarvam_reasoning_notified'):
                                 state['sarvam_reasoning_notified'] = True
-                                yield f"data: {json.dumps({'type': 'status', 'message': 'Sarvam is preparing the answer…'})}\n\n"
+                                yield f"data: {json.dumps({'type': 'status', 'message': 'Preparing your answer…'})}\n\n"
                             elif state['sarvam_reasoning_chunks'] % 20 == 0:
                                 yield ': ping\n\n'
                         elif kind == 'error':
@@ -3392,7 +3659,7 @@ def stream_query():
                                     else str(value)
                                 )
                             else:
-                                yield f"data: {json.dumps({'type': 'error', 'message': f'Sarvam error: {value}'})}\n\n"
+                                    yield f"data: {json.dumps({'type': 'error', 'message': 'We could not complete the answer. Please try again.'})}\n\n"
                             return
                         elif kind == 'done':
                             if not state.get('content_streamed'):
@@ -3539,13 +3806,18 @@ def stream_query():
                 'fallback_used': False,
                 'fallback_model': FALLBACK_MODEL,
             }
-            yield f"data: {json.dumps({'type': 'status', 'message': f'Generating with {_primary_model}…'})}\n\n"
+            yield f"data: {json.dumps({'type': 'status', 'message': 'Preparing your answer…'})}\n\n"
             # Buffer buyer answers until their actor boundary is checked.  A
             # streamed bad token cannot be recalled from the browser.
             _buffer_for_actor_guard = actor == 'department_buyer'
+            _buffer_for_claim_guard = requires_buffered_claim_validation(
+                effective_query, fine_intent
+            )
+            _buffer_for_answer_guard = _buffer_for_actor_guard or _buffer_for_claim_guard
             _actor_guard_violations = ()
+            _claim_guard_violations = ()
             for sse in _stream_model(_primary_model, state):
-                if not _buffer_for_actor_guard:
+                if not _buffer_for_answer_guard:
                     yield sse
 
             # Transparent fallback to the lighter model when the primary either
@@ -3555,11 +3827,7 @@ def stream_query():
             # otherwise see nothing useful, so retry on llama3:8b before giving up.
             _primary_state = dict(state)
             if should_retry_with_fallback(state, MODEL_FALLBACK_ENABLED, FALLBACK_MODEL):
-                _fallback_status = (
-                    f'Sarvam timed out, switching to {FALLBACK_MODEL}...'
-                    if _primary_state.get('sarvam_timeout')
-                    else f'Switching to fallback model {FALLBACK_MODEL}...'
-                )
+                _fallback_status = 'Still working on your answer…'
                 yield f"data: {json.dumps({'type':'status','message':_fallback_status})}\n\n"
                 # Free the iGPU BEFORE falling back. gemma4:12b (~8GB) and the
                 # fallback model both resident on the Arc iGPU exhaust its VRAM,
@@ -3596,16 +3864,30 @@ def stream_query():
                     'sarvam_reasoning_chunks': _primary_state.get('sarvam_reasoning_chunks', 0),
                 }
                 for sse in _stream_model(FALLBACK_MODEL, state):
-                    if not _buffer_for_actor_guard:
+                    if not _buffer_for_answer_guard:
                         yield sse
 
             content_streamed = state['content_streamed']
 
-            if _buffer_for_actor_guard and content_streamed:
+            if _buffer_for_answer_guard and content_streamed:
                 _buffered_answer = ''.join(state.get('answer_buf', []))
-                _actor_guard_violations = actor_answer_violations(actor, _buffered_answer)
+                _actor_guard_violations = (
+                    actor_answer_violations(actor, _buffered_answer)
+                    if _buffer_for_actor_guard else ()
+                )
+                _claim_guard_violations = answer_claim_violations(
+                    effective_query, _buffered_answer, fine_intent
+                ) if _buffer_for_claim_guard else ()
                 if _actor_guard_violations:
                     _safe_answer = direct_department_laptop_planning_answer(effective_query)
+                    if (not _safe_answer
+                            and fine_intent == 'procurement_planning'
+                            and actor == 'department_buyer'
+                            and commodity != 'unspecified'):
+                        _safe_answer = render_department_purchase_answer(
+                            _lang, commodity=commodity, source_refs=tuple(source_refs),
+                            query=effective_query,
+                        )
                     if not _safe_answer:
                         _safe_answer = render_fine_intent_fallback(
                             build_fine_intent_fallback(
@@ -3618,6 +3900,28 @@ def stream_query():
                     state['deterministic_fallback'] = True
                     state['fallback_reason_code'] = 'actor_boundary_violation:' + ','.join(_actor_guard_violations)
                     state['response_provider'] = 'deterministic'
+                    yield f"data: {json.dumps({'type':'token','content':_safe_answer})}\n\n"
+                elif _claim_guard_violations:
+                    if fine_intent in ('payment_and_asset_entry', 'approval_and_budget', 'tender_method_definition'):
+                        _safe_answer = render_fine_intent_fallback(
+                            build_fine_intent_fallback(
+                                effective_query, actor, fine_intent, _lang, commodity,
+                                'Chhattisgarh', 'claim_validation_failed', tuple(source_refs),
+                            )
+                        )
+                    elif (fine_intent == 'procurement_planning'
+                          and actor == 'department_buyer'
+                          and commodity != 'unspecified'):
+                        _safe_answer = render_department_purchase_answer(
+                            _lang, commodity=commodity, source_refs=tuple(source_refs),
+                            query=effective_query,
+                        )
+                    else:
+                        _safe_answer = render_evidence_gap_answer(_lang, query_text)
+                    state['answer_buf'] = [_safe_answer]
+                    state['deterministic_fallback'] = True
+                    state['fallback_reason_code'] = 'claim_validation:' + ','.join(_claim_guard_violations)
+                    state['response_provider'] = 'evidence_gate'
                     yield f"data: {json.dumps({'type':'token','content':_safe_answer})}\n\n"
                 else:
                     yield f"data: {json.dumps({'type':'token','content':_buffered_answer})}\n\n"
@@ -3651,8 +3955,8 @@ def stream_query():
             if not content_streamed and SARVAM_ONLY_MODE:
                 _sarvam_only_message = {
                     'hi': 'à¤•à¥à¤·à¤®à¤¾ à¤•à¤°à¥‡à¤‚, Sarvam API à¤¸à¥‡ à¤‰à¤¤à¥à¤¤à¤° à¤®à¤¿à¤² à¤¨à¤¹à¥€à¤‚ à¤ªà¤¾à¤¯à¤¾à¥¤ à¤•à¥ƒà¤ªà¤¯à¤¾ à¤¥à¥‹à¤¡à¤¼à¥€ à¤¦à¥‡à¤° à¤¬à¤¾à¤¦ à¤«à¤¿à¤° à¤¸à¥‡ à¤ªà¥à¤°à¤¯à¤¾à¤¸ à¤•à¤°à¥‡à¤‚à¥¤',
-                    'hinglish': 'Sorry, Sarvam API se answer nahi mil paya. Please thodi der baad dobara try karein.',
-                    'en': 'Sorry, no answer was received from the Sarvam API. Please try again shortly.',
+                    'hinglish': 'Sorry, answer nahi mil paya. Please thodi der baad dobara try karein.',
+                    'en': 'Sorry, an answer was not available. Please try again shortly.',
                 }
                 yield f"data: {json.dumps({'type':'token','content':_sarvam_only_message.get(_lang, _sarvam_only_message['en'])})}\n\n"
                 content_streamed = True
@@ -3717,7 +4021,7 @@ def stream_query():
 
             # Suggested follow-up questions (clickable chips in the UI).
             try:
-                _fu = suggest_followups(intent)
+                _fu = suggest_followups(intent, query=effective_query)
                 if _fu and content_streamed:
                     yield f"data: {json.dumps({'type':'followups','items':_fu})}\n\n"
             except Exception:
@@ -3733,6 +4037,7 @@ def stream_query():
                 'primary_retrieval_seconds': round(_primary_retrieval_seconds, 3),
                 'context_packing_seconds': round(_context_packing_seconds, 3),
                 'actor_guard_violations': list(_actor_guard_violations),
+                'claim_guard_violations': list(_claim_guard_violations),
             })
 
             elapsed = f"{time.time()-t0:.2f}s"
