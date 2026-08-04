@@ -1,0 +1,252 @@
+[
+  {
+    "id": "GENERAL-01",
+    "role": "General User",
+    "query": "Hamare office ko naye laptops chahiye. Humein process kahan se start karna chahiye?"
+  },
+  {
+    "id": "GENERAL-02",
+    "role": "General User",
+    "query": "Government office mein saman kharidne ka normal process kya hota hai?"
+  },
+  {
+    "id": "GENERAL-03",
+    "role": "General User",
+    "query": "GeM aur e-Procurement portal mein difference kya hai?"
+  },
+  {
+    "id": "GENERAL-04",
+    "role": "General User",
+    "query": "Mujhe samajh nahi aa raha ki GeM use karun ya tender nikalu."
+  },
+  {
+    "id": "GENERAL-05",
+    "role": "General User",
+    "query": "Kya har government purchase tender se hi hoti hai?"
+  },
+  {
+    "id": "GENERAL-06",
+    "role": "General User",
+    "query": "Agar office ke liye furniture lena ho to kya procedure hota hai?"
+  },
+  {
+    "id": "GENERAL-07",
+    "role": "General User",
+    "query": "Single Tender ka matlab simple language mein batao."
+  },
+  {
+    "id": "GENERAL-08",
+    "role": "General User",
+    "query": "Limited Tender kab use karte hain?"
+  },
+  {
+    "id": "GENERAL-09",
+    "role": "General User",
+    "query": "Department ko office stationery kharidni ho to kya karna padega?"
+  },
+  {
+    "id": "GENERAL-10",
+    "role": "General User",
+    "query": "Chhattisgarh mein government procurement kaise hoti hai?"
+  },
+  {
+    "id": "BUYER-01",
+    "role": "Department Buyer",
+    "query": "Hamare department ko 40 desktops kharidne hain. Sabse pehle kya karein?"
+  },
+  {
+    "id": "BUYER-02",
+    "role": "Department Buyer",
+    "query": "Office ke liye printers lene hain. Tender karna padega ya GeM chalega?"
+  },
+  {
+    "id": "BUYER-03",
+    "role": "Department Buyer",
+    "query": "Agar GeM par laptop available hai to kya wahi se lena compulsory hai?"
+  },
+  {
+    "id": "BUYER-04",
+    "role": "Department Buyer",
+    "query": "Hamare office ko projector kharidna hai. Kaunsi procurement method sahi rahegi?"
+  },
+  {
+    "id": "BUYER-05",
+    "role": "Department Buyer",
+    "query": "Purchase start karne se pehle kis-kis se approval lena hota hai?"
+  },
+  {
+    "id": "BUYER-06",
+    "role": "Department Buyer",
+    "query": "Technical specification banate waqt kya dhyan rakhna chahiye?"
+  },
+  {
+    "id": "BUYER-07",
+    "role": "Department Buyer",
+    "query": "Kya hum specification mein HP ya Dell ka naam likh sakte hain?"
+  },
+  {
+    "id": "BUYER-08",
+    "role": "Department Buyer",
+    "query": "Budget approve ho gaya hai. Ab next step kya hai?"
+  },
+  {
+    "id": "BUYER-09",
+    "role": "Department Buyer",
+    "query": "Agar sirf ek vendor qualify kare to kya purchase ho sakti hai?"
+  },
+  {
+    "id": "BUYER-10",
+    "role": "Department Buyer",
+    "query": "Lowest price dene wale ko hi order dena padta hai kya?"
+  },
+  {
+    "id": "BUYER-11",
+    "role": "Department Buyer",
+    "query": "Purchase Order issue hone ke baad department ko kya karna hota hai?"
+  },
+  {
+    "id": "BUYER-12",
+    "role": "Department Buyer",
+    "query": "Vendor ne galat material deliver kar diya. Ab kya process rahega?"
+  },
+  {
+    "id": "BUYER-13",
+    "role": "Department Buyer",
+    "query": "Agar delivery late ho jaye to department kya action le sakta hai?"
+  },
+  {
+    "id": "BUYER-14",
+    "role": "Department Buyer",
+    "query": "Payment release karne se pehle kya verify karna hota hai?"
+  },
+  {
+    "id": "BUYER-15",
+    "role": "Department Buyer",
+    "query": "Office ke liye AC ka AMC karwana hai. Process kya rahega?"
+  },
+  {
+    "id": "VENDOR-01",
+    "role": "Vendor / Bidder",
+    "query": "Main pehli baar government tender mein participate kar raha hoon. Kahan se shuru karun?"
+  },
+  {
+    "id": "VENDOR-02",
+    "role": "Vendor / Bidder",
+    "query": "Vendor registration ka process kya hai?"
+  },
+  {
+    "id": "VENDOR-03",
+    "role": "Vendor / Bidder",
+    "query": "Registration ke liye kaun-kaun se documents chahiye?"
+  },
+  {
+    "id": "VENDOR-04",
+    "role": "Vendor / Bidder",
+    "query": "DSC map kaise karte hain?"
+  },
+  {
+    "id": "VENDOR-05",
+    "role": "Vendor / Bidder",
+    "query": "Bid submit karne ke baad usme changes kar sakte hain kya?"
+  },
+  {
+    "id": "VENDOR-06",
+    "role": "Vendor / Bidder",
+    "query": "Deadline nikal gayi hai. Kya ab bhi bid edit ho sakti hai?"
+  },
+  {
+    "id": "VENDOR-07",
+    "role": "Vendor / Bidder",
+    "query": "EMD ka payment kaise karna hota hai?"
+  },
+  {
+    "id": "VENDOR-08",
+    "role": "Vendor / Bidder",
+    "query": "Paisa account se kat gaya lekin EMD update nahi hua. Ab kya karun?"
+  },
+  {
+    "id": "VENDOR-09",
+    "role": "Vendor / Bidder",
+    "query": "Agar meri bid reject ho gayi to EMD kab wapas milegi?"
+  },
+  {
+    "id": "VENDOR-10",
+    "role": "Vendor / Bidder",
+    "query": "Corrigendum aaya hai ya nahi, kaise pata chalega?"
+  },
+  {
+    "id": "VENDOR-11",
+    "role": "Vendor / Bidder",
+    "query": "Reverse auction mein participate kaise karte hain?"
+  },
+  {
+    "id": "VENDOR-12",
+    "role": "Vendor / Bidder",
+    "query": "Financial bid kab open hoti hai?"
+  },
+  {
+    "id": "VENDOR-13",
+    "role": "Vendor / Bidder",
+    "query": "Startup company hoon. Kya government tender mein participate kar sakta hoon?"
+  },
+  {
+    "id": "VENDOR-14",
+    "role": "Vendor / Bidder",
+    "query": "Foreign company bhi Chhattisgarh tender mein participate kar sakti hai kya?"
+  },
+  {
+    "id": "VENDOR-15",
+    "role": "Vendor / Bidder",
+    "query": "Bid submit karne ke baad acknowledgement kahan milega?"
+  },
+  {
+    "id": "OPERATOR-01",
+    "role": "Department Operator",
+    "query": "Naya tender create karna hai. Process batao."
+  },
+  {
+    "id": "OPERATOR-02",
+    "role": "Department Operator",
+    "query": "Tender publish kaise karte hain portal par?"
+  },
+  {
+    "id": "OPERATOR-03",
+    "role": "Department Operator",
+    "query": "Tender ki last date badhani ho to kya karna padega?"
+  },
+  {
+    "id": "OPERATOR-04",
+    "role": "Department Operator",
+    "query": "Corrigendum issue karne ka process kya hai?"
+  },
+  {
+    "id": "OPERATOR-05",
+    "role": "Department Operator",
+    "query": "Technical bids open kaise karte hain?"
+  },
+  {
+    "id": "OPERATOR-06",
+    "role": "Department Operator",
+    "query": "Financial bids kab open karni chahiye?"
+  },
+  {
+    "id": "OPERATOR-07",
+    "role": "Department Operator",
+    "query": "Bid evaluation report generate kaise karte hain?"
+  },
+  {
+    "id": "OPERATOR-08",
+    "role": "Department Operator",
+    "query": "EMD refund initiate kaise karte hain department side se?"
+  },
+  {
+    "id": "OPERATOR-09",
+    "role": "Department Operator",
+    "query": "Offline tender upload karna ho to kya process hai?"
+  },
+  {
+    "id": "OPERATOR-10",
+    "role": "Department Operator",
+    "query": "Tender publish hone ke baad koi mistake mil jaye to kya karna chahiye?"
+  }
+]

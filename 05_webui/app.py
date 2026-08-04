@@ -64,6 +64,10 @@ from fine_intent_policy import (
     canonical_source_contract_sources,
 )
 from cg_store_rule_answers import direct_cg_store_rule_answer
+from answer_synthesis import build_answer_synthesis_directive
+from answer_evidence_guard import assess_final_context, render_evidence_gap_answer
+from answer_claim_guard import requires_buffered_claim_validation, answer_claim_violations
+from purchase_workflow import render_department_purchase_answer
 
 # Dynamically find RAG pipeline module - works for both local and Docker
 def _find_rag_module():
@@ -366,13 +370,13 @@ DOCUMENT NAMES — NEVER show raw filenames. Always use these friendly names:
 For any other file, create a clean readable title (no extension, no hash digits).
 
 RESPONSE STRUCTURE:
-Write a direct, conversational, and natural response as a helpful AI assistant. Do NOT use rigid headers like "💡 Answer", "📋 Process", "Rule/Provision:", or "Explanation:".
-Instead, structure the answer fluidly:
-1. Start with a direct, friendly answer to the user's question.
-2. If there are steps or a process, list them naturally using bullet points or numbers.
-3. If quoting a rule or provision, integrate it naturally into your explanation.
-4. If a comparison or list is requested, use a Markdown table seamlessly within your text.
-5. AT THE VERY END, you must always provide the source citation on a new line formatted exactly as:
+Write a direct, conversational, and natural response as a helpful AI assistant.
+Use a lightweight structure: start with "💡 Answer"; use "📋 Process" or
+"📋 Decision checklist" only when actionable steps are useful; use
+"⚠ Important points" only for source-supported conditions or exceptions.
+If a comparison is requested, begin with a filled Markdown table before the
+short conclusion. Do not repeat the same content across sections.
+AT THE VERY END, you must always provide the source citation on a new line formatted exactly as:
    "📘 Source: [Friendly Document Name]"
    (or "📘 स्रोत: [Friendly Document Name]" if responding in Hindi).
 
@@ -466,7 +470,10 @@ def direct_department_laptop_planning_answer(query):
     # registration just because the word "process" is present.
     if not (has_laptop and asks_workflow and (has_department or has_purchase)) or has_explicit_vendor_role:
         return None
-    if any(term in q for term in ('mujhe', 'kharid', 'khareed', 'kaise', 'batao', 'bataye')):
+    # Use the shared language detector rather than a small set of workflow
+    # keywords.  For example, "Hamare office ko naye laptops chahiye" is
+    # Hinglish but contains neither "kharid" nor "batao".
+    if detect_query_language(query) == 'hinglish':
         return (
             "💡 Answer\n"
             "Laptop/computer ki department purchase mein pehle consolidated requirement, quantity, users, purpose, delivery timeline, estimated value aur budget head record karein. "
@@ -2168,13 +2175,6 @@ def query():
     """Process a query"""
     query_start_time = time.time()
     
-    if not RAG_AVAILABLE:
-        return jsonify({
-            'success': False,
-            'error': 'RAG pipeline not available. Check imports and configuration.',
-            'query': ''
-        }), 503
-    
     data = request.get_json()
     query_text = data.get('query', '').strip()
     num_context = data.get('num_results', num_results)
@@ -2185,6 +2185,13 @@ def query():
             'error': 'Query cannot be empty',
             'query': ''
         }), 400
+
+    if not RAG_AVAILABLE:
+        return jsonify({
+            'success': False,
+            'error': 'RAG pipeline not available. Check imports and configuration.',
+            'query': ''
+        }), 503
 
     # Profanity / abuse filter — refuse outright, no retrieval or sources.
     if contains_profanity(query_text):
@@ -2591,12 +2598,7 @@ def home():
 @app.route('/api/stream', methods=['POST'])
 def stream_query():
     """Stream query response using SSE."""
-    if not RAG_AVAILABLE:
-        def err_gen():
-            yield f"data: {json.dumps({'type':'error','message':'RAG pipeline not available'})}\n\n"
-        return Response(stream_with_context(err_gen()), mimetype='text/event-stream')
-
-    data = request.get_json()
+    data = request.get_json() or {}
     query_text = data.get('query', '').strip()
     num_context = data.get('num_results', num_results)
     # Evaluation clients can opt out of shortcuts to measure retrieval quality.
@@ -2615,6 +2617,11 @@ def stream_query():
     if not query_text:
         def err_gen():
             yield f"data: {json.dumps({'type':'error','message':'Query cannot be empty'})}\n\n"
+        return Response(stream_with_context(err_gen()), mimetype='text/event-stream')
+
+    if not RAG_AVAILABLE:
+        def err_gen():
+            yield f"data: {json.dumps({'type':'error','message':'RAG pipeline not available'})}\n\n"
         return Response(stream_with_context(err_gen()), mimetype='text/event-stream')
 
     try:
@@ -2891,9 +2898,20 @@ def stream_query():
             # 6) Answer cache: serve near-duplicate questions instantly. Skip when
             #    the query is personalised (has a name) or is a context-dependent
             #    follow-up, since those need a fresh, tailored answer.
+            # A verified laptop-workflow answer is language-specific.  Prefer
+            # its current rendering over an older cache entry, which may have
+            # been saved before language selection was corrected.
+            _laptop_answer = direct_department_laptop_planning_answer(effective_query)
             if (not force_retrieval and not evaluation_diagnostics
-                    and not coref_applied and not entities.get('persons')):
-                _cached = ANSWER_CACHE.get(effective_query)
+                    and not coref_applied and not entities.get('persons')
+                    and not _laptop_answer):
+                # Policy contracts are deliberately versioned by code.  Never
+                # replay an older cached response for one: it can preserve a
+                # refusal or an unsafe answer after a contract repair.
+                _cached = None if (
+                    fine_intent == 'procurement_methods_overview'
+                    or requires_deterministic_policy_answer(effective_query, fine_intent)
+                ) else ANSWER_CACHE.get(effective_query)
                 if _cached:
                     _cached_answer = normalize_vendor_registration_portal_name(
                         _cached['answer'], effective_query
@@ -2913,7 +2931,6 @@ def stream_query():
                     yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_cached['sources'],'answer':_cached_answer,'diagnostics':bypass_diagnostics('answer_cache', 'cache'), **_routing_diagnostics})}\n\n"
                     return
 
-            _laptop_answer = direct_department_laptop_planning_answer(effective_query)
             if _laptop_answer and not force_retrieval:
                 _laptop_sources = [
                     'Chhattisgarh Store Purchase Rules',
@@ -3139,6 +3156,31 @@ def stream_query():
                 char_budget=_packing_budget, per_chunk_cap=PER_CHUNK_CAP,
             )
             _context_packing_seconds = time.perf_counter() - _context_packing_started
+            _evidence_assessment = assess_final_context(
+                effective_query, fine_intent, _selected_context_results
+            )
+            if (tuple(_selected_context_results) != _evidence_assessment.usable_results
+                    and _evidence_assessment.usable_results):
+                context_text, source_refs, _selected_context_results = pack_context(
+                    list(_evidence_assessment.usable_results), _context_route, effective_query,
+                    strip_chunk_header,
+                    lambda src: _rag_module.get_actual_filename(src)
+                    if '_rag_module' in globals() else src,
+                    char_budget=_packing_budget, per_chunk_cap=PER_CHUNK_CAP,
+                )
+            _routing_diagnostics['evidence_gate'] = {
+                'evidence_present': _evidence_assessment.evidence_present,
+                'reason_code': _evidence_assessment.reason_code,
+                'excluded_sources': list(_evidence_assessment.excluded_sources),
+            }
+            if not _evidence_assessment.evidence_present:
+                _gap_answer = render_evidence_gap_answer(
+                    detect_query_language(query_text), query_text
+                )
+                yield f"data: {json.dumps({'type':'token','content':_gap_answer})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _gap_answer[:300])
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':source_refs,'answer':_gap_answer,'diagnostics':{'provider':'evidence_gate','retrieval_skipped':False,'force_retrieval':force_retrieval,'fallback_reason_code':_evidence_assessment.reason_code}, **_routing_diagnostics})}\n\n"
+                return
             if (fine_intent == 'purchase_order'
                     and requires_deterministic_policy_answer(effective_query, fine_intent)):
                 # The direct answer is grounded in procurement/contract evidence;
@@ -3215,9 +3257,7 @@ def stream_query():
                 'ENABLE_MODEL_FALLBACK', 'true'
             ).strip().lower() in ('1', 'true', 'yes', 'on')
             SARVAM_MODEL = os.getenv('SARVAM_MODEL', 'sarvam-30b')
-            SARVAM_ONLY_MODE = ANSWER_PROVIDER == 'sarvam'
-            if SARVAM_ONLY_MODE:
-                MODEL_FALLBACK_ENABLED = False
+            SARVAM_ONLY_MODE = ANSWER_PROVIDER == 'sarvam' and not MODEL_FALLBACK_ENABLED
             # Sarvam is a remote 30B model: its prompt prefill and tail latency
             # are materially higher than the local Ollama path.  Keep the full
             # retrieved context for the UI and diagnostics, but send a bounded
@@ -3282,6 +3322,13 @@ def stream_query():
             # When a follow-up was coreference-resolved, give the LLM the resolved
             # (self-contained) question so it answers the right subject.
             _llm_question = effective_query if coref_applied else query_text
+            ollama_system += build_answer_synthesis_directive(
+                _llm_question,
+                actor,
+                fine_intent,
+                commodity,
+                route_for_intent(fine_intent).answer_structure,
+            ).directive
             _parts = _decompose_question(_llm_question)
             _hardness, _hardness_reasons = estimate_prompt_hardness(
                 _llm_question,
@@ -3438,8 +3485,6 @@ def stream_query():
             FALLBACK_MODEL = _fallback_model_env or (
                 OLLAMA_MODEL if ANSWER_PROVIDER == 'sarvam' else 'llama3:8b'
             )
-            if SARVAM_ONLY_MODE:
-                FALLBACK_MODEL = ''
 
             # ── Deterministic lines injected after the answer heading (the LLM
             #    is too unreliable to format these): deadline urgency, numeric
@@ -3595,7 +3640,7 @@ def stream_query():
                                 state['sarvam_first_activity_elapsed'] = time.perf_counter() - _sarvam_started
                             if not state.get('sarvam_reasoning_notified'):
                                 state['sarvam_reasoning_notified'] = True
-                                yield f"data: {json.dumps({'type': 'status', 'message': 'Sarvam is preparing the answer…'})}\n\n"
+                                yield f"data: {json.dumps({'type': 'status', 'message': 'Preparing your answer…'})}\n\n"
                             elif state['sarvam_reasoning_chunks'] % 20 == 0:
                                 yield ': ping\n\n'
                         elif kind == 'error':
@@ -3614,7 +3659,7 @@ def stream_query():
                                     else str(value)
                                 )
                             else:
-                                yield f"data: {json.dumps({'type': 'error', 'message': f'Sarvam error: {value}'})}\n\n"
+                                    yield f"data: {json.dumps({'type': 'error', 'message': 'We could not complete the answer. Please try again.'})}\n\n"
                             return
                         elif kind == 'done':
                             if not state.get('content_streamed'):
@@ -3761,13 +3806,18 @@ def stream_query():
                 'fallback_used': False,
                 'fallback_model': FALLBACK_MODEL,
             }
-            yield f"data: {json.dumps({'type': 'status', 'message': f'Generating with {_primary_model}…'})}\n\n"
+            yield f"data: {json.dumps({'type': 'status', 'message': 'Preparing your answer…'})}\n\n"
             # Buffer buyer answers until their actor boundary is checked.  A
             # streamed bad token cannot be recalled from the browser.
             _buffer_for_actor_guard = actor == 'department_buyer'
+            _buffer_for_claim_guard = requires_buffered_claim_validation(
+                effective_query, fine_intent
+            )
+            _buffer_for_answer_guard = _buffer_for_actor_guard or _buffer_for_claim_guard
             _actor_guard_violations = ()
+            _claim_guard_violations = ()
             for sse in _stream_model(_primary_model, state):
-                if not _buffer_for_actor_guard:
+                if not _buffer_for_answer_guard:
                     yield sse
 
             # Transparent fallback to the lighter model when the primary either
@@ -3777,11 +3827,7 @@ def stream_query():
             # otherwise see nothing useful, so retry on llama3:8b before giving up.
             _primary_state = dict(state)
             if should_retry_with_fallback(state, MODEL_FALLBACK_ENABLED, FALLBACK_MODEL):
-                _fallback_status = (
-                    f'Sarvam timed out, switching to {FALLBACK_MODEL}...'
-                    if _primary_state.get('sarvam_timeout')
-                    else f'Switching to fallback model {FALLBACK_MODEL}...'
-                )
+                _fallback_status = 'Still working on your answer…'
                 yield f"data: {json.dumps({'type':'status','message':_fallback_status})}\n\n"
                 # Free the iGPU BEFORE falling back. gemma4:12b (~8GB) and the
                 # fallback model both resident on the Arc iGPU exhaust its VRAM,
@@ -3818,16 +3864,30 @@ def stream_query():
                     'sarvam_reasoning_chunks': _primary_state.get('sarvam_reasoning_chunks', 0),
                 }
                 for sse in _stream_model(FALLBACK_MODEL, state):
-                    if not _buffer_for_actor_guard:
+                    if not _buffer_for_answer_guard:
                         yield sse
 
             content_streamed = state['content_streamed']
 
-            if _buffer_for_actor_guard and content_streamed:
+            if _buffer_for_answer_guard and content_streamed:
                 _buffered_answer = ''.join(state.get('answer_buf', []))
-                _actor_guard_violations = actor_answer_violations(actor, _buffered_answer)
+                _actor_guard_violations = (
+                    actor_answer_violations(actor, _buffered_answer)
+                    if _buffer_for_actor_guard else ()
+                )
+                _claim_guard_violations = answer_claim_violations(
+                    effective_query, _buffered_answer, fine_intent
+                ) if _buffer_for_claim_guard else ()
                 if _actor_guard_violations:
                     _safe_answer = direct_department_laptop_planning_answer(effective_query)
+                    if (not _safe_answer
+                            and fine_intent == 'procurement_planning'
+                            and actor == 'department_buyer'
+                            and commodity != 'unspecified'):
+                        _safe_answer = render_department_purchase_answer(
+                            _lang, commodity=commodity, source_refs=tuple(source_refs),
+                            query=effective_query,
+                        )
                     if not _safe_answer:
                         _safe_answer = render_fine_intent_fallback(
                             build_fine_intent_fallback(
@@ -3840,6 +3900,28 @@ def stream_query():
                     state['deterministic_fallback'] = True
                     state['fallback_reason_code'] = 'actor_boundary_violation:' + ','.join(_actor_guard_violations)
                     state['response_provider'] = 'deterministic'
+                    yield f"data: {json.dumps({'type':'token','content':_safe_answer})}\n\n"
+                elif _claim_guard_violations:
+                    if fine_intent in ('payment_and_asset_entry', 'approval_and_budget', 'tender_method_definition'):
+                        _safe_answer = render_fine_intent_fallback(
+                            build_fine_intent_fallback(
+                                effective_query, actor, fine_intent, _lang, commodity,
+                                'Chhattisgarh', 'claim_validation_failed', tuple(source_refs),
+                            )
+                        )
+                    elif (fine_intent == 'procurement_planning'
+                          and actor == 'department_buyer'
+                          and commodity != 'unspecified'):
+                        _safe_answer = render_department_purchase_answer(
+                            _lang, commodity=commodity, source_refs=tuple(source_refs),
+                            query=effective_query,
+                        )
+                    else:
+                        _safe_answer = render_evidence_gap_answer(_lang, query_text)
+                    state['answer_buf'] = [_safe_answer]
+                    state['deterministic_fallback'] = True
+                    state['fallback_reason_code'] = 'claim_validation:' + ','.join(_claim_guard_violations)
+                    state['response_provider'] = 'evidence_gate'
                     yield f"data: {json.dumps({'type':'token','content':_safe_answer})}\n\n"
                 else:
                     yield f"data: {json.dumps({'type':'token','content':_buffered_answer})}\n\n"
@@ -3873,8 +3955,8 @@ def stream_query():
             if not content_streamed and SARVAM_ONLY_MODE:
                 _sarvam_only_message = {
                     'hi': 'à¤•à¥à¤·à¤®à¤¾ à¤•à¤°à¥‡à¤‚, Sarvam API à¤¸à¥‡ à¤‰à¤¤à¥à¤¤à¤° à¤®à¤¿à¤² à¤¨à¤¹à¥€à¤‚ à¤ªà¤¾à¤¯à¤¾à¥¤ à¤•à¥ƒà¤ªà¤¯à¤¾ à¤¥à¥‹à¤¡à¤¼à¥€ à¤¦à¥‡à¤° à¤¬à¤¾à¤¦ à¤«à¤¿à¤° à¤¸à¥‡ à¤ªà¥à¤°à¤¯à¤¾à¤¸ à¤•à¤°à¥‡à¤‚à¥¤',
-                    'hinglish': 'Sorry, Sarvam API se answer nahi mil paya. Please thodi der baad dobara try karein.',
-                    'en': 'Sorry, no answer was received from the Sarvam API. Please try again shortly.',
+                    'hinglish': 'Sorry, answer nahi mil paya. Please thodi der baad dobara try karein.',
+                    'en': 'Sorry, an answer was not available. Please try again shortly.',
                 }
                 yield f"data: {json.dumps({'type':'token','content':_sarvam_only_message.get(_lang, _sarvam_only_message['en'])})}\n\n"
                 content_streamed = True
@@ -3955,6 +4037,7 @@ def stream_query():
                 'primary_retrieval_seconds': round(_primary_retrieval_seconds, 3),
                 'context_packing_seconds': round(_context_packing_seconds, 3),
                 'actor_guard_violations': list(_actor_guard_violations),
+                'claim_guard_violations': list(_claim_guard_violations),
             })
 
             elapsed = f"{time.time()-t0:.2f}s"

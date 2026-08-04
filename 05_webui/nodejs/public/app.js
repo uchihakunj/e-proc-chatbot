@@ -243,7 +243,7 @@ const api = {
   // blob plus the 1-based page of the first highlight (from a response header)
   // so the viewer can jump straight to it. Falls back to a plain blob server-side.
   async fetchPdfHighlighted(filename, snippet) {
-    const res = await fetch('/e-proc/api/highlighted_pdf', {
+    const res = await fetch('/api/highlighted_pdf', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.token()}` },
       body: JSON.stringify({ filename, snippet }),
@@ -257,11 +257,11 @@ const api = {
 
   login:    (u, p) => api._request('POST', '/auth/login', { username: u, password: p }, false),
   logout:   ()     => api._request('POST', '/auth/logout', undefined, false),
-  health:   ()     => api._request('GET',  '/e-proc/api/health'),
-  init:     ()     => api._request('POST', '/e-proc/api/init'),
-  dbStatus: ()     => api._request('GET',  '/e-proc/api/db-status'),
-  settings: (body) => api._request(body ? 'POST' : 'GET', '/e-proc/api/settings', body),
-  query:    (q, n) => api._request('POST', '/e-proc/api/query', { query: q, num_results: n }),
+  health:   ()     => api._request('GET',  '/api/health'),
+  init:     ()     => api._request('POST', '/api/init'),
+  dbStatus: ()     => api._request('GET',  '/api/db-status'),
+  settings: (body) => api._request(body ? 'POST' : 'GET', '/api/settings', body),
+  query:    (q, n) => api._request('POST', '/api/query', { query: q, num_results: n }),
 };
 
 // ── Markdown-lite renderer ────────────────────────────────────────────────
@@ -1447,7 +1447,7 @@ function addAnswerActions(container, question, answer, sources) {
     up.disabled = true; down.disabled = true;
     btn.classList.add('fb-active');
     try {
-      await fetch('/e-proc/api/feedback', {
+      await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rating, query: question, answer,
@@ -1684,7 +1684,7 @@ async function sendQuery() {
     state.abortController = controller;
     showStopBtn();
 
-    const response = await fetch('/e-proc/api/stream', {
+    const response = await fetch('/api/stream', {
       method: 'POST', headers, signal: controller.signal,
       body: JSON.stringify({ query: queryPayload, num_results: numCtx, session_id: state.conversationId }),
     });
@@ -2067,6 +2067,31 @@ function loadExamples() {
   });
 }
 
+const ROLE_STARTER_QUESTIONS = {
+  buyer: ['Our office needs laptops. What should we do first?', 'Can we purchase through GeM?', "Budget approved. What's next?"],
+  vendor: ['How do I register as a vendor?', 'How do I pay EMD?', 'How do I submit a bid?'],
+  operator: ['How do I create a tender on the portal?', 'How do I publish a tender?', 'How do I issue a corrigendum?'],
+  general: ['What are the different procurement methods?', 'What is the difference between GeM and e-Procurement?', 'What is Limited Tender?'],
+};
+
+function showRoleStarters(role) {
+  const questions = ROLE_STARTER_QUESTIONS[role];
+  if (!questions || !ui.exampleList) return;
+  ui.exampleList.innerHTML = '';
+  const label = document.getElementById('role-example-label');
+  const names = { buyer: 'Department Buyer', vendor: 'Vendor/Bidder', operator: 'Department Operator', general: 'General Information' };
+  if (label) label.textContent = `${names[role]} starter questions`;
+  questions.forEach(question => {
+    const btn = document.createElement('button');
+    btn.className = 'example-quick-item'; btn.type = 'button'; btn.textContent = question;
+    btn.addEventListener('click', () => {
+      ui.queryInput.value = question; autoResize();
+      if (ui.btnSend && !ui.btnSend.disabled) sendQuery(); else ui.queryInput.focus();
+    });
+    ui.exampleList.appendChild(btn);
+  });
+}
+
 // ── Settings sync ─────────────────────────────────────────────────────────
 async function pushSettings() {
   await api.settings({ num_results: parseInt(ui.numResults.value, 10) }).catch(() => {});
@@ -2106,6 +2131,9 @@ async function bootRagUI() {
   }, 1000);
 
   loadExamples();
+  document.querySelectorAll('.role-start-card').forEach(card => {
+    card.addEventListener('click', () => showRoleStarters(card.dataset.role));
+  });
 
   try {
     const { ok, data } = await api.health();

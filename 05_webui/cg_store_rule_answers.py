@@ -27,7 +27,9 @@ def direct_cg_store_rule_answer(query: str) -> str | None:
         return (
             "Agar CG Store Purchase Rules ke context mein tender value Rs. 3 lakh se kam hai, to value-band ke hisaab se route choose karein:\n\n"
             "- **Rs. 50,001 se Rs. 3,00,000 tak:** Rule 4.3.2 ka **Limited Tender** use hota hai. Kam se kam 3 manufacturers, authorised representatives, ya registered manufacturers ko invite karein.\n"
-            "- **Rs. 50,000 tak:** Rule 4.3.1 ke permitted **Single Tender** exceptions hi apply honge, jaise proprietary item, emergency, ya compatibility/standardisation; reasons, PAC/technical advice aur competent approval jahan prescribed ho, record karein.\n"
+            "- **Rs. 50,000 se neeche:** Limited Tender automatically required nahi hai. Do checks karein:\n"
+            "  1. Item GeM par available ho to Rule 3.1.1 ki prescribed GeM process follow karein.\n"
+            "  2. GeM par available na ho to Rule 4.3.1 ke permitted **Single Tender/direct-purchase** exceptions hi use karein—jaise proprietary item, emergency, ya compatibility/standardisation—and reasons, PAC/technical advice aur competent approval jahan prescribed ho, record karein.\n"
             "- **GeM par item available ho:** pehle Rule 3.1.1 ke mutabik GeM ki prescribed process follow karein; sirf amount dekhkar tender route na choose karein.\n\n"
             "Ek hi requirement ko threshold avoid karne ke liye chhote orders mein split nahi karna chahiye.\n\n"
             "Source: Chhattisgarh Store Purchase Rules — Rules 3.1.1, 4.3.1 and 4.3.2."

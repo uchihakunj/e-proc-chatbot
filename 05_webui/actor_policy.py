@@ -98,6 +98,11 @@ _IMPLICIT_VENDOR_OPERATION_SIGNALS = (
     "bid deadline ke baad", "bid edit kar", "edit my bid", "modify my bid",
     "modify bid after", "financial bid kaise submit", "technical bid submit ho",
     "bidders ko kya karna", "bidder ko kya karna", "after corrigendum bidders",
+    # A follow-up asking what to do after a corrigendum is ordinarily a bidder
+    # action request unless it names a department-side action such as issue,
+    # upload or extend.  Without this cue it fell through to a generic policy
+    # answer and instructed the department instead of the bidder.
+    "corrigendum aane ke baad", "corrigendum ke baad kya karna",
     "foreign company tender mein participate", "foreign company participate in tender",
     # Human-style benchmark: role is implied by a portal action rather than a
     # self-description such as "I am a vendor".
@@ -203,6 +208,8 @@ _PURCHASE_PROCESS_SIGNALS = (
 _BUYER_LIFECYCLE_SIGNALS = (
     "purchase order issue", "asset register entry", "payment and asset",
     "budget and administrative approval", "inspection and acceptance",
+    "budget approve ho gaya", "budget approved", "budget approval ho gaya",
+    "payment release", "payment release se pehle",
     "विभागीय खरीद", "प्रशासनिक स्वीकृति", "क्रय आदेश",
     "निरीक्षण और स्वीकृति", "संपत्ति रजिस्टर", "स्टॉक और संपत्ति",
 )
@@ -243,6 +250,9 @@ _IMPLICIT_BUYER_OPERATION_SIGNALS = (
     "tie-breaker", "financial bids", "work order", "purchase order amended",
     "purchase order be amended", "order amended after it has been signed",
     "bank guarantee", "liquidated damages", "delivery delay penalty",
+    # In this procurement assistant, an unqualified request for an urgent
+    # purchase route is a department-side method decision, not a definition.
+    "urgent purchase", "urgent procurement", "fastest lawful option",
 )
 
 _PERSONAL_SIGNALS = (

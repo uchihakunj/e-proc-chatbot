@@ -1,0 +1,4 @@
+pages=29
+characters=47635
+devanagari_characters=34167
+rule_heading_matches=77

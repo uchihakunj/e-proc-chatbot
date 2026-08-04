@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/e-proc/style.css" />
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
 
@@ -220,7 +220,13 @@
           <div id="chat-empty" class="chat-empty">
             <div class="welcome-icon">&#128075;</div>
             <h3 class="welcome-title">Welcome to the eProcurement Assistant</h3>
-            <p class="welcome-intro">Your AI guide to Chhattisgarh Government procurement — tenders, bids, EMD, vendor registration and the GFR rules. Ask in <strong>Hindi, English or Hinglish</strong>; every answer cites its source manual.</p>
+            <p class="welcome-intro">Your AI assistant for Government Procurement</p>
+            <div class="role-starts" aria-label="Choose a starting point">
+              <button class="role-start-card" type="button" data-role="buyer"><span class="role-start-icon" aria-hidden="true">🏢</span><span><strong>Department Buyer</strong><small>Plan and purchase</small></span></button>
+              <button class="role-start-card" type="button" data-role="vendor"><span class="role-start-icon" aria-hidden="true">👤</span><span><strong>Vendor/Bidder</strong><small>Register and bid</small></span></button>
+              <button class="role-start-card" type="button" data-role="operator"><span class="role-start-icon" aria-hidden="true">⚙</span><span><strong>Department Operator</strong><small>Manage tenders</small></span></button>
+              <button class="role-start-card" type="button" data-role="general"><span class="role-start-icon" aria-hidden="true">📚</span><span><strong>General Information</strong><small>Understand the rules</small></span></button>
+            </div>
             <div class="welcome-caps">
               <span class="cap-chip">Tenders &amp; Bids</span>
               <span class="cap-chip">Vendor Registration</span>
@@ -229,6 +235,7 @@
               <span class="cap-chip">Auctions</span>
             </div>
             <div class="suggest-label">Try asking</div>
+            <div id="role-example-label" class="role-example-label" aria-live="polite"></div>
             <div class="example-quick-list" id="example-list"></div>
           </div>
           <div id="chat-messages"></div>
@@ -244,7 +251,7 @@
           </div>
           <div id="query-wrap">
             <textarea id="query-input" rows="1"
-              placeholder="Ask about tenders, vendors, EMD…"
+              placeholder="Ask your procurement question..."
               spellcheck="false"></textarea>
             <button id="btn-mic" title="Speak your question (voice)">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -348,12 +355,12 @@
   <div style="display:none">
     <span id="stat-docs">—</span>
     <span id="stat-session">—</span>
-    <span id="stat-model">sarvam-105b</span>
+    <span id="stat-model">Assistant</span>
     <!-- app-shell kept hidden so existing showApp/showLogin still reference it -->
     <div id="app-shell"></div>
     <div id="login-screen"></div>
   </div>
 
-  <script type="module" src="/e-proc/app.js?v=source-click-fix-6"></script>
+  <script type="module" src="/app.js?v=ux-status-7"></script>
 </body>
 </html>

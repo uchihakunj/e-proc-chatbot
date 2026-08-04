@@ -231,10 +231,14 @@ def detect_commodity(query: str) -> str:
         return "laptops_computers_it_equipment"
     if any(s in q for s in ("server", "router", "network equipment", "it equipment")):
         return "it_equipment"
+    if "projector" in q:
+        return "projector"
     if any(s in q for s in ("printer", "scanner", "multifunction printer", "mfp")):
         return "printers_office_equipment"
     if any(s in q for s in ("furniture", "chair", "chairs", "desk", "table", "kursi", "kursiyan", "फर्नीचर", "कुर्सी")):
         return "furniture"
+    if any(s in q for s in ("stationery", "stationary", "office supplies", "office supply")):
+        return "stationery_office_supplies"
     if any(s in q for s in ("vehicle", "car", "jeep", "वाहन")):
         return "vehicle"
     if any(s in q for s in ("software", "licence", "license", "सॉफ्टवेयर")):

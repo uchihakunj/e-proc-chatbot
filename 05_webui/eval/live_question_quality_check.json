@@ -1,0 +1,981 @@
+[
+  {
+    "id": "Q01",
+    "question": "Our office needs 30 laptops. Should we use GeM or tender?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_method_selection",
+    "detected_actor": "department_buyer",
+    "detected_intent": "procurement_method_selection",
+    "latency_s": 2.76,
+    "answer": "💡 Answer\nYou should use the GeM route to purchase the 30 laptops.\n\n📋 Process\n1. Check the GeM portal (https://gem.gov.in) to see if the required laptops and their specifications are available.\n2. If available, you can proceed with the purchase through GeM using its prescribed process.\n3. Before placing the order on GeM, you must check the technical specifications, seller credibility, L1 price, economy, and quality.\n4. The only way to choose a different method like tendering is to get written concurrence from the Finance Department through your concerned administrative department.\n\n⚠ Important points\nThe documents state that you must use the GeM route when goods and their rates are available on the portal. Tendering is an exception that requires special approval.\n\n📘 Source: Store Purchase Rule CG",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 1.276,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 1.457,
+      "sarvam_first_token_seconds": 0.555,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q02",
+    "question": "Department ko 4 lakh ka furniture kharidna hai. Kaunsa procurement method use karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_method_selection",
+    "detected_actor": "department_buyer",
+    "detected_intent": "procurement_method_selection",
+    "latency_s": 5.31,
+    "answer": "💡 Answer\nUploaded documents mein is exact scenario ke liye direct guidance nahi milti. Unrelated Tender, portal ya project material ko substitute ke roop mein use nahi kiya gaya hai. Please purchase/service ka subject, applicable process, ya Tender/GeM reference share karein.",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "diagnostics": {
+      "provider": "evidence_gate",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 3.606,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 1.681,
+      "sarvam_first_token_seconds": 0.562,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "claim_validation:generic_commodity_answer_invented_value_workflow"
+    }
+  },
+  {
+    "id": "Q03",
+    "question": "Agar item GeM par available nahi hai to next kya karna chahiye?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_method_selection",
+    "detected_actor": "department_buyer",
+    "detected_intent": "procurement_method_selection",
+    "latency_s": 3.65,
+    "answer": "Agar item GeM par available nahi hai, to next step ke liye context mein direct information nahi di gayi hai. Context sirf GeM ke liye rules aur processes batata hai, jaise ki GeM route use karna, procurement methods (Direct Purchase, L1, e-bidding, Reverse Auction), aur payment procedures.\n\nGeM ke alawa procurement ke liye general rules jaise ki GFR ya Chhattisgarh ke specific store purchase rules apply honge, lekin ye documents mein detailed nahi hai.\n\n📘 srota: Store Purchase Rule CG, Public Procurement Manual 2024",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 2.319,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 1.323,
+      "sarvam_first_token_seconds": 0.631,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q04",
+    "question": "Can we use Limited Tender instead of Open Tender?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "tender_comparison_or_selection",
+    "detected_actor": "general_information_user",
+    "detected_intent": "tender_method_definition",
+    "latency_s": 4.79,
+    "answer": "💡 Answer\nYes, you can use Limited Tender instead of Open Tender, but only if the estimated value of the goods to be procured is up to Rs. 50 lakhs.\n\n📋 Process\n- Check the estimated value of the goods you need to procure.\n- If the value is up to Rs. 50 lakhs, you are eligible to use the Limited Tender method.\n- If the value is above Rs. 50 lakhs, you must use an Open Tender or Advertised Tender Enquiry as per the General Financial Rules.\n\n⚠ Important points\n- Limited Tender is normally used for estimated annual purchases from Rs. 50,001 to Rs. 3,00,000 as per the Store Purchase Rules.\n- For Limited Tender, you must invite at least three manufacturers, authorized representatives, or registered manufacturers.\n- Participation in Limited Tender is by invitation only and is limited to the procuring entity's registered suppliers.\n\n📘 Source: Limited Tender Guidelines and General Financial Rules\n\n📎 As written in the rulebook — Rule 161: [Rs. 50 lakhs (Rupees Fifty 200 crore or such limit as",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 3.239,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 1.547,
+      "sarvam_first_token_seconds": 0.425,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q05",
+    "question": "Can we specify Dell laptops only?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "specification_preparation",
+    "detected_actor": "department_buyer",
+    "detected_intent": "specification_preparation",
+    "latency_s": 1.91,
+    "answer": "Answer\nNormally, do not write a brand-only specification merely because the team already uses a particular make or model. Use neutral, functional and measurable requirements. A brand restriction is appropriate only where a genuine compatibility or technical necessity is recorded in writing, permitted by the applicable rule, and an equivalent option is included where appropriate.\n\n📘 Source: Manual for Procurement of Goods 2024; Compilation of CVC Circulars and Guidelines",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "retrieved_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q06",
+    "question": "Can we split a 10 lakh purchase into smaller orders?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_compliance_or_split_purchase",
+    "detected_actor": "department_buyer",
+    "detected_intent": "procurement_planning",
+    "latency_s": 2.95,
+    "answer": "💡 Answer\nNo. A department must not artificially split one known requirement into smaller orders to avoid a higher approval level or the applicable procurement method. Assess and estimate the consolidated requirement, then use the route permitted by the current rules and delegated powers; record the method decision and approval.\n\n📘 Source: Manual for Procurement of Goods 2024; Chhattisgarh Store Purchase Rules",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "retrieved_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q07",
+    "question": "Is L1 compulsory?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "bid_evaluation",
+    "detected_actor": "general_information_user",
+    "detected_intent": "bid_evaluation",
+    "latency_s": 0.75,
+    "answer": "💡 Answer\nNo. L1/lowest price is not automatically selected. The bidder must also satisfy the published eligibility, required-document, technical-responsiveness and Tender-compliance conditions. Evaluate only under the published criteria, record price reasonableness, and obtain competent approval before award.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q08",
+    "question": "Can Single Tender be used because the old vendor already knows our system?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "single_tender_policy",
+    "detected_actor": "general_information_user",
+    "detected_intent": "tender_method_definition",
+    "latency_s": 3.96,
+    "answer": "Based on the provided documents, Single Tender can be used only under specific circumstances outlined in the rules. The fact that an old vendor already knows your system is not a valid reason for using Single Tender procurement.\n\nThe rules permit Single Tender in the following situations:\n- For a proprietary single item with an annual requirement not exceeding Rs. 50,000, when competition is not needed\n- When the user department knows that only a particular firm manufactures the required item\n- In emergency situations (with recorded reasons and competent authority approval)\n- For standardisation or compatibility of spare parts (with technical expert advice and authority approval)\n\nThe documents do not mention vendor familiarity with the system as a valid ground for Single Tender procurement. The decision must be based on the specific conditions mentioned in the procurement rules.\n\n📘 Source: store purchase rule cg",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 2.287,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 1.66,
+      "sarvam_first_token_seconds": 0.653,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q09",
+    "question": "Printer purchase department ke liye process batao.",
+    "expected_actor": "department_buyer",
+    "expected_intent": "department_purchase_workflow",
+    "detected_actor": "department_buyer",
+    "detected_intent": "procurement_planning",
+    "latency_s": 9.46,
+    "answer": "💡 Answer\nPrinter purchase ke liye department ko pehle check karna chahiye ki GeM portal par printer ke technical specifications, seller credibility, L1 price, economy aur quality available hain ya nahi. Agar GeM par sab kuch available hai, to GeM ke prescribed process se hi purchase karna hoga. Agar GeM se purchase nahi karna hai, to Finance Department se written concurrence lena zaroori hai, jo concerned administrative department ke through milega.\n\nAgar GeM route use nahi kar rahe hain, to procurement process follow karna hoga. Printer ek proprietary article ho sakta hai, isliye Proprietary Article Certificate (PAC) lena pad sakta hai. Iske liye Appendix 4 mein prescribed form mein PAC lena hoga, phir newspapers aur government website par 30 days ka notice publish karna hoga. Objections resolve hone ke baad, supplier ke rates aur justification lena hoga, aur purchase committee recommendation ke baad competent approval lena hoga.\n\n📋 Process\n1. Check GeM availability: Technical specs, seller credibility, L1 price, economy, quality.\n2. Agar GeM use kar rahe hain: GeM process follow karein.\n3. Agar GeM use nahi kar rahe hain: Finance Department se written concurrence lein.\n4. Agar proprietary article hai: PAC form (Appendix 4) bharein.\n5. Notice publish karein: Newspapers aur website par 30 days ke liye.\n6. Objections resolve karein.\n7. Supplier se rates aur justification lein.\n8. Purchase committee recommendation lein.\n9. Competent approval lein.\n\n⚠ Important points\n- GeM route prefer kiya jaata hai agar rates aur specifications available hain.\n- Finance Department ka written concurrence mandatory hai agar GeM se purchase nahi kar rahe.\n- Proprietary Article Certificate ke liye 30 days ka notice period zaroori hai.\n- Purchase committee ki recommendation aur competent approval final steps hain.\n\n📘 srota: Store Purchase Rule CG, Manual for Procurement of Goods 2024",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 3.568,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 5.878,
+      "sarvam_first_token_seconds": 0.809,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q10",
+    "question": "Before buying computers, what approvals are required?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "approval_requirements",
+    "detected_actor": "department_buyer",
+    "detected_intent": "approval_and_budget",
+    "latency_s": 4.8,
+    "answer": "💡 Answer\nFor buying computers, the following approvals are required based on the procurement rules:\n- If the computers are a proprietary article (only available from a specific manufacturer or authorized seller), you must obtain a Proprietary Article Certificate (PAC) in the prescribed form before procurement.\n- A purchase committee must be formed if the office is purchasing Rs. 50,000 or more per year. The committee must include the departmental accounts officer/accounts in-charge and officers with technical knowledge.\n- The purchase committee will review the proposed supplier's rates and justification and recommend acceptance, rejection, or negotiation before competent approval is obtained.\n- If the lowest bid (L1) is not accepted, the reasons must be recorded in writing.\n- The contract must be executed before issuing the purchase order.\n\n📋 Process\n1. Determine if the computers are a proprietary article.\n2. If proprietary, obtain a PAC and publish a claim/objection notice for at least 30 days.\n3. Form a purchase committee (if applicable).\n4. The committee reviews and makes a recommendation.\n5. Obtain competent approval.\n6. Execute the contract and then issue the purchase order.\n\n⚠ Important points\n- The purchase committee is mandatory for purchases of Rs. 50,000 or more per year.\n- If the L1 bid is not accepted, written reasons are required.\n- A repeat supply order cannot be issued after six months and cannot exceed 25% of the original order quantity.\n\n📘 Source: Store Purchase Rule CG",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 2.561,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 2.227,
+      "sarvam_first_token_seconds": 0.584,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q11",
+    "question": "Purchase order ke baad next process kya hota hai?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "post_purchase_order_workflow",
+    "detected_actor": "department_buyer",
+    "detected_intent": "inspection_and_acceptance",
+    "latency_s": 0.75,
+    "answer": "💡 Answer\nPurchase Order issue hone ke baad department delivery ko PO aur contract conditions ke against inspect karke formal acceptance record kare.\n\n📋 Process\n1. Delivered quantity, specifications, warranty aur condition ko PO se match karein.\n2. Shortage, damage ya deviation ko inspection record mein note karein.\n3. Non-compliant supply ke liye supplier se rectification ya replacement karayein.\n4. Compliant supply ki receipt aur formal acceptance record banayein.\n5. Acceptance aur required invoice/supporting documents ke baad payment process karke item ko stock/asset register mein enter karein.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q12",
+    "question": "Inspection and acceptance process kya hota hai?",
+    "expected_actor": "department_buyer",
+    "expected_intent": "inspection_and_acceptance",
+    "detected_actor": "department_buyer",
+    "detected_intent": "inspection_and_acceptance",
+    "latency_s": 3.83,
+    "answer": "💡 Answer\nInspection aur acceptance process ke liye contract ke end mein material ka inspection shuru hota hai. Jaise hi material milta hai, inspection officer ko turant inspection shuru karke report issue karni chahiye, jo contract ki validity period ke andar ho. Agar delivery period ke last days mein material milta hai, to officer ko koshish karni chahiye ki delivery period khatam hone se pehle inspection shuru ho jaye.\n\nAgar delivery period khatam hone se pehle inspection shuru ya complete nahi ho paata, to officer ko supplier ko turant inform karna chahiye - pehle orally aur phir written mein - ki material bahut late stage mein submit kiya gaya hai aur period ke andar inspection possible nahi hai. Phir bhi, goods ka inspection poora hone tak jaari rakha jaata hai, jo period ke baad bhi ho sakta hai.\n\nAcceptance ke liye koi initial provisional acceptance lower level par nahi honi chahiye. Inspection documents issue karne ke liye ek time limit fixed honi chahiye. Inspection note mein validity period bhi mention hona chahiye, jo vo period hai jismein supplier ko accepted goods consignee ko dispatch karne hote hain.\n\nInspection reports detailed honi chahiye, jismein inspection details, samples examined, relevant specifications/contract ke according requirements, aur firm ke representative ke saath kiye gaye observations shaamil hon.\n\n📋 Process\n1. Material milte hi turant inspection shuru karein.\n2. Contract ki validity period ke andar inspection report issue karein.\n3. Agar late submission hai, to supplier ko orally aur written mein inform karein.\n4. Inspection poora hone tak jaari rakhein, chahe period khatam ho chuka ho.\n5. Koi provisional acceptance lower level par na karein.\n6. Inspection documents ke liye time limit fix karein.\n7. Inspection note mein validity period mention karein.\n8. Detailed inspection report taiyaar karein.\n\n⚠ Important points\n- Inspection period ke andar hi report issue honi chahiye.\n- Late submission ki soorat mein supplier ko turant inform karna zaroori hai.\n- Security ke liye inspection notebooks machine numbered aur different colored copies honi chahiye.\n- Fraud avoid karne ke liye fool-proof system hona chahiye.\n\n📘 srota: Manual for Procurement of Goods 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 0.709,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 3.105,
+      "sarvam_first_token_seconds": 0.569,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q13",
+    "question": "How do I register as a vendor?",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "vendor_registration",
+    "detected_actor": "vendor_bidder",
+    "detected_intent": "vendor_registration",
+    "latency_s": 4.61,
+    "answer": "💡 Answer\nTo register as a vendor, you need to follow the process outlined in the CHiPS Vendor Registration Manual. The registration is done online through the e-Procurement portal and requires a Digital Signature Certificate (DSC).\n\n📋 Process\nThe registration process depends on whether you are an existing supplier or a new supplier:\n- For existing suppliers, you can use the \"Existing Supplier Registration Guide\" (Section 2 of the manual).\n- For new suppliers, you should follow the \"New Supplier Registration Guide\" (Section 3 of the manual).\n- If you are a PWD registered supplier, you can use the \"PWD registered Supplier Registration Guide\" (Section 4 of the manual).\n\nBefore you can register, you must first obtain a DSC. The manual provides a step-by-step procedure for this. If you are a foreign vendor, there is a specific process for obtaining the DSC that involves submitting documents to the Indian Embassy.\n\nThe manual also includes guides for:\n- PC Setup and Initial Login (Section 1)\n- Installing Java Runtime Environment (Section 1)\n- Regional & Language Format Settings (Section 1)\n- Registration Payment (Section 5)\n\n📘 Source: Vendor Registration Manual (CHiPS)",
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "retrieved_top10": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 2.543,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 2.06,
+      "sarvam_first_token_seconds": 0.572,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q14",
+    "question": "DSC kaise obtain karun?",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "dsc_workflow",
+    "detected_actor": "vendor_bidder",
+    "detected_intent": "dsc_obtainment",
+    "latency_s": 4.15,
+    "answer": "💡 Answer\nDSC obtain karne ke liye pehle vendor ko ek step-by-step procedure follow karna padta hai. Pehle vendor ko kisi bhi licensed CA (Certifying Authority) se registration form download karna hai jo CCA se approved ho. Phir form ko zaroori documents ke saath bharna hai aur original documents ke certified true copies ke liye Indian Embassy jaana hai. Embassy se documents certify karwane ke baad, vendor ko online fund transfer karke CA ko payment karni padti hai. Aakhri mein, CA se DSC aur e-token mil jaata hai jo vendor ko courier kar diya jaata hai.\n\nForeign vendors ke liye, unhe Indian Embassy ko ya toh Certificate of Incorporation, Memorandum and Articles of Association, Registered Partnership Deed, ya phir Valid Business License document submit karna padta hai.\n\n📋 Process\n1. Licensed CA se registration form download karein.\n2. Form bharein aur zaroori documents ke saath Indian Embassy jaayein.\n3. Embassy se documents ke certified true copies lein.\n4. CA ko online fund transfer karein.\n5. CA se DSC aur e-token receive karein.\n\n⚠ Important points\n- Form download karne ke liye https://cca.gov.in par visit kar sakte hain.\n- Foreign vendors ke liye company ke documents ka certified true copy zaroori hai.\n\n📘 srota: CHiPS_Vendor_Registration_Manual_English",
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "retrieved_top10": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 2.123,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 2.029,
+      "sarvam_first_token_seconds": 0.542,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q15",
+    "question": "EMD refund kab milta hai?",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "emd_refund",
+    "detected_actor": "vendor_bidder",
+    "detected_intent": "emd_refund_unsuccessful_bidder",
+    "latency_s": 2.98,
+    "answer": "Answer\nApplicable opening/evaluation stage ke baad Department Admin/Tender Owner eligible unsuccessful bidder ki EMD refund initiate karta hai. Department Approver verify aur approve karta hai; phir e-Procurement system registered bank account ke liye instruction bhejta hai. Completion ke liye portal status check karein. Fixed credit time promise na karein, kyunki approval aur bank processing vary karte hain.\n\n📘 Source: EMD Refund Guidelines (CHiPS)",
+    "sources": [
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "retrieved_top10": [
+      "Online_EMD_Refund_Notice.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Online_EMD_Refund_Notice.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q16",
+    "question": "Bid submit karne ka complete process batao.",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "bid_submission",
+    "detected_actor": "vendor_bidder",
+    "detected_intent": "bid_submission_portal_steps",
+    "latency_s": 7.44,
+    "answer": "💡 Answer\nBoli submit karne ka complete process yeh hai:\n\n1. **Portal Access:** Pehle eproc.cgstate.gov.in par jao.\n2. **Java Setup:** Download section mein click karo, phir Java, Java Runtime Environment, aur \"Which should I choose?\" par click karke sahi Java download karo.\n3. **Regional Settings:** Control Panel mein jaao, Regional and Language Options icon par click karo, aur English (United States) select karke OK karo.\n4. **Login:** Portal par login karo.\n5. **Tender Search:** Jo tender (NIT) mein participate karna hai, uska tender number ya naam search karo.\n6. **Tender Download:** Tender document download karo. Ismein Technical Bid (PQ Bid) aur Price Bid (Financial Bid) ke formats honge.\n7. **Technical Bid Fill:** Technical Bid form mein apni details, company details, aur experience fill karo. Sabhi required documents upload karo.\n8. **Price Bid Fill:** Price Bid (BOQ) mein har item ka rate fill karo.\n9. **Upload:** Dono filled bids (Technical aur Price) ko upload karo.\n10. **Submit:** Upload karne ke baad \"Submit\" button par click karo.\n11. **EMD Payment:** Agar EMD (Earnest Money Deposit) chahiye, to challan ke through payment karo.\n12. **Confirmation:** Submit karne ke baad confirmation message check karo aur receipt save kar lo.\n\n⚠ Important points:\n- Login ke liye DSC (Digital Signature Certificate) zaroori hai.\n- Portal ke liye Internet Explorer aur Java Runtime Environment properly installed hona chahiye.\n- Technical Bid aur Price Bid dono complete aur correct format mein upload karne honge, warna boli reject ho sakti hai.\n\n📘 Source: CHiPS_Bid_Submission_Manual_English",
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "retrieved_top10": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 3.526,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 3.904,
+      "sarvam_first_token_seconds": 0.634,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q17",
+    "question": "Technical bids kaise open karte hain?",
+    "expected_actor": "department_operator",
+    "expected_intent": "technical_bid_opening",
+    "detected_actor": "department_operator",
+    "detected_intent": "bid_opening_portal_steps",
+    "latency_s": 1.84,
+    "answer": "💡 Answer\nTender ki scheduled opening time ke baad authorised department account se hi action karein. Opening record banayein, required bid parts/documents ko published tender conditions ke against check karein aur system-generated opening record preserve karein. Two-bid tender mein technical responsiveness evaluate hone ke baad hi price bid open/evaluate karein. Available local manuals universal screen/button sequence establish nahi karte, isliye generic menu names par rely na karke authorised department portal workflow follow karein.\n\n📘 Source: Offline Tender Upload Manual (CHiPS); Bid Submission Manual (CHiPS)",
+    "sources": [
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "retrieved_top10": [
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_Offline_Tenders_v.1.0.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q18",
+    "question": "Tender ki last date extend karni hai. Kya process hai?",
+    "expected_actor": "department_operator",
+    "expected_intent": "corrigendum_portal_steps",
+    "detected_actor": "department_operator",
+    "detected_intent": "corrigendum_portal_steps",
+    "latency_s": 5.15,
+    "answer": "💡 Answer: Tender ki last date extend karne ke liye do main process hain, ek system failure ke liye aur doosra normal date change ke liye.\n\n📋 Process:\n1. Agar e-Procurement system fail ho gaya hai (internet, power, server failure ya natural calamity), to System Administrator Tender Inviting Authority ke saath consult karke bid submission deadline extend kar sakta hai. Yeh extension 24, 48, ya 72 hours ka ho sakta hai aur Administrative Corrigendum ke through kiya jaata hai. Affected bidders ko automatic email alert bhi jaata hai.\n\n2. Agar normal date change karni hai, to Add Tender Date Corrigendum option use karna padta hai. Isme applicable Bid dates modify karni hoti hain, jaise ki Bid due date ya Bid opening date. Phir Submit karke Close karna hota hai.\n\n⚠ Important points:\n- Corrigendum publish hone ke baad, bidders ko portal par Tender open karke View Corrigendum/Addendum se changes check karne chahiye.\n- Agar previous quotation/Bid delete ho gaya hai, to fresh Bid submit karni padegi revised deadline se pehle.\n- Agar Required Attachment Corrigendum aaya hai aur Bid deletion No hai, to fresh attachments ke saath resubmit karna hoga.\n- Pehle ki Bid valid assume na karein, hamesha portal par Tender aur Bid status verify karein.\n\n📘 srota: CHiPS_Corrigendum_Issuance_Manual, CHiPS_Bid_Submission_Manual_English",
+    "sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "retrieved_top10": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 1.902,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 3.236,
+      "sarvam_first_token_seconds": 0.534,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q19",
+    "question": "Corrigendum kaise issue karein?",
+    "expected_actor": "department_operator",
+    "expected_intent": "corrigendum_portal_steps",
+    "detected_actor": "department_operator",
+    "detected_intent": "corrigendum_portal_steps",
+    "latency_s": 4.97,
+    "answer": "Answer\nIs action ke liye relevant CHiPS portal manual aur authorised role use karein. DSC/browser issue mein documented compatibility, Java/extension aur certificate checks hi karein. Bid opening required authentication/opening controls se hoga. Corrigendum/deadline extension authorised department user issue aur publish karta hai; ye automatic nahi hota, par material change ya insufficient time mein bidders ko fair response opportunity ke liye assess karein.\n\n📘 Source: Corrigendum Issuance Manual (CHiPS)",
+    "sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf"
+    ],
+    "retrieved_top10": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Corrigendum_Issuance_Manual.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q20",
+    "question": "EMD refund department side se kaise initiate hota hai?",
+    "expected_actor": "department_operator",
+    "expected_intent": "department_emd_refund_process",
+    "detected_actor": "department_operator",
+    "detected_intent": "emd_remittance_to_department",
+    "latency_s": 2.55,
+    "answer": "Answer\nApplicable opening/evaluation stage ke baad Department Admin/Tender Owner eligible unsuccessful bidder ki EMD refund initiate karta hai. Department Approver verify aur approve karta hai; phir e-Procurement system registered bank account ke liye instruction bhejta hai. Completion ke liye portal status check karein. Fixed credit time promise na karein, kyunki approval aur bank processing vary karte hain.\n\n📘 Source: EMD Refund Guidelines (CHiPS)",
+    "sources": [
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "retrieved_top10": [
+      "Online_EMD_Refund_Notice.pdf",
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q21",
+    "question": "Open Tender aur Limited Tender mein difference kya hai?",
+    "expected_actor": "general_information_user",
+    "expected_intent": "tender_method_definition",
+    "detected_actor": "general_information_user",
+    "detected_intent": "tender_method_definition",
+    "latency_s": 5.88,
+    "answer": "💡 Answer\n| Method | Kaun bid kar sakta hai | Main use |\n|---|---|---|\n| Open Tender | Published conditions meet karne wale sab eligible bidders | Broad, publicly advertised competition |\n| Limited Tender | Applicable rules ke under invited capable/registered suppliers | Restricted competition; convenience ke liye Open Tender ka substitute nahi |\n\nDepartment ko current Chhattisgarh rules, estimated value, delegated powers aur approvals ke hisaab se method choose karna hoga.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024; General Financial Rules\n\n📎 As written in the rulebook — Rule 161: [Rs. 50 lakhs (Rupees Fifty 200 crore or such limit as",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "diagnostics": {
+      "provider": "evidence_gate",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 3.078,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 2.789,
+      "sarvam_first_token_seconds": 0.644,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "claim_validation:definition_expanded_into_unasked_workflow"
+    }
+  },
+  {
+    "id": "Q22",
+    "question": "Technical bid aur financial bid mein kya difference kya hai?",
+    "expected_actor": "general_information_user",
+    "expected_intent": "bid_comparison",
+    "detected_actor": "general_information_user",
+    "detected_intent": "general_bid_information",
+    "latency_s": 3.9,
+    "answer": "💡 Answer\nTechnical bid aur financial bid mein main difference yeh hai ki technical bid mein vendor ki technical capability aur experience check ki jaati hai, jabki financial bid mein sirf price evaluate ki jaati hai.\n\nTechnical bid (jise PQ bid ya Prequalification bid bhi kehte hain) mein vendor ko apne technical experience, qualifications aur required documents submit karne hote hain taaki unki technical suitability check ho sake. Sirf technically suitable bids hi financial evaluation ke liye aage badhte hain.\n\nFinancial bid (jise Price bid ya Commercial bid bhi kehte hain) mein vendor apni price quote karta hai. Iska evaluation sirf price criteria par hota hai aur lowest priced bidder (L1) select kiya jaata hai. Financial evaluation mein total outgo consider kiya jaata hai jismein GST, transportation, insurance, aur freight jaisi cheezein include hoti hain.\n\n📋 Process\n1. Pehle technical bid submit karna hota hai\n2. Technical bid evaluate karke suitability check ki jaati hai\n3. Sirf techno-commercially suitable bids hi financial evaluation ke liye jaate hain\n4. Financial bid mein price compare karke ranking ki jaati hai\n\n⚠ Important points\n- Agar tender mein multiple schedules hain, toh har schedule ke liye alag se evaluation ho sakti hai\n- Financial evaluation mein destination-wise, item-wise ya total basis par ho sakta hai, jo tender document mein mention hota hai\n- CPSE availing Input Tax Credit ke liye price \"Net of GST\" consider ki jaati hai\n\n📘 Source: Public Procurement Manual 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "retrieved_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 1.441,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 2.444,
+      "sarvam_first_token_seconds": 0.724,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q23",
+    "question": "GeM aur state e-procurement portal mein difference kya hai?",
+    "expected_actor": "general_information_user",
+    "expected_intent": "platform_comparison",
+    "detected_actor": "general_information_user",
+    "detected_intent": "gem_eproc_comparison",
+    "latency_s": 2.58,
+    "answer": "Answer\nGeM goods/services procurement ka government marketplace aur channel hai, jab applicable rules permit karein. State e-Procurement portal Tender publish/manage karne, Bid receipt/opening aur Corrigendum ke liye use hota hai. Pehle current Chhattisgarh rules aur approvals ke under lawful route choose karein, phir appropriate channel use karein. Governing rule confirm kiye bina generic monetary thresholds apply na karein.\n\n📘 Source: Manual for Procurement of Goods 2024; Chhattisgarh Store Purchase Rules",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "retrieved_top10": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  },
+  {
+    "id": "Q24",
+    "question": "What is EMD?",
+    "expected_actor": "general_information_user",
+    "expected_intent": "emd_definition",
+    "detected_actor": "general_information_user",
+    "detected_intent": "emd_definition",
+    "latency_s": 10.98,
+    "answer": "💡 Answer\nEMD, or Earnest Money Deposit, is a bid security obtained from bidders to safeguard against them withdrawing or altering their bid during the bid validity period. It is also referred to as Bid Security. The amount is typically between two to five percent of the estimated procurement value, rounded to the nearest thousand rupees, and must be indicated in the bidding documents. EMD can be submitted as an account payee demand draft, banker's cheque, bank guarantee, fixed deposit receipt, or online payment, wherever permitted. The bid security remains valid for 45 days beyond the final bid validity period. In some cases, a Bid Securing Declaration (BSD) may be accepted in place of EMD, subject to approval.\n\n📋 Process\n- The EMD amount is determined by the Procuring Entity and specified in the tender documents.\n- Bidders must submit the EMD along with their bids; bids without it are rejected as non-responsive.\n- The EMD is refunded to unsuccessful bidders within 15 days of finalization.\n\n⚠ Important points\n- For small/cottage units or recognized startups, EMD exemption is available upon submitting the required certificate or proof.\n- EMD or security deposits cannot be accepted in cash.\n\n📘 Source: Manual_for_Procurement_of_works_2019, Store Purchase Rule CG, Public Procurement Manual",
+    "sources": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "mannual procurement.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 8.033,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 2.943,
+      "sarvam_first_token_seconds": 0.592,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q25",
+    "question": "mujhe laptop kharidne ka process batao",
+    "expected_actor": "department_buyer",
+    "expected_intent": "department_purchase_workflow",
+    "detected_actor": "department_buyer",
+    "detected_intent": "procurement_planning",
+    "latency_s": 0.01,
+    "answer": "💡 Answer\nLaptop/computer ki department purchase mein pehle consolidated requirement, quantity, users, purpose, delivery timeline, estimated value aur budget head record karein. Phir generic, measurable specifications banayein, budget aur approvals confirm karein, aur GeM ya applicable approved channel par availability check karein. Uske baad hi permitted procurement method choose karke GeM Bid ya Tender start karein.\n\n📋 Process\n1. Requirement aur quantity record karein.\n2. Neutral technical specifications banayein.\n3. Total cost estimate aur budget availability confirm karein.\n4. Administrative aur financial approval lein.\n5. Purchase indent/procurement request banayein.\n6. GeM aur approved channels par availability check karein.\n7. Store Purchase Rules aur delegated powers ke hisaab se method choose karein.\n8. Phir GeM Bid ya Tender process proceed karein.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024.",
+    "sources": [
+      "Chhattisgarh Store Purchase Rules",
+      "Manual for Procurement of Goods 2024"
+    ],
+    "retrieved_top10": [],
+    "diagnostics": {
+      "provider": "direct_policy",
+      "retrieval_skipped": true,
+      "bypass_reason": "direct_laptop_workflow",
+      "force_retrieval": false
+    }
+  },
+  {
+    "id": "Q26",
+    "question": "urgent purchase ka kya option hai",
+    "expected_actor": "department_buyer",
+    "expected_intent": "procurement_method_selection",
+    "detected_actor": "general_information_user",
+    "detected_intent": "unknown",
+    "latency_s": 8.91,
+    "answer": "💡 Answer: Urgent purchase ke liye aapke paas do main options hain - direct purchase aur Purchase Committee se purchase.\n\n📋 Process:\n1. **Direct Purchase (Rs. 25,000 tak):** Agar item ki value Rs. 25,000 ya usse kam hai, toh aap bina rate quotation ya bid invite kiye kharid sakte hain. Iske liye ek certificate chahiye jismein aap likhenge ki aap personally satisfied hain ki item ki quality aur price reasonable hai.\n\n2. **Purchase Committee se Purchase (Rs. 25,001 se Rs. 2,50,000 tak):** Agar item ki value Rs. 25,000 se zyada aur Rs. 2,50,000 tak hai, toh Purchase Committee se purchase kar sakte hain. Ye items GeM portal par available nahi hote.\n\n3. **Purchase Committee se Purchase (Rs. 50,000 se Rs. 5,00,000 tak):** Agar item ki value Rs. 50,000 se zyada aur Rs. 5,00,000 tak hai, toh Purchase Committee se purchase kar sakte hain. Ye items GeM portal par available nahi hote.\n\n⚠ Important points:\n- Proprietary Article Certificate (PAC) lena padega agar aap ek hi manufacturer se kharid rahe hain.\n- PAC ke liye newspaper aur website par notice publish karna hoga, kam se kam 30 days ke liye.\n\n📘 Source: Store Purchase Rules 2021",
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "retrieved_top10": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 6.403,
+      "context_packing_seconds": 0.001,
+      "generation_seconds": 2.489,
+      "sarvam_first_token_seconds": 0.783,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q27",
+    "question": "agar vendor hoon to bid kaise bharun",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "bid_submission",
+    "detected_actor": "vendor_bidder",
+    "detected_intent": "unknown",
+    "latency_s": 11.12,
+    "answer": "💡 Answer\nAgar aap vendor hain to bid bharne ke liye pehle e-Procurement portal par registration karna hoga. Iske liye aapko valid DSC (Digital Signature Certificate) chahiye hoga. Registration ke baad aap tender notice (NIT) dekh sakte hain aur bidding documents download kar sakte hain. Technical bid (technical details aur documents) pehle submit karna hota hai, uske baad \"ADD QUOTATION\" par click karke price bid (financial bid) fill karna hota hai. Sabhi documents ko \"Add attachment\" button se upload karna padta hai aur appropriate DSC select karna hota hai.\n\n📋 Process\n1. e-Procurement portal par registration karein (Vendor Registration Manual ke according).\n2. Tender notice (NIT) dhoondhein aur bidding documents download karein.\n3. Technical bid prepare karein aur \"ADD QUOTATION\" par click karke upload karein.\n4. Technical details input page par information fill karein aur documents attach karein.\n5. Price bid (financial bid) fill karein.\n6. Sabhi documents ke liye appropriate DSC select karein.\n7. Final bid submit karein.\n\n⚠ Important points\n- Late bids (specified date aur time ke baad aane wale) consider nahi kiye jaate (GFR Rule 202).\n- Technical bid aur price bid alag-alag steps mein submit hote hain.\n- Documents attach karne ke liye \"Add attachment\" button use karein.\n\n📘 srota: CHiPS Bid Submission Manual (English)",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "retrieved_top10": [
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "mannual procurement.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf",
+      "mannual procurement.pdf"
+    ],
+    "diagnostics": {
+      "provider": "sarvam",
+      "primary_provider": "sarvam",
+      "primary_model": "sarvam-105b",
+      "response_model": "sarvam-105b",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "fallback_used": false,
+      "fallback_model": "gemma3:4b",
+      "primary_retrieval_seconds": 8.478,
+      "context_packing_seconds": 0.0,
+      "generation_seconds": 2.628,
+      "sarvam_first_token_seconds": 0.813,
+      "sarvam_timeout": false,
+      "sarvam_total_timeout": false,
+      "sarvam_answer_token_timeout": false,
+      "sarvam_first_activity_seconds": null,
+      "sarvam_reasoning_chunks": 0,
+      "deterministic_fallback": false,
+      "fallback_reason_code": null
+    }
+  },
+  {
+    "id": "Q28",
+    "question": "corrigendum aane ke baad kya karna hota hai",
+    "expected_actor": "vendor_bidder",
+    "expected_intent": "corrigendum_bidder_action",
+    "detected_actor": "general_information_user",
+    "detected_intent": "corrigendum_policy",
+    "latency_s": 1.42,
+    "answer": "Answer\nNahi. Corrigendum issue hone par deadline extension automatic nahi hota. Authorised department user assess kare ki change material hai ya bidders ko response revise karne ke liye time insufficient hai. Aisa ho to corrigendum publish karke level playing field ke liye adequate extension dein; warna no-extension ka reason record karein. Extension ko sirf system failure tak limit na karein.\n\n📘 Source: General Financial Rules; Manual for Procurement of Goods 2024",
+    "sources": [
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "retrieved_top10": [
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "diagnostics": {
+      "provider": "deterministic",
+      "retrieval_skipped": false,
+      "force_retrieval": false,
+      "deterministic_fallback": true,
+      "fallback_reason_code": "policy_answer_contract"
+    }
+  }
+]

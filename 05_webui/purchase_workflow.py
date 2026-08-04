@@ -109,6 +109,7 @@ def _commodity_label(commodity, language="hinglish"):
         "printers_office_equipment": ("printers/office equipment", "Printer", "प्रिंटर"),
         "it_equipment": ("IT equipment", "IT equipment", "IT उपकरण"),
         "furniture": ("furniture", "Furniture", "फर्नीचर"),
+        "stationery_office_supplies": ("stationery/office supplies", "Stationery", "स्टेशनरी"),
         "vehicle": ("vehicles", "Vehicle", "वाहन"),
         "software": ("software licences", "Software", "सॉफ्टवेयर"),
         "amc_services": ("annual maintenance services", "AMC service", "AMC सेवा"),

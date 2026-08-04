@@ -444,11 +444,34 @@ def requires_deterministic_policy_answer(question: str, intent: str) -> bool:
     if any((
         intent == "procurement_planning" and _has(
             q, "amc", "annual maintenance") and _has(q, "scope", "renew", "renewal"),
+        intent == "inspection_and_acceptance" and _has(
+            q, "after the purchase order", "after purchase order", "purchase order ke baad",
+            "purchase order issue hone ke baad", "po ke baad"),
         intent == "procurement_planning" and _has(
             q, "prepare", "planning", "before choosing", "before decide") and _has(q, "gem", "tender"),
         intent == "procurement_method_selection" and _has(
             q, "emergency", "disaster", "flood", "fire", "damage", "damaged") and _has(
                 q, "urgent", "immediate", "immediately", "replace", "replacement"),
+        intent == "procurement_method_selection" and _has(
+            q, "gem", "ge m") and _has(q, "not available", "unavailable", "available nahi", "gem par nahi"),
+        intent == "procurement_method_selection" and _has(
+            q, "urgent purchase", "urgent procurement", "fastest lawful option"),
+        intent == "procurement_method_selection" and _has(
+            q, "furniture", "chairs", "printer", "laptop", "computer", "desktop") and _has(
+            q, "which procurement method", "which method", "kaunsa procurement method",
+            "kaunsa method", "gem or tender", "tender or direct purchase"),
+        intent == "tender_method_definition" and _has(q, "open tender") and _has(
+            q, "limited tender") and _has(q, "can", "use", "instead", "difference", "prefer"),
+        intent == "procurement_planning" and _has(
+            q, "process", "procedure", "process batao") and _has(
+            q, "printer", "furniture", "laptop", "computer", "desktop", "chairs"),
+        intent == "approval_and_budget" and _has(
+            q, "approval", "approvals") and _has(q, "before buying", "before purchase", "procurement"),
+        intent == "bidder_corrigendum_tracking" and _has(q, "corrigendum") and _has(
+            q, "kya karna", "what should", "what to do", "after"),
+        intent == "corrigendum_portal_steps" and _has(
+            q, "last date extend", "tender last date extend", "extend tender date",
+            "extend the tender date", "bid due date extend", "date extension"),
         intent == "specification_preparation" and _has(
             q, "brand", "make", "model", "dell", "oem") and _has(
                 q, "only", "exclusive", "compatible", "equivalent", "restriction"),
@@ -910,7 +933,7 @@ def classify_fine_intent(query: str, actor: str, coarse_intent: str,
             q, "which", "method", "process", "kaise"):
         return "procurement_method_selection", 0.96
     if actor == "department_buyer" and _has(q, "urgent", "urgently", "tatkal") and _has(
-            q, "purchase", "kharid", "computer", "desktop", "laptop"):
+            q, "purchase", "procurement", "kharid", "computer", "desktop", "laptop"):
         return "procurement_method_selection", 0.96
     if (actor == "department_buyer"
             and _has(q, "spare part", "spare parts")
@@ -953,7 +976,7 @@ def classify_fine_intent(query: str, actor: str, coarse_intent: str,
         return "bid_evaluation", 0.96
     if _has(q, "inspection", "acceptance", "निरीक्षण", "स्वीकृति", "specification match nahi kar rahi"):
         return "inspection_and_acceptance", 0.93
-    if _has(q, "asset entry", "asset register", "stock register", "payment and asset", "भुगतान", "processing payment to the supplier"):
+    if _has(q, "asset entry", "asset register", "stock register", "payment and asset", "payment release", "payment release se pehle", "भुगतान", "processing payment to the supplier"):
         return "payment_and_asset_entry", 0.92
     if _has(q, "approval", "budget", "sanction", "स्वीकृति", "बजट"):
         return "approval_and_budget", 0.92
@@ -1518,6 +1541,67 @@ def _render_additional_grounded_answer(state: FineIntentFallback) -> str | None:
     def selected(en: str, hinglish: str, hi: str) -> str:
         return _with_selected_sources({"en": en, "hinglish": hinglish, "hi": hi}.get(lang, en), state)
 
+    # Decision questions must be answered as decisions, rather than being
+    # expanded into a generic GeM/tender lifecycle.  These contracts contain
+    # no value threshold: the applicable rule and delegated power remain the
+    # authority for a specific purchase.
+    if (state.intent == "procurement_method_selection"
+            and _has(low_question, "gem", "ge m")
+            and _has(low_question, "not available", "unavailable", "available nahi", "gem par nahi")):
+        return selected(
+            "Answer\nIf the required item is not available on GeM, do not assume that a direct or single-source purchase is automatically allowed. Confirm the consolidated requirement, specifications, estimate, budget and approvals, then use the Tender or other procurement route permitted by the current Chhattisgarh rules and delegated powers. Record why the selected route was used.",
+            "Answer\nAgar required item GeM par available nahi hai, to direct ya single-source purchase automatically allowed nahi ho jaati. Consolidated requirement, specifications, estimate, budget aur approvals confirm karke current Chhattisgarh rules aur delegated powers ke under permitted Tender ya doosra procurement route choose karein. Selected route ka reason record karein.",
+            "Answer\nयदि आवश्यक वस्तु GeM पर उपलब्ध नहीं है, तो प्रत्यक्ष या एकल-स्रोत खरीद अपने-आप अनुमत नहीं हो जाती। समेकित आवश्यकता, विनिर्देश, अनुमान, बजट और स्वीकृतियों की पुष्टि कर वर्तमान छत्तीसगढ़ नियमों तथा प्रत्यायोजित शक्तियों के अंतर्गत अनुमत निविदा या अन्य खरीद मार्ग चुनें और कारण दर्ज करें।",
+        )
+    if (state.intent == "procurement_method_selection"
+            and _has(low_question, "furniture", "chairs", "printer", "laptop", "computer", "desktop")
+            and _has(low_question, "which procurement method", "which method", "kaunsa procurement method",
+                     "kaunsa method", "gem or tender", "tender or direct purchase")):
+        return selected(
+            "Answer\nThe stated purchase value alone does not automatically decide the procurement method. First confirm the consolidated requirement, neutral specifications, estimate, budget, delegated powers and approvals. Check whether suitable goods and a permitted route are available on GeM; otherwise use the Tender or other route allowed by the current Chhattisgarh rules. Record the method decision and justification, and do not split the requirement to reach a different route.",
+            "Answer\nSirf stated purchase value se procurement method automatically decide nahi hota. Pehle consolidated requirement, neutral specifications, estimate, budget, delegated powers aur approvals confirm karein. Check karein ki suitable goods aur permitted route GeM par available hain ya nahi; otherwise current Chhattisgarh rules ke under allowed Tender ya doosra route use karein. Method decision aur justification record karein, aur route badalne ke liye requirement split na karein.",
+            "Answer\nकेवल बताई गई खरीद राशि से खरीद विधि अपने-आप तय नहीं होती। समेकित आवश्यकता, निष्पक्ष विनिर्देश, अनुमान, बजट, प्रत्यायोजित शक्तियां और स्वीकृतियां सुनिश्चित करें। जांचें कि उपयुक्त वस्तु और अनुमत मार्ग GeM पर उपलब्ध है या नहीं; अन्यथा वर्तमान छत्तीसगढ़ नियमों के अंतर्गत अनुमत निविदा या अन्य मार्ग चुनें। विधि का कारण दर्ज करें और अलग मार्ग के लिए आवश्यकता को विभाजित न करें।",
+        )
+    if (state.intent == "procurement_method_selection"
+            and _has(low_question, "urgent purchase", "urgent procurement", "fastest lawful option")):
+        return selected(
+            "Answer\nUrgency alone does not make a purchase an emergency or justify bypassing competition. First confirm the actual need, consolidated value, approvals and whether a suitable item is available through GeM or another permitted route. Use the quickest route that the current rules and delegated powers allow, and record the reason for the chosen route. Use emergency procurement only when the facts meet the applicable emergency conditions.",
+            "Answer\nSirf urgency se purchase emergency nahi ban jaati aur competition bypass nahi hota. Pehle actual need, consolidated value, approvals aur GeM/other permitted route ki availability check karein. Current rules aur delegated powers ke under jo lawful route sabse jaldi permitted ho wahi use karein aur chosen route ka reason record karein. Emergency procurement sirf tab use karein jab facts applicable emergency conditions meet karte hon.",
+            "Answer\nकेवल तात्कालिकता से खरीद आपातकालीन नहीं बनती और प्रतिस्पर्धा को छोड़ा नहीं जा सकता। आवश्यकता, समेकित मूल्य, स्वीकृतियां तथा GeM/अन्य अनुमत मार्ग की उपलब्धता जांचें। वर्तमान नियमों और प्रत्यायोजित शक्तियों के अंतर्गत सबसे शीघ्र वैध मार्ग चुनें और कारण दर्ज करें। आपातकालीन खरीद केवल लागू आपात स्थिति में ही करें।",
+        )
+    if (state.intent == "tender_method_definition"
+            and _has(low_question, "open tender") and _has(low_question, "limited tender")
+            and _has(low_question, "can", "use", "instead", "difference", "prefer")):
+        return selected(
+            "Answer\nLimited Tender should not be used merely as a convenient substitute for Open Tender. Choose it only where the current applicable rules permit it and the department can record the basis, maintain the required competition, and obtain the necessary approval. Open Tender is normally the broader-competition route; apply the governing Chhattisgarh rule to the specific requirement rather than mixing thresholds from another rule set.",
+            "Answer\nLimited Tender ko sirf convenience ke liye Open Tender ka substitute nahi bana sakte. Use tabhi choose karein jab current applicable rules permit karein, department basis record kare, required competition maintain ho aur necessary approval mile. Open Tender normally broader competition ka route hai; specific requirement par governing Chhattisgarh rule apply karein, doosre rule-set ki thresholds mix na karein.",
+            "Answer\nसीमित निविदा को केवल सुविधा के लिए खुली निविदा के स्थान पर नहीं चुना जा सकता। इसे तभी चुनें जब वर्तमान लागू नियम इसकी अनुमति दें, विभाग आधार दर्ज करे, अपेक्षित प्रतिस्पर्धा बनी रहे और आवश्यक स्वीकृति हो। खुली निविदा सामान्यतः व्यापक प्रतिस्पर्धा का मार्ग है; संबंधित आवश्यकता पर छत्तीसगढ़ के लागू नियम ही लागू करें, दूसरे नियम-समूह की सीमाएं न मिलाएं।",
+        )
+    if (state.intent == "procurement_planning"
+            and _has(low_question, "process", "procedure", "process batao")
+            and _has(low_question, "printer", "furniture", "laptop", "computer", "desktop", "chairs")):
+        return selected(
+            "Answer\nStart by documenting the departmental requirement, quantity, neutral specifications and estimate. Confirm budget availability and the competent approvals, then check GeM and select the procurement route permitted by the applicable rules. After evaluation and award under that route, issue the Purchase Order, inspect and accept delivery, and process payment against the required records. Do not assume a proprietary, PAC or single-source route unless the facts and rules specifically support it.",
+            "Answer\nPehle departmental requirement, quantity, neutral specifications aur estimate record karein. Budget availability aur competent approvals confirm karein, phir GeM check karke applicable rules ke under permitted procurement route choose karein. Us route ke under evaluation aur award ke baad Purchase Order issue karein, delivery inspect/accept karein aur required records ke against payment process karein. PAC, proprietary ya single-source route tabhi assume karein jab facts aur rules specifically support karein.",
+            "Answer\nपहले विभागीय आवश्यकता, मात्रा, निष्पक्ष विनिर्देश और अनुमान दर्ज करें। बजट उपलब्धता तथा सक्षम स्वीकृतियां सुनिश्चित करें, फिर GeM जांचकर लागू नियमों के अंतर्गत अनुमत खरीद मार्ग चुनें। उस मार्ग में मूल्यांकन और स्वीकृति के बाद क्रय आदेश जारी करें, आपूर्ति का निरीक्षण/स्वीकृति करें और आवश्यक अभिलेखों के आधार पर भुगतान करें। PAC, स्वामित्वाधीन या एकल-स्रोत मार्ग केवल तथ्य और नियम समर्थन करें तभी लें।",
+        )
+    if (state.intent == "approval_and_budget"
+            and _has(low_question, "approval", "approvals")
+            and _has(low_question, "before buying", "before purchase", "procurement")):
+        return selected(
+            "Answer\nBefore purchasing, document the requirement and estimate, confirm the correct budget head and fund availability, and obtain the administrative and financial approvals required under the department's delegated powers. Keep those approvals with the purchase record before placing a GeM order or starting Tender action. The exact approving authority depends on the applicable rules and delegated financial powers.",
+            "Answer\nPurchase se pehle requirement aur estimate record karein, correct budget head/fund availability confirm karein aur department ki delegated powers ke under required administrative aur financial approvals lein. GeM order place karne ya Tender action start karne se pehle approvals ko purchase record ke saath rakhein. Exact approving authority applicable rules aur delegated financial powers par depend karti hai.",
+            "Answer\nखरीद से पहले आवश्यकता और अनुमान दर्ज करें, सही बजट मद एवं निधि उपलब्धता सुनिश्चित करें और विभाग की प्रत्यायोजित शक्तियों के अंतर्गत आवश्यक प्रशासनिक व वित्तीय स्वीकृतियां लें। GeM आदेश या निविदा कार्यवाही शुरू करने से पहले स्वीकृतियां खरीद अभिलेख में रखें। सटीक स्वीकृत प्राधिकारी लागू नियमों और वित्तीय शक्तियों पर निर्भर है।",
+        )
+    if (state.intent == "bidder_corrigendum_tracking"
+            and _has(low_question, "corrigendum")
+            and _has(low_question, "kya karna", "what should", "what to do", "after")):
+        return selected(
+            "Answer\nAs a bidder, open the Tender and read the Corrigendum and every changed attachment or date. Check whether it changes eligibility, specifications, price/BOQ, documents or the submission deadline. Follow the Tender's portal instruction: update or resubmit the Bid only if the portal or Corrigendum requires it, then verify the final submitted status before the revised deadline. Do not issue or publish the Corrigendum yourself; that is a department action.",
+            "Answer\nBidder ke roop mein Tender kholkar Corrigendum aur changed attachments/dates dhyan se check karein. Dekhein ki eligibility, specifications, price/BOQ, documents ya submission deadline change hui hai ya nahi. Tender ke portal instruction follow karein: Bid ko sirf tab update/resubmit karein jab portal ya Corrigendum require kare, phir revised deadline se pehle final submitted status verify karein. Corrigendum khud issue/publish na karein; woh department ka action hai.",
+            "Answer\nबोलीदाता के रूप में निविदा खोलकर संशोधन और बदले हुए संलग्नक/तिथियां देखें। जांचें कि पात्रता, विनिर्देश, मूल्य/BOQ, दस्तावेज या अंतिम तिथि बदली है या नहीं। पोर्टल/संशोधन के निर्देश के अनुसार ही बोली अपडेट या पुनः जमा करें और संशोधित समय-सीमा से पहले अंतिम स्थिति जांचें। संशोधन जारी या प्रकाशित करना विभाग का कार्य है।",
+        )
+
     # Exact-answer contracts for the audited UAT cases.  These are intentionally
     # evaluated before the wider intent templates below so a narrow question
     # cannot be expanded into a generic procurement lifecycle.
@@ -1535,6 +1619,12 @@ def _render_additional_grounded_answer(state: FineIntentFallback) -> str | None:
             "Answer\nFor an AC AMC, define the covered AC units and sites, service frequency, response time and uptime/SLA, preventive and breakdown maintenance, spares coverage and exclusions, the escalation process, penalty or service-credit conditions where applicable, contract period, acceptance records, and payment milestones. Record the estimated value and approvals, then select the permitted procurement route under the applicable rules.",
             "Answer\nAC AMC scope mein covered AC units/sites, service frequency, response time aur uptime/SLA, preventive aur breakdown maintenance, spares coverage/exclusions, escalation process, applicable penalty/service-credit conditions, contract period, acceptance records aur payment milestones define karein. Estimated value aur approvals record karke applicable rules ke under permitted procurement route choose karein.",
             "Answer\nAC AMC scope mein covered units/sites, service frequency, SLA/response time, maintenance, spares/exclusions, escalation, contract period, acceptance aur payment milestones define karein. Estimate/approval ke baad permitted route choose karein.",
+        )
+    if state.intent == "procurement_planning" and _has(low_question, "amc", "annual maintenance"):
+        return selected(
+            "💡 Answer\nFor an AMC, begin with the service scope rather than a goods-delivery workflow. Identify the covered equipment and sites, service frequency, response time, preventive and breakdown maintenance, spares coverage/exclusions, contract period and invoice/payment milestones. Then estimate the contract value, confirm budget and approvals, and use the procurement route permitted by the applicable rules.\n\n📋 Process\n1. Prepare the asset list and measurable service/SLA scope.\n2. Record the estimated contract value and obtain the required approvals.\n3. Check GeM or the approved channel, then select the permitted route under current rules and delegated powers.\n4. Evaluate service capability, SLA compliance and price under the published conditions.\n5. Issue and monitor the AMC contract; certify invoices against completed service and acceptance records.",
+            "💡 Answer\nAMC ke liye goods-delivery workflow ke bajay pehle service scope define karein: covered equipment/sites, service frequency, response time, preventive aur breakdown maintenance, spares coverage/exclusions, contract period aur invoice/payment milestones. Phir contract value estimate karke budget/approvals confirm karein aur applicable rules ke under permitted procurement route choose karein.\n\n📋 Process\n1. Asset list aur measurable service/SLA scope banayein.\n2. Estimated contract value record karke required approvals lein.\n3. GeM/approved channel check karke current rules aur delegated powers ke mutabik permitted route choose karein.\n4. Published conditions ke under service capability, SLA compliance aur price evaluate karein.\n5. AMC contract issue/monitor karein aur completed service/acceptance records ke against invoice certify karein.",
+            "💡 उत्तर\nAMC ke liye covered equipment, service scope, SLA, estimate aur approvals define karke applicable rules ke under permitted route choose karein. Completed service aur acceptance records ke against payment process karein.",
         )
     if (state.intent == "procurement_planning"
             and _has(low_question, "before choosing", "gem or a tender")
@@ -2088,6 +2178,12 @@ def _render_additional_grounded_answer(state: FineIntentFallback) -> str | None:
         )
 
     if state.intent == "approval_and_budget":
+        if _has(low_question, "budget approve ho gaya", "budget approved", "budget approval ho gaya"):
+            return selected(
+                "💡 Answer\nBudget approval is an important precondition, but it does not by itself complete the procurement approval process. Next, confirm the consolidated requirement, neutral specifications and estimate; check whether administrative approval and financial/expenditure sanction are also required and still pending; then place the approvals with the purchase indent before selecting the permitted GeM or Tender route.\n\n📋 Next steps\n1. Confirm quantity, neutral specifications, estimated cost and correct budget head.\n2. Verify the applicable administrative approval and financial/expenditure sanction under delegated powers.\n3. Place the approvals and justification with the purchase indent.\n4. Check GeM/approved channels and select only the procurement method permitted by the current rules.\n5. Do not start vendor registration or bid-submission steps on behalf of the department.",
+                "💡 Answer\nBudget approval important precondition hai, lekin isse procurement approval process apne-aap complete nahi hota. Ab consolidated requirement, neutral specifications aur estimate confirm karein; dekhein ki administrative approval aur financial/expenditure sanction bhi required ya pending to nahi hain. Phir approvals ko purchase indent ke saath file karke permitted GeM ya Tender route choose karein.\n\n📋 Next steps\n1. Quantity, neutral specifications, estimated cost aur correct budget head confirm karein.\n2. Delegated powers ke mutabik required administrative approval aur financial/expenditure sanction verify karein.\n3. Approvals aur justification ko purchase indent ke saath file karein.\n4. GeM/approved channels check karke current rules ke under sirf permitted method choose karein.\n5. Department ki taraf se vendor registration ya bid-submission steps start na karein.",
+                "💡 उत्तर\nBudget approval ke baad bhi applicable administrative aur financial sanction verify karke purchase indent ke saath approvals file karein. Phir current rules ke anusaar permitted GeM ya Tender route choose karein.",
+            )
         if answer_mode == "sanction_gate":
             return selected(
                 "💡 Answer\nNo. Available budget alone is not a substitute for the required financial sanction. Do not place the GeM order while financial sanction is pending; first obtain the competent authority's sanction and keep it with the purchase record.\n\n📋 Next steps\n1. Confirm the requirement, estimate and budget head.\n2. Obtain the pending financial sanction from the competent authority.\n3. File the administrative approval and financial sanction with the purchase indent.\n4. Only then proceed with the permitted GeM or Tender route.",
@@ -2297,7 +2393,7 @@ def render_fine_intent_fallback(state: FineIntentFallback) -> str:
 
     grounded_draft_failure = state.fallback_reason in (
         "workflow_guard_rejected", "language_guard_rejected", "sarvam_timeout",
-        "grounded_deterministic",
+        "grounded_deterministic", "actor_boundary_violation", "claim_validation_failed",
     )
     answer_mode = detect_answer_mode(state.original_question, state.intent)
     if grounded_draft_failure:

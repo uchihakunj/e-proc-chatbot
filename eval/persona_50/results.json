@@ -1,0 +1,1105 @@
+[
+  {
+    "id": "BUYER-01",
+    "role": "Department Buyer",
+    "query": "Hamare department ko 40 desktops kharidne hain. Sabse pehle kya karein?",
+    "status": "Pass",
+    "response_time_seconds": 7.096,
+    "answer": "Aapke department ko 40 desktops kharidne ke liye sabse pehle ye steps follow karne honge:\n\n*   **Purchase Committee banana:** Chunki aapka office Rs. 50,000 ya usse zyada ka purchase kar raha hai, toh ek purchase committee banana zaroori hai. Ismein departmental accounts officer/accounts in-charge aur technical knowledge wale officers shaamil hone chahiye.\n*   **Tender conditions taiyaar karna:** Tender conditions clear aur unambiguous honi chahiye. Bidder GST-registered hona chahiye aur taxes separately quote karne honge.\n*   **Sample ka intezam:** Agar pre-purchase sample nahi mil sakta, toh supplier ko item demonstrate karna hoga. Agar wo bhi possible nahi hai, toh manufacturing site par inspection ka right reserve karna hoga.\n*   **Contract execute karna:** Purchase order issue karne se pehle contract execute karna hoga. Agar L1 (lowest bid) ko accept nahi kiya jaata, toh reasons in writing record karne honge.\n\n40 desktops ke liye ye process follow karna hoga. Agar aap chahte hain ki main aapko is process ke baare mein aur detail mein bataun, toh main aapki help kar sakta hoon.\n\n📘 स्रोत: Store Purchase Rule CG",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-02",
+    "role": "Department Buyer",
+    "query": "Office ke liye printers lene hain. Tender karna padega ya GeM chalega?",
+    "status": "Pass",
+    "response_time_seconds": 5.266,
+    "answer": "Printers lene ke liye pehle check karna hoga ki GeM par printers available hain ya nahi. Agar GeM par printers hain aur unke rates aur specifications aapke office ki zarurat se match karte hain, toh GeM se hi kharid sakte hain. GeM se kharidne se pehle buyer ko technical specifications, seller credibility, L1 price, economy aur quality check karni hogi. Agar GeM par printers nahi hain ya aapke paas Finance Department ki written concurrence hai, tabhi aap tender kar sakte hain. Agar GeM par printers nahi hain aur CSIDC e-Standard par bhi nahi hain, toh Rule 4 tender procedure ke through procurement karna padega.\n\n📘 स्रोत: Store Purchase Rule CG",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-03",
+    "role": "Department Buyer",
+    "query": "Agar GeM par laptop available hai to kya wahi se lena compulsory hai?",
+    "status": "Pass",
+    "response_time_seconds": 11.699,
+    "answer": "Agar GeM par laptop available hai to wahi se lena compulsory nahi hai, lekin pehle buyer ko check karna padega ki technical specifications, seller credibility, L1 price, economy, aur quality sahi hai ya nahi. Agar department ko lagta hai ki GeM se lena theek nahi hai, to ve tender kar sakte hain, lekin iske liye Finance Department se concerned administrative department ke through written concurrence lena zaroori hai.\n\n📘 स्रोत: Store Purchase Rule CG",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-04",
+    "role": "Department Buyer",
+    "query": "Hamare office ko projector kharidna hai. Kaunsi procurement method sahi rahegi?",
+    "status": "Pass",
+    "response_time_seconds": 13.369,
+    "answer": "💡 Answer\nOriginal question “Hamare office ko projector kharidna hai. Kaunsi procurement method sahi rahegi?” ko exact intent procurement_method_selection ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-05",
+    "role": "Department Buyer",
+    "query": "Purchase start karne se pehle kis-kis se approval lena hota hai?",
+    "status": "Pass",
+    "response_time_seconds": 7.446,
+    "answer": "Purchase start karne se pehle approval ke liye ye steps follow karne padte hain:\n\n**Proprietary Article Certificate (PAC) ke liye:**\n- Appendix 4 ke prescribed form mein PAC obtain karna hota hai\n- Newspapers aur government/department website par claim/objection notice publish karna hota hai, jisme kam se kam 30 days ka time diya jaata hai\n- Objections resolve hone ke baad, proposed supplier ke rates aur justification lena hota hai\n- Purchase committee recommendation deti hai - acceptance, rejection ya negotiation ke liye\n- Uske baad competent approval lena hota hai\n\n**General Purchase Committee Approval:**\n- Agar office Rs. 50,000 ya usse zyada per year ka purchase kar raha hai to purchase committee banani padti hai\n- Committee mein departmental accounts officer/accounts in-charge aur technical knowledge wale officers hona zaroori hain\n\n**Contract Execution ke liye:**\n- Purchase order issue karne se pehle contract execute karna hota hai\n- Agar L1/lowest tender accept nahi kiya jaata to written reasons record karne padte hain\n\n**Repeat Supply Orders ke liye:**\n- Original order se six months ke andar repeat supply order issue nahi kiya ja sakta\n- Original order quantity ka sirf 25% tak hi ho sakta hai\n\n📘 स्रोत: Store Purchase Rule CG, Public Procurement Manual",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-06",
+    "role": "Department Buyer",
+    "query": "Technical specification banate waqt kya dhyan rakhna chahiye?",
+    "status": "Pass",
+    "response_time_seconds": 4.903,
+    "answer": "Technical specification banate waqt ye baatein dhyan mein rakhni chahiye:\n\n*   **Level playing field aur widest competition ensure karna:** Specification aisi honi chahiye jo sabhi vendors ke liye barabar ho aur zyada se zyada log participate kar saken.\n*   **Unambiguous aur precise hona:** Koi bhi confusion na ho, sab kuch clear aur exact likha hona chahiye.\n*   **Objective aur functional hona:** Specification sirf zaroori cheezon par focus kare, koi faltu features na hon jo cost badhaaye.\n*   **Broad-based aur generic hona:** Aisi specification jo common materials aur equipment ko allow kare, taaki koi restriction na ho.\n*   **National standards follow karna:** Preference BIS mark wale goods ko deni chahiye. Agar BIS standards nahi hain, to international standards use kiye ja sakte hain, lekin iske liye written reasons record karne honge.\n*   **Detailed specifications use karna:** Jahan possible ho, detailed specifications ke basis par procurement karein, na ki sirf sample ke basis par. Sample sirf successful bidder ke liye bulk production se pehle approve karwana chahiye.\n\n📘 स्रोत: Public Procurement Manual 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-07",
+    "role": "Department Buyer",
+    "query": "Kya hum specification mein HP ya Dell ka naam likh sakte hain?",
+    "status": "Pass",
+    "response_time_seconds": 3.217,
+    "answer": "Nahi, aap specification mein HP ya Dell jaise brand names nahi likh sakte. CVC guidelines ke according, open tender system mein brand names specify karna guidelines ke against hai. Yeh doosre brands, including domestic manufacturers ko tender mein participate karne ka opportunity nahi deta.\n\nGuidelines kehti hain ki personal computers ke liye generalized specifications use karni chahiye aur brand names mention nahi karne chahiye. Yeh tab tak apply hota hai jab tak DG dwara rate contract conclude nahi ho jaata.\n\n📘 स्रोत: CVC Circulars & Guidelines",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Compilation of CVC Circulars and Guidelines.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-08",
+    "role": "Department Buyer",
+    "query": "Budget approve ho gaya hai. Ab next step kya hai?",
+    "status": "Pass",
+    "response_time_seconds": 4.157,
+    "answer": "Budget approve ho gaya hai, lekin context mein next step ke baare mein koi jaankari nahi di gayi hai. Document sirf e-Procurement Project ke costs ke baare mein bataata hai, jo Rs. 36.90 Crore aur Rs. 42.3 Crore hain. Iske alaava, Manual for Procurement of Goods 2024 mein re-delegation of powers aur contingent expenditure ke rules hain, lekin project budget approve hone ke baad kya karna hai, yeh nahi bataya gaya hai.\n\n📘 स्रोत: Public Procurement Manual 2024, Integrated e-Procurement Project 2.0 & 3.0 Documents",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "Précis  e-Procurement Project.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-09",
+    "role": "Department Buyer",
+    "query": "Agar sirf ek vendor qualify kare to kya purchase ho sakti hai?",
+    "status": "Pass",
+    "response_time_seconds": 10.022,
+    "answer": "Haan, agar sirf ek vendor qualify karta hai to purchase ho sakti hai. Yeh GFR ke Rule 166 ke according allowed hai.\n\nIske liye do conditions hain:\n1. Jab sirf ek hi firm ke paas expected goods ka manufacturing ka right ho.\n2. Emergency mein jab expected goods ko kisi particular source se hi kharidna zaroori ho.\n\nIs case mein, decision ka reason record karna hoga aur competent authority se approval lena hoga.\n\n📘 स्रोत: GFR2017_HINDI.pdf",
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-10",
+    "role": "Department Buyer",
+    "query": "Lowest price dene wale ko hi order dena padta hai kya?",
+    "status": "Pass",
+    "response_time_seconds": 14.948,
+    "answer": "नहीं, lowest price dene wale ko hi order dena zaroori nahi hai. Context mein yeh information nahi di gayi hai ki lowest bid (L1) ko hi contract dena hoga.\n\nGFR aur store purchase rules mein sirf tender process, timelines, aur purchase limits ke baare mein bataya gaya hai, lekin yeh clear nahi kiya gaya ki lowest price hi final decision ka basis hoga.\n\n📘 स्रोत: General Financial Rules 2017 (Hindi) और Store Purchase Rules CG",
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-11",
+    "role": "Department Buyer",
+    "query": "Purchase Order issue hone ke baad department ko kya karna hota hai?",
+    "status": "Pass",
+    "response_time_seconds": 6.638,
+    "answer": "Purchase Order issue hone ke baad department ko kya karna hota hai, yeh information available documents mein nahi hai. Context mein sirf Standing Committee ke functions, non-compliance ke action, aur supply base assessment ke baare mein information hai, lekin Purchase Order issue hone ke baad ka process ya department ke responsibilities ke baare mein kuch nahi diya gaya hai.\n\n📘 स्रोत: Public Procurement Manual (English)",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-12",
+    "role": "Department Buyer",
+    "query": "Vendor ne galat material deliver kar diya. Ab kya process rahega?",
+    "status": "Pass",
+    "response_time_seconds": 9.773,
+    "answer": "Vendor ne galat material deliver kar diya hai, toh contract ke terms ke according action lena padega. Manual for Procurement of Goods, 2024 ke according, delivery date expire hone ke baad bhi agar outstanding quantity hai, toh contract cancel kiya ja sakta hai.\n\nProcess kuch is tarah se hoga:\n\n1.  **Notice bhejna:** Department Admin ko supplier ko ek formal notice bhejna hoga, jismein bataya jaye ki galat material deliver hua hai aur contract ka breach hua hai.\n2.  **Details maangna:** Supplier se poora record maanga jayega ki kitna material supply hua, kitna inspect hua, aur kitna dispatch ya tender ke liye ready hai.\n3.  **Extension dena (agar zaroori ho):** Agar supplier ko thoda time chahiye, toh delivery period extend kiya ja sakta hai, lekin yeh unke risk aur cost par hoga.\n4.  **Contract Cancellation:** Agar supplier extended time mein bhi sahi material deliver nahi karta, toh contract cancel kar diya jayega.\n\nYeh process Manual for Procurement of Goods, Second Edition, 2024 ke Annexure 23 mein diya gaya hai.\n\n📘 स्रोत: Manual for Procurement of Goods 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "mannual procurement.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-13",
+    "role": "Department Buyer",
+    "query": "Agar delivery late ho jaye to department kya action le sakta hai?",
+    "status": "Pass",
+    "response_time_seconds": 5.293,
+    "answer": "Available documents mein delivery late hone ke liye department ke specific action ke baare mein koi jaankari nahi di gayi hai.\n\n📘 स्रोत: store purchase rule cg.pdf",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "AuctionManual_FA.pdf"
+    ],
+    "followups": [
+      "How does reverse auction work?",
+      "How is EMD handled in auctions?",
+      "When is the auction EMD refunded?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-14",
+    "role": "Department Buyer",
+    "query": "Payment release karne se pehle kya verify karna hota hai?",
+    "status": "Pass",
+    "response_time_seconds": 10.806,
+    "answer": "Payment release karne se pehle kya verify karna hota hai, yeh context mein clear nahi hai. Available documents mein loan disbursement, claims processing, aur procurement rules ke baare mein information hai, lekin payment release ke liye specific verification steps ka detail nahi diya gaya hai.\n\n📘 स्रोत: GFR2017_HINDI.pdf, FInal_GFR_upto_31_07_2024.pdf",
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "BUYER-15",
+    "role": "Department Buyer",
+    "query": "Office ke liye AC ka AMC karwana hai. Process kya rahega?",
+    "status": "Pass",
+    "response_time_seconds": 6.819,
+    "answer": "💡 Answer\nOriginal question “Office ke liye AC ka AMC karwana hai. Process kya rahega?” ko exact intent procurement_planning ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-01",
+    "role": "General User",
+    "query": "Hamare office ko naye laptops chahiye. Humein process kahan se start karna chahiye?",
+    "status": "Pass",
+    "response_time_seconds": 0.021,
+    "answer": "💡 Answer\nFirst, the department should consolidate and record the requirement for the laptops, including quantity, purpose, users, delivery timeline, estimated value, and budget head. After that, it should prepare generic and competition-friendly technical specifications, confirm budget availability, obtain the required administrative and financial approvals, and then check whether suitable laptops are available on GeM or another approved procurement channel. Only after these steps should the department choose the permitted procurement method and create the GeM Bid or Tender.\n\n📋 Process\n1. Record the full requirement, including users, purpose, and delivery timeline.\n2. Prepare generic, measurable technical specifications.\n3. Estimate the total cost and confirm budget availability.\n4. Obtain the applicable administrative approval and financial sanction.\n5. Create the purchase indent or procurement request.\n6. Check GeM and other approved channels for availability.\n7. Apply the Store Purchase Rules and delegated powers to choose the lawful procurement method.\n8. Then proceed with the GeM Bid or Tender process.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024.",
+    "sources": [
+      "Chhattisgarh Store Purchase Rules",
+      "Manual for Procurement of Goods 2024"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-02",
+    "role": "General User",
+    "query": "Government office mein saman kharidne ka normal process kya hota hai?",
+    "status": "Pass",
+    "response_time_seconds": 4.768,
+    "answer": "Government office mein saman kharidne ka normal process e-procurement portal ke through hota hai. Pehle, department ek tender notice (NIT) release karta hai jismein requirements aur eligibility criteria di hoti hai. Interested vendors (suppliers) portal par registration karke apna technical bid (PQ bid) aur price bid (financial bid) submit karte hain. Technical bid ki evaluation hoti hai, aur agar vendor qualify ho jaata hai, toh price bid open ki jaati hai. Sabse kam price wala vendor (L1) select hota hai aur use purchase order issue kiya jaata hai. Agar tender ki value kam hai, toh GFR ke according direct purchase ya store purchase rules follow kiye ja sakte hain.\n\n📘 स्रोत: Manual for Procurement of Goods 2024, General Financial Rules (GFR)",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-03",
+    "role": "General User",
+    "query": "GeM aur e-Procurement portal mein difference kya hai?",
+    "status": "Pass",
+    "response_time_seconds": 4.747,
+    "answer": "Answer\nGeM goods/services procurement ka government marketplace aur channel hai, jab applicable rules permit karein. State e-Procurement portal Tender publish/manage karne, Bid receipt/opening aur Corrigendum ke liye use hota hai. Pehle current Chhattisgarh rules aur approvals ke under lawful route choose karein, phir appropriate channel use karein. Governing rule confirm kiye bina generic monetary thresholds apply na karein.\n\n📘 Source: Manual for Procurement of Goods 2024; Chhattisgarh Store Purchase Rules",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf",
+      "store purchase rule cg.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-04",
+    "role": "General User",
+    "query": "Mujhe samajh nahi aa raha ki GeM use karun ya tender nikalu.",
+    "status": "Pass",
+    "response_time_seconds": 15.559,
+    "answer": "GeM use karna chahiye jab aapke goods ya services aur unke rates aur specifications GeM par available hain. GeM se kharidne ke liye, aapko uska prescribed process follow karna hoga. Order karne se pehle, aapko technical specifications, seller credibility, L1 price, economy, aur quality check karni chahiye. Agar aap tender nikalna chahte hain, toh aapko Finance Department se written concurrence lena hoga, jo concerned administrative department ke through milega.\n\nAgar aapke items GeM par available nahi hain, toh aap CSIDC e-Standard se kharid sakte hain agar unke rates aur specifications wahan available hain. Agar item GeM ya CSIDC dono par available nahi hai, toh aapko Rule 4 tender procedure se procure karna hoga.\n\n📘 स्रोत: Store Purchase Rule CG",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-05",
+    "role": "General User",
+    "query": "Kya har government purchase tender se hi hoti hai?",
+    "status": "Pass",
+    "response_time_seconds": 23.233,
+    "answer": "Government procurement normally tender system se hoti hai, lekin har purchase ke liye tender zaroori nahi hai.\n\nContext ke according:\n- Rule 4 aur 4.1 kehta hai ki government procurement normally tender system se hoti hai, lekin iska matlab ye nahi ki har purchase tender se hi hogi.\n- Store Purchase Rules 2021 mein open tender method ki details di gayi hain, jo specific value ranges ke liye apply hoti hai.\n- GFR mein Purchase Committee ke through purchase ka provision hai, jahan GeM portal par item available nahi ho to Rs. 50,000 se Rs. 5,00,000 tak ke items purchase kiye ja sakte hain.\n\nIsliye, har government purchase tender se nahi hoti. Kuch purchases Purchase Committee ke through ya direct procurement se bhi ho sakti hain.\n\n📘 स्रोत: Store Purchase Rules 2021, General Financial Rules (GFR)",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-06",
+    "role": "General User",
+    "query": "Agar office ke liye furniture lena ho to kya procedure hota hai?",
+    "status": "Pass",
+    "response_time_seconds": 12.438,
+    "answer": "Office ke liye furniture lene ke liye neeche diye gaye procedure follow karne honge:\n\nAgar furniture ki total value Rs. 50,000 ya usse zyada hai, to office mein ek purchase committee banani hogi jisme departmental accounts officer/accounts in-charge aur technical knowledge wale officers shaamil honge.\n\nTender conditions clear aur unambiguous hone chahiye. Furniture ke liye jo bhi supplier tender de, usse GST-registered hona zaroori hai aur taxes alag se quote karne honge. Agar pre-purchase sample nahi milta hai, to supplier ko item demonstrate karne ka chance dena chahiye, aur agar woh bhi possible nahi hai, to buyer ke paas manufacturing site par inspect karne ka right hona chahiye.\n\nEMD (Earnest Money Deposit) normally estimated purchase value ka 1% hota hai. Successful bidder ka EMD retain kar liya jaata hai, aur baaki bidders ka EMD finalisation ke 15 days ke andar refund karna hota hai. Agar office ek registered small/cottage unit ya valid recognised startup hai, to EMD exemption mil sakti hai, lekin iske liye required certificate/proof submit karna padega.\n\nPurchase order issue karne se pehle, kam se kam actual purchase value ka 3% security deposit lena zaroori hai. EMD ya security deposit cash mein accept nahi kiye ja sakte.\n\nAgar L1 (lowest tender) accept nahi kiya jaata hai, to written mein reasons record karne honge. Contract purchase order issue karne se pehle execute karna hoga.\n\nRepeat supply order ke liye, original order ke 6 months baad tak order issue nahi kiya ja sakta aur yeh original order quantity ke 25% se zyada nahi ho sakta.\n\n📘 स्रोत: store purchase rule cg",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-07",
+    "role": "General User",
+    "query": "Single Tender ka matlab simple language mein batao.",
+    "status": "Pass",
+    "response_time_seconds": 10.138,
+    "answer": "Single Tender ka matlab hai jab koi bhi cheez sirf ek hi company se kharidi jaati hai. Yeh tab hota hai jab user department ko pata ho ki sirf ek hi firm uss cheez ka manufacturer hai. Iske alawa, agar kisi procurement ke terms aur conditions revise karne hain, toh procuring entity fundamental rules ko modify nahi kar sakti.\n\n📘 स्रोत: Final_GFR_upto_31_07_2024.pdf",
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Chatbot_Capabilities.pdf",
+      "GFR2017_HINDI.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-08",
+    "role": "General User",
+    "query": "Limited Tender kab use karte hain?",
+    "status": "Pass",
+    "response_time_seconds": 8.934,
+    "answer": "Limited Tender ka use tab kiya jaata hai jab estimated annual purchases Rs. 50,001 se Rs. 3,00,000 ke beech hoti hain. Is method mein kam se kam three manufacturers, authorised representatives, ya registered manufacturers ko invite karna hota hai. Agar estimated value of goods Rs. Fifty Lakhs tak hai, tab bhi Limited Tender Enquiry method use kiya ja sakta hai.\n\n📘 स्रोत: Store Purchase Rule CG, Public Procurement Manual, General Financial Rules",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-09",
+    "role": "General User",
+    "query": "Department ko office stationery kharidni ho to kya karna padega?",
+    "status": "Pass",
+    "response_time_seconds": 9.877,
+    "answer": "💡 Answer\nOriginal question “Department ko office stationery kharidni ho to kya karna padega?” ko exact intent procurement_planning ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "GFRupdatedupto31012026.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "GENERAL-10",
+    "role": "General User",
+    "query": "Chhattisgarh mein government procurement kaise hoti hai?",
+    "status": "Pass",
+    "response_time_seconds": 3.385,
+    "answer": "💡 Answer\nChhattisgarh procurement mein channels/platforms aur procurement methods alag cheezein hain. GeM aur State e-Procurement portal selected route ko execute karne ke channels hain; registration ya login procurement method nahi hai.\n\n📋 Major procurement routes\n1. GeM procurement — item aur applicable rules permit karein to relevant GeM method use hota hai.\n2. Tender procurement — Open, Limited ya Single Tender sirf applicable conditions mein.\n3. Permitted direct purchase — current rules, value conditions, delegated powers aur approvals allow karein tabhi.\n4. Inter-departmental/undertaking purchase — rules permit karein to doosre government department ya undertaking se purchase.\n5. Emergency/special procurement — exceptional route; recorded reasons aur competent approval chahiye, unrestricted direct purchase nahi.\n6. Foreign/global purchase — sirf jab applicable GFR/rules aur approvals is route ko support karein.\n\nPehle route choose karein, phir appropriate GeM ya e-Procurement channel use karein. Registration, vendor login aur DSC setup bidder/portal activities hain, procurement methods nahi.\n\n📘 Source: Chhattisgarh Store Purchase Rules; Manual for Procurement of Goods 2024",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-01",
+    "role": "Department Operator",
+    "query": "Naya tender create karna hai. Process batao.",
+    "status": "Pass",
+    "response_time_seconds": 3.391,
+    "answer": "Naya tender create karne ke liye, aapko pehle decide karna hoga ki kis type ka tender chahiye. Agar aapko market explore karna hai aur specifications finalize karne hain, toh two-stage tendering system use kar sakte hain. Isme pehle Expression of Interest (EoI) bids invite kiye jaate hain.\n\nEoI bids in situations mein invite kiye ja sakte hain:\n- Agar aap detailed specifications khud se formulate nahi kar pa rahe hain aur bidders se technical inputs chahiye.\n- Agar subject matter mein rapid technological advances ya market fluctuations hain.\n- Agar aap research, experiment, study ya development ke liye contract karna chahte hain.\n- Agar bidder se detailed survey ya investigation ki expectation hai.\n\nLess complex cases mein, pre-NIT conference ke through market consultation bhi kaafi hai.\n\nIske liye aapko Manual for Procurement of Goods 2024 refer karna chahiye.\n\n📘 स्रोत: Manual for Procurement of Goods 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-02",
+    "role": "Department Operator",
+    "query": "Tender publish kaise karte hain portal par?",
+    "status": "Pass",
+    "response_time_seconds": 4.153,
+    "answer": "Portal par tender publish karne ke liye aapko 'ADVANCE SEARCH' option use karna padta hai. Yeh feature aapko Tender, Latest News, Latest Notice, aur Heldesk Contact details dekhne mein madad karta hai. Iske alawa, tender document mein Section I hota hai jismein 'Notice Inviting Tender (NIT)' aur uska Appendix 'Tender Information Summary (TIS)' hota hai, jo portal par publish karne ke liye zaroori hota hai.\n\n📘 स्रोत: Manual_Offline_Tenders_v.1.0.pdf",
+    "sources": [
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-03",
+    "role": "Department Operator",
+    "query": "Tender ki last date badhani ho to kya karna padega?",
+    "status": "Pass",
+    "response_time_seconds": 13.603,
+    "answer": "Tender ki last date badhani ho to tender notice mein mentioned process follow karna padega. Agar tender offline hai to registered post se extension request bhejni hogi, lekin yeh sirf tab possible hai agar tender notice mein pehle se mention ho. Online tender ke liye, tender portal par ja kar extension ke liye official process follow karni padegi.\n\nAgar last date ke baad tender receive hua hai to woh open nahi kiya jaata aur wapas bhej diya jaata hai. Tender ki validity aur last date badhane ke liye tender issuing authority se permission lena zaroori hai.\n\n📘 स्रोत: Store Purchase Rules 28.01.2021",
+    "sources": [
+      "Chatbot_Capabilities.pdf",
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-04",
+    "role": "Department Operator",
+    "query": "Corrigendum issue karne ka process kya hai?",
+    "status": "Pass",
+    "response_time_seconds": 12.449,
+    "answer": "Answer\nIs action ke liye relevant CHiPS portal manual aur authorised role use karein. DSC/browser issue mein documented compatibility, Java/extension aur certificate checks hi karein. Bid opening required authentication/opening controls se hoga. Corrigendum/deadline extension authorised department user issue aur publish karta hai; ye automatic nahi hota, par material change ya insufficient time mein bidders ko fair response opportunity ke liye assess karein.\n\n📘 Source: Corrigendum Issuance Manual (CHiPS)",
+    "sources": [
+      "CHiPS_Corrigendum_Issuance_Manual.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-05",
+    "role": "Department Operator",
+    "query": "Technical bids open kaise karte hain?",
+    "status": "Pass",
+    "response_time_seconds": 12.93,
+    "answer": "Technical bids open karne ke liye, Ministry ya Department ko ek Consultancy Evaluation Committee (CEC) banani padti hai. Yeh committee technical bids ko open karti hai, aur phir unhe analyse aur evaluate karti hai. Committee ko har technical proposal ke acceptance ya rejection ke reasons detail mein record karne hote hain. Sirf unhi bidders ke financial bids open kiye jaate hain jinhe technically qualified declare kiya gaya ho.\n\n📘 स्रोत: FInal_GFR_upto_31_07_2024, Manual_for_Procurement_of_works_2019, mannual procurement",
+    "sources": [
+      "FInal_GFR_upto_31_07_2024.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "mannual procurement.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf"
+    ],
+    "followups": [
+      "What is the difference between technical and price bid?",
+      "Can I modify my bid after submission?",
+      "What happens if a corrigendum is issued?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-06",
+    "role": "Department Operator",
+    "query": "Financial bids kab open karni chahiye?",
+    "status": "Pass",
+    "response_time_seconds": 4.036,
+    "answer": "💡 Answer\nOriginal question “Financial bids kab open karni chahiye?” ko exact intent procurement_planning ke saath preserve kiya gaya hai. Is specific workflow ke liye reliable section available nahi hua, isliye kisi related lekin alag process ke steps nahi diye gaye hain. Relevant official section check karein.",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-07",
+    "role": "Department Operator",
+    "query": "Bid evaluation report generate kaise karte hain?",
+    "status": "Pass",
+    "response_time_seconds": 9.474,
+    "answer": "Bid evaluation report banane ka process tender ki financial value par depend karta hai. Agar tender ka value Rs. 50 lakhs se zyada hai, to ek Tender Committee banaya jaata hai jo bid ko evaluate karti hai. Yeh committee mein teen members hote hain, jisme ek finance member aur ek user department ka representative shaamil hota hai. Committee bid ko tender document ke terms and conditions ke basis par strictly evaluate karti hai. Evaluation transparent hona chahiye aur kisi bhi bidder ko undue advantage nahi milna chahiye. Report banane se pehle committee technical suitability report bhi maang sakti hai user departments se.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-08",
+    "role": "Department Operator",
+    "query": "EMD refund initiate kaise karte hain department side se?",
+    "status": "Pass",
+    "response_time_seconds": 2.568,
+    "answer": "Answer\nApplicable opening/evaluation stage ke baad Department Admin/Tender Owner eligible unsuccessful bidder ki EMD refund initiate karta hai. Department Approver verify aur approve karta hai; phir e-Procurement system registered bank account ke liye instruction bhejta hai. Completion ke liye portal status check karein. Fixed credit time promise na karein, kyunki approval aur bank processing vary karte hain.\n\n📘 Source: EMD Refund Guidelines (CHiPS)",
+    "sources": [
+      "Online_EMD_Refund_Notice.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-09",
+    "role": "Department Operator",
+    "query": "Offline tender upload karna ho to kya process hai?",
+    "status": "Pass",
+    "response_time_seconds": 6.556,
+    "answer": "Offline tender upload karne ke liye CHiPS e-Procurement portal par Tender Creator ke roop mein login karna padta hai. Iske liye step-by-step process yeh hai:\n\n1.  **Login karein:** Portal par login karein aur 'Offline Tender' menu par click karein.\n2.  **Header Details bharein:** 'MANUAL TENDER HEADER DETAIL' section mein saari jaankari bharein jaise TENDER NO., NIT REFERENCE NO, TENDER CALL NO, DETAILED DESCRIPTION, PROBABLE AMOUNT OF CONTRACT, Bid Submission Start date, Bid Open Date, aur TENDER & PROCESSING FEES. Phir 'SAVE' par click karein.\n3.  **Payment karein:** 'Payment' par click karein, payment details enter karein aur 'SAVE' karein.\n4.  **Evaluation mein Bidders add karein:** 'Evaluation' par click karein aur PAN No enter karke 'REGISTER NEW BIDDER' karein.\n5.  **Bid Value enter karein:** Quoted/Bid Value aur Remarks enter karein aur 'SAVE' karein.\n6.  **Finalize karein:** 'REGISTER' par click karein, phir 'Purchase Order' par click karke saare PO details aur attachments fill karein aur 'SAVE' karein.\n\n📘 स्रोत: Manual_Offline_Tenders_v.1.0.pdf",
+    "sources": [
+      "Manual_Offline_Tenders_v.1.0.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "OPERATOR-10",
+    "role": "Department Operator",
+    "query": "Tender publish hone ke baad koi mistake mil jaye to kya karna chahiye?",
+    "status": "Pass",
+    "response_time_seconds": 5.193,
+    "answer": "Tender publish hone ke baad agar koi mistake milti hai, to uske liye corrigendum issue karna padta hai. Corrigendum ek amendment notice hota hai jo tender mein ki gayi galtiyon ya changes ko correct karne ke liye nikala jaata hai.\n\nIske liye ye steps follow karne hote hain:\n1. Department Admin ya tender owner ko mistake identify karni padti hai.\n2. Ek corrigendum draft kiya jaata hai jismein saaf likha hota hai ki kya correction ki ja rahi hai.\n3. Corrigendum ko e-Procurement portal par upload kiya jaata hai.\n4. Saare registered bidders ko corrigendum ka notification bheja jaata hai.\n\nCorrigendum mein jo bhi changes hote hain, unhe sabhi bidders ke liye mandatory maana jaata hai. Agar koi bidder naye changes ke according bid submit nahi karta, to uski bid reject ho sakti hai.\n\n📘 Source: Manual for Procurement of Goods 2024",
+    "sources": [
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-01",
+    "role": "Vendor / Bidder",
+    "query": "Main pehli baar government tender mein participate kar raha hoon. Kahan se shuru karun?",
+    "status": "Pass",
+    "response_time_seconds": 17.247,
+    "answer": "Pehli baar government tender mein participate karne ke liye aapko kuch basic steps follow karne honge. Main aapko process bata deta hoon:\n\n**1. Vendor Registration:**\n*   Sabse pehle aapko e-Procurement portal par vendor registration karna hoga. Yeh ek baar ki process hai.\n*   Iske liye aapko valid DSC (Digital Signature Certificate) chahiye hoga.\n*   Portal par \"New Supplier Registration\" ka option milega, wahan aap PAN card details aur zaroori documents upload karke submit karna hoga.\n\n**2. Tender Dhundhna:**\n*   e-Procurement portal par aapko active tenders dekh sakte hain.\n*   Aap apni category ya zaroorat ke hisaab se tender filter kar sakte hain.\n\n**3. Eligibility Check Karna:**\n*   Har tender ke liye eligibility criteria hota hai. Aapko check karna hai ki aap un criteria ko meet karte hain ya nahi.\n*   Ismein company type, turnover, experience, aur kisi bhi debarment ka record check hota hai.\n\n**4. Tender Documents Download Karna:**\n*   Jab aapko suitable tender mile, toh aap Notice Inviting Tender (NIT) aur baaki documents download kar sakte hain.\n*   Yeh documents portal par downloadable form mein hote hain.\n\n**5. Bidding Process:**\n*   Aapko tender ke according technical bid aur price bid prepare karni hogi.\n*   Technical bid mein aapka company ka detail aur capability batani hoti hai.\n*   Price bid mein aap apni rates fill karte hain.\n\n**6. Bid Submit Karna:**\n*   Final bid submit karne ke liye aapko DSC use karna hoga.\n*   Last date se pehle aap portal par bid upload karke submit kar dena hai.\n\n**7. EMD (Earnest Money Deposit):**\n*   Tender mein EMD bhi maanga jaata hai. Yeh refundable amount hota hai.\n*   Aapko EMD challan ke through pay karna hoga.\n\n**8. Performance Security:**\n*   Agar aapka tender select hota hai, toh aapko performance security (bank guarantee ya FDR) bhi deni hogi.\n\nYeh process thoda detailed hai, lekin ek baar registration ho jaaye toh aage tenders participate karna easy ho jaata hai. Agar aapko koi specific step mein help chahiye, toh bataiye.\n\n📘 स्रोत: Vendor Registration Manual (CHiPS)",
+    "sources": [
+      "Store_Purhase_Rules_28.01.2021.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "Vigilance Manual (Updated 2021) English.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-02",
+    "role": "Vendor / Bidder",
+    "query": "Vendor registration ka process kya hai?",
+    "status": "Pass",
+    "response_time_seconds": 7.469,
+    "answer": "Vendor registration ka process e-Procurement portal par online hota hai. Pehle aapko DSC lena padega. Foreign vendors ke liye DSC lene ka process thoda alag hai. Aapko licensed CAs se application form download karna hai aur documents ke saath Indian Embassy jaana hai. Wahan documents certified hote hain. Online fund transfer karna padta hai aur certified documents CA ko courier karne padte hain. Phir CA DSC aur e-token provide karta hai.\n\nExisting suppliers ke liye Section 2 mein guide hai aur new suppliers ke liye Section 3 mein complete registration process di gayi hai. PWD registered suppliers ke liye alag Section 4 hai. Registration payment bhi karna padta hai jo Section 5 mein explain kiya gaya hai.\n\n📘 स्रोत: Vendor Registration Manual (CHiPS)",
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "followups": [
+      "What documents are required for vendor registration?",
+      "How long does registration approval take?",
+      "Do I need a DSC to register?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-03",
+    "role": "Vendor / Bidder",
+    "query": "Registration ke liye kaun-kaun se documents chahiye?",
+    "status": "Pass",
+    "response_time_seconds": 15.647,
+    "answer": "Vendor registration ke liye documents chahiye, jo do sources se mile hain:\n\n**GFR 2017 ke according:**\n- आपूर्तिकर्ता के प्रत्यय पत्र (credentials)\n- विनिर्माण क्षमता (manufacturing capability)\n- गुणवत्ता नियंत्रण प्रणाली (quality control system)\n- विगत कार्यनिष्पादन (past performance)\n- बिक्री बाद सेवा (after-sales service)\n- वित्तीय पृष्ठभूमि (financial background)\n\n**CHiPS Vendor Registration Manual ke according:**\n**DSC के लिए:**\n- Registration/Application form (licensed CAs से download करना है)\n- Indian Embassy से certified true copies\n- Online fund transfer (currency के according)\n\n**Foreign vendors के लिए:**\nइनमें से कोई भी एक document:\n- Certificate of Incorporation\n- Memorandum and Articles of Association\n- Registered Partnership Deed\n- Valid Business License document\n\n**Registration process:**\n1. Form download करें\n2. Documents भरें और Indian Embassy जाएं\n3. Embassy से certification करवाएं\n4. Online payment करें\n5. Documents CA को courier करें\n6. CA से DSC प्राप्त करें\n\n📘 स्रोत: GFR2017_HINDI, CHiPS_Vendor_Registration_Manual_English",
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-04",
+    "role": "Vendor / Bidder",
+    "query": "DSC map kaise karte hain?",
+    "status": "Pass",
+    "response_time_seconds": 9.482,
+    "answer": "DSC map karne ke liye pehle aapko ek DSC lena padega. Ye Class II ya Class III ka hona chahiye, aur usme Signing & Encryption dono certificates hone chahiye. Ye aapko kisi licensed CA se lena hoga.\n\nDSC lene ke liye ye steps follow kijiye:\n\n1.  **Form download kijiye:** Aap kisi bhi licensed CA se approved Registration/Application form download kijiye. Aap CCA ki website https://cca.gov.in par details dekh sakte hain.\n2.  **Form bhariye aur documents jama kijiye:** Form ko bhariye aur zaroori documents ke saath Indian Embassy jaiye. Wahan original documents ke certified true copies submit kijiye.\n3.  **Embassy se certification:** Embassy aapke documents ko certify karegi.\n4.  **Online payment:** Aapko online fund transfer karna hoga. Amount Rupee mein equivalent hoga, jo respective country ki currency mein hoga. CA aapko Swift code provide karega.\n5.  **Documents courier kijiye:** Embassy se certified documents ko courier karke CA ko bhejiye.\n6.  **DSC receive kijiye:** CA aapko DSC aur e-token bhej dega.\n\nJab aapke paas DSC aa jaye, to aap e-Procurement portal par vendor registration kar sakte hain:\n\n1.  Portal par registration details bhariye aur Save & Next kijiye.\n2.  'Selecting DSC' step par aapko apna DSC select karna hoga. Ye certificate aapke Vendor/Bidder account ke saath register hona zaroori hai.\n3.  DSC select karne ke baad, Confirmation par click karke Terms & Conditions accept kijiye.\n\n📘 स्रोत: CHiPS_Vendor_Registration_Manual_English.pdf",
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "followups": [
+      "My DSC token is not recognised - what do I do?",
+      "Which class of DSC is required?",
+      "Can one DSC be used for multiple logins?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-05",
+    "role": "Vendor / Bidder",
+    "query": "Bid submit karne ke baad usme changes kar sakte hain kya?",
+    "status": "Pass",
+    "response_time_seconds": 5.639,
+    "answer": "Context mein bid submit karne ke baad changes karne ke baare mein koi specific information nahi di gayi hai. Manual mein bid submission process ki details hain, jaise ki technical bid add karna aur documents attach karna, lekin submission ke baad modifications ke baare mein kuch nahi bataya gaya hai.\n\n📘 स्रोत: CHiPS_Bid_Submission_Manual_English",
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "followups": [
+      "What is the difference between technical and price bid?",
+      "Can I modify my bid after submission?",
+      "What happens if a corrigendum is issued?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-06",
+    "role": "Vendor / Bidder",
+    "query": "Deadline nikal gayi hai. Kya ab bhi bid edit ho sakti hai?",
+    "status": "Pass",
+    "response_time_seconds": 10.933,
+    "answer": "Deadline nikal gayi hai, toh bid edit karne ka chance bahut kam hai. Agar bid submission deadline pehle hi nikal gayi hai, toh bid edit nahi ho sakti.\n\nLekin, agar deadline extend hui hai toh:\n- Agar e-Procurement system fail ho gaya tha (internet, power, server failure ya natural calamity), toh System Administrator Tender Inviting Authority se consult karke bid submission deadline extend kar sakta hai.\n- Yeh extension 24, 48, ya 72 hours ka ho sakta hai.\n- Iske liye ek Administrative Corrigendum issue kiya jaata hai aur affected bidders ko automatic email alert bhi jaata hai.\n\nAgar deadline extend hui hai aur aapka time abhi bhi chal raha hai, toh aap bid edit kar sakte hain. Lekin agar deadline poori tarah nikal gayi hai, toh bid edit nahi ho sakti.\n\n📘 स्रोत: CHiPS_Bid_Submission_Manual_English.pdf",
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "GFR2017_HINDI.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-07",
+    "role": "Vendor / Bidder",
+    "query": "EMD ka payment kaise karna hota hai?",
+    "status": "Pass",
+    "response_time_seconds": 16.739,
+    "answer": "EMD ka payment karne ke do tarike hain - ek challan se aur doosra internet banking se.\n\n**SECTION 1: EMD Payment via CHALLAN**\nChallan se payment karne ke liye aapko Chhattisgarh e-Procurement portal par jaana hoga. Portal ka link hai: https://eprocdemo.cgstate.gov.in/CHEPS/security/getSignInAction.do\n\nYahan par aapko vendor ke credentials se login karna hoga. Login ke baad aap EMD payment ka option select kar sakte hain aur challan generate kar sakte hain.\n\n**SECTION 2: EMD Payment via INTERNET BANKING**\nInternet banking se payment karne ke liye bhi aapko e-Procurement portal par login karna hoga. Login ke baad EMD payment section mein jaakar aap direct internet banking se payment kar sakte hain.\n\nPortal par aapko tender number, bid submission start date, bid due date aur probable amount of contract (PAC) ki details bhi bharni hongi.\n\n📘 स्रोत: EMD Challan Payment Guide (CHiPS)",
+    "sources": [
+      "EMD_CHALLAN_PAYMENT_V1.0.pdf"
+    ],
+    "followups": [
+      "When will my EMD be refunded?",
+      "Who is eligible for EMD exemption?",
+      "What is the difference between EMD and performance security?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-08",
+    "role": "Vendor / Bidder",
+    "query": "Paisa account se kat gaya lekin EMD update nahi hua. Ab kya karun?",
+    "status": "Pass",
+    "response_time_seconds": 15.167,
+    "answer": "EMD refund process ke liye, unsuccessful bidders ke liye Department Admin EMD refund initiate karta hai. Approval ke baad, e-Procurement system bank ko instruct karta hai aur amount 1-2 days mein credit ho jaata hai. Process typically Department Admin, phir Approver, aur finally bank ke through jaata hai.\n\nAgar paisa account se kat gaya hai lekin EMD update nahi hua hai, toh aapko tender issuing department se contact karna chahiye. Unhe payment proof aur tender details provide karein. Department Admin ko refund process initiate karna hoga. Agar 15 days ke andar refund nahi milta hai, toh aap department se follow-up kar sakte hain.\n\n📘 स्रोत: EMD Refund Guidelines (CHiPS)",
+    "sources": [
+      "store purchase rule cg.pdf",
+      "GFR2017_HINDI.pdf",
+      "FInal_GFR_upto_31_07_2024.pdf"
+    ],
+    "followups": [
+      "How do I pay EMD online?",
+      "When will my EMD be refunded?",
+      "What percentage of tender value is the EMD?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-09",
+    "role": "Vendor / Bidder",
+    "query": "Agar meri bid reject ho gayi to EMD kab wapas milegi?",
+    "status": "Pass",
+    "response_time_seconds": 8.108,
+    "answer": "Agar aapki bid reject ho gayi hai, to EMD refund process department officials dwara kiya jaata hai. CHiPS ka ismein koi intervention nahi hai. Refund process online e-Procurement system ke through hota hai, jismein payment gateway integrated hai. Department officials approval ke baad bank ko instruction dete hain, aur amount 1-2 days mein aapke account mein credit ho jaata hai.\n\n📘 स्रोत: EMD Refund Guidelines (CHiPS)",
+    "sources": [
+      "Online_EMD_Refund_Notice.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [
+      "How do I pay EMD online?",
+      "How long does the EMD refund take?",
+      "What if my bank account details changed?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-10",
+    "role": "Vendor / Bidder",
+    "query": "Corrigendum aaya hai ya nahi, kaise pata chalega?",
+    "status": "Pass",
+    "response_time_seconds": 1.377,
+    "answer": "Answer\nNahi. Corrigendum issue hone par deadline extension automatic nahi hota. Authorised department user assess kare ki change material hai ya bidders ko response revise karne ke liye time insufficient hai. Aisa ho to corrigendum publish karke level playing field ke liye adequate extension dein; warna no-extension ka reason record karein. Extension ko sirf system failure tak limit na karein.\n\n📘 Source: General Financial Rules; Manual for Procurement of Goods 2024",
+    "sources": [
+      "GFRupdatedupto31012026.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-11",
+    "role": "Vendor / Bidder",
+    "query": "Reverse auction mein participate kaise karte hain?",
+    "status": "Pass",
+    "response_time_seconds": 12.395,
+    "answer": "Reverse auction mein participate karne ke liye aapko neeche diye gaye steps follow karne honge:\n\n1.  **Portal Login:** Chhattisgarh e-Procurement portal https://eproc.cgstate.gov.in par login karein. Apna user-id, password, aur DSC use karein.\n2.  **Auction Portal Access:** Dashboard par login karne ke baad, Auction tab par right-click karein aur \"Open in new tab\" select karein.\n3.  **Password Change:** Agar auction engine password change karne ko kahe, to old password \"Password@123\" daalein aur naya password set karein.\n4.  **Select Auction:** Auction dashboard se woh auction select karein jisme aap participate karna chahte hain aur \"View/Respond to RFX\" par click karein.\n5.  **Accept Terms:** Auction terms accept karein.\n6.  **Place Your Bid:** \"Bid\" par click karein. Aapki boli opening price se upar honi chahiye aur minimum bid change price ka multiple honi chahiye. Agar koi opening price nahi hai, to aap opening price ko '0' maan sakte hain.\n7.  **Submit Bid:** Apni boli place karne ke baad \"Submit Bid\" button par click karein. Aap apni boli jitni chahein badha sakte hain, bas minimum bid change price ke multiple mein.\n\nAuction ke dauran aap sirf H1 (highest) price aur ranking dekh paayenge. Auction page har 1 minute mein auto-refresh hoga.\n\n📘 स्रोत: AuctionManual_FA.pdf",
+    "sources": [
+      "AuctionManual_FA.pdf",
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "followups": [
+      "How does reverse auction work?",
+      "How is EMD handled in auctions?",
+      "When is the auction EMD refunded?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-12",
+    "role": "Vendor / Bidder",
+    "query": "Financial bid kab open hoti hai?",
+    "status": "Pass",
+    "response_time_seconds": 14.584,
+    "answer": "Financial bid opening ke baare mein, Manual for Procurement of Works 2019 mein bataya gaya hai ki price bids technically suitable bidders ki presence mein open kiye jaate hain. Yeh ek pre-publicised date, time aur place par hota hai, ya phir e-procurement ke case mein portal par hota hai. Single envelope tender mein, tender committee CA ke reference ke bina price aspects ko evaluate karti hai.\n\n📘 स्रोत: Manual for Procurement of Works 2019",
+    "sources": [
+      "GFR2017_HINDI.pdf",
+      "Manual_for_Procurement_of_works_2019.pdf",
+      "publicProManual-1755343081262-715558279.pdf",
+      "FAQ of Chhattisgarh Infotech Promotion Society(CHIPS).pdf"
+    ],
+    "followups": [
+      "What is the difference between technical and price bid?",
+      "Can I modify my bid after submission?",
+      "What happens if a corrigendum is issued?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-13",
+    "role": "Vendor / Bidder",
+    "query": "Startup company hoon. Kya government tender mein participate kar sakta hoon?",
+    "status": "Pass",
+    "response_time_seconds": 2.463,
+    "answer": "Answer\nEligibility conditions tender mein stated, requirement se relevant aur sab par equally applied honi chahiye. Turnover, experience, local support, MSME/startup benefit, land-border restriction aur documents sirf applicable rule/tender ki scope aur required evidence ke according apply hote hain. Ye automatic waiver ya arbitrary restriction nahi hain. Publication ke baad ek bidder ke liye material criterion relax na karein; permitted change ho to common corrigendum aur material change par adequate time dein.\n\n📘 Source: Bid Submission Manual (CHiPS); Manual for Procurement of Goods 2024",
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf",
+      "publicProManual-1755343081262-715558279.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-14",
+    "role": "Vendor / Bidder",
+    "query": "Foreign company bhi Chhattisgarh tender mein participate kar sakti hai kya?",
+    "status": "Pass",
+    "response_time_seconds": 9.403,
+    "answer": "Answer\nPehle specific Tender mein foreign-bidder participation, eligibility, currency aur registration conditions check karein. DSC ke liye licensed Certificate Authority se application lein, required organisation/identity documents complete karein, applicable process mein Indian Embassy certification karayein, prescribed documents/payment CA ko submit karein aur DSC/e-token obtain karein. Tender ki eligibility aur registration conditions hi final control karengi.\n\n📘 Source: Vendor Registration Manual (CHiPS)",
+    "sources": [
+      "CHiPS_Vendor_Registration_Manual_English.pdf"
+    ],
+    "followups": [],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": false
+    },
+    "error": ""
+  },
+  {
+    "id": "VENDOR-15",
+    "role": "Vendor / Bidder",
+    "query": "Bid submit karne ke baad acknowledgement kahan milega?",
+    "status": "Pass",
+    "response_time_seconds": 9.192,
+    "answer": "Bid submit karne ke baad acknowledgement milne ke liye, aapko e-Procurement portal par login karna hoga. Login karne ke baad, aap apne \"Tenders\" section mein ja sakte hain. Wahan aapko \"Bidding\" ya \"Bid Submission\" ka option milega, jahan aap apni submitted bids ki status check kar sakte hain. Acknowledgement ya confirmation usually bid submission ke baad automatically generate hota hai aur portal par dikhta hai.\n\n📘 स्रोत: CHiPS_Bid_Submission_Manual_English",
+    "sources": [
+      "CHiPS_Bid_Submission_Manual_English.pdf"
+    ],
+    "followups": [
+      "What changes if the estimated value is below ₹3 lakh?",
+      "Does GeM have to be checked before inviting a tender?",
+      "What approval, publication, and timeline apply?"
+    ],
+    "checks": {
+      "answer_present": true,
+      "source_present": true,
+      "provider_or_transport_error": false,
+      "followups_present": true
+    },
+    "error": ""
+  }
+]
