@@ -1,4 +1,4 @@
-# eproc-chatbot
+# eProcurement-Chatbot
 
 This repository is now organized so that runtime code stays near the top level,
 while reports, diagnostics, ad-hoc scripts, and request documents live in
