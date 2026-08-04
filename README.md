@@ -1,70 +1,154 @@
-# eproc-chatbot
+# 🤖 CHiPS e-Procurement RAG Chatbot
 
-This repository is now organized so that runtime code stays near the top level,
-while reports, diagnostics, ad-hoc scripts, and request documents live in
-dedicated folders.
+An AI-powered e-Procurement assistant designed to answer queries based on Chhattisgarh e-Procurement store rules and procurement guidelines using Retrieval-Augmented Generation (RAG) powered by **Gemma 3 (4B)**.
 
-## Top-Level Layout
+---
 
-- `01_preprocessing` to `06_voice`: primary pipeline and application modules
-- `docs/reports`: evaluation reports, benchmarks, and sample-answer documents
-- `docs/requests`: Word documents and request artifacts
-- `diagnostics`: JSON and text outputs from audits, traces, and debugging runs
-- `scripts/dev`: one-off debugging and patch helper scripts
-- `scripts/maintenance`: repository maintenance utilities
-- `scripts/pipeline`: non-primary pipeline helper runners
-- `tests/manual`: root-level manual and exploratory test scripts
-- `utils`: shared utility modules, including configuration helpers
-- `eval`, `reports`, `scratch`, `tmp`, `output`, `outputs`: existing analysis and experiment areas
+## ⚡ 1-Click Automated Setup & Launch (Windows)
 
-## Main Runtime Entry Points
+If you are on Windows, simply open PowerShell in the project folder and run:
 
-- Flask RAG backend: `python 05_webui/app.py`
-- Node UI proxy: `cd 05_webui/nodejs && npm install && npm start`
-- Voice server: `python 06_voice/voice_server.py`
-- CPU stack bootstrap: `./start_cpu.bat` on Windows or `./start_cpu.sh` on Unix-like shells
-- Health check: `python scripts/maintenance/health_check.py`
-- Manifest rebuild: `python scripts/maintenance/rebuild_manifest.py`
+```powershell
+.\setup_and_run.ps1
+```
 
-## Production Notes
+> **What this script does automatically:**
+> 1. Verifies your system has Python 3.10+, Node.js, and Ollama installed.
+> 2. Copies `.env.template` to `.env` if not present.
+> 3. Creates the Python virtual environment (`.venv`) and installs all dependencies from `requirements.txt`.
+> 4. Installs Node.js frontend dependencies in `05_webui/nodejs`.
+> 5. Starts Ollama and downloads the `gemma3:4b` model.
+> 6. Launches the application stack and opens `http://localhost:3000` in your web browser.
 
-- Windows bootstrap now starts the backend in production mode with `waitress` by default via `start_cpu.bat`.
-- Request concurrency is intentionally capped by `MAX_CONCURRENT_RAG_REQUESTS` so the app sheds load cleanly instead of hanging under burst traffic.
-- Health endpoint `GET /api/health` now reports active request count and configured concurrency limit.
-- Concurrent force-retrieval load testing: `python eval/retrieval_regression/run_concurrent_benchmark.py --workers 10`
-- Try `--workers 10`, `--workers 25`, and `--workers 50` separately before production sign-off.
+---
 
-## Pipeline
+## 📋 Manual Setup Guide
 
-### Stage 01 - Preprocessing
+If you prefer to set up manually or are running on Linux/macOS, follow the steps below:
 
-- Run `python 01_preprocessing/run_stage1.py`
-  - default input: `01_preprocessing/input_pdfs`
-  - default output: `01_preprocessing/stage1_output`
-- Run `python 01_preprocessing/run_stage2.py`
-  - default input: `01_preprocessing/stage1_output`
-  - default output: `01_preprocessing/stage2_output`
+### 💻 Prerequisites
 
-### Stage 02 - Optimization
+| Software | Required Version | Download Link |
+| :--- | :--- | :--- |
+| **Python** | 3.10 or higher | [python.org/downloads](https://www.python.org/downloads/) |
+| **Node.js** | v18 or higher | [nodejs.org](https://nodejs.org/) |
+| **Ollama** | Latest | [ollama.com](https://ollama.com/) |
+| **Git** | Latest | [git-scm.com](https://git-scm.com/) |
 
-- Run `python 02_optimization/optimize.py`
+> 💡 **Important for Windows Users during installation:**  
+> When installing Python, make sure to check the box **"Add Python to PATH"**.
 
-### Stage 03 - Chunking
+---
 
-- Run `python 03_chunking/docling_chunker.py`
+## 🚀 Step-by-Step Manual Setup
 
-### Stage 04 - Embeddings and Vector DB
+### Step 1: Clone the Repository
 
-- Run `python 04_embeddings_and_kg/scripts/embeddings_production.py`
+Open your terminal and run:
 
-### Stage 05 - Web UI and Flask Backend
+```bash
+git clone https://github.com/YOUR_USERNAME/E-PROC-CHATBOT_ANTI_GRAVITY.git
+cd E-PROC-CHATBOT_ANTI_GRAVITY
+```
 
-- Start Flask: `python 05_webui/app.py`
-- Start UI: `cd 05_webui/nodejs && npm install && npm start`
-- Open `http://localhost:3000`
+---
 
-## Notes
+### Step 2: Create Configuration File
 
-- `HF_HUB_OFFLINE=1` and `TRANSFORMERS_OFFLINE=1` are still useful when running fully local model flows.
-- Voice STT and TTS live in `06_voice`.
-- Sarvam and Ollama startup choices depend on environment variables set before starting the UI/backend processes.
+Copy `.env.template` to create your configuration file `.env`:
+
+* **Windows (PowerShell):** `Copy-Item .env.template .env`
+* **Windows (CMD):** `copy .env.template .env`
+* **Linux / macOS:** `cp .env.template .env`
+
+---
+
+### Step 3: Set Up Python Virtual Environment
+
+```bash
+# 1. Create virtual environment
+python -m venv .venv
+
+# 2. Activate virtual environment
+# Windows (PowerShell):
+.\.venv\Scripts\Activate.ps1
+# Windows (CMD):
+.\.venv\Scripts\activate.bat
+# Linux / macOS:
+source .venv/bin/activate
+
+# 3. Install dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+### Step 4: Install Node.js UI Dependencies
+
+```bash
+cd 05_webui/nodejs
+npm install
+cd ../..
+```
+
+---
+
+### Step 5: Setup & Download Gemma 3 (4B)
+
+```bash
+# Start Ollama service (if not running)
+ollama serve
+
+# Pull Gemma 3 4B model
+ollama pull gemma3:4b
+```
+
+---
+
+## 🚀 Launching the Application
+
+* **Windows (Automated):** `.\setup_and_run.ps1` or `start_cpu.bat`
+* **Linux / macOS:** 
+  ```bash
+  chmod +x start_cpu.sh
+  ./start_cpu.sh
+  ```
+* **Manual Launch:**
+  ```bash
+  cd 05_webui/nodejs
+  npm start
+  ```
+
+---
+
+## 🌐 Accessing the Web UI
+
+Open your browser and navigate to:  
+👉 **[http://localhost:3000](http://localhost:3000)**
+
+---
+
+## 🛑 How to Stop the Application
+
+- **In Terminal:** Press `Ctrl + C`
+- **Force Stop via Command:**
+  * **Windows (PowerShell):** `Stop-Process -Name "node","python","ollama*" -Force -ErrorAction SilentlyContinue`
+  * **Windows (CMD):** `taskkill /F /IM node.exe /IM python.exe /IM ollama.exe`
+  * **Linux / macOS:** `pkill -f "node|python|ollama"`
+
+---
+
+## ❓ Troubleshooting
+
+### 1. 'python' or 'pip' is not recognized
+Ensure Python was added to system PATH during installation, then restart your terminal.
+
+### 2. PowerShell execution policy error (.ps1 script blocked)
+Open PowerShell as Administrator and run:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+### 3. "RAG backend is unreachable"
+Ensure `ollama pull gemma3:4b` has completed and `ollama serve` is active.
