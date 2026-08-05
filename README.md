@@ -81,10 +81,10 @@ If you are on Windows, you can perform full environment verification, dependency
 .\setup_and_run.ps1
 ```
 
-> **What [setup_and_run.ps1](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/setup_and_run.ps1) automates:**
+> **What [setup_and_run.ps1](file:///c:/Users/HP/Desktop/eProcurement-Project/setup_and_run.ps1) automates:**
 > 1. Verifies Python 3.10+, Node.js, and Ollama installation.
-> 2. Copies [.env.template](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/.env.template) to `.env` if missing.
-> 3. Creates the `.venv` virtual environment and installs all Python requirements from [requirements.txt](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/requirements.txt).
+> 2. Copies [.env.template](file:///c:/Users/HP/Desktop/eProcurement-Project/.env.template) to `.env` if missing.
+> 3. Creates the `.venv` virtual environment and installs all Python requirements from [requirements.txt](file:///c:/Users/HP/Desktop/eProcurement-Project/requirements.txt).
 > 4. Installs Node.js UI dependencies in `05_webui/nodejs`.
 > 5. Starts Ollama in background (if not running) and pulls `gemma3:4b`.
 > 6. Launches the application stack and automatically opens `http://localhost:3000` in your web browser.
@@ -100,7 +100,7 @@ If your environment is already set up and you wish to run with CPU optimization 
 ```cmd
 start_cpu.bat
 ```
-*(Runs [start_cpu.bat](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/start_cpu.bat))*
+*(Runs [start_cpu.bat](file:///c:/Users/HP/Desktop/eProcurement-Project/start_cpu.bat))*
 
 #### On Linux / macOS (Bash):
 
@@ -108,7 +108,7 @@ start_cpu.bat
 chmod +x start_cpu.sh
 ./start_cpu.sh
 ```
-*(Runs [start_cpu.sh](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/start_cpu.sh))*
+*(Runs [start_cpu.sh](file:///c:/Users/HP/Desktop/eProcurement-Project/start_cpu.sh))*
 
 ---
 
@@ -122,7 +122,8 @@ Open your terminal / PowerShell and clone the repository:
 
 ```bash
 git clone https://github.com/CMITF/eProcurement-Project.git
-cd E-PROC-CHATBOT_ANTI_GRAVITY
+cd eProcurement-Project
+
 ```
 
 ---
@@ -148,7 +149,7 @@ Create your local `.env` configuration file from the provided template:
 
 ### Step 3: Setup Python Virtual Environment
 
-Create and activate a virtual environment, then install required packages from [requirements.txt](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/requirements.txt):
+Create and activate a virtual environment, then install required packages from [requirements.txt](file:///c:/Users/HP/Desktop/eProcurement-Project/requirements.txt):
 
 #### 1. Create Virtual Environment:
 ```bash
@@ -212,7 +213,7 @@ cd 05_webui/nodejs
 node server.js
 ```
 
-> ℹ️ **How it works:** [server.js](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/05_webui/nodejs/server.js) starts the Express UI server on port `3000` and automatically spawns the Flask RAG backend ([05_webui/app.py](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/05_webui/app.py)) on port `5000` if it is not already running.
+> ℹ️ **How it works:** [server.js](file:///c:/Users/HP/Desktop/eProcurement-Project/05_webui/nodejs/server.js) starts the Express UI server on port `3000` and automatically spawns the Flask RAG backend ([05_webui/app.py](file:///c:/Users/HP/Desktop/eProcurement-Project/05_webui/app.py)) on port `5000` if it is not already running.
 
 Open your browser and visit:
 
@@ -226,7 +227,7 @@ If you add new procurement store rules or PDF guidelines and want to re-process 
 
 1. Place your input PDF documents into `01_preprocessing/input_pdfs/`.
 2. Activate your Python virtual environment.
-3. Run the master pipeline script [run_full_pipeline.py](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/run_full_pipeline.py):
+3. Run the master pipeline script [run_full_pipeline.py](file:///c:/Users/HP/Desktop/eProcurement-Project/run_full_pipeline.py):
 
 ```bash
 python run_full_pipeline.py
@@ -234,8 +235,8 @@ python run_full_pipeline.py
 
 ### Pipeline Sequence:
 1. **Stage 1 & 2 (OCR & Structure):** Runs PDF image conversion & Docling OCR structure extraction to generate markdown/JSON outputs in `01_preprocessing/stage2_output/`.
-2. **Stage 3 (Semantic Chunking):** Runs [docling_chunker.py](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/03_chunking/docling_chunker.py) to split markdown into chunk files in `03_chunking/output/`.
-3. **Stage 4 (Vector Embeddings):** Runs [embeddings_production.py](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/04_embeddings_and_kg/scripts/embeddings_production.py) to compute `BAAI/bge-m3` dense + BM25 sparse hybrid embeddings and store them in Qdrant (`04_embeddings_and_kg/db/qdrant_local`).
+2. **Stage 3 (Semantic Chunking):** Runs [docling_chunker.py](file:///c:/Users/HP/Desktop/eProcurement-Project/03_chunking/docling_chunker.py) to split markdown into chunk files in `03_chunking/output/`.
+3. **Stage 4 (Vector Embeddings):** Runs [embeddings_production.py](file:///c:/Users/HP/Desktop/eProcurement-Project/04_embeddings_and_kg/scripts/embeddings_production.py) to compute `BAAI/bge-m3` dense + BM25 sparse hybrid embeddings and store them in Qdrant (`04_embeddings_and_kg/db/qdrant_local`).
 
 ### Useful Pipeline CLI Flags:
 * Skip embeddings step (chunking only):
@@ -268,7 +269,7 @@ python 06_voice/voice_server.py
 
 ## ⚙️ Environment Configuration Reference
 
-The [.env](file:///c:/Users/HP/Desktop/E-PROC-CHATBOT_ANTI_GRAVITY/.env.template) file allows you to customize ports, models, and retrieval parameters:
+The [.env](file:///c:/Users/HP/Desktop/eProcurement-Project/.env.template) file allows you to customize ports, models, and retrieval parameters:
 
 | Variable | Default Value | Description |
 | :--- | :--- | :--- |
