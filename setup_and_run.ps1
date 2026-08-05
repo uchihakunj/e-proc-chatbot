@@ -170,6 +170,16 @@ if (-not $env:RAG_REQUEST_QUEUE_TIMEOUT_SECONDS) { $env:RAG_REQUEST_QUEUE_TIMEOU
 $env:PATH = "$(Join-Path $venvPath 'Scripts');" + $env:PATH
 $env:PYTHON = $venvPython
 
+# Start Voice Server in background
+$voiceServerScript = Join-Path $ProjectRoot "06_voice\voice_server.py"
+if (Test-Path $voiceServerScript) {
+    $logsDir = Join-Path $ProjectRoot "logs"
+    if (-not (Test-Path $logsDir)) { New-Item -ItemType Directory -Path $logsDir -Force | Out-Null }
+    $voiceLog = Join-Path $logsDir "voice_server.log"
+    Write-Step "Starting Voice Server on port 5050 (background)..."
+    Start-Process -FilePath $venvPython -ArgumentList "`"$voiceServerScript`"" -RedirectStandardOutput $voiceLog -RedirectStandardError $voiceLog -WindowStyle Hidden
+}
+
 Write-Info "Waiting for UI to become ready at http://localhost:3000 before opening browser..."
 Start-Job -ScriptBlock {
     for ($i = 0; $i -lt 150; $i++) {

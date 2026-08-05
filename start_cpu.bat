@@ -19,7 +19,16 @@ echo Starting Ollama in CPU-only mode (background)...
 start /B ollama serve >nul 2>&1
 timeout /t 3 >nul
 
-:: 4. Start the Application Stack
+:: 4. Start Voice Server (background)
+set PYTHON=.venv\Scripts\python.exe
+if not exist "%PYTHON%" set PYTHON=python
+
+echo Starting Voice Server on port 5050 (background)...
+if not exist "logs" mkdir logs
+start /B "" "%PYTHON%" 06_voice\voice_server.py > logs\voice_server.log 2>&1
+timeout /t 2 >nul
+
+:: 5. Start the Application Stack
 echo Starting Node.js UI and Flask Backend...
 set NODE_ENV=production
 set ENVIRONMENT=production
