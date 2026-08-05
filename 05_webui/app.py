@@ -4414,7 +4414,7 @@ if __name__ == '__main__':
     print("   Authentication is handled by Express.js at :3000")
     
     flask_host = os.getenv('FLASK_HOST', '0.0.0.0')
-    flask_port = 8080
+    flask_port = 5000
     if os.getenv('FLASK_PORT'):
         try:
             flask_port = int(os.getenv('FLASK_PORT'))

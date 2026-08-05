@@ -13,8 +13,12 @@ try {
 }
 
 // Login/auth removed — no JWT_SECRET or user store required anymore.
+const flaskPort = process.env.FLASK_PORT || '5000';
+const defaultFlaskUrl = `http://127.0.0.1:${flaskPort}`;
+
 module.exports = {
-  PORT:      parseInt(process.env.PORT || '3000', 10),
-  FLASK_URL: process.env.FLASK_URL     || 'http://127.0.0.1:8080',
-  IS_PROD:   process.env.NODE_ENV      === 'production',
+  PORT:             parseInt(process.env.PORT || '3000', 10),
+  FLASK_URL:        process.env.FLASK_URL || defaultFlaskUrl,
+  FLASK_TIMEOUT_MS: parseInt(process.env.FLASK_TIMEOUT_MS || '300000', 10),
+  IS_PROD:          process.env.NODE_ENV  === 'production',
 };

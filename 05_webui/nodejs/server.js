@@ -8,7 +8,7 @@ const path = require('path');
 const net = require('net');
 const { spawn } = require('child_process');
 
-const { PORT, FLASK_URL, IS_PROD } = require('./config');
+const { PORT, FLASK_URL, IS_PROD, FLASK_TIMEOUT_MS } = require('./config');
 // Auth (login UI) removed — the chatbot is now open access. The proxies below
 // forward straight to Flask with no JWT guard.
 
@@ -28,7 +28,8 @@ function parseBackendTarget(urlString) {
       port: Number(target.port || (target.protocol === 'https:' ? 443 : 80)),
     };
   } catch (_err) {
-    return { hostname: '127.0.0.1', port: 8080 };
+    const defaultPort = Number(process.env.FLASK_PORT || 5000);
+    return { hostname: '127.0.0.1', port: defaultPort };
   }
 }
 
@@ -55,7 +56,7 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function waitForFlaskBackend(target, childProcess, timeoutMs = 120000) {
+async function waitForFlaskBackend(target, childProcess, timeoutMs = (FLASK_TIMEOUT_MS || 300000)) {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     if (await isPortOpen(target.hostname, target.port)) {
@@ -121,9 +122,11 @@ async function ensureFlaskBackend() {
       }
     });
 
-    const ready = await waitForFlaskBackend(target, child);
+    const timeoutMs = FLASK_TIMEOUT_MS || 300000;
+    const ready = await waitForFlaskBackend(target, child, timeoutMs);
     if (!ready) {
-      throw new Error(`Flask did not become ready within 120 seconds at ${FLASK_URL}`);
+      const timeoutSec = Math.round(timeoutMs / 1000);
+      throw new Error(`Flask did not become ready within ${timeoutSec} seconds at ${FLASK_URL}`);
     }
     console.log(`[flask] Backend ready at ${FLASK_URL}`);
     return true;

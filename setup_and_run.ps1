@@ -104,8 +104,8 @@ if (-not (Test-Path $venvPath)) {
 }
 
 Write-Step "Upgrading pip and installing Python dependencies..."
-& $venvPython -m pip install --upgrade pip --quiet
-& $venvPip install -r (Join-Path $ProjectRoot "requirements.txt") --quiet
+& $venvPython -m pip install --upgrade pip
+& $venvPip install -r (Join-Path $ProjectRoot "requirements.txt") --no-cache-dir
 
 # ---------------------------------------------------------------------------
 # 4. Node.js UI Setup
@@ -116,7 +116,7 @@ $nodeModulesDir = Join-Path $nodeUiDir "node_modules"
 if (-not (Test-Path $nodeModulesDir)) {
     Write-Step "Installing Node.js dependencies in 05_webui\nodejs..."
     Set-Location -Path $nodeUiDir
-    npm install --quiet
+    npm install
     Set-Location -Path $ProjectRoot
 } else {
     Write-Info "Node.js dependencies already installed."
@@ -159,6 +159,9 @@ Write-Header "Launching Application Stack"
 $env:NODE_ENV = "production"
 $env:ENVIRONMENT = "production"
 $env:USE_WAITRESS = "true"
+if (-not $env:FLASK_PORT) { $env:FLASK_PORT = "5000" }
+if (-not $env:FLASK_URL) { $env:FLASK_URL = "http://127.0.0.1:$($env:FLASK_PORT)" }
+if (-not $env:FLASK_TIMEOUT_MS) { $env:FLASK_TIMEOUT_MS = "300000" }
 if (-not $env:WAITRESS_THREADS) { $env:WAITRESS_THREADS = "8" }
 if (-not $env:MAX_CONCURRENT_RAG_REQUESTS) { $env:MAX_CONCURRENT_RAG_REQUESTS = "8" }
 if (-not $env:RAG_REQUEST_QUEUE_TIMEOUT_SECONDS) { $env:RAG_REQUEST_QUEUE_TIMEOUT_SECONDS = "2.0" }
@@ -167,9 +170,19 @@ if (-not $env:RAG_REQUEST_QUEUE_TIMEOUT_SECONDS) { $env:RAG_REQUEST_QUEUE_TIMEOU
 $env:PATH = "$(Join-Path $venvPath 'Scripts');" + $env:PATH
 $env:PYTHON = $venvPython
 
-Write-Info "Opening browser at http://localhost:3000 in 5 seconds..."
+Write-Info "Waiting for UI to become ready at http://localhost:3000 before opening browser..."
 Start-Job -ScriptBlock {
-    Start-Sleep -Seconds 5
+    for ($i = 0; $i -lt 150; $i++) {
+        Start-Sleep -Seconds 2
+        try {
+            $resp = Invoke-WebRequest -Uri "http://localhost:3000" -UseBasicParsing -TimeoutSec 1 -ErrorAction SilentlyContinue
+            if ($resp.StatusCode -eq 200) {
+                break
+            }
+        } catch {
+            # Express UI not listening yet
+        }
+    }
     Start-Process "http://localhost:3000"
 } | Out-Null
 
