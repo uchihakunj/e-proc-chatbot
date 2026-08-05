@@ -10,11 +10,10 @@ __pycache__/
 .env.*
 !.env.template
 
-# Vector database (large binary, not source)
-04_embeddings_and_kg/db/
+# Vector database lock files (do not push runtime locks)
+04_embeddings_and_kg/db/**/*.lock
+04_embeddings_and_kg/db/*.lock
 
-# Manifest (auto-generated, not source)
-04_embeddings_and_kg/.embeddings_manifest.json
 
 # Logs
 logs/
