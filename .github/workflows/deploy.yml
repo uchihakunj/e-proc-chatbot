@@ -1,0 +1,32 @@
+name: Continuous Deployment to VM
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  deploy-self-hosted:
+    name: Deploy via Self-Hosted Runner on VM
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull Latest Changes
+        run: |
+          git fetch origin
+          git reset --hard origin/master
+
+      - name: Install Node.js UI Dependencies
+        run: |
+          cd 05_webui/nodejs
+          npm install
+
+      - name: Update Python Virtual Environment Dependencies
+        run: |
+          source .venv/bin/activate || true
+          python -m pip install -r requirements.txt
+
+      - name: Restart eProcurement Application Service
+        run: |
+          sudo systemctl restart eproc-chatbot.service || true
