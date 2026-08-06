@@ -13,20 +13,20 @@ set OLLAMA_LLM_LIBRARY=cpu
 :: 3. Restart Ollama in this terminal so it picks up the CPU flags
 echo Stopping any running Ollama instance...
 powershell -Command "Stop-Process -Name 'ollama*' -Force -ErrorAction SilentlyContinue"
-timeout /t 2 >nul
+ping 127.0.0.1 -n 3 >nul
 
 echo Starting Ollama in CPU-only mode (background)...
 start /B ollama serve >nul 2>&1
-timeout /t 3 >nul
+ping 127.0.0.1 -n 4 >nul
 
 :: 4. Start Voice Server (background)
-set PYTHON=.venv\Scripts\python.exe
+set PYTHON=%~dp0.venv\Scripts\python.exe
 if not exist "%PYTHON%" set PYTHON=python
 
 echo Starting Voice Server on port 5050 (background)...
-if not exist "logs" mkdir logs
-start /B "" "%PYTHON%" 06_voice\voice_server.py > logs\voice_server.log 2>&1
-timeout /t 2 >nul
+if not exist "%~dp0logs" mkdir "%~dp0logs"
+start /B "" "%PYTHON%" "%~dp006_voice\voice_server.py" > "%~dp0logs\voice_server.log" 2>&1
+ping 127.0.0.1 -n 3 >nul
 
 :: 5. Start the Application Stack
 echo Starting Node.js UI and Flask Backend...
@@ -39,5 +39,6 @@ if "%FLASK_TIMEOUT_MS%"=="" set FLASK_TIMEOUT_MS=300000
 if "%WAITRESS_THREADS%"=="" set WAITRESS_THREADS=8
 if "%MAX_CONCURRENT_RAG_REQUESTS%"=="" set MAX_CONCURRENT_RAG_REQUESTS=8
 if "%RAG_REQUEST_QUEUE_TIMEOUT_SECONDS%"=="" set RAG_REQUEST_QUEUE_TIMEOUT_SECONDS=2.0
-cd 05_webui\nodejs
+cd "%~dp005_webui\nodejs"
 node server.js
+
