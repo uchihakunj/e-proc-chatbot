@@ -243,7 +243,7 @@ const api = {
   // blob plus the 1-based page of the first highlight (from a response header)
   // so the viewer can jump straight to it. Falls back to a plain blob server-side.
   async fetchPdfHighlighted(filename, snippet) {
-    const res = await fetch('/api/highlighted_pdf', {
+    const res = await fetch('./api/highlighted_pdf', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${session.token()}` },
       body: JSON.stringify({ filename, snippet }),
@@ -255,13 +255,13 @@ const api = {
     return { blob: await res.blob(), page: Number.isFinite(page) ? page : null, hits: Number.isFinite(hits) ? hits : 0 };
   },
 
-  login:    (u, p) => api._request('POST', '/auth/login', { username: u, password: p }, false),
-  logout:   ()     => api._request('POST', '/auth/logout', undefined, false),
-  health:   ()     => api._request('GET',  '/api/health'),
-  init:     ()     => api._request('POST', '/api/init'),
-  dbStatus: ()     => api._request('GET',  '/api/db-status'),
-  settings: (body) => api._request(body ? 'POST' : 'GET', '/api/settings', body),
-  query:    (q, n) => api._request('POST', '/api/query', { query: q, num_results: n }),
+  login:    (u, p) => api._request('POST', './auth/login', { username: u, password: p }, false),
+  logout:   ()     => api._request('POST', './auth/logout', undefined, false),
+  health:   ()     => api._request('GET',  './api/health'),
+  init:     ()     => api._request('POST', './api/init'),
+  dbStatus: ()     => api._request('GET',  './api/db-status'),
+  settings: (body) => api._request(body ? 'POST' : 'GET', './api/settings', body),
+  query:    (q, n) => api._request('POST', './api/query', { query: q, num_results: n }),
 };
 
 // ── Markdown-lite renderer ────────────────────────────────────────────────
@@ -1447,7 +1447,7 @@ function addAnswerActions(container, question, answer, sources) {
     up.disabled = true; down.disabled = true;
     btn.classList.add('fb-active');
     try {
-      await fetch('/api/feedback', {
+      await fetch('./api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rating, query: question, answer,
@@ -1684,7 +1684,7 @@ async function sendQuery() {
     state.abortController = controller;
     showStopBtn();
 
-    const response = await fetch('/api/stream', {
+    const response = await fetch('./api/stream', {
       method: 'POST', headers, signal: controller.signal,
       body: JSON.stringify({ query: queryPayload, num_results: numCtx, session_id: state.conversationId }),
     });
