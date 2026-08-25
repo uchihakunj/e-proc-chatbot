@@ -49,7 +49,8 @@ jobs:
         run: |
           if [ -d "/opt/eproc-chatbot" ]; then
             echo "Syncing latest commit to /opt/eproc-chatbot..."
-            rsync -av --exclude='.venv' --exclude='.env' --exclude='node_modules' --exclude='.git' --exclude='logs' ./ /opt/eproc-chatbot/ 2>/dev/null || cp -r 05_webui 06_voice *.py *.txt *.sh /opt/eproc-chatbot/ 2>/dev/null || true
+            sudo cp -rf 05_webui 06_voice *.py *.txt *.sh /opt/eproc-chatbot/ || true
+            sudo chown -R chips:chips /opt/eproc-chatbot 2>/dev/null || true
           fi
 
       - name: Restart eProcurement Application Service

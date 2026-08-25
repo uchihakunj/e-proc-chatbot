@@ -991,9 +991,9 @@ ABBREVIATION_EXPANSIONS = {
 
 
 REFUSAL_LINES = {
-    'hi':       'इस प्रश्न का उत्तर उपलब्ध दस्तावेजों में नहीं मिला।',
-    'hinglish': 'Is question ka answer uplabdh documents mein nahi mila.',
-    'en':       'The answer to this question was not found in the available documents.',
+    'hi':       'मैं छत्तीसगढ़ ई-प्रोक्योरमेंट और स्टोर परचेज रूल्स से संबंधित प्रश्नों में सहायता के लिए बनाया गया हूँ। कृपया प्रोक्योरमेंट दिशानिर्देश, निविदा (Tender) प्रक्रिया, वेंडर पंजीकरण, EMD, बिडिंग या पोर्टल हेल्पडेस्क से संबंधित प्रश्न पूछें।',
+    'hinglish': 'Main Chhattisgarh e-Procurement aur Store Purchase Rules se related queries ke liye design kiya gaya hoon. Kripya procurement, tender procedures, vendor registration, EMD, bidding ya portal helpdesk se related sawaal poochein.',
+    'en':       'I am designed to assist specifically with Chhattisgarh e-Procurement and Store Purchase Rules. Please ask questions related to procurement guidelines, tender procedures, vendor registration, EMD, bidding, or portal helpdesk support.',
 }
 
 # Procurement domain vocabulary (English + Hindi + Hinglish) for a fast scope gate.
