@@ -25,7 +25,7 @@ sentencepiece>=0.1.99
 # STAGE 4: EMBEDDINGS & VECTOR DATABASE
 # ============================================================================
 FlagEmbedding>=1.2.0
-sentence-transformers>=3.0.0
+sentence-transformers~=3.0.1
 faiss-cpu>=1.7.4
 qdrant-client>=1.9.0
 
