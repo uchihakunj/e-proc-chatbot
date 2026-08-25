@@ -15,33 +15,38 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
+          fetch-depth: 2
           clean: false
 
       - name: Configure Git Safe Directory
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE" || true
 
-      - name: Sync Git Repository
+      - name: Install Node.js UI Dependencies (Only if changed)
         run: |
-          git fetch origin master || true
-          git reset --hard origin/master || true
-
-      - name: Install Node.js UI Dependencies
-        run: |
-          cd 05_webui/nodejs
-          npm install
-
-      - name: Update Python Virtual Environment Dependencies
-        run: |
-          if [ -f ".venv/bin/python" ]; then
-            .venv/bin/python -m pip install -r requirements.txt
-          elif [ -f "/opt/eproc-chatbot/.venv/bin/python" ]; then
-            /opt/eproc-chatbot/.venv/bin/python -m pip install -r requirements.txt
+          if git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -q '05_webui/nodejs/package'; then
+            echo "package.json changed — running npm install..."
+            cd 05_webui/nodejs
+            npm install
           else
-            python3 -m pip install -r requirements.txt
+            echo "package.json unchanged — skipping npm install."
+          fi
+
+      - name: Update Python Dependencies (Only if requirements.txt changed)
+        run: |
+          if git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -q 'requirements.txt'; then
+            echo "requirements.txt changed — updating python dependencies..."
+            PYTHON_BIN=""
+            if [ -f ".venv/bin/python" ]; then PYTHON_BIN=".venv/bin/python";
+            elif [ -f "/opt/eproc-chatbot/.venv/bin/python" ]; then PYTHON_BIN="/opt/eproc-chatbot/.venv/bin/python";
+            else PYTHON_BIN="python3"; fi
+            $PYTHON_BIN -m pip install -r requirements.txt
+          else
+            echo "requirements.txt unchanged — skipping pip install."
           fi
 
       - name: Restart eProcurement Application Service
         run: |
           sudo systemctl restart eproc-chatbot.service || true
+
 
