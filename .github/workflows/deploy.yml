@@ -47,6 +47,6 @@ jobs:
 
       - name: Restart eProcurement Application Service
         run: |
-          sudo systemctl restart eproc-chatbot.service || true
+          sudo systemctl restart eproc-chatbot.service & disown || true
 
 
