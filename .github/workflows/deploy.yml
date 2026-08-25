@@ -45,6 +45,13 @@ jobs:
             echo "requirements.txt unchanged — skipping pip install."
           fi
 
+      - name: Sync Code to /opt/eproc-chatbot Deployment Directory
+        run: |
+          if [ -d "/opt/eproc-chatbot" ]; then
+            echo "Syncing latest commit to /opt/eproc-chatbot..."
+            rsync -av --exclude='.venv' --exclude='.env' --exclude='node_modules' --exclude='.git' --exclude='logs' ./ /opt/eproc-chatbot/ 2>/dev/null || cp -r 05_webui 06_voice *.py *.txt *.sh /opt/eproc-chatbot/ 2>/dev/null || true
+          fi
+
       - name: Restart eProcurement Application Service
         run: |
           sudo systemctl restart eproc-chatbot.service & disown || true
