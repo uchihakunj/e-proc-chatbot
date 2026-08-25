@@ -105,7 +105,7 @@ def build_answer_synthesis_directive(question: str, actor: str, intent: str,
         "documents do not explicitly state this exact scenario. The closest applicable guidance is …” "
         "Then provide only that grounded guidance; do not guess.\n"
         "- Use a compact format: start with `💡 Answer`; add `📋 Process` or `📋 Decision checklist` "
-        "only where steps help; add `⚠ Important points` only for source-supported exceptions. "
+        "only where steps help; add `⚠ Important points` only for source-supported requirements, exceptions, or risks. "
         "End with the required source line. Avoid boilerplate and repeated content.\n"
         "- Write like an experienced government procurement officer: clear, neutral, practical and "
         "conversational. Prefer natural procurement language over literal translations or copied rule text.\n"

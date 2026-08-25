@@ -492,6 +492,14 @@ def requires_deterministic_policy_answer(question: str, intent: str) -> bool:
         intent == "vendor_registration" and _has(
             q, "foreign company", "foreign vendor", "foreign bidder", "foreign supplier") and _has(
                 q, "dsc", "registration", "register", "certificate"),
+        any(phrase in q for phrase in (
+            "kinse contact", "kisse contact", "kise contact", "kahan contact", "kaha contact",
+            "kiske contact", "kiske paas contact", "who to contact", "whom to contact", "where to contact",
+            "helpdesk number", "helpline number", "helpdesk contact", "helpline contact",
+            "kisse baat kare", "kinse baat kare", "contact karein", "contact karu", "contact kare",
+            "kisse contact karein", "kinse contact karein", "kise contact karein", "kisse contact karu",
+            "kinse contact karu", "kise contact karu"
+        )),
     )):
         return True
     return any((
@@ -1541,6 +1549,20 @@ def _render_additional_grounded_answer(state: FineIntentFallback) -> str | None:
     def selected(en: str, hinglish: str, hi: str) -> str:
         return _with_selected_sources({"en": en, "hinglish": hinglish, "hi": hi}.get(lang, en), state)
 
+    # Direct contact inquiry ("kinse contact karein", "kisse contact karein", "who to contact", etc.)
+    if any(phrase in low_question for phrase in (
+            "kinse contact", "kisse contact", "kise contact", "kahan contact", "kaha contact",
+            "kiske contact", "kiske paas contact", "who to contact", "whom to contact", "where to contact",
+            "helpdesk number", "helpline number", "helpdesk contact", "helpline contact",
+            "kisse baat kare", "kinse baat kare", "contact karein", "contact karu", "contact kare",
+            "kisse contact karein", "kinse contact karein", "kise contact karein", "kisse contact karu",
+            "kinse contact karu", "kise contact karu")):
+        return selected(
+            "Answer\nYou can contact the CHiPS e-Procurement Helpdesk through the following contact details:\n\n📞 Helpline / Toll-Free Number: 1800 419 9140\n⏰ Support Hours: 9:00 AM to 11:00 PM (IST)\n✉️ Helpdesk Email: helpdesk.eproc@cgswan.gov.in (or helpdesk.cgeproc@mjunction.in)\n🌐 e-Procurement Portal: CHiPS e-Procurement Portal\n\nIf your query relates to a specific Tender, Bid Submission, Payment, or EMD Refund issue, please keep your Tender ID, Bidder ID, and Payment Transaction details ready when contacting support.",
+            "Answer\nChhattisgarh e-Procurement (CHiPS) Helpdesk se contact karne ke liye in details ka use karein:\n\n📞 Toll-Free Helpline Number: 1800 419 9140\n⏰ Support Hours: Subah 9:00 AM se Raat 11:00 PM (IST)\n✉️ Helpdesk Email: helpdesk.eproc@cgswan.gov.in (ya helpdesk.cgeproc@mjunction.in)\n🌐 Portal: CHiPS e-Procurement Portal\n\nAgar aapka sawaal kisi specific Tender, Bid Submission, Payment ya EMD Refund se related hai, to Helpdesk se contact karte waqt apna Tender ID, Bidder ID aur Payment Receipt/Transaction details saath rakhein.",
+            "Answer\nछत्तीसगढ़ ई-प्रोक्योरमेंट (CHiPS) हेल्पडेस्क से संपर्क करने के लिए निम्नलिखित संपर्क विवरण का उपयोग करें:\n\n📞 टोल-फ्री हेल्पलाइन नंबर: 1800 419 9140\n⏰ सहायता समय: सुबह 9:00 बजे से रात 11:00 बजे तक (IST)\n✉️ हेल्पडेस्क ईमेल: helpdesk.eproc@cgswan.gov.in (या helpdesk.cgeproc@mjunction.in)\n🌐 पोर्टल: CHiPS ई-प्रोक्योरमेंट पोर्टल\n\nयदि आपकी समस्या किसी निविदा (Tender), बीओक्यू, भुगतान या EMD रिफंड से संबंधित है, तो हेल्पडेस्क से संपर्क करते समय अपना Tender ID, Bidder ID और भुगतान रसीद/ट्रांजैक्शन विवरण पास रखें।",
+        )
+
     # Decision questions must be answered as decisions, rather than being
     # expanded into a generic GeM/tender lifecycle.  These contracts contain
     # no value threshold: the applicable rule and delegated power remain the
@@ -1697,6 +1719,12 @@ def _render_additional_grounded_answer(state: FineIntentFallback) -> str | None:
             "Answer\nUse your authorised bidder credentials and valid DSC, open the relevant Auction and choose View/Respond. Before bidding, review the auction terms, opening price and minimum bid-change condition. Enter a bid only within those conditions, submit it, and verify the displayed acknowledgement or current bid status. Do not rely on or disclose any default password.",
             "Answer\nAuthorised bidder credentials aur valid DSC se login karke relevant Auction mein View/Respond open karein. Bid se pehle auction terms, opening price aur minimum bid-change condition check karein. Conditions ke andar bid enter/submit karke acknowledgement ya current bid status verify karein. Kisi default password par rely ya disclose na karein.",
             "Answer\nValid DSC se relevant Auction ka View/Respond kholein, opening price aur minimum bid-change condition check karein, bid submit karke status verify karein. Default password use ya disclose na karein.",
+        )
+    if state.intent in ("emd_refund_unsuccessful_bidder", "emd_remittance_to_department", "emd_payment_failure", "emd_payment") and any(term in low_question for term in ("contact", "helpline", "helpdesk", "kinse", "kise", "kisse", "kaha", "kahan", "kiske", "who", "whom", "sampark", "samparak", "jau", "baat", "call", "number", "email")):
+        return selected(
+            "Answer\nIf your EMD refund is missing or delayed, contact the following:\n1. Department Admin / Tender Owner: Contact the concerned Department Admin or Tender Owner specified in the Tender Notice, as the refund initiation and approval are processed by them.\n2. CHiPS e-Procurement Helpdesk: Contact the CHiPS Helpdesk with your Tender ID, Bidder ID, payment acknowledgement/challan, and bank transaction details.\n3. Portal Status: Check the EMD refund/transaction status on the e-Procurement portal to verify whether the refund instruction has been sent to the bank.",
+            "Answer\nAgar EMD refund nahi mila hai to in se contact karein:\n1. Department Admin / Tender Owner: Relevant Tender Notice mein diye gaye Department Admin ya Tender Owner se contact karein, kyunki refund initiation aur approval unke dwara hi hota hai.\n2. CHiPS e-Procurement Helpdesk: Tender ID, Bidder ID, payment acknowledgement/challan aur bank transaction details ke saath CHiPS Helpdesk se contact karein.\n3. Portal Status: e-Procurement portal par EMD refund/transaction status check karke verify karein ki system ne bank ko instruction bhej diya hai ya nahi.",
+            "Answer\nयदि EMD रिफंड प्राप्त नहीं हुआ है, तो निम्नलिखित से संपर्क करें:\n1. विभाग प्रशासक / निविदा स्वामी (Department Admin / Tender Owner): निविदा सूचना में निर्दिष्ट संबंधित विभाग प्रशासक या निविदा अधिकारी से संपर्क करें, क्योंकि रिफंड प्रक्रिया उन्हीं के द्वारा शुरू और स्वीकृत की जाती है।\n2. CHiPS हेल्पडेस्क: अपनी Tender ID, Bidder ID, भुगतान चालान/पावती और ट्रांजैक्शन विवरण के साथ CHiPS हेल्पडेस्क से संपर्क करें।\n3. पोर्टल स्थिति: ई-प्रोक्योरमेंट पोर्टल पर EMD रिफंड स्टेटस जांचें और सत्यापित करें कि क्या बैंक को निर्देश भेजा जा चुका है।",
         )
     if state.intent in ("emd_refund_unsuccessful_bidder", "emd_remittance_to_department") and _has(low_question, "refund", "reject", "unsuccessful"):
         return selected(

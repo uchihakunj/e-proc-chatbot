@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style.css?v=1.4" />
 </head>
 <body>
 
@@ -91,6 +91,14 @@
               <path d="M16 21v-3a2 2 0 0 1 2-2h3"/>
             </svg>
           </button>
+          <button id="clear-chat-btn" class="header-clear-btn" type="button" title="Clear this conversation">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              <line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>
+            </svg>
+          </button>
           <!-- Reset position & size (shown only after moving / maximizing) -->
           <button id="popup-reset-btn" class="header-icon-btn hidden" title="Reset position &amp; size">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -116,15 +124,6 @@
           </button>
           <!-- Dropdown options menu -->
           <div id="popup-menu" class="popup-menu hidden" role="menu">
-            <button class="popup-menu-item" data-action="clear" role="menuitem" type="button">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="3 6 5 6 21 6"/>
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                <line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>
-              </svg>
-              <span>Clear Chat</span>
-            </button>
             <button class="popup-menu-item" data-action="minimize" role="menuitem" type="button">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -221,6 +220,15 @@
             <div class="welcome-icon">&#128075;</div>
             <h3 class="welcome-title">Welcome to the eProcurement Assistant</h3>
             <p class="welcome-intro">Your AI assistant for Government Procurement</p>
+            <div class="landing-info" aria-label="What this assistant can do">
+              <div class="landing-info-title">What you can do here</div>
+              <ul class="landing-info-list">
+                <li>Ask about tenders, bids, EMD, vendor registration, auctions, and GFR rules.</li>
+                <li>Use Hindi, English, or Hinglish. The assistant will try to answer in your language.</li>
+                <li>Open sources under an answer to read the manual or notice being used.</li>
+                <li>Turn on Auto-Voice to hear answers while they appear on screen.</li>
+              </ul>
+            </div>
             <div class="role-starts" aria-label="Choose a starting point">
               <button class="role-start-card" type="button" data-role="buyer"><span class="role-start-icon" aria-hidden="true">🏢</span><span><strong>Department Buyer</strong><small>Plan and purchase</small></span></button>
               <button class="role-start-card" type="button" data-role="vendor"><span class="role-start-icon" aria-hidden="true">👤</span><span><strong>Vendor/Bidder</strong><small>Register and bid</small></span></button>
@@ -243,6 +251,17 @@
 
         <!-- Query bar -->
         <div id="query-bar">
+          <div class="chat-toolbar">
+            <button id="clear-chat-inline" class="clear-chat-btn" type="button" title="Clear this conversation">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="3 6 5 6 21 6"/>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                <line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>
+              </svg>
+              <span>Clear chat</span>
+            </button>
+          </div>
           <div id="suggestion-chips">
             <button class="suggestion-chip" type="button">What is e-Procurement?</button>
             <button class="suggestion-chip" type="button">Vendor registration</button>
@@ -361,6 +380,6 @@
     <div id="login-screen"></div>
   </div>
 
-  <script type="module" src="./app.js?v=ux-status-7"></script>
+  <script type="module" src="./app.js?v=ux-status-13"></script>
 </body>
 </html>

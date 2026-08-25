@@ -273,7 +273,7 @@ The [.env](file:///c:/Users/HP/Desktop/eProcurement-Project/.env.template) file 
 
 | Variable | Default Value | Description |
 | :--- | :--- | :--- |
-| `FLASK_PORT` | `5000` | Port for Flask RAG backend |
+| `FLASK_PORT` | `5050` | Port for Flask RAG backend |
 | `PORT` | `3000` | Port for Express Web UI frontend |
 | `OLLAMA_MODEL` | `gemma3:4b` | Default LLM model running in Ollama |
 | `ANSWER_PROVIDER` | `ollama` | Primary answer synthesis provider (`ollama` / `sarvam`) |

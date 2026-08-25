@@ -176,8 +176,9 @@ if (Test-Path $voiceServerScript) {
     $logsDir = Join-Path $ProjectRoot "logs"
     if (-not (Test-Path $logsDir)) { New-Item -ItemType Directory -Path $logsDir -Force | Out-Null }
     $voiceLog = Join-Path $logsDir "voice_server.log"
+    $voiceErrLog = Join-Path $logsDir "voice_server_err.log"
     Write-Step "Starting Voice Server on port 5050 (background)..."
-    Start-Process -FilePath $venvPython -ArgumentList "`"$voiceServerScript`"" -RedirectStandardOutput $voiceLog -RedirectStandardError $voiceLog -WindowStyle Hidden
+    Start-Process -FilePath $venvPython -ArgumentList "`"$voiceServerScript`"" -RedirectStandardOutput $voiceLog -RedirectStandardError $voiceErrLog -WindowStyle Hidden
 }
 
 Write-Info "Waiting for UI to become ready at http://localhost:3000 before opening browser..."

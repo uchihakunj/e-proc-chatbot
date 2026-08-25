@@ -157,6 +157,13 @@ app.use(
   express.static(path.join(__dirname, 'public'), {
     maxAge: IS_PROD ? '7d' : 0,
     etag: true,
+    setHeaders: (res, filePath) => {
+      // The HTML entry point contains the asset version; never let a browser
+      // keep an old entry point after the frontend bundle changes.
+      if (filePath.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'no-store');
+      }
+    },
   })
 );
 

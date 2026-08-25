@@ -39,6 +39,14 @@ class ConversationFeatureTests(unittest.TestCase):
         self.assertTrue(applied)
         self.assertIn("open tender", resolved.casefold())
 
+    def test_short_process_followup_keeps_previous_question(self):
+        resolved, applied = resolve_coreference(
+            "process batao?", "vendor registration", "How do I register as a vendor?"
+        )
+        self.assertTrue(applied)
+        self.assertIn("vendor registration", resolved.casefold())
+        self.assertIn("how do i register as a vendor", resolved.casefold())
+
     def test_rules_followups_are_actionable(self):
         suggestions = suggest_followups("RULES_GFR", query="open tender above 3 lakh")
         self.assertEqual(len(suggestions), 3)

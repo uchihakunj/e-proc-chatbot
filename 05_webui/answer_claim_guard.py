@@ -45,7 +45,7 @@ def answer_claim_violations(question: str, answer: str, fine_intent: str = "") -
         if "bank guarantee" in a and not has_payment_artifact:
             issues.append("payment_reduced_to_bg_only")
     if fine_intent == "tender_method_definition" and _is_simple_definition_question(question):
-        if any(term in a for term in ("📋 process", "key steps", "⚠ important", "quotation opened", "prescribed form")):
+        if any(term in a for term in ("📋 process", "key steps", "⚠ important", "⚠ compliance notes", "quotation opened", "prescribed form")):
             issues.append("definition_expanded_into_unasked_workflow")
     if ("lowest bidder" in q or "l1 bidder" in q) and "highest bidder" in a:
         issues.append("l1_answer_mentions_highest_bidder")

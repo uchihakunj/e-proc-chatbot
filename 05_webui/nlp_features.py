@@ -654,6 +654,7 @@ _COREF_RE = re.compile("|".join(_COREF_PRONOUNS), re.I)
 _FOLLOWUP_MARKERS = (
     "more", "explain", "elaborate", "details", "detail", "continue", "go on",
     "why", "how", "what about", "and", "also", "aur batao", "aur bataye",
+    "process batao", "process bataye", "procedure batao", "procedure bataye",
     "below", "under", "less than", "above", "over", "more than",
     "se kam", "se zyada", "upar", "neeche", "agar",
     "vistar", "detail me", "kyun", "kyu", "kaise", "iske baare", "uske baare",

@@ -83,6 +83,7 @@ const ui = {
   queryInput:   $('query-input'),
   queryStatus:  $('query-status'),
   queryTiming:  $('query-timing'),
+  clearChatBtn: $('clear-chat-btn'),
   chatEmpty:    $('chat-empty'),
   chatMessages: $('chat-messages'),
   exampleList:  $('example-list'),
@@ -323,6 +324,15 @@ function renderMarkdown(text) {
 
     const bare = line.replace(/^#{1,6}\s*/, '').replace(/<\/?(strong|em)>/g, '').trim();
 
+    // Give warning headings clear spacing and emphasis instead of rendering
+    // them as ordinary paragraph text.
+    const warningHead = bare.match(/^(⚠️?\s*)?(Important points|Compliance Notes)\s*:?[ \t]*$/i);
+    if (warningHead) {
+      if (inList) { processed.push('</ul>'); inList = false; }
+      processed.push(`<div class="ans-warning"><span class="ans-warning-ico">⚠</span><strong>${warningHead[2]}</strong></div>`, '');
+      continue;
+    }
+
     // Emoji section headings (💡 उत्तर, 📋 प्रक्रिया) → styled header.
     // Also split "📋 प्रक्रिया: <content>" so inline content becomes a paragraph.
     const emoH = bare.match(/^(💡|📋|🔖|⚖️|📊|📝)\s*(.+)$/u);
@@ -382,7 +392,7 @@ function renderMarkdown(text) {
       processed.push(`<li>${line.slice(2)}</li>`);
     } else if (/^\d+\. /.test(line)) {
       // Numbered list items — wrap as <li> inside <ol>
-      if (inList) { processed.push('</ul>'); inList = false; }
+      if (!inList) { processed.push('<ul class="answer-steps">'); inList = true; }
       processed.push(`<li style="list-style:decimal;margin-left:1.2em">${line.replace(/^\d+\.\s+/, '')}</li>`);
     } else {
       if (inList) { processed.push('</ul>'); inList = false; }
@@ -670,7 +680,6 @@ function clearChat() {
   if (!ui.chatMessages) return;
   if (state.loading) { toast('Please wait for the current answer to finish', 'info'); return; }
   if (ui.chatMessages.children.length === 0) { toast('Chat is already empty', 'info'); return; }
-  if (!confirm('Clear all chat messages?')) return;
   stopSpeak();                       // stop any ongoing 🔊 playback (its button is about to vanish)
   closePdfPanel();                   // the cited docs belong to the old chat
   state.lastPdf = null;
@@ -719,8 +728,7 @@ function toggleMenu() {
 }
 function runMenuAction(action) {
   closeMenu();
-  if      (action === 'clear')    clearChat();
-  else if (action === 'minimize') closeWidget();
+  if      (action === 'minimize') closeWidget();
   else if (action === 'save')     saveChat();
   else if (action === 'exit')     handleLogout();
 }
@@ -1153,6 +1161,8 @@ async function toggleMic() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     toast('Microphone not available in this browser', 'error'); return;
   }
+  // Use the browser's Web Speech API by default. Local Whisper is only the
+  // fallback for browsers or recognition services that cannot handle speech.
   if (BrowserSpeechRecognition) {
     startBrowserSTT();
     return;
@@ -1229,12 +1239,28 @@ function startBrowserSTT() {
 async function startServerSTT() {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    voiceRec = new MediaRecorder(stream);
+    if (!window.MediaRecorder) throw new Error('MediaRecorder is not supported');
+    const mimeTypes = [
+      'audio/webm;codecs=opus',
+      'audio/webm',
+      'audio/ogg;codecs=opus',
+      'audio/mp4'
+    ];
+    const mimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
+    voiceRec = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
     voiceChunks = [];
     voiceRec.ondataavailable = e => { if (e.data.size) voiceChunks.push(e.data); };
     voiceRec.onstop = async () => {
       stream.getTracks().forEach(t => t.stop());
-      await sttSend(new Blob(voiceChunks, { type: 'audio/webm' }));
+      const type = voiceRec.mimeType || mimeType || 'audio/webm';
+      const extension = type.includes('ogg') ? 'ogg' : type.includes('mp4') ? 'mp4' : 'webm';
+      await sttSend(new Blob(voiceChunks, { type }), extension);
+    };
+    voiceRec.onerror = () => {
+      stream.getTracks().forEach(t => t.stop());
+      voiceOn = false;
+      ui.btnMic.classList.remove('recording');
+      toast('Could not capture audio from the microphone', 'error');
     };
     voiceRec.start(250);
     voiceOn = true;
@@ -1242,7 +1268,12 @@ async function startServerSTT() {
     ui.queryStatus.textContent = '🔴 Listening…';
     voiceTimer = setTimeout(() => { if (voiceOn) stopMic(); }, VOICE_AUTO_STOP_MS);
   } catch (err) {
-    toast('Microphone permission denied', 'error');
+    const message = err && err.name === 'NotAllowedError'
+      ? 'Microphone permission denied — allow microphone access for this site'
+      : err && err.message
+        ? 'Voice input unavailable: ' + err.message
+        : 'Voice input unavailable';
+    toast(message, 'error');
   }
 }
 
@@ -1259,10 +1290,10 @@ function stopMic(fromBrowserEnd = false) {
   ui.btnMic.classList.remove('recording');
 }
 
-async function sttSend(blob) {
+async function sttSend(blob, extension = 'webm') {
   ui.queryStatus.textContent = 'Transcribing…';
   const fd = new FormData();
-  fd.append('audio', blob, 'recording.webm');
+  fd.append('audio', blob, 'recording.' + extension);
   try {
     const r = await fetch(VOICE_SERVER + '/stt', { method: 'POST', body: fd });
     const j = await r.json();
@@ -1540,11 +1571,16 @@ const _DEVA_C = {'क':'k','ख':'kh','ग':'g','घ':'gh','ङ':'ng','च':'ch'
 const _DEVA_V = {'अ':'a','आ':'aa','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ऋ':'ri','ॠ':'ri','ऌ':'li','ए':'e','ऐ':'ai','ओ':'o','औ':'au','ऍ':'e','ऎ':'e','ऑ':'o','ऒ':'o'};
 const _DEVA_M = {'ा':'aa','ि':'i','ी':'ee','ु':'u','ू':'oo','ृ':'ri','ॄ':'ri','े':'e','ै':'ai','ो':'o','ौ':'au','ॅ':'e','ॉ':'o','ॆ':'e','ॊ':'o'};
 const _DEVA_VIRAMA = '्';
+// Handle precomposed nukta letters such as U+095D, which otherwise pass
+// through unchanged and leave Devanagari in a Roman Hinglish response.
+const _DEVA_PRECOMPOSED = {'\u0958':'qa','\u0959':'kha','\u095a':'gha','\u095b':'za','\u095c':'ra','\u095d':'rha','\u095e':'fa','\u095f':'ya'};
 function devanagariToRoman(input) {
   let out = ''; const s = [...input];
   for (let i = 0; i < s.length; i++) {
     const ch = s[i];
-    if (_DEVA_C[ch] !== undefined) {
+    if (_DEVA_PRECOMPOSED[ch] !== undefined) {
+      out += _DEVA_PRECOMPOSED[ch];
+    } else if (_DEVA_C[ch] !== undefined) {
       out += _DEVA_C[ch];
       const nx = s[i + 1];
       if (nx === _DEVA_VIRAMA) { i++; }                 // conjunct: drop inherent vowel
@@ -2264,6 +2300,7 @@ function boot() {
 
   // Clear chat history / maximize / drag-to-move / edge-resize
   if (ui.clearBtn)    ui.clearBtn.addEventListener('click', clearChat);
+  if (ui.clearChatBtn) ui.clearChatBtn.addEventListener('click', clearChat);
   if (ui.maximizeBtn) ui.maximizeBtn.addEventListener('click', toggleMaximize);
   if (ui.resetBtn)    ui.resetBtn.addEventListener('click', resetWidgetPosition);
   initDragMove();

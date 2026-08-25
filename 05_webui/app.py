@@ -373,7 +373,7 @@ RESPONSE STRUCTURE:
 Write a direct, conversational, and natural response as a helpful AI assistant.
 Use a lightweight structure: start with "💡 Answer"; use "📋 Process" or
 "📋 Decision checklist" only when actionable steps are useful; use
-"⚠ Important points" only for source-supported conditions or exceptions.
+"⚠ Important points" only for source-supported requirements, exceptions, or risks.
 If a comparison is requested, begin with a filled Markdown table before the
 short conclusion. Do not repeat the same content across sections.
 AT THE VERY END, you must always provide the source citation on a new line formatted exactly as:
@@ -2781,6 +2781,63 @@ def stream_query():
                 yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':[],'diagnostics':bypass_diagnostics('clarification_required'), **_routing_diagnostics})}\n\n"
                 return
 
+            # EMD definition is a stable, vetted explanation with language
+            # variants. Serve it directly instead of paying for retrieval and
+            # generation again—especially for follow-ups such as "hindi m
+            # batao", which resolve back to the prior EMD question.
+            if fine_intent == 'emd_definition' and not force_retrieval:
+                _emd_sources = [
+                    'Chhattisgarh Store Purchase Rules',
+                    'Manual for Procurement of Goods 2024',
+                ]
+                _emd_lang = detect_query_language(query_text)
+                _emd_answer = render_fine_intent_fallback(
+                    build_fine_intent_fallback(
+                        effective_query, actor, fine_intent, _emd_lang, commodity,
+                        'Chhattisgarh', 'grounded_deterministic', tuple(_emd_sources),
+                    )
+                )
+                yield f"data: {json.dumps({'type':'status','message':'Using the verified EMD guidance'})}\n\n"
+                yield bypass_context_event('direct_emd_definition', _emd_sources)
+                yield f"data: {json.dumps({'type':'token','content':_emd_answer})}\n\n"
+                _emd_followups = suggest_followups(intent, query=effective_query)
+                if _emd_followups:
+                    yield f"data: {json.dumps({'type':'followups','items':_emd_followups})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _emd_answer[:300])
+                _log_event(ANALYTICS_LOG, {
+                    'q': query_text, 'intent': intent, 'direct_emd_definition': True,
+                    'elapsed': round(time.time()-t0, 2),
+                })
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_emd_sources,'answer':_emd_answer,'diagnostics':bypass_diagnostics('direct_emd_definition'), **_routing_diagnostics})}\n\n"
+                return
+
+            # Vendor registration is a stable, source-backed workflow.  Serve
+            # it from the language-specific policy fallback so a follow-up such
+            # as "hinglish me batao" never goes back through the LLM and the
+            # browser's lossy Devanagari transliterator.
+            if (fine_intent == 'vendor_registration' and not force_retrieval):
+                _vendor_sources = ['Vendor Registration Manual (CHiPS)']
+                _vendor_lang = detect_query_language(query_text)
+                _vendor_answer = render_fine_intent_fallback(
+                    build_fine_intent_fallback(
+                        effective_query, actor, fine_intent, _vendor_lang, commodity,
+                        'Chhattisgarh', 'grounded_deterministic', tuple(_vendor_sources),
+                    )
+                )
+                yield f"data: {json.dumps({'type':'status','message':'Using the verified vendor registration guidance'})}\n\n"
+                yield bypass_context_event('direct_vendor_registration', _vendor_sources)
+                yield f"data: {json.dumps({'type':'token','content':_vendor_answer})}\n\n"
+                _vendor_followups = suggest_followups(intent, query=effective_query)
+                if _vendor_followups:
+                    yield f"data: {json.dumps({'type':'followups','items':_vendor_followups})}\n\n"
+                CONV_MEMORY.record_turn(session_id, query_text, intent, topic, _vendor_answer[:300])
+                _log_event(ANALYTICS_LOG, {
+                    'q': query_text, 'intent': intent, 'direct_vendor_registration': True,
+                    'elapsed': round(time.time()-t0, 2),
+                })
+                yield f"data: {json.dumps({'type':'done','elapsed':f'{time.time()-t0:.2f}s','sources':_vendor_sources,'answer':_vendor_answer,'diagnostics':bypass_diagnostics('direct_vendor_registration'), **_routing_diagnostics})}\n\n"
+                return
+
             # Explicit link requests are served from a small, audited registry.
             # This makes the official portal URL reliable and avoids the retrieval
             # + LLM round trip for a simple navigation question.
@@ -4414,7 +4471,7 @@ if __name__ == '__main__':
     print("   Authentication is handled by Express.js at :3000")
     
     flask_host = os.getenv('FLASK_HOST', '0.0.0.0')
-    flask_port = 5000
+    flask_port = 5050
     if os.getenv('FLASK_PORT'):
         try:
             flask_port = int(os.getenv('FLASK_PORT'))
