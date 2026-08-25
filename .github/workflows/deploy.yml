@@ -12,10 +12,19 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Pull Latest Changes
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          clean: false
+
+      - name: Configure Git Safe Directory
         run: |
-          git fetch origin
-          git reset --hard origin/master
+          git config --global --add safe.directory "$GITHUB_WORKSPACE" || true
+
+      - name: Sync Git Repository
+        run: |
+          git fetch origin master || true
+          git reset --hard origin/master || true
 
       - name: Install Node.js UI Dependencies
         run: |
@@ -24,9 +33,15 @@ jobs:
 
       - name: Update Python Virtual Environment Dependencies
         run: |
-          source .venv/bin/activate || true
-          python -m pip install -r requirements.txt
+          if [ -f ".venv/bin/python" ]; then
+            .venv/bin/python -m pip install -r requirements.txt
+          elif [ -f "/opt/eproc-chatbot/.venv/bin/python" ]; then
+            /opt/eproc-chatbot/.venv/bin/python -m pip install -r requirements.txt
+          else
+            python3 -m pip install -r requirements.txt
+          fi
 
       - name: Restart eProcurement Application Service
         run: |
           sudo systemctl restart eproc-chatbot.service || true
+
